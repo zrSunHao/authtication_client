@@ -3,16 +3,13 @@
 
 $customer-app-primary: mat.define-palette(mat.$teal-palette);
 $customer-app-accent: mat.define-palette(mat.$amber-palette, 600);
-
 $customer-app-warn: mat.define-palette(mat.$red-palette, A400);
-
 $customer-app-theme: mat.define-dark-theme(
   (
     color: (
       primary: $customer-app-primary,
       accent: $customer-app-accent,
       warn: $customer-app-warn,
-      
     ),
   )
 );
@@ -35,7 +32,7 @@ body {
   font-style: normal;
   font-weight: 400;
   src: local("Material Icons"), local("MaterialIcons-Regular"),
-      url(./@arts/MaterialIcons-Regular.ttf) format("truetype");
+    url(./@arts/MaterialIcons-Regular.ttf) format("truetype");
 }
 
 .material-icons {
@@ -62,23 +59,20 @@ body {
 }
 
 /*定义滚动条高宽及背景高宽分别对应横竖滚动条的尺寸*/
- ::-webkit-scrollbar
- {
-     width:8px;
-     height:8px;
-     background-color:#757575;
- }
- /*定义滚动条轨道*/
- ::-webkit-scrollbar-track
- {
-     background-color:#757575;
- }
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background-color: #757575;
+}
+/*定义滚动条轨道*/
+::-webkit-scrollbar-track {
+  background-color: #757575;
+}
 
- /*定义滑块内阴影+圆角*/
- ::-webkit-scrollbar-thumb
- {
-     background-color:#009688;
- }
+/*定义滑块内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+  background-color: #009688;
+}
 
 @import "./@arts/color.css";
 @import "./@arts/common.css";
