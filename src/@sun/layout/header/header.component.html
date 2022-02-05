@@ -1,0 +1,50 @@
+<div class="header-container">
+  <div class="logo-wrap">
+    <img class="logo-img" src="/assets/images/logo_256.png" />
+    <h2>认证中心</h2>
+  </div>
+  <div class="menu-wrap">
+    <button mat-button [ngClass]="{'menu-selection-btn':menuitem == menuitemtype.dashboard}"
+      (click)="menu_click(menuitemtype.dashboard)">
+      <mat-icon>dashboard</mat-icon>首页
+    </button>
+    <button mat-button [ngClass]="{'menu-selection-btn':menuitem == menuitemtype.customer}"
+      (click)="menu_click(menuitemtype.customer)">
+      <mat-icon>group</mat-icon>客户管理
+    </button>
+    <button mat-button [ngClass]="{'menu-selection-btn':menuitem == menuitemtype.app}"
+      (click)="menu_click(menuitemtype.app)">
+      <mat-icon>gamepad</mat-icon>应用管理
+    </button>
+    <button mat-button [ngClass]="{'menu-selection-btn':menuitem == menuitemtype.program}"
+      (click)="menu_click(menuitemtype.program)">
+      <mat-icon>miscellaneous_services</mat-icon>程序管理
+    </button>
+    <button mat-button [ngClass]="{'menu-selection-btn':menuitem == menuitemtype.constraint}"
+      (click)="menu_click(menuitemtype.constraint)">
+      <mat-icon>security</mat-icon>约束管理
+    </button>
+  </div>
+  <div class="customer-wrap">
+    <div class="avatar-container" [matMenuTriggerFor]="menu">
+      <img class="people-img" src="/assets/images/people_1.jpg" />
+      <img class="adoner-img" src="/assets/images/adoner.png" />
+    </div>
+    <span class="role">超级管理员</span>
+  </div>
+</div>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>assignment_ind</mat-icon>
+    <span>账号信息</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>fingerprint</mat-icon>
+    <span>修改密码</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>logout</mat-icon>
+    <span>登出</span>
+  </button>
+</mat-menu>
