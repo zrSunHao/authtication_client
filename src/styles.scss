@@ -22,9 +22,10 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto,"楷体", "Helvetica Neue", sans-serif;
   color: lightgray;
   background-color: #303030;
+  overflow-y: hidden;
 }
 
 @font-face {
