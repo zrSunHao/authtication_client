@@ -1,32 +1,13 @@
 <div class="page">
     <div class="topbar"></div>
     <div class="module-wrap">
-        <mat-card>
-            <mat-icon>group</mat-icon>
-            <h2>126名客户</h2>
-        </mat-card>
-        <mat-card>
-            <mat-icon>gamepad</mat-icon>
-            <h2>17个应用</h2>
-        </mat-card>
-        <mat-card>
-            <mat-icon>miscellaneous_services</mat-icon>
-            <h2>99个程序（20|79）</h2>
-        </mat-card>
-        <mat-card>
-            <mat-icon>security</mat-icon>
-            <h2>11111个有效约束</h2>
-        </mat-card>
+        <app-widget-activity *ngFor="let widget of widgets" [msg]="widget"></app-widget-activity>
     </div>
     <div class="activity-wrap">
-        <mat-card>
-            
-        </mat-card>
-        <mat-card>
-            
-        </mat-card>
+        <app-customer-activity></app-customer-activity>
+        <app-log-activity></app-log-activity>
     </div>
     <div class="constraint-wrap">
-        <mat-card></mat-card>
+        <app-constraint-activity></app-constraint-activity>>
     </div>
 </div>

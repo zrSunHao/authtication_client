@@ -3,7 +3,6 @@
     width: 100%;
     display: grid;
     grid-template-rows: 5rem 13rem 26rem 26rem;
-    row-gap: 1rem;
 }
 
 .topbar {
@@ -19,39 +18,6 @@
     column-gap: 2rem;
 }
 
-.module-wrap mat-card {
-    height: 7rem;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-.module-wrap mat-card mat-icon {
-    font-size: 4rem;
-    height: 4rem;
-    width: 4rem;
-}
-
-.module-wrap mat-card:nth-child(1) mat-icon {
-    color: #e81e63;
-}
-
-.module-wrap mat-card:nth-child(2) mat-icon {
-    color: #0dcaf0;
-}
-
-.module-wrap mat-card:nth-child(3) mat-icon {
-    color: green;
-}
-
-.module-wrap mat-card:nth-child(4) mat-icon {
-    color: #f89f15;
-}
-
-.module-wrap mat-card h2 {
-    margin-top: 1rem;
-}
-
 .activity-wrap {
     margin: auto;
     display: grid;
@@ -60,21 +26,8 @@
     column-gap: 2rem;
 }
 
-.activity-wrap mat-card {
-    height: 22rem;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
 .constraint-wrap {
     margin: auto;
     padding: 1rem;
     width: 62rem;
-}
-
-.constraint-wrap mat-card {
-    height: 22rem;
-    padding: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
 }

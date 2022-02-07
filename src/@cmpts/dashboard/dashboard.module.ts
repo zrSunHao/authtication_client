@@ -9,6 +9,10 @@ import { MatDividerModule } from '@angular/material/divider';
 
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard.module.routing';
+import { CustomerActivityComponent } from './customer-activity/customer-activity.component';
+import { LogActivityComponent } from './log-activity/log-activity.component';
+import { ConstraintActivityComponent } from './constraint-activity/constraint-activity.component';
+import { WidgetActivityComponent } from './widget-activity/widget-activity.component';
 
 @NgModule({
   imports: [
@@ -21,6 +25,12 @@ import { DashboardRoutingModule } from './dashboard.module.routing';
     MatTableModule,
     MatDividerModule,
   ],
-  declarations: [DashboardComponent]
+  declarations: [
+    DashboardComponent,
+    CustomerActivityComponent,
+    LogActivityComponent,
+    ConstraintActivityComponent,
+    WidgetActivityComponent,
+  ]
 })
 export class DashboardModule { }
