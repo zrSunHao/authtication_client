@@ -4,8 +4,14 @@ mat-card {
     flex-direction: column;
 }
 
-mat-card mat-icon {
-    font-size: 4rem;
+img {
     height: 4rem;
     width: 4rem;
+    margin-bottom: 1rem;
+}
+
+img:hover {
+    -webkit-animation: wobble-hor-bottom 0.8s both;
+    animation: wobble-hor-bottom 0.8s both;
+    animation-delay: 300ms;
 }
