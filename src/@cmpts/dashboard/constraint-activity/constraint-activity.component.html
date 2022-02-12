@@ -1,1 +1,44 @@
-<mat-card></mat-card>
+<div class="card">
+    <div class="card-header">
+        <img src="/assets/icons/constraint.png" />
+        <span>最近20条约束</span>
+        <div style="display: flex; flex: 1;"></div>
+        <button mat-mini-fab color="primary">
+            <mat-icon>autorenew</mat-icon>
+        </button>
+    </div>
+    <div class="card-body">
+        <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="type">
+                <th mat-header-cell *matHeaderCellDef> 类别 </th>
+                <td mat-cell *matCellDef="let element">{{element.type}}</td>
+            </ng-container>
+            <ng-container matColumnDef="method">
+                <th mat-header-cell *matHeaderCellDef> 方式 </th>
+                <td mat-cell *matCellDef="let element">{{element.method}}</td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> 名称（应用/账号/功能） </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="origin">
+                <th mat-header-cell *matHeaderCellDef> 来源 </th>
+                <td mat-cell *matCellDef="let element">{{element.origin}}</td>
+            </ng-container>
+            <ng-container matColumnDef="expireAt">
+                <th mat-header-cell *matHeaderCellDef> 失效时间 </th>
+                <td mat-cell *matCellDef="let element"> {{element.expireAt| date:'yyyy-MM-dd HH:mm:ss'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="createdAt">
+                <th mat-header-cell *matHeaderCellDef> 添加时间 </th>
+                <td mat-cell *matCellDef="let element"> {{element.createdAt| date:'yyyy-MM-dd HH:mm:ss'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="remark">
+                <th mat-header-cell *matHeaderCellDef> 备注 </th>
+                <td mat-cell *matCellDef="let element">{{element.remark}}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="table-header-row"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-element-row"></tr>
+        </table>
+    </div>
+</div>

@@ -1,3 +1,35 @@
-mat-card {
-    height: 22rem;
+.card-header img {
+    height: 2rem;
+    width: 2rem;
+    margin-left: 0.5rem;
+}
+
+.card-header span {
+    margin-left: 1rem;
+    font-size: 1rem;
+    font-weight: bolder;
+}
+
+.card-header button {
+    margin-right: 0.5rem;
+}
+
+.card-body {
+    height: 20.5rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    padding-top: 0;
+    padding-bottom: 0.25rem;
+    overflow-y: auto;
+}
+
+table {
+    width: 100%;
+}
+.table-header-row {
+    height: 3rem;
+    background-color: #303030;
+}
+.table-element-row:hover {
+    background-color: #303030;
 }

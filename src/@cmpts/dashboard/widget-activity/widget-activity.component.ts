@@ -8,7 +8,7 @@ import { Widget } from '../model';
 })
 export class WidgetActivityComponent implements OnInit {
 
-  @Input() msg: Widget = new Widget();
+  @Input() msg: Widget = { title: '', icon: '', color: '' };
 
   constructor() { }
 
