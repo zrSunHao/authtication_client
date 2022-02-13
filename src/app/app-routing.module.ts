@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from 'src/@sun/layout/layout.component';
 
 const routes: Routes = [
-  // { path: 'wand', loadChildren: () => import('../@wand/wand.module').then(m => m.WandModule) },
+  { path: 'security', loadChildren: () => import('../@sun/security/security.module').then(m => m.SecurityModule) },
   {
     path: '', component: LayoutComponent,
     children: [
