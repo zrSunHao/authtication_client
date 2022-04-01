@@ -1,0 +1,94 @@
+.page {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.container {
+    height: 768px;
+    width: 1200px;
+    background-color: #424242;
+    overflow: hidden;
+}
+
+.wrap {
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    position: relative;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.exhibition {
+    height: 100%;
+    background-image: url("/assets/bgs/tree_swing.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    margin-right: -600px;
+}
+
+form {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+form img {
+    height: 100px;
+    width: 100px;
+    margin-bottom: 1rem;
+}
+
+form .title {
+    font-size: xx-large;
+    font-weight: bolder;
+    line-height: 50px;
+    margin-bottom: 1rem;
+}
+
+form mat-form-field {
+    width: 250px;
+}
+
+form .line {
+    margin-bottom: 0.5rem;
+    width: 520px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #303030;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 15px;
+    padding-left: 15px;
+    border-radius: 5px;
+}
+
+form .link {
+    margin-bottom: 0.5rem;
+    width: 520px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+form button {
+    width: 150px;
+}
+
+.bg-box {
+    position: absolute;
+    width: 500px;
+    z-index: 0;
+
+    border: 0px solid transparent;
+    border-top: 768px solid #6366f147;
+    border-right: 150px solid transparent;
+    height: 0;
+}

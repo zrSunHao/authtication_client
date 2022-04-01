@@ -1,3 +1,74 @@
-<p>
-  register works!
-</p>
+<div class="page bg-image-net">
+  <div class="container">
+    <div class="bg-box"></div>
+    <div class="wrap">
+      <div class="exhibition"></div>
+      <form>
+        <img src="/assets/images/logo_256.png" />
+        <div class="title">用&nbsp;&nbsp;户&nbsp;&nbsp;中&nbsp;&nbsp;心</div>
+        <div class="line">
+          <mat-form-field appearance="outline">
+            <mat-label>账号</mat-label>
+            <input matInput placeholder="请输入账号" autocomplete="off">
+            <mat-icon matSuffix>account_circle</mat-icon>
+            <mat-hint>字母开头，6-16位，</mat-hint>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>姓名</mat-label>
+            <input matInput placeholder="请输入姓名" autocomplete="off">
+            <mat-icon matSuffix>fingerprint</mat-icon>
+            <mat-hint>，6-18位，</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="line">
+          <mat-form-field appearance="outline">
+            <mat-label>昵称</mat-label>
+            <input matInput placeholder="请输入昵称" autocomplete="off">
+            <mat-icon matSuffix>account_circle</mat-icon>
+            <mat-hint>字母开头，6-16位，</mat-hint>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>性别</mat-label>
+            <input matInput placeholder="请输入性别" autocomplete="off">
+            <mat-icon matSuffix>fingerprint</mat-icon>
+            <mat-hint>，6-18位，</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="line">
+          <mat-form-field appearance="outline">
+            <mat-label>密码</mat-label>
+            <input matInput placeholder="请输入密码" type="password" autocomplete="off">
+            <mat-icon matSuffix>fingerprint</mat-icon>
+            <mat-hint>，6-18位，</mat-hint>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>生日</mat-label>
+            <input matInput placeholder="请输入生日" autocomplete="off">
+            <mat-icon matSuffix>account_circle</mat-icon>
+            <mat-hint>字母开头，6-16位，</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="line">
+          <mat-form-field appearance="outline">
+            <mat-label>确认密码</mat-label>
+            <input matInput placeholder="请输入确认密码" autocomplete="off">
+            <mat-icon matSuffix>account_circle</mat-icon>
+            <mat-hint>字母开头，6-16位，</mat-hint>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>学历</mat-label>
+            <input matInput placeholder="请输入学历" type="password" autocomplete="off">
+            <mat-icon matSuffix>fingerprint</mat-icon>
+            <mat-hint>，6-18位，</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="link">
+          <a mat-button color="accent" routerLink="/security/login/">已有帐号？登录</a>
+        </div>
+        <button mat-raised-button color="primary" (click)="register()" style="font-weight: bold;">
+          注&nbsp;&nbsp;&nbsp;&nbsp;册</button>
+      </form>
+    </div>
+  </div>
+
+</div>
