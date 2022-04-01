@@ -32,12 +32,40 @@
     background-position: bottom;
 }
 
-.info {
+form {
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+form img {
+    height: 128px;
+    width: 128px;
+}
+
+form .title {
+    font-size:xx-large;
+    font-weight: bolder;
+    line-height: 50px;
+    margin-bottom: 3rem;
+}
+
+form mat-form-field {
+    width: 300px;
+    margin-bottom: 1rem;
+}
+
+form .link {
+    margin-bottom: 1rem;
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+}
+
+form button {
+    width: 150px;
 }
 
 .bg-box {

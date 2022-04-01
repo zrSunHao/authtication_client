@@ -3,11 +3,29 @@
     <div class="bg-box"></div>
     <div class="wrap">
       <div class="exhibition"></div>
-      <div class="info">
-        <div style="height: 30px;width: 150px;background-color: aquamarine; margin: 1rem;"></div>
-        <div style="height: 30px;width: 150px;background-color: aquamarine;margin: 1rem;"></div>
-        <div style="height: 30px;width: 150px;background-color: aquamarine;margin: 1rem;"></div>
-      </div>
+      <form [formGroup]="loginForm">
+        <img src="/assets/images/logo_256.png" />
+        <div class="title">用&nbsp;&nbsp;户&nbsp;&nbsp;中&nbsp;&nbsp;心</div>
+        <mat-form-field appearance="outline">
+          <mat-label>账号</mat-label>
+          <input matInput placeholder="请输入账号" formControlName="userName" autocomplete="off">
+          <mat-icon matSuffix>account_circle</mat-icon>
+          <mat-hint>字母开头，6-16位，包括字母、数字、下划线</mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>密码</mat-label>
+          <input matInput placeholder="请输入密码" type="password" formControlName="password" autocomplete="off">
+          <mat-icon matSuffix>fingerprint</mat-icon>
+          <mat-hint>必须包含大小写字母和数字，6-18位，可使用特殊字符，</mat-hint>
+        </mat-form-field>
+        <div class="link">
+          <a mat-button color="accent" routerLink="/dashboard/">没有账号？注册</a>
+          <a mat-button color="accent" routerLink="/dashboard/">忘记密码？</a>
+        </div>
+        <button mat-raised-button color="primary" [disabled]="!loginForm.valid" 
+        (click)="login()">
+          登&nbsp;&nbsp;&nbsp;&nbsp;录</button>
+      </form>
     </div>
   </div>
 </div>
