@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { LayoutModule } from 'src/@sun/layout/layout.module';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { LayoutModule } from 'src/@sun/layout/layout.module';
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
+    { provide: MAT_DATE_LOCALE, useValue: 'zh-CN' }
   ],
   bootstrap: [AppComponent]
 })
