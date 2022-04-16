@@ -1,0 +1,83 @@
+<div class="page">
+  <div class="topbar"></div>
+  <div class="content-warp">
+    <mat-card class="search">
+      <form class="form" [formGroup]="form">
+        <mat-form-field appearance="outline">
+          <mat-label>账号</mat-label>
+          <input matInput placeholder="请输入要搜索的账号" formControlName="userName" autocomplete="off">
+          <mat-icon matSuffix>account_circle</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>昵称</mat-label>
+          <input matInput placeholder="请输入要搜索的昵称" formControlName="nickname" autocomplete="off">
+          <mat-icon matSuffix>account_circle</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>约束</mat-label>
+          <mat-select formControlName="contraint">
+            <mat-option value="0">空</mat-option>
+            <mat-option value="1">无约束</mat-option>
+            <mat-option value="1">有约束</mat-option>
+            <mat-option value="2">禁用</mat-option>
+          </mat-select>
+          <mat-icon matSuffix>account_circle</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>备注</mat-label>
+          <input matInput placeholder="请输入要搜索的备注" formControlName="remark" autocomplete="off">
+          <mat-icon matSuffix>account_circle</mat-icon>
+        </mat-form-field>
+      </form>
+    </mat-card>
+    <mat-card class="table">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="avatar">
+          <th mat-header-cell *matHeaderCellDef> 头像 </th>
+          <td mat-cell *matCellDef="let element">
+            <img class="customer-avatar" [src]="element.avatar" />
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> 账号 </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="nickname">
+          <th mat-header-cell *matHeaderCellDef> 昵称 </th>
+          <td mat-cell *matCellDef="let element"> {{element.nickname}} </td>
+        </ng-container>
+        <ng-container matColumnDef="constraint">
+          <th mat-header-cell *matHeaderCellDef> 约束 </th>
+          <td mat-cell *matCellDef="let element"> {{element.constraint}} </td>
+        </ng-container>
+        <ng-container matColumnDef="constraintEndAt">
+          <th mat-header-cell *matHeaderCellDef> 约束到期时间 </th>
+          <td mat-cell *matCellDef="let element"> {{element.constraintEndAt| date:'yyyy-MM-dd'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="lastLoginAt">
+          <th mat-header-cell *matHeaderCellDef> 最近登陆时间 </th>
+          <td mat-cell *matCellDef="let element"> {{element.lastLoginAt| date:'yyyy-MM-dd HH:mm:ss'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="remark">
+          <th mat-header-cell *matHeaderCellDef> 备注 </th>
+          <td mat-cell *matCellDef="let element">
+            <span matTooltip={{element.remark}}>{{element.remark|clip:8}} </span>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="operate">
+          <th mat-header-cell *matHeaderCellDef> 操作 </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-stroked-button color="accent">详情</button>
+            <button mat-stroked-button color="accent">约束</button>
+            <button mat-stroked-button color="accent">备注</button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="table-header-row"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-element-row"></tr>
+      </table>
+    </mat-card>
+    <mat-card class="footer">
+      <app-paginator></app-paginator>
+    </mat-card>
+  </div>
+</div>

@@ -8,6 +8,7 @@ const routes: Routes = [
     path: '', component: LayoutComponent,
     children: [
       { path: 'dashboard', loadChildren: () => import('../@cmpts/dashboard/dashboard.module').then(m => m.DashboardModule) },
+      { path: 'customer', loadChildren: () => import('../@cmpts/customer/customer.module').then(m => m.CustomerModule) },
       { path: '**', redirectTo: '/dashboard/' },
     ],
   },
