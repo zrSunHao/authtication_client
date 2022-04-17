@@ -1,5 +1,17 @@
 <div class="page">
-  <div class="topbar"></div>
+  <div class="topbar">
+    <img src="/assets/icons/customer.png" />
+    <div>
+      <h2>客户管理页面</h2>
+    </div>
+    <div class="box-fill"></div>
+    <button mat-flat-button color="accent">
+      <mat-icon>search</mat-icon>搜索
+    </button>
+    <button mat-flat-button color="accent">
+      <mat-icon>autorenew</mat-icon>重置
+    </button>
+  </div>
   <div class="content-warp">
     <mat-card class="search">
       <form class="form" [formGroup]="form">
@@ -11,7 +23,7 @@
         <mat-form-field appearance="outline">
           <mat-label>昵称</mat-label>
           <input matInput placeholder="请输入要搜索的昵称" formControlName="nickname" autocomplete="off">
-          <mat-icon matSuffix>account_circle</mat-icon>
+          <mat-icon matSuffix>portrait</mat-icon>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>约束</mat-label>
@@ -21,12 +33,12 @@
             <mat-option value="1">有约束</mat-option>
             <mat-option value="2">禁用</mat-option>
           </mat-select>
-          <mat-icon matSuffix>account_circle</mat-icon>
+          <mat-icon matSuffix>security</mat-icon>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>备注</mat-label>
           <input matInput placeholder="请输入要搜索的备注" formControlName="remark" autocomplete="off">
-          <mat-icon matSuffix>account_circle</mat-icon>
+          <mat-icon matSuffix>format_color_text</mat-icon>
         </mat-form-field>
       </form>
     </mat-card>
@@ -40,15 +52,17 @@
         </ng-container>
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef> 账号 </th>
-          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.name}}&nbsp;&nbsp; </td>
         </ng-container>
         <ng-container matColumnDef="nickname">
           <th mat-header-cell *matHeaderCellDef> 昵称 </th>
-          <td mat-cell *matCellDef="let element"> {{element.nickname}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.nickname}}&nbsp;&nbsp; </td>
         </ng-container>
         <ng-container matColumnDef="constraint">
           <th mat-header-cell *matHeaderCellDef> 约束 </th>
-          <td mat-cell *matCellDef="let element"> {{element.constraint}} </td>
+          <td mat-cell *matCellDef="let element">
+            <span>{{element.constraint}}&nbsp;&nbsp;</span>
+          </td>
         </ng-container>
         <ng-container matColumnDef="constraintEndAt">
           <th mat-header-cell *matHeaderCellDef> 约束到期时间 </th>
@@ -67,9 +81,15 @@
         <ng-container matColumnDef="operate">
           <th mat-header-cell *matHeaderCellDef> 操作 </th>
           <td mat-cell *matCellDef="let element">
-            <button mat-stroked-button color="accent">详情</button>
-            <button mat-stroked-button color="accent">约束</button>
-            <button mat-stroked-button color="accent">备注</button>
+            <button mat-icon-button matTooltip="详情" (click)="detail_click(element)">
+              <mat-icon>remove_red_eye</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="约束" (click)="constraint_click(element)">
+              <mat-icon>security</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="备注" (click)="remark_click(element)">
+              <mat-icon>format_color_text</mat-icon>
+            </button>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="table-header-row"></tr>
@@ -77,7 +97,8 @@
       </table>
     </mat-card>
     <mat-card class="footer">
-      <app-paginator></app-paginator>
+      <app-paginator [total]="total" [columns]="columns" [columnOp]="columnOp" (onChange)="paginatorChange($event)">
+      </app-paginator>
     </mat-card>
   </div>
 </div>

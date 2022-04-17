@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { CUSTOMER_ELEMENT_DATA } from '../model';
+import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
+import { CustomerElement, CUSTOMER_ELEMENT_DATA } from '../model';
 
 @Component({
   selector: 'app-customer-list',
@@ -9,8 +10,19 @@ import { CUSTOMER_ELEMENT_DATA } from '../model';
 })
 export class CustomerListComponent implements OnInit {
 
+  total = 35;
+  columnOp = 'lastLoginAt';
+  columns: Array<PaginatorColumn> = [
+    { name: '账号', value: 'name' },
+    { name: '昵称', value: 'nickname' },
+    { name: '约束', value: 'constraint' },
+    { name: '约束到期时间', value: 'constraintEndAt' },
+    { name: '最近登陆时间', value: 'lastLoginAt' },
+    { name: '注册时间', value: 'createdAt' },
+  ];
+
   form: FormGroup;
-  displayedColumns = ['avatar', 'name', 'nickname', 'constraint', 'constraintEndAt', 'lastLoginAt', 'remark','operate',];
+  displayedColumns = ['avatar', 'name', 'nickname', 'constraint', 'constraintEndAt', 'lastLoginAt', 'remark', 'operate',];
   dataSource = CUSTOMER_ELEMENT_DATA;
 
   constructor() {
@@ -25,4 +37,19 @@ export class CustomerListComponent implements OnInit {
   ngOnInit() {
   }
 
+  paginatorChange(paginator: Paginator) {
+    console.log(paginator);
+  }
+
+  detail_click(e: CustomerElement): void {
+    console.log(e);
+  }
+
+  constraint_click(e: CustomerElement): void {
+    console.log(e);
+  }
+
+  remark_click(e: CustomerElement): void {
+    console.log(e);
+  }
 }
