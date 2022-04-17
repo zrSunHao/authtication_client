@@ -1,0 +1,19 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.header h3{
+    margin: 0;
+}
+
+.header button :hover{
+    font-size: 2rem;
+}
+
+.mat-form-field{
+    width: 100%;
+}
+

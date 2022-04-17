@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
+import { DialogCustomerComponent } from '../dialog-customer/dialog-customer.component';
 import { CustomerElement, CUSTOMER_ELEMENT_DATA } from '../model';
 
 @Component({
@@ -16,16 +19,15 @@ export class CustomerListComponent implements OnInit {
     { name: '账号', value: 'name' },
     { name: '昵称', value: 'nickname' },
     { name: '约束', value: 'constraint' },
-    { name: '约束到期时间', value: 'constraintEndAt' },
     { name: '最近登陆时间', value: 'lastLoginAt' },
     { name: '注册时间', value: 'createdAt' },
   ];
 
   form: FormGroup;
-  displayedColumns = ['avatar', 'name', 'nickname', 'constraint', 'constraintEndAt', 'lastLoginAt', 'remark', 'operate',];
+  displayedColumns = ['avatar', 'name', 'nickname', 'constraint', 'lastLoginAt', 'remark', 'operate',];
   dataSource = CUSTOMER_ELEMENT_DATA;
 
-  constructor() {
+  constructor(private dialog: MatDialog, private router: Router) {
     this.form = new FormGroup({
       userName: new FormControl(null, []),
       nickname: new FormControl(null, []),
@@ -42,14 +44,19 @@ export class CustomerListComponent implements OnInit {
   }
 
   detail_click(e: CustomerElement): void {
-    console.log(e);
-  }
-
-  constraint_click(e: CustomerElement): void {
-    console.log(e);
+    this.router.navigate([`/customer/detail/${e.name}`]);
   }
 
   remark_click(e: CustomerElement): void {
-    console.log(e);
+    const dialogRef = this.dialog.open(DialogCustomerComponent, {
+      width: '360px',
+      data: e,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.op === 'save') {
+        e.remark = result.remark;
+      }
+    });
   }
 }

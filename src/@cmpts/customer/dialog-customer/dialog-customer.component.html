@@ -1,0 +1,16 @@
+<div mat-dialog-title class="header">
+  <h3>【{{data.name}}】的备注</h3>
+  <button mat-icon-button color="warn" (click)="onCloseClick()">
+    <mat-icon>cancel</mat-icon>
+  </button>
+</div>
+<div mat-dialog-content>
+  <mat-form-field appearance="outline">
+    <mat-label>备注</mat-label>
+    <textarea matInput [(ngModel)]="remark" placeholder="请输该客户的备注" rows="6" maxlength="256"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button color="warn" (click)="onCloseClick()">取消</button>
+  <button mat-button cdkFocusInitial color="accent" (click)="onSaveClick()">保存</button>
+</div>

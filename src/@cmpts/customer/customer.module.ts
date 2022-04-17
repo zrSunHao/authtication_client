@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { MatCardModule } from '@angular/material/card';
@@ -10,6 +11,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AccountInfoComponent } from './account-info/account-info.component';
 import { CustomerConstraintsComponent } from './customer-constraints/customer-constraints.component';
@@ -20,11 +23,14 @@ import { CustomerRolesComponent } from './customer-roles/customer-roles.componen
 import { PeopleInfoComponent } from './people-info/people-info.component';
 import { CustomerRoutingModule } from './customer.module.routing';
 import { SharedModule } from 'src/@sun/shared/shared.module';
+import { DialogCustomerComponent } from './dialog-customer/dialog-customer.component';
+import { DialogConstraintComponent } from './dialog-constraint/dialog-constraint.component';
 
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     SharedModule,
     CustomerRoutingModule,
@@ -37,6 +43,8 @@ import { SharedModule } from 'src/@sun/shared/shared.module';
     MatSelectModule,
     MatTableModule,
     MatTooltipModule,
+    MatDialogModule,
+    MatSnackBarModule,
   ],
   declarations: [
     CustomerListComponent,
@@ -46,6 +54,8 @@ import { SharedModule } from 'src/@sun/shared/shared.module';
     CustomerLogsComponent,
     AccountInfoComponent,
     PeopleInfoComponent,
+    DialogCustomerComponent,
+    DialogConstraintComponent,
   ]
 })
 export class CustomerModule { }
