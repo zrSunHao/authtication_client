@@ -1,0 +1,25 @@
+mat-card-title {
+    font-size: larger;
+}
+
+mat-card-title button {
+    float: right;
+    font-size: 12px;
+    margin-left: 1rem;
+}
+
+.mat-raised-button {
+    line-height: 24px;
+}
+
+form {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: 4rem 4rem 4rem 8rem;
+    gap: 1rem;
+}
+
+.intro {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}

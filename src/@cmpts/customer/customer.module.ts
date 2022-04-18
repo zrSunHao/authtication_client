@@ -13,6 +13,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { AccountInfoComponent } from './account-info/account-info.component';
 import { CustomerConstraintsComponent } from './customer-constraints/customer-constraints.component';
@@ -25,7 +27,6 @@ import { CustomerRoutingModule } from './customer.module.routing';
 import { SharedModule } from 'src/@sun/shared/shared.module';
 import { DialogCustomerComponent } from './dialog-customer/dialog-customer.component';
 import { DialogConstraintComponent } from './dialog-constraint/dialog-constraint.component';
-
 
 @NgModule({
   imports: [
@@ -45,6 +46,8 @@ import { DialogConstraintComponent } from './dialog-constraint/dialog-constraint
     MatTooltipModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   declarations: [
     CustomerListComponent,

@@ -1,0 +1,42 @@
+mat-card-title {
+    font-size: larger;
+}
+
+mat-card-title button {
+    float: right;
+    font-size: 12px;
+}
+
+.mat-raised-button {
+    line-height: 24px;
+}
+
+form {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: 4rem 4rem 4rem 8rem;
+    gap: 1rem;
+}
+
+.remark {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.image-upload {
+    grid-column: 2;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-upload button:hover {
+    color: red;
+}
+
+.customer-avatar {
+    width: 7rem;
+    height: 7rem;
+}
