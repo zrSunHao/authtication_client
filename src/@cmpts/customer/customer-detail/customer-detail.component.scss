@@ -33,6 +33,17 @@
     align-items: center;
 }
 
+mat-tab-group{
+    margin-top: 2rem;
+    width: 90%;
+    min-width: 1024px;
+    max-width: 1366px; 
+}
+
+::ng-deep .mat-tab-header{
+    background-color: #424242;
+}
+
 .info-warp {
     margin-top: 2rem;
     width: 90%;
@@ -44,22 +55,16 @@
 }
 
 .role-wrap {
-    margin-top: 2rem;
-    width: 90%;
-    min-width: 1024px;
-    max-width: 1366px;
+    margin-top: 1rem;
+    width: 100%;
 }
 
 .constraint-wrap {
-    margin-top: 2rem;
-    width: 90%;
-    min-width: 1024px;
-    max-width: 1366px;
+    margin-top: 1rem;
+    width: 100%;
 }
 
 .log-wrap {
-    margin-top: 2rem;
-    width: 90%;
-    min-width: 1024px;
-    max-width: 1366px;
+    margin-top: 1rem;
+    width: 100%;
 }

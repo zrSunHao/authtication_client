@@ -15,6 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { AccountInfoComponent } from './account-info/account-info.component';
 import { CustomerConstraintsComponent } from './customer-constraints/customer-constraints.component';
@@ -48,6 +49,7 @@ import { DialogConstraintComponent } from './dialog-constraint/dialog-constraint
     MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTabsModule,
   ],
   declarations: [
     CustomerListComponent,

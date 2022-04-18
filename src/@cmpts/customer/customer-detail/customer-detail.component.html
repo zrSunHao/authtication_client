@@ -7,7 +7,24 @@
       <app-account-info></app-account-info>
       <app-people-info></app-people-info>
     </div>
-    <div class="role-wrap">
+    <mat-tab-group mat-align-tabs="center">
+      <mat-tab label="账号角色">
+        <div class="role-wrap">
+          <app-customer-roles></app-customer-roles>
+        </div>
+      </mat-tab>
+      <mat-tab label="账号约束">
+        <div class="constraint-wrap">
+          <app-customer-constraints></app-customer-constraints>
+        </div>
+      </mat-tab>
+      <mat-tab label="操作日志">
+        <div class="log-wrap">
+          <app-customer-logs></app-customer-logs>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+    <!-- <div class="role-wrap">
       <app-customer-roles></app-customer-roles>
     </div>
     <div class="constraint-wrap">
@@ -15,6 +32,6 @@
     </div>
     <div class="log-wrap">
       <app-customer-logs></app-customer-logs>
-    </div>
+    </div> -->
   </div>
 </div>
