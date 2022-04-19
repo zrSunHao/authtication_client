@@ -1,0 +1,38 @@
+.search {
+    display: grid;
+    grid-template-columns: auto auto auto 6rem 6rem;
+    gap: 1rem;
+    align-items: center;
+}
+
+.search ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0 !important;
+}
+
+.search button {
+    height: 2.5rem;
+}
+
+.table {
+    margin-top: 2rem;
+    min-height: 18rem;
+}
+
+table {
+    width: 100%;
+}
+
+.table-header-row {
+    height: 3rem;
+    background-color: #303030;
+}
+
+.table-element-row:hover {
+    background-color: #303030;
+}
+
+.footer {
+    height: fit-content;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
