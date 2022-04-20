@@ -6,7 +6,7 @@ import { filter } from 'rxjs';
 export enum menutype {
   dashboard = 'dashboard',
   customer = 'customer',
-  app = 'app',
+  system = 'system',
   program = 'program',
   constraint = 'constraint',
 }
@@ -41,8 +41,8 @@ export class HeaderComponent implements OnInit {
       this.menuitem = menutype.dashboard;
     } else if (url.indexOf(menutype.customer) != -1) {
       this.menuitem = menutype.customer;
-    } else if (url.indexOf(menutype.app) != -1) {
-      this.menuitem = menutype.app;
+    } else if (url.indexOf(menutype.system) != -1) {
+      this.menuitem = menutype.system;
     } else if (url.indexOf(menutype.program) != -1) {
       this.menuitem = menutype.program;
     } else if (url.indexOf(menutype.constraint) != -1) {

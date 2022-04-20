@@ -9,6 +9,9 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', loadChildren: () => import('../@cmpts/dashboard/dashboard.module').then(m => m.DashboardModule) },
       { path: 'customer', loadChildren: () => import('../@cmpts/customer/customer.module').then(m => m.CustomerModule) },
+      { path: 'program', loadChildren: () => import('../@cmpts/program/program.module').then(m => m.ProgramModule) },
+      { path: 'system', loadChildren: () => import('../@cmpts/system/system.module').then(m => m.SystemModule) },
+      { path: 'constraint', loadChildren: () => import('../@cmpts/constraint/constraint.module').then(m => m.ConstraintModule) },
       { path: '**', redirectTo: '/dashboard/' },
     ],
   },

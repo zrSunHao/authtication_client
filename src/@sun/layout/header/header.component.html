@@ -12,13 +12,13 @@
       (click)="menu_click(menuitemtype.customer)">
       <mat-icon>group</mat-icon>客户管理
     </button>
-    <button mat-button [ngClass]="{'menu-selection-btn':menuitem == menuitemtype.app}"
-      (click)="menu_click(menuitemtype.app)">
-      <mat-icon>gamepad</mat-icon>应用管理
-    </button>
     <button mat-button [ngClass]="{'menu-selection-btn':menuitem == menuitemtype.program}"
       (click)="menu_click(menuitemtype.program)">
       <mat-icon>miscellaneous_services</mat-icon>程序管理
+    </button>
+    <button mat-button [ngClass]="{'menu-selection-btn':menuitem == menuitemtype.system}"
+      (click)="menu_click(menuitemtype.system)">
+      <mat-icon>gamepad</mat-icon>系统管理
     </button>
     <button mat-button [ngClass]="{'menu-selection-btn':menuitem == menuitemtype.constraint}"
       (click)="menu_click(menuitemtype.constraint)">
