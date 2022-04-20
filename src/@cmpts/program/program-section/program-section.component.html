@@ -1,0 +1,16 @@
+<mat-card>
+  <div class="list-wrap">
+    <div class="section-wrap" *ngFor="let section of sections;let i  = index">
+      <div class="section-header">
+        <span class="title">{{i+1}}、</span>
+        <span class="title">{{section.name}}</span>
+        <span>{{section.code}}</span>
+        <button mat-raised-button color="accent" (click)="onEditClick(section)">修改</button>
+        <button mat-raised-button color="accent" (click)="onDeleteClick(section)">删除</button>
+      </div>
+      <div class="section-remark">
+        {{section.remark}}
+      </div>
+    </div>
+  </div>
+</mat-card>

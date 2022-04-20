@@ -1,3 +1,24 @@
-<p>
-  program-detail works!
-</p>
+<div class="page">
+  <div class="topbar">
+    <img src="/assets/icons/program.png" />
+    <div>
+      <h2>程序管理--【客户端1】</h2>
+    </div>
+    <div class="box-fill"></div>
+    <button mat-flat-button color="accent">
+      <mat-icon>add</mat-icon>添加模块
+    </button>
+    <button mat-flat-button color="accent">
+      <mat-icon>add</mat-icon>添加功能
+    </button>
+    <button mat-flat-button color="accent">
+      <mat-icon>autorenew</mat-icon>刷新
+    </button>
+  </div>
+  <div class="content-warp">
+    <div class="content">
+      <app-program-section></app-program-section>
+      <mat-card></mat-card>
+    </div>
+  </div>
+</div>
