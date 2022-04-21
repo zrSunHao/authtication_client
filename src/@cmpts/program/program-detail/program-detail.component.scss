@@ -57,3 +57,26 @@
     grid-template-columns: 2fr 3fr;
     column-gap: 2rem;
 }
+
+.table{
+    max-height: 34rem;
+    overflow-y: scroll;
+    padding-bottom: 0.25rem;
+    padding-right: 0.5rem;
+}
+
+table {
+    width: 100%;
+}
+
+.table-header-row {
+    height: 3rem;
+    background-color: #303030;
+}
+.table-element-row:hover {
+    background-color: #303030;
+}
+
+table button {
+    margin-left: 0.5rem;
+}

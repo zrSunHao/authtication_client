@@ -39,3 +39,24 @@ export const SECTION_ELEMENT_DATA: SectionElement[] = [
     { name: '页面/模块_9', type: '1', code: 'code1', remark: '啦啦d啦fsdfsdf啦啦sdfrsdfsdfsdfsd啦啦啦啦啦' },
     { name: '页面/模块_10', type: '1', code: 'code1', remark: '啦啦d啦fsdfsdf啦啦sdfrsdfsdfsdfsd啦啦啦啦啦' },
 ]
+
+export interface FunctionElement {
+    name: string;
+    code: string;
+    constraint: '1' | '2';
+    limitedExpireAt: Date;
+    remark: string;
+}
+
+export const FUNCTION_ELEMENT_DATA: FunctionElement[] = [
+    { name: '添加', code: 'add', constraint: '1', limitedExpireAt: new Date(), remark: '梵蒂冈地方韩国人的好地方恢复的很好地方天热问个问题温特沃' },
+    { name: '添加', code: 'add', constraint: '1', limitedExpireAt: new Date(), remark: '梵蒂冈地方韩国人的好地方恢复的很好地方天热问个问题温特沃' },
+    { name: '添加', code: 'add', constraint: '1', limitedExpireAt: new Date(), remark: '梵蒂冈地方韩国人的好地方恢复的很好地方天热问个问题温特沃' },
+    { name: '添加', code: 'add', constraint: '1', limitedExpireAt: new Date(), remark: '梵蒂冈地方韩国人的好地方恢复的很好地方天热问个问题温特沃' },
+    { name: '添加', code: 'add', constraint: '1', limitedExpireAt: new Date(), remark: '梵蒂冈地方韩国人的好地方恢复的很好地方天热问个问题温特沃' },
+    { name: '添加', code: 'add', constraint: '1', limitedExpireAt: new Date(), remark: '梵蒂冈地方韩国人的好地方恢复的很好地方天热问个问题温特沃' },
+    { name: '添加', code: 'add', constraint: '1', limitedExpireAt: new Date(), remark: '梵蒂冈地方韩国人的好地方恢复的很好地方天热问个问题温特沃' },
+    { name: '添加', code: 'add', constraint: '1', limitedExpireAt: new Date(), remark: '梵蒂冈地方韩国人的好地方恢复的很好地方天热问个问题温特沃' },
+    { name: '添加', code: 'add', constraint: '1', limitedExpireAt: new Date(), remark: '梵蒂冈地方韩国人的好地方恢复的很好地方天热问个问题温特沃' },
+    { name: '添加', code: 'add', constraint: '1', limitedExpireAt: new Date(), remark: '梵蒂冈地方韩国人的好地方恢复的很好地方天热问个问题温特沃' },
+];
