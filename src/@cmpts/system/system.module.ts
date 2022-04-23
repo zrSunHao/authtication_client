@@ -15,15 +15,16 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { SharedModule } from 'src/@sun/shared/shared.module';
 import { SystemRoutingModule } from './system.module.routing';
 
 import { SystemComponent } from './system.component';
-import { SystemRoleDetailComponent } from './system-role-detail/system-role-detail.component';
 import { SystemRoleListComponent } from './system-role-list/system-role-list.component';
 import { SystemProgramComponent } from './system-program/system-program.component';
 import { SystemSectionComponent } from './system-section/system-section.component';
+import { SystemRoleFuntionsComponent } from './system-role-funtions/system-role-funtions.component';
 
 @NgModule({
   imports: [
@@ -47,13 +48,14 @@ import { SystemSectionComponent } from './system-section/system-section.componen
     MatDatepickerModule,
     MatNativeDateModule,
     MatDividerModule,
+    MatCheckboxModule,
   ],
   declarations: [
     SystemComponent,
     SystemProgramComponent,
     SystemRoleListComponent,
-    SystemRoleDetailComponent,
     SystemSectionComponent,
+    SystemRoleFuntionsComponent,
   ]
 })
 export class SystemModule { }

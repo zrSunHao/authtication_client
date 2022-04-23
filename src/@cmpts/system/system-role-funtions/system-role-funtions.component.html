@@ -1,0 +1,40 @@
+<div class="page">
+  <div class="topbar">
+    <img src="/assets/icons/app.png" />
+    <div>
+      <h2>系统管理 ---> 【xxxxxxx】角色 ---> 权限功能</h2>
+    </div>
+    <div class="box-fill"></div>
+    <button mat-flat-button color="accent">
+      <mat-icon>autorenew</mat-icon>重置
+    </button>
+    <button mat-flat-button color="accent">
+      <mat-icon>add</mat-icon>返回
+    </button>
+  </div>
+  <div class="content-warp">
+    <div class="content">
+      <mat-card *ngFor="let role of roles">
+        <mat-card-title>程序搜索(共26个)
+          <button mat-raised-button color="accent">保存</button>
+        </mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+        <table mat-table [dataSource]="role.section">
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> 模块名称 </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+          </ng-container>
+          <ng-container matColumnDef="functions">
+            <th mat-header-cell *matHeaderCellDef> 功能 </th>
+            <td mat-cell *matCellDef="let element">
+              <mat-checkbox *ngFor="let function of element.functions" [(ngModel)]="function.checked">{{function.name}}
+              </mat-checkbox>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="table-header-row"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-element-row"></tr>
+        </table>
+      </mat-card>
+    </div>
+  </div>
+</div>

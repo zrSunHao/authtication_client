@@ -46,7 +46,7 @@ export class SystemComponent implements OnInit {
   }
 
   onRoleClick(e: SystemElement): void {
-    this.router.navigate([`/system/role-list/${e.name}`]);
+    this.router.navigate([`/system/role/${e.name}`]);
   }
 
   onDeleteClick(e: SystemElement): void {

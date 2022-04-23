@@ -40,3 +40,244 @@ export const PROGRAM_ELEMENT_DATA: ProgramElement[] = [
     { name: 'service_1', type: '2', code: 'code1', intro: '图片管理', remark: '啦啦啦啦啦啦啦啦啦啦' },
     { name: 'service_1', type: '2', code: 'code1', intro: '图片管理', remark: '啦啦啦啦啦啦啦啦啦啦' },
 ];
+
+export interface RoleElement {
+    name: string;
+    code: string;
+    limitedMethod: '1' | '2' | '';//禁用 锁定
+    limitedExpiredAt: Date;
+    createdAt: Date;
+    remark: string;
+}
+
+export const ROLE_ELEMENT_DATA: RoleElement[] = [
+    { name: '普通用户', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { name: '会员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { name: '管理员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { name: '超级管理员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { name: '业务员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { name: '测试人员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { name: '设计人员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { name: '开发人员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { name: '普通用户', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { name: '普通用户', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { name: '普通用户', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+];
+
+export interface FunctionElement {
+    name: string;
+    checked: boolean;
+}
+
+export interface SectionElement {
+    name: string;
+    functions: Array<FunctionElement>;
+}
+
+export interface RoleSectionElement {
+    name: string;
+    section: Array<SectionElement>;
+}
+
+export const ROLE_SECTION_ELEMENT_DATA: RoleSectionElement[] = [
+    {
+        name: '角色1',
+        section: [
+            {
+                name: '模块1', functions: [
+                    { name: '功能/操作1', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作2', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作3', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作4', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作5', checked: false }, { name: '功能/操作1', checked: false },
+                ]
+            },
+            {
+                name: '模块1', functions: [
+                    { name: '功能/操作1', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作2', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作3', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作4', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作5', checked: false }, { name: '功能/操作1', checked: false },
+                ]
+            },
+            {
+                name: '模块1', functions: [
+                    { name: '功能/操作1', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作2', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作3', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作4', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作5', checked: false }, { name: '功能/操作1', checked: false },
+                ]
+            },
+            {
+                name: '模块1', functions: [
+                    { name: '功能/操作1', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作2', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作3', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作4', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作5', checked: false }, { name: '功能/操作1', checked: false },
+                ]
+            },
+            {
+                name: '模块1', functions: [
+                    { name: '功能/操作1', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作2', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作3', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作4', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作5', checked: false }, { name: '功能/操作1', checked: false },
+                ]
+            },
+        ]
+    },
+    {
+        name: '角色1',
+        section: [
+            {
+                name: '模块1', functions: [
+                    { name: '功能/操作1', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作2', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作3', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作4', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作5', checked: false }, { name: '功能/操作1', checked: false },
+                ]
+            },
+            {
+                name: '模块1', functions: [
+                    { name: '功能/操作1', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作2', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作3', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作4', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作5', checked: false }, { name: '功能/操作1', checked: false },
+                ]
+            },
+            {
+                name: '模块1', functions: [
+                    { name: '功能/操作1', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作2', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作3', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作4', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作5', checked: false }, { name: '功能/操作1', checked: false },
+                ]
+            },
+            {
+                name: '模块1', functions: [
+                    { name: '功能/操作1', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作2', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作3', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作4', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作5', checked: false }, { name: '功能/操作1', checked: false },
+                ]
+            },
+            {
+                name: '模块1', functions: [
+                    { name: '功能/操作1', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作2', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作3', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作4', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作5', checked: false }, { name: '功能/操作1', checked: false },
+                ]
+            },
+        ]
+    },
+    {
+        name: '角色1',
+        section: [
+            {
+                name: '模块1', functions: [
+                    { name: '功能/操作1', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作2', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作3', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作4', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作5', checked: false }, { name: '功能/操作1', checked: false },
+                ]
+            },
+            {
+                name: '模块1', functions: [
+                    { name: '功能/操作1', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作2', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作3', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作4', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作5', checked: false }, { name: '功能/操作1', checked: false },
+                ]
+            },
+            {
+                name: '模块1', functions: [
+                    { name: '功能/操作1', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作2', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作3', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作4', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作5', checked: false }, { name: '功能/操作1', checked: false },
+                ]
+            },
+            {
+                name: '模块1', functions: [
+                    { name: '功能/操作1', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作2', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作3', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作4', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作5', checked: false }, { name: '功能/操作1', checked: false },
+                ]
+            },
+            {
+                name: '模块1', functions: [
+                    { name: '功能/操作1', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作2', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作3', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作4', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作5', checked: false }, { name: '功能/操作1', checked: false },
+                ]
+            },
+        ]
+    },
+    {
+        name: '角色1',
+        section: [
+            {
+                name: '模块1', functions: [
+                    { name: '功能/操作1', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作2', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作3', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作4', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作5', checked: false }, { name: '功能/操作1', checked: false },
+                ]
+            },
+            {
+                name: '模块1', functions: [
+                    { name: '功能/操作1', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作2', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作3', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作4', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作5', checked: false }, { name: '功能/操作1', checked: false },
+                ]
+            },
+            {
+                name: '模块1', functions: [
+                    { name: '功能/操作1', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作2', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作3', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作4', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作5', checked: false }, { name: '功能/操作1', checked: false },
+                ]
+            },
+            {
+                name: '模块1', functions: [
+                    { name: '功能/操作1', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作2', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作3', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作4', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作5', checked: false }, { name: '功能/操作1', checked: false },
+                ]
+            },
+            {
+                name: '模块1', functions: [
+                    { name: '功能/操作1', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作2', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作3', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作4', checked: false }, { name: '功能/操作1', checked: false },
+                    { name: '功能/操作5', checked: false }, { name: '功能/操作1', checked: false },
+                ]
+            },
+        ]
+    },
+];

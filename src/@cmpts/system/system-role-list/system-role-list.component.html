@@ -1,3 +1,107 @@
-<p>
-  system-role-list works!
-</p>
+<div class="page">
+  <div class="topbar">
+    <img src="/assets/icons/app.png" />
+    <div>
+      <h2>系统管理 ---> 角色管理</h2>
+    </div>
+    <div class="box-fill"></div>
+    <button mat-flat-button color="accent">
+      <mat-icon>add</mat-icon>添加
+    </button>
+    <button mat-flat-button color="accent">
+      <mat-icon>search</mat-icon>搜索
+    </button>
+    <button mat-flat-button color="accent">
+      <mat-icon>autorenew</mat-icon>重置
+    </button>
+  </div>
+  <div class="content-warp">
+    <mat-card class="search">
+      <form class="form">
+        <mat-form-field appearance="outline">
+          <mat-label>名称</mat-label>
+          <input matInput placeholder="请输入要搜索的程序名称" [(ngModel)]="name" name="name" autocomplete="off">
+          <mat-icon matSuffix>account_circle</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>标识码</mat-label>
+          <input matInput placeholder="请输入要搜索的程序编码" [(ngModel)]="code" name="code" autocomplete="off">
+          <mat-icon matSuffix>portrait</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>约束</mat-label>
+          <mat-select [(ngModel)]="limitedMethod" name="limitedMethod">
+            <mat-option value="">全部</mat-option>
+            <mat-option value="1">禁用</mat-option>
+            <mat-option value="2">锁定</mat-option>
+            <mat-option value="3">无</mat-option>
+          </mat-select>
+          <mat-icon matSuffix>security</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>功能简介/备注</mat-label>
+          <input matInput placeholder="请输入要搜索的功能简介/备注" [(ngModel)]="remark" name="remark" autocomplete="off">
+          <mat-icon matSuffix>format_color_text</mat-icon>
+        </mat-form-field>
+      </form>
+    </mat-card>
+    <mat-card class="table">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> 账号 </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}}&nbsp;&nbsp; </td>
+        </ng-container>
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef> 标识码 </th>
+          <td mat-cell *matCellDef="let element"> {{element.code}}&nbsp;&nbsp; </td>
+        </ng-container>
+        <ng-container matColumnDef="limitedMethod">
+          <th mat-header-cell *matHeaderCellDef> 方式 </th>
+          <td mat-cell *matCellDef="let element">
+            <span *ngIf="element.limitedMethod === ''">全部</span>
+            <span *ngIf="element.limitedMethod === '1'">禁用</span>
+            <span *ngIf="element.limitedMethod === '2'">锁定</span>
+            <span *ngIf="element.limitedMethod === '3'">无</span>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef> 创建时间 </th>
+          <td mat-cell *matCellDef="let element"> {{element.createdAt| date:'yyyy-MM-dd HH:mm:ss'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="limitedExpiredAt">
+          <th mat-header-cell *matHeaderCellDef> 过期时间 </th>
+          <td mat-cell *matCellDef="let element"> {{element.limitedExpiredAt| date:'yyyy-MM-dd'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="remark">
+          <th mat-header-cell *matHeaderCellDef> 备注 </th>
+          <td mat-cell *matCellDef="let element">
+            <span matTooltip={{element.remark}}>{{element.remark|clip:15}} </span>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="operate">
+          <th mat-header-cell *matHeaderCellDef> 操作 </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button matTooltip="编辑" (click)="onEditClick(element)">
+              <mat-icon>mode_edit_outline</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="功能" (click)="onFuntionsClick(element)">
+              <mat-icon>receipt_long</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="约束" (click)="onLimitClick(element)">
+              <mat-icon>receipt_long</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="删除" (click)="ondeleteClick(element)">
+              <mat-icon>delete_sweep</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="table-header-row"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-element-row"></tr>
+      </table>
+    </mat-card>
+    <mat-card class="footer">
+      <app-paginator [total]="total" [columns]="columns" [columnOp]="columnOp" (onChange)="paginatorChange($event)">
+      </app-paginator>
+    </mat-card>
+  </div>
+</div>

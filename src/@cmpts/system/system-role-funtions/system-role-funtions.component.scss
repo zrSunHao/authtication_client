@@ -47,41 +47,6 @@
     align-items: center;
 }
 
-.search {
-    width: 90%;
-    min-width: 1024px;
-    max-width: 1366px;
-    margin-top: 3rem;
-}
-
-.search ::ng-deep .mat-form-field-wrapper {
-    padding-bottom: 0;
-}
-
-.form {
-    height: fit-content;
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: auto auto auto auto;
-    font-size: 12px;
-}
-
-.table {
-    width: 90%;
-    min-width: 1024px;
-    max-width: 1366px;
-    min-height: 24rem;
-    margin-top: 2rem;
-}
-
-.footer {
-    width: 90%;
-    min-width: 1024px;
-    max-width: 1366px;
-    height: fit-content;
-    margin-top: 2rem;
-}
-
 table {
     width: 100%;
 }
@@ -96,4 +61,40 @@ table {
 
 table button {
     margin-left: 0.5rem;
+}
+
+.content {
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    width: 90%;
+    min-width: 1024px;
+    max-width: 1366px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+mat-card{
+    margin-bottom: 2rem;
+}
+
+.mat-card-title {
+    font-size: 20px;
+}
+
+mat-card-title button {
+    float: right;
+    font-size: 12px;
+    margin-left: 1rem;
+}
+
+mat-card-title .mat-raised-button {
+    line-height: 24px;
+    width: 2rem;
+    padding: 0;
+    min-width: 2rem;
+}
+
+mat-checkbox{
+    margin-right: 1.5rem;
 }
