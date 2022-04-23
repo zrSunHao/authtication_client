@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { SystemElement, SYSTEM_ELEMENT_DATA } from './model';
 
@@ -26,7 +28,7 @@ export class SystemComponent implements OnInit {
   displayedColumns = ['icon', 'name', 'code', 'createdAt', 'intro', 'remark', 'operate',];
   dataSource = SYSTEM_ELEMENT_DATA;
 
-  constructor() { }
+  constructor(private dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
   }
@@ -39,12 +41,12 @@ export class SystemComponent implements OnInit {
 
   }
 
-  onConfigClick(e: SystemElement): void {
-
+  onProgtamClick(e: SystemElement): void {
+    this.router.navigate([`/system/program/${e.name}`]);
   }
 
   onRoleClick(e: SystemElement): void {
-
+    this.router.navigate([`/system/role-list/${e.name}`]);
   }
 
   onDeleteClick(e: SystemElement): void {

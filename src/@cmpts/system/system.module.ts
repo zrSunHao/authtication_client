@@ -14,14 +14,16 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { SharedModule } from 'src/@sun/shared/shared.module';
 import { SystemRoutingModule } from './system.module.routing';
 
 import { SystemComponent } from './system.component';
-import { SystemDetailComponent } from './system-detail/system-detail.component';
 import { SystemRoleDetailComponent } from './system-role-detail/system-role-detail.component';
 import { SystemRoleListComponent } from './system-role-list/system-role-list.component';
+import { SystemProgramComponent } from './system-program/system-program.component';
+import { SystemSectionComponent } from './system-section/system-section.component';
 
 @NgModule({
   imports: [
@@ -44,12 +46,14 @@ import { SystemRoleListComponent } from './system-role-list/system-role-list.com
     MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatDividerModule,
   ],
   declarations: [
     SystemComponent,
-    SystemDetailComponent,
+    SystemProgramComponent,
     SystemRoleListComponent,
     SystemRoleDetailComponent,
+    SystemSectionComponent,
   ]
 })
 export class SystemModule { }

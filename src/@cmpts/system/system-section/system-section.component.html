@@ -1,0 +1,40 @@
+<mat-card>
+  <mat-card-title>程序搜索(共26个)
+    <button mat-raised-button color="accent">搜索</button>
+    <button mat-raised-button color="accent">重置</button>
+  </mat-card-title>
+  <mat-card-subtitle></mat-card-subtitle>
+  <div class="search">
+    <mat-form-field appearance="outline">
+      <mat-label>名称</mat-label>
+      <input matInput placeholder="请输入要搜索的程序名称" [(ngModel)]="name" name="name" autocomplete="off">
+      <mat-icon matSuffix>account_circle</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>类别</mat-label>
+      <mat-select [(ngModel)]="type" name="type">
+        <mat-option value="">全部</mat-option>
+        <mat-option value="1">网页端</mat-option>
+        <mat-option value="2">服务端</mat-option>
+        <mat-option value="3">桌面端</mat-option>
+        <mat-option value="4">移动端</mat-option>
+      </mat-select>
+      <mat-icon matSuffix>security</mat-icon>
+    </mat-form-field>
+  </div>
+  <div class="list-wrap">
+    <div class="section-wrap" *ngFor="let section of sections;let i  = index">
+      <div class="section-header">
+        <span class="title">{{i+1}}、</span>
+        <span class="title">{{section.name}}</span>
+        <span>{{section.code}}</span>
+        <button mat-raised-button color="accent" (click)="onAddClick(section)">添加</button>
+      </div>
+      <div ><mat-divider></mat-divider></div>
+      <div class="section-remark">
+        {{section.intro}}
+      </div>
+    </div>
+  </div>
+</mat-card>
+
