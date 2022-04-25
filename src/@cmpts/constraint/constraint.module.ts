@@ -15,11 +15,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
+import { ConstraintService } from './constraint.service';
 import { SharedModule } from 'src/@sun/shared/shared.module';
 import { ConstraintRoutingModule } from './constraint.module.routing';
 
 import { ConstraintComponent } from './constraint.component';
-import { ConstraintService } from './constraint.service';
 
 @NgModule({
   imports: [

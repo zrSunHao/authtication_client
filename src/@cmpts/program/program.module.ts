@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatCardModule } from '@angular/material/card';
@@ -11,21 +12,27 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
+import { ProgramService } from './program.service';
 import { SharedModule } from 'src/@sun/shared/shared.module';
 import { ProgramRoutingModule } from './program.module.routing';
 
 import { ProgramComponent } from './program.component';
 import { ProgramDetailComponent } from './program-detail/program-detail.component';
 import { ProgramSectionComponent } from './program-section/program-section.component';
+import { DialogFunctionComponent } from './dialog-function/dialog-function.component';
+import { DialogProgramComponent } from './dialog-program/dialog-program.component';
+import { DialogSectionComponent } from './dialog-section/dialog-section.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
-    
+
     SharedModule,
     ProgramRoutingModule,
 
@@ -38,12 +45,17 @@ import { ProgramSectionComponent } from './program-section/program-section.compo
     MatTableModule,
     MatTooltipModule,
     MatDialogModule,
-    MatSnackBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   declarations: [
     ProgramComponent,
     ProgramDetailComponent,
     ProgramSectionComponent,
-  ]
+    DialogProgramComponent,
+    DialogSectionComponent,
+    DialogFunctionComponent,
+  ],
+  providers: [ProgramService]
 })
 export class ProgramModule { }

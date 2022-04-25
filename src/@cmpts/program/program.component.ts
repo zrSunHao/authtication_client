@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
+import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { ProgramElement, PROGRAM_ELEMENT_DATA } from './model';
+import { ProgramService } from './program.service';
 
 @Component({
   selector: 'app-program',
@@ -28,7 +30,10 @@ export class ProgramComponent implements OnInit {
   displayedColumns = ['name', 'type', 'code', 'createdAt', 'intro', 'remark', 'operate',];
   dataSource = PROGRAM_ELEMENT_DATA;
 
-  constructor(private dialog: MatDialog, private router: Router) { }
+  constructor(private router: Router,
+    private dialog: MatDialog,
+    private notifyServ: NotifyService,
+    private programServ: ProgramService,) { }
 
   ngOnInit() {
   }

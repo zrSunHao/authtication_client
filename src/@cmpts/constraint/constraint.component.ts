@@ -26,7 +26,7 @@ export class ConstraintComponent implements OnInit {
   ];
 
   displayedColumns = ['category', 'method', 'userName', 'sysName', 'functionName', 'expiredAt', 'origin', 'createdAt', 'remark', 'operate',];
-  dataSource = CONSTRAINT_ELEMENT_DATA;
+  dataSource: Array<ConstraintElement> = CONSTRAINT_ELEMENT_DATA;
 
   constructor(private dialog: MatDialog,
     private notifyServ: NotifyService,
@@ -36,7 +36,7 @@ export class ConstraintComponent implements OnInit {
     this.onSearchClick();
   }
 
-  paginatorChange(paginator: Paginator) {
+  onPaginatorChange(paginator: Paginator) {
     console.log(paginator);
     const params = new PagingParameter<ConstraintSearchDto>();
     params.filter = this.dto;
