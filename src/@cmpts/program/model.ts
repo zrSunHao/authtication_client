@@ -1,7 +1,7 @@
 export interface ProgramElement {
     id: string | null;
     name: string;
-    type: '1' | '2' | '3' | '4'; // 网页端 桌面端 移动端 服务端
+    type: '' | '1' | '2' | '3' | '4'; // 网页端 桌面端 移动端 服务端
     code: string;
     intro: string;
     remark: string;

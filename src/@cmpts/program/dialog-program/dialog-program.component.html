@@ -1,3 +1,39 @@
-<p>
-  dialog-program works!
-</p>
+<div mat-dialog-title class="header">
+  <h3>{{title}}</h3>
+</div>
+<form [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>程序名称</mat-label>
+    <input matInput formControlName="name">
+    <mat-icon matSuffix>report</mat-icon>
+    <mat-hint>中文、英文、数字、下划线，5-16位</mat-hint>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>类别</mat-label>
+    <mat-select formControlName="type">
+      <mat-option value="1">网页端</mat-option>
+      <mat-option value="2">桌面端</mat-option>
+      <mat-option value="3">移动端</mat-option>
+      <mat-option value="4">服务端</mat-option>
+    </mat-select>
+    <mat-icon matSuffix>category</mat-icon>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>识别码</mat-label>
+    <input matInput formControlName="code">
+    <mat-icon matSuffix>report</mat-icon>
+    <mat-hint>中文、英文、数字、下划线，5-16位</mat-hint>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="intro">
+    <mat-label>功能简介</mat-label>
+    <textarea matInput formControlName="intro" rows="4"></textarea>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="remark">
+    <mat-label>备注</mat-label>
+    <textarea matInput formControlName="remark" rows="4"></textarea>
+  </mat-form-field>
+</form>
+<div mat-dialog-actions align="end">
+  <button mat-button color="warn" (click)="onCloseClick()">取消</button>
+  <button mat-button cdkFocusInitial color="accent" (click)="onSaveClick()">保存</button>
+</div>

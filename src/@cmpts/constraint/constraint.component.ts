@@ -15,6 +15,7 @@ import { ConstraintElement, ConstraintSearchDto, CONSTRAINT_ELEMENT_DATA } from 
 export class ConstraintComponent implements OnInit {
 
   dto: ConstraintSearchDto = new ConstraintSearchDto();
+  params = new PagingParameter<ConstraintSearchDto>();
 
   total = 35;
   columnOp = 'createdAt';
@@ -33,37 +34,22 @@ export class ConstraintComponent implements OnInit {
     private hostServ: ConstraintService) { }
 
   ngOnInit() {
-    this.onSearchClick();
-  }
-
-  onPaginatorChange(paginator: Paginator) {
-    console.log(paginator);
-    const params = new PagingParameter<ConstraintSearchDto>();
-    params.filter = this.dto;
-    params.pageIndex = paginator.pageIndex;
-    params.pageSize = paginator.pageSize;
-    params.sortColumn = paginator.column;
-    params.sort = paginator.sort;
-    this.hostServ.serach(params);
+    this.onResetClick();
   }
 
   onSearchClick(): void {
-    const params = new PagingParameter<ConstraintSearchDto>();
-    params.filter = this.dto;
-    params.pageIndex = 1;
-    params.pageSize = 10;
-    params.sortColumn = this.columnOp;
-
-    this.hostServ.serach(params).subscribe({
-      next: res => { this._renderInfo(res); },
-      error: err => { console.error(err); }
-    })
+    this.params.filter = this.dto;
+    this._loadData(this.params);
   }
 
   onResetClick(): void {
     this.dto = new ConstraintSearchDto();
+    this.params.filter = this.dto;
+    this.params.pageIndex = 1;
+    this.params.pageSize = 10;
+    this.params.sortColumn = this.columnOp;
     this.columnOp = 'createdAt';
-    this.onSearchClick();
+    this._loadData(this.params);
   }
 
   onCancelClick(e: ConstraintElement): void {
@@ -73,8 +59,25 @@ export class ConstraintComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: string) => {
-      if (result === 'yes') {
-        this.notifyServ.notify('约束取消成功！！！', 'success');
+      if (result === 'yes') this._cancel(e);
+    });
+  }
+
+  onPaginatorChange(paginator: Paginator) {
+    this.params.filter = this.dto;
+    this.params.pageIndex = paginator.pageIndex;
+    this.params.pageSize = paginator.pageSize;
+    this.params.sortColumn = paginator.column;
+    this.params.sort = paginator.sort;
+    this._loadData(this.params);
+  }
+
+  private _loadData(params: PagingParameter<ConstraintSearchDto>) {
+    this.hostServ.serach(params).subscribe({
+      next: res => { this._renderInfo(res); },
+      error: err => {
+        const msg = `数据加载失败！！！ ${err}`;
+        this.notifyServ.notify(msg, 'error');
       }
     });
   }
@@ -87,6 +90,24 @@ export class ConstraintComponent implements OnInit {
       const msg = `数据加载失败！！！ ${res.allMessages}`;
       this.notifyServ.notify(msg, 'error');
     }
+  }
+
+  private _cancel(e: ConstraintElement) {
+    this.hostServ.cancel(e.id).subscribe({
+      next: res => {
+        if (res.success) {
+          this.notifyServ.notify('约束取消成功！！！', 'success');
+          this._loadData(this.params);
+        } else {
+          const msg = `约束取消失败！！！ ${res.allMessages}`;
+          this.notifyServ.notify(msg, 'error');
+        }
+      },
+      error: err => {
+        const msg = `约束取消失败！！！ ${err}`;
+        this.notifyServ.notify(msg, 'error');
+      }
+    });
   }
 
 }
