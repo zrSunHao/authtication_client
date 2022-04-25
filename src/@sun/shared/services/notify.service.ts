@@ -14,7 +14,7 @@ export class NotifyService {
     const panelClass = this._getPanelClass(type);
     this.snackBar.openFromComponent(IconSnackBarComponent,
       {
-        duration: 2000,
+        duration: 3000,
         horizontalPosition: 'right',
         verticalPosition: 'bottom',
         panelClass: [panelClass],

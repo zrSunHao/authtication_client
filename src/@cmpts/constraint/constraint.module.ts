@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatCardModule } from '@angular/material/card';
@@ -18,11 +19,13 @@ import { SharedModule } from 'src/@sun/shared/shared.module';
 import { ConstraintRoutingModule } from './constraint.module.routing';
 
 import { ConstraintComponent } from './constraint.component';
+import { ConstraintService } from './constraint.service';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
 
     SharedModule,
@@ -42,6 +45,9 @@ import { ConstraintComponent } from './constraint.component';
   ],
   declarations: [
     ConstraintComponent,
+  ],
+  providers: [
+    ConstraintService
   ]
 })
 export class ConstraintModule { }

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { PagingParameter, ResponsePagingResult } from 'src/@sun/models/paging.model';
 import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/confirm-dialog.component';
-import { IconSnackBarComponent } from 'src/@sun/shared/cmpts/icon-snack-bar/icon-snack-bar.component';
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { ConstraintElement, CONSTRAINT_ELEMENT_DATA } from './model';
+import { ConstraintService } from './constraint.service';
+import { ConstraintElement, ConstraintSearchDto, CONSTRAINT_ELEMENT_DATA } from './model';
 
 @Component({
   selector: 'app-constraint',
@@ -14,11 +14,7 @@ import { ConstraintElement, CONSTRAINT_ELEMENT_DATA } from './model';
 })
 export class ConstraintComponent implements OnInit {
 
-  name: string = '';
-  category: '' | '1' | '2' | '3' | '4' = '';
-  introOrRemark: string = '';
-  startAt: Date | null = null;
-  endAt: Date | null = null;
+  dto: ConstraintSearchDto = new ConstraintSearchDto();
 
   total = 35;
   columnOp = 'createdAt';
@@ -32,25 +28,41 @@ export class ConstraintComponent implements OnInit {
   displayedColumns = ['category', 'method', 'userName', 'sysName', 'functionName', 'expiredAt', 'origin', 'createdAt', 'remark', 'operate',];
   dataSource = CONSTRAINT_ELEMENT_DATA;
 
-  constructor(private dialog: MatDialog, private notifySer: NotifyService) { }
+  constructor(private dialog: MatDialog,
+    private notifyServ: NotifyService,
+    private hostServ: ConstraintService) { }
 
   ngOnInit() {
+    this.onSearchClick();
   }
 
   paginatorChange(paginator: Paginator) {
     console.log(paginator);
+    const params = new PagingParameter<ConstraintSearchDto>();
+    params.filter = this.dto;
+    params.pageIndex = paginator.pageIndex;
+    params.pageSize = paginator.pageSize;
+    params.sortColumn = paginator.column;
+    params.sort = paginator.sort;
+    this.hostServ.serach(params);
   }
 
   onSearchClick(): void {
-    this.notifySer.notify('数据加载成功！！！', 'success');
+    const params = new PagingParameter<ConstraintSearchDto>();
+    params.filter = this.dto;
+    params.pageIndex = 1;
+    params.pageSize = 10;
+    params.sortColumn = this.columnOp;
+
+    this.hostServ.serach(params).subscribe({
+      next: res => { this._renderInfo(res); },
+      error: err => { console.error(err); }
+    })
   }
 
   onResetClick(): void {
-    this.name = '';
-    this.category = '';
-    this.introOrRemark = '';
-    this.startAt = null;
-    this.endAt = null;
+    this.dto = new ConstraintSearchDto();
+    this.columnOp = 'createdAt';
     this.onSearchClick();
   }
 
@@ -62,9 +74,19 @@ export class ConstraintComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: string) => {
       if (result === 'yes') {
-        this.notifySer.notify('约束取消成功！！！', 'success');
+        this.notifyServ.notify('约束取消成功！！！', 'success');
       }
     });
+  }
+
+  private _renderInfo(res: ResponsePagingResult<ConstraintElement>) {
+    if (res.success) {
+      // TODO 返回的数据赋值给页面
+      this.notifyServ.notify('数据加载成功！！！', 'success');
+    } else {
+      const msg = `数据加载失败！！！ ${res.allMessages}`;
+      this.notifyServ.notify(msg, 'error');
+    }
   }
 
 }
