@@ -25,7 +25,6 @@ import { ProgramSectionComponent } from './program-section/program-section.compo
 import { DialogFunctionComponent } from './dialog-function/dialog-function.component';
 import { DialogProgramComponent } from './dialog-program/dialog-program.component';
 import { DialogSectionComponent } from './dialog-section/dialog-section.component';
-import { DialogFunctionContraintComponent } from './dialog-function-contraint/dialog-function-contraint.component';
 import { ProgramFunctionComponent } from './program-function/program-function.component';
 
 @NgModule({
@@ -58,7 +57,6 @@ import { ProgramFunctionComponent } from './program-function/program-function.co
     DialogProgramComponent,
     DialogSectionComponent,
     DialogFunctionComponent,
-    DialogFunctionContraintComponent,
   ],
   providers: [ProgramService]
 })

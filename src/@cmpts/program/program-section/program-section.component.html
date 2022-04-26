@@ -1,16 +1,18 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>程序模块列表（共{{data.length}}个）</mat-card-title>
+    <mat-card-title>
+      <h3>模块列表（当前 '{{selectedSection?.name}}' | 共 {{data.length}} 个）</h3>
+    </mat-card-title>
     <mat-card-subtitle></mat-card-subtitle>
   </mat-card-header>
 
   <div class="list-wrap">
-    <div class="section-wrap" [ngClass]="{'section-wrap-selected':section.id === selectedId}"
+    <div class="section-wrap" [ngClass]="{'section-wrap-selected':section.id === selectedSection?.id}"
       *ngFor="let section of data;let i = index" (click)="onSelectClick(section)">
       <div class="section-header">
         <span class="title">{{section.name}}</span>
         <span>{{section.code}}</span>
-        <button mat-raised-button color="accent" (click)="onEditClick(section)">添加功能</button>
+        <button mat-raised-button color="accent" (click)="onAddFunctionClick(section)">添加功能</button>
         <button mat-raised-button color="accent" (click)="onEditClick(section)">修改</button>
         <button mat-raised-button color="accent" (click)="onDeleteClick(section)">删除</button>
       </div>

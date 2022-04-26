@@ -101,3 +101,11 @@ table {
 table button {
     margin-left: 0.5rem;
 }
+
+table mat-icon {
+    color: orange;
+}
+
+table mat-icon:hover {
+    color: #e91e63;
+}

@@ -1,0 +1,17 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.header h3 {
+    margin: 0;
+}
+
+form {
+    display: grid;
+    //grid-template-columns: auto auto 6rem;
+    grid-template-rows: 4rem 4rem 6rem;
+    gap: 1rem;
+}

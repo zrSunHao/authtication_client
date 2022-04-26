@@ -1,3 +1,25 @@
-<p>
-  dialog-section works!
-</p>
+<div mat-dialog-title class="header">
+  <h3>{{title}}</h3>
+</div>
+<form [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>模块名称</mat-label>
+    <input matInput formControlName="name">
+    <mat-icon matSuffix>report</mat-icon>
+    <mat-hint>中文、英文、数字、下划线，2-16位</mat-hint>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>识别码</mat-label>
+    <input matInput formControlName="code">
+    <mat-icon matSuffix>report</mat-icon>
+    <mat-hint>中文、英文、数字、下划线，2-16位</mat-hint>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="remark">
+    <mat-label>备注</mat-label>
+    <textarea matInput formControlName="remark" rows="4"></textarea>
+  </mat-form-field>
+</form>
+<div mat-dialog-actions align="end">
+  <button mat-button color="warn" (click)="onCloseClick()">取消</button>
+  <button mat-button color="accent" (click)="onSaveClick()" [disabled]="!form.valid">保存</button>
+</div>

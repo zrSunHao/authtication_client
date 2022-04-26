@@ -6,7 +6,7 @@
     <mat-label>程序名称</mat-label>
     <input matInput formControlName="name">
     <mat-icon matSuffix>report</mat-icon>
-    <mat-hint>中文、英文、数字、下划线，5-16位</mat-hint>
+    <mat-hint>中文、英文、数字、下划线，2-16位</mat-hint>
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>类别</mat-label>
@@ -22,7 +22,7 @@
     <mat-label>识别码</mat-label>
     <input matInput formControlName="code">
     <mat-icon matSuffix>report</mat-icon>
-    <mat-hint>中文、英文、数字、下划线，5-16位</mat-hint>
+    <mat-hint>中文、英文、数字、下划线，2-16位</mat-hint>
   </mat-form-field>
   <mat-form-field appearance="outline" class="intro">
     <mat-label>功能简介</mat-label>
@@ -35,5 +35,5 @@
 </form>
 <div mat-dialog-actions align="end">
   <button mat-button color="warn" (click)="onCloseClick()">取消</button>
-  <button mat-button cdkFocusInitial color="accent" (click)="onSaveClick()" [disabled]="!form.valid">保存</button>
+  <button mat-button color="accent" (click)="onSaveClick()" [disabled]="!form.valid">保存</button>
 </div>

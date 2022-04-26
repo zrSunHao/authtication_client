@@ -8,17 +8,15 @@
     <button mat-flat-button color="accent" (click)="onAddSectionClick()">
       <mat-icon>add</mat-icon>添加模块
     </button>
-    <button mat-flat-button color="accent" (click)="onResetClick()">
-      <mat-icon>autorenew</mat-icon>刷新
-    </button>
   </div>
 
   <div class="content-warp">
     <div class="content">
-      <app-program-section #sectCmpt [data]="sections" (onSelect)="onSelectSectionClick($event)"
+      <app-program-section #sectCmpt [data]="sections" [selectedSection]="selectedSection"
+        (onSelect)="onSelectSectionClick($event)" (onAddFunction)="onAddFunctionClick($event)"
         (onEdit)="onEditSectionClick($event)" (onDelete)="onDeleteSectionClick($event)"></app-program-section>
-      <app-program-function #funcCmpt [data]="functions" (onLimit)="onLimitFunctionClick($event)"
-        (onEdit)="onEditFunctionClick($event)" (onDelete)="onDeleteFunctionClick($event)"></app-program-function>
+      <app-program-function #funcCmpt [data]="functions" (onEdit)="onEditFunctionClick($event)"
+        (onDelete)="onDeleteFunctionClick($event)"></app-program-function>
     </div>
   </div>
 </div>

@@ -84,8 +84,8 @@ export class ConstraintComponent implements OnInit {
 
   private _renderInfo(res: ResponsePagingResult<ConstraintElement>) {
     if (res.success) {
-      // TODO 返回的数据赋值给页面
-      this.notifyServ.notify('数据加载成功！！！', 'success');
+      this.total = res.rowsCount;
+      this.dataSource = res.data;
     } else {
       const msg = `数据加载失败！！！ ${res.allMessages}`;
       this.notifyServ.notify(msg, 'error');
