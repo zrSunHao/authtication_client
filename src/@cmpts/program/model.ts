@@ -65,4 +65,11 @@ export const FUNCTION_ELEMENT_DATA: FunctionElement[] = [
     { id: '3', name: '删除模块', programId: '1', sectionId: '1', code: 'remove_section', constraint: '', limitedExpireAt: null, remark: '梵蒂冈地方韩国人的好地方恢复的很好地方天热问个问题温特沃' },
     { id: '4', name: '添加功能', programId: '1', sectionId: '1', code: 'add_function', constraint: '', limitedExpireAt: null, remark: '梵蒂冈地方韩国人的好地方恢复的很好地方天热问个问题温特沃' },
     { id: '5', name: '添加约束', programId: '1', sectionId: '1', code: 'add_constraint', constraint: '', limitedExpireAt: null, remark: '梵蒂冈地方韩国人的好地方恢复的很好地方天热问个问题温特沃' },
+    { id: '1', name: '页面数据', programId: '1', sectionId: '1', code: 'page_list', constraint: '', limitedExpireAt: null, remark: '梵蒂冈地方韩国人的好地方恢复的很好地方天热问个问题温特沃' },
+    { id: '2', name: '添加模块', programId: '1', sectionId: '1', code: 'add_section', constraint: '', limitedExpireAt: null, remark: '梵蒂冈地方韩国人的好地方恢复的很好地方天热问个问题温特沃' },
+    { id: '3', name: '删除模块', programId: '1', sectionId: '1', code: 'remove_section', constraint: '', limitedExpireAt: null, remark: '梵蒂冈地方韩国人的好地方恢复的很好地方天热问个问题温特沃' },
+    { id: '4', name: '添加功能', programId: '1', sectionId: '1', code: 'add_function', constraint: '', limitedExpireAt: null, remark: '梵蒂冈地方韩国人的好地方恢复的很好地方天热问个问题温特沃' },
+    { id: '5', name: '添加约束', programId: '1', sectionId: '1', code: 'add_constraint', constraint: '', limitedExpireAt: null, remark: '梵蒂冈地方韩国人的好地方恢复的很好地方天热问个问题温特沃' },
+    { id: '4', name: '添加功能', programId: '1', sectionId: '1', code: 'add_function', constraint: '', limitedExpireAt: null, remark: '梵蒂冈地方韩国人的好地方恢复的很好地方天热问个问题温特沃' },
+    { id: '5', name: '添加约束', programId: '1', sectionId: '1', code: 'add_constraint', constraint: '', limitedExpireAt: null, remark: '梵蒂冈地方韩国人的好地方恢复的很好地方天热问个问题温特沃' },
 ];

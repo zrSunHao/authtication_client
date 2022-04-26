@@ -35,5 +35,5 @@
 </form>
 <div mat-dialog-actions align="end">
   <button mat-button color="warn" (click)="onCloseClick()">取消</button>
-  <button mat-button cdkFocusInitial color="accent" (click)="onSaveClick()">保存</button>
+  <button mat-button cdkFocusInitial color="accent" (click)="onSaveClick()" [disabled]="!form.valid">保存</button>
 </div>

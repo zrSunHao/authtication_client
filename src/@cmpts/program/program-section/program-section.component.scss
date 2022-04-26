@@ -1,6 +1,10 @@
+$section-bg-color: #595959;
+$section-hover-bg-color: #303030;
+$section-selected-bg-color: #303030;
+
 .list-wrap {
-    overflow-y: scroll;
-    max-height: 34rem;
+    overflow-y: auto;
+    max-height: 34.25rem;
 }
 
 .section-wrap {
@@ -10,17 +14,21 @@
     margin-bottom: 0.5rem;
     margin-right: 0.5rem;
     padding: 0.5rem;
-    background-color: #595959;//#595959;
+    background-color: $section-bg-color;
 }
 
 .section-wrap:hover {
-    background-color: #303030;
+    background-color: $section-hover-bg-color;
+}
+
+.section-wrap-selected {
+    background-color: $section-selected-bg-color;
 }
 
 .section-header {
-    color: burlywood;
+    color: #d1fae5;
     display: grid;
-    grid-template-columns: 1.5rem auto 5rem 3rem 3rem;
+    grid-template-columns: auto 5rem 5rem 3rem 3rem;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     align-items: center;
@@ -35,18 +43,18 @@
 .section-header .mat-raised-button {
     height: 24px;
     line-height: 24px;
-    width: 2rem;
+    max-width: 4rem;
     padding: 0;
     min-width: 2rem;
 }
 
-.title{
+.title {
     font-size: medium;
     font-weight: bold;
 }
 
 .section-remark {
     height: 3rem;
-    color: burlywood;
+    color: #ccfbf1;
     word-break: normal;
 }

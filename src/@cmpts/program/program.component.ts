@@ -68,7 +68,7 @@ export class ProgramComponent implements OnInit {
   }
 
   onConfigClick(e: ProgramElement): void {
-    this.router.navigate([`/program/detail/${e.id}?type=${e.type}&${e.name}`]);
+    this.router.navigate([`/program/detail/${e.id}/${e.type}/${e.name}`]);
   }
 
   onEditClick(e: ProgramElement): void {

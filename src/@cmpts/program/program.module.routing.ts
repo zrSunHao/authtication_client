@@ -5,7 +5,7 @@ import { ProgramComponent } from './program.component';
 
 const routes: Routes = [
     { path: '', component: ProgramComponent, },
-    { path: 'detail/:id', component: ProgramDetailComponent, },
+    { path: 'detail/:id/:type/:name', component: ProgramDetailComponent, },
     { path: '**', component: ProgramComponent, },
 ];
 
