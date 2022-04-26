@@ -41,8 +41,25 @@ export class ProgramDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.programId = params['id'];
-      this.programType = params['type'];
       this.programName = params['name'];
+      switch (params['type']) {
+        case '1':
+          this.programType = '网页端';
+          break;
+        case '2':
+          this.programType = '桌面端';
+          break;
+        case '3':
+          this.programType = '移动端';
+          break;
+        case '4':
+          this.programType = '服务端';
+          break;
+        default:
+          this.programType = '';
+          break;
+      }
+
       this._loadSectionData(this.programId);
     })
   }
