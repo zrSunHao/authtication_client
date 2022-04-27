@@ -24,6 +24,7 @@ export const SYSTEM_ELEMENT_DATA: SystemElement[] = [
 export interface ProgramElement {
     id: string;
     name: string;
+    systemId: string | null;
     type: '' | '1' | '2' | '3' | '4'; // 网页端 桌面端 移动端 服务端
     code: string;
     intro: string;
@@ -32,19 +33,21 @@ export interface ProgramElement {
 }
 
 export const PROGRAM_ELEMENT_DATA: ProgramElement[] = [
-    { id: '1', name: 'client_1', type: '1', code: 'customer_angular', intro: '认证中心Angular版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '2', name: 'desktop_2', type: '2', code: 'customer_wpf', intro: '认证中心WPF版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '3', name: 'mobile_3', type: '3', code: 'customer_android', intro: '认证中心android版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '4', name: 'service_4', type: '4', code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '5', name: 'client_5', type: '1', code: 'customer_angular', intro: '认证中心Angular版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '6', name: 'desktop_6', type: '2', code: 'customer_wpf', intro: '认证中心WPF版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '7', name: 'mobile_7', type: '3', code: 'customer_android', intro: '认证中心android版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '8', name: 'service_8', type: '4', code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '9', name: 'mobile_9', type: '3', code: 'customer_android', intro: '认证中心android版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '10', name: 'service_10', type: '4', code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '1', name: 'client_1', type: '1', systemId: '', code: 'customer_angular', intro: '认证中心Angular版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '2', name: 'desktop_2', type: '2', systemId: '', code: 'customer_wpf', intro: '认证中心WPF版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '3', name: 'mobile_3', type: '3', systemId: '', code: 'customer_android', intro: '认证中心android版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '4', name: 'service_4', type: '4', systemId: '', code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '5', name: 'client_5', type: '1', systemId: '', code: 'customer_angular', intro: '认证中心Angular版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '6', name: 'desktop_6', type: '2', systemId: '', code: 'customer_wpf', intro: '认证中心WPF版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '7', name: 'mobile_7', type: '3', systemId: '', code: 'customer_android', intro: '认证中心android版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '8', name: 'service_8', type: '4', systemId: '', code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '9', name: 'mobile_9', type: '3', systemId: '', code: 'customer_android', intro: '认证中心android版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '10', name: 'service_10', type: '4', systemId: '', code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
 ];
 
 export interface RoleElement {
+    id: string;
+    rank: number;
     name: string;
     code: string;
     limitedMethod: '1' | '2' | '';//禁用 锁定
@@ -54,17 +57,17 @@ export interface RoleElement {
 }
 
 export const ROLE_ELEMENT_DATA: RoleElement[] = [
-    { name: '普通用户', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { name: '会员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { name: '管理员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { name: '超级管理员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { name: '业务员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { name: '测试人员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { name: '设计人员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { name: '开发人员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { name: '普通用户', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { name: '普通用户', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { name: '普通用户', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { id: '1', rank: 0, name: '普通用户', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { id: '1', rank: 1, name: '会员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { id: '1', rank: 100, name: '管理员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { id: '1', rank: 1000, name: '超级管理员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { id: '1', rank: 10, name: '业务员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { id: '1', rank: 10, name: '测试人员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { id: '1', rank: 10, name: '设计人员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { id: '1', rank: 10, name: '开发人员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { id: '1', rank: 0, name: '普通用户', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { id: '1', rank: 0, name: '普通用户', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { id: '1', rank: 0, name: '普通用户', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
 ];
 
 export interface FunctionElement {
@@ -250,6 +253,13 @@ export class SystemSearchDto {
 }
 
 export class SystemProgramSearchDto {
+    systemId: string = '';
+    nameOrCode: string = '';
+    type: '' | '1' | '2' | '3' | '4' = '';
+}
+
+export class SystemProgramGetDto {
+    systemId: string = '';
     nameOrCode: string = '';
     type: '' | '1' | '2' | '3' | '4' = '';
     introOrRemark: string = '';

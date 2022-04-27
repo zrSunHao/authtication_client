@@ -2,28 +2,32 @@
   <div class="topbar">
     <img src="/assets/icons/app.png" />
     <div>
-      <h2>系统管理 ---> 程序配置</h2>
+      <h2>系统管理 ---> 【{{sysName}}】的程序配置</h2>
     </div>
     <div class="box-fill"></div>
   </div>
   <div class="content-warp">
     <div class="content">
-      <app-system-section [sections]="sections"></app-system-section>
+      <app-system-section [data]="sections" (onAddProgram)="onAddProgramClick($event)"
+        (onGetPrograms)="onSearchProgramsClick($event)"></app-system-section>
+
       <mat-card>
-        <mat-card-title>添加的程序(共26个)
-          <button mat-raised-button color="accent">搜索</button>
-          <button mat-raised-button color="accent">重置</button>
+        <mat-card-title>
+          <h3>关联的程序(共 {{programs.length}} 个)</h3>
+          <button mat-raised-button color="accent" (click)="onGetProgramsClick()">搜索</button>
+          <button mat-raised-button color="accent" (click)="onResetProgramClick()">重置</button>
         </mat-card-title>
         <mat-card-subtitle></mat-card-subtitle>
         <div class="search">
           <mat-form-field appearance="outline">
-            <mat-label>名称</mat-label>
-            <input matInput placeholder="请输入要搜索的程序名称" [(ngModel)]="name" name="name" autocomplete="off">
-            <mat-icon matSuffix>account_circle</mat-icon>
+            <mat-label>程序名称/标识码</mat-label>
+            <input matInput placeholder="请输入要搜索的程序名称/标识码" [(ngModel)]="dto.nameOrCode" name="nameOrCode"
+              autocomplete="off">
+            <mat-icon matSuffix>report</mat-icon>
           </mat-form-field>
           <mat-form-field appearance="outline">
-            <mat-label>类别</mat-label>
-            <mat-select [(ngModel)]="type" name="type">
+            <mat-label>程序类别</mat-label>
+            <mat-select [(ngModel)]="dto.type" name="type">
               <mat-option value="">全部</mat-option>
               <mat-option value="1">网页端</mat-option>
               <mat-option value="2">服务端</mat-option>
@@ -34,30 +38,32 @@
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>简介/备注</mat-label>
-            <input matInput placeholder="请输入要搜索的简介/备注" [(ngModel)]="introOrRemark" autocomplete="off" name="introOrRemark">
-            <mat-icon matSuffix>account_circle</mat-icon>
+            <input matInput placeholder="请输入要搜索的简介/备注" [(ngModel)]="dto.introOrRemark" autocomplete="off"
+              name="introOrRemark">
+            <mat-icon matSuffix>message</mat-icon>
           </mat-form-field>
         </div>
+
         <div class="table">
-          <table mat-table [dataSource]="dataSource">
+          <table mat-table [dataSource]="programs">
             <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef> 账号 </th>
-              <td mat-cell *matCellDef="let element"> {{element.name}}&nbsp;&nbsp; </td>
+              <th mat-header-cell *matHeaderCellDef> 程序名称 </th>
+              <td mat-cell *matCellDef="let element" style="color: #a5f3fc;min-width: 5rem;">
+                {{element.name}}&nbsp;&nbsp; </td>
             </ng-container>
             <ng-container matColumnDef="type">
               <th mat-header-cell *matHeaderCellDef> 方式 </th>
-              <td mat-cell *matCellDef="let element">
-                <span *ngIf="element.type === '1'">网页端</span>
-                <span *ngIf="element.type === '2'">服务端</span>
-                <span *ngIf="element.type === '3'">桌面端</span>
-                <span *ngIf="element.type === '4'">移动端</span>
-                <span
-                  *ngIf="element.type !== '1'&&element.type !== '2'&&element.type !== '3'&&element.type !== '4'">-----</span>
+              <td mat-cell *matCellDef="let element" style="min-width: 5rem;">
+                <span *ngIf="element.type === '1'" style="color: #a5f3fc;">网页端</span>
+                <span *ngIf="element.type === '2'" style="color: #fde68a;">服务端</span>
+                <span *ngIf="element.type === '3'" style="color: #a7f3d0;">桌面端</span>
+                <span *ngIf="element.type === '4'" style="color: #f9a8d4;">移动端</span>
               </td>
             </ng-container>
             <ng-container matColumnDef="code">
-              <th mat-header-cell *matHeaderCellDef> 编码 </th>
-              <td mat-cell *matCellDef="let element"> {{element.code}}&nbsp;&nbsp; </td>
+              <th mat-header-cell *matHeaderCellDef> 标识码 </th>
+              <td mat-cell *matCellDef="let element" style="color: #ecfccb;min-width: 5rem;">
+                {{element.code}}&nbsp;&nbsp; </td>
             </ng-container>
             <ng-container matColumnDef="intro">
               <th mat-header-cell *matHeaderCellDef> 功能简介 </th>
@@ -74,7 +80,7 @@
             <ng-container matColumnDef="operate">
               <th mat-header-cell *matHeaderCellDef> 操作 </th>
               <td mat-cell *matCellDef="let element">
-                <button mat-icon-button matTooltip="删除" (click)="delete_click(element)">
+                <button mat-icon-button matTooltip="删除" (click)="onDeleteProgramClick(element)">
                   <mat-icon>delete_sweep</mat-icon>
                 </button>
               </td>

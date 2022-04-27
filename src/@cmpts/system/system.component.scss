@@ -1,3 +1,7 @@
+$topbar-color: #e91e63;
+$table-header-bg-color: #303030;
+$table-row-hover-bg-color: #303030;
+
 .page {
     height: 100%;
     width: 100%;
@@ -7,7 +11,7 @@
 
 .topbar {
     width: 100%;
-    background-color: #e91e63;
+    background-color: $topbar-color;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -88,10 +92,10 @@ table {
 
 .table-header-row {
     height: 3rem;
-    background-color: #303030;
+    background-color: $table-header-bg-color;
 }
 .table-element-row:hover {
-    background-color: #303030;
+    background-color: $table-row-hover-bg-color;
 }
 
 table button {

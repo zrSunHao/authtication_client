@@ -28,7 +28,7 @@ export class SystemComponent implements OnInit, AfterViewInit {
     { name: '创建时间', value: 'createdAt' },
   ];
   displayedColumns = ['logo', 'name', 'code', 'createdAt', 'intro', 'remark', 'operate',];
-  dataSource: SystemElement[] = SYSTEM_ELEMENT_DATA;
+  dataSource: SystemElement[] = [];
 
   @ViewChild("imageInput", { static: false })
   imageInput!: ElementRef;
@@ -142,6 +142,7 @@ export class SystemComponent implements OnInit, AfterViewInit {
       error: err => {
         const msg = `数据加载失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
+        this.dataSource = SYSTEM_ELEMENT_DATA; // TODO 待删除
       }
     });
   }

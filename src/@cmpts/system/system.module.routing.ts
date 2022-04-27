@@ -7,9 +7,9 @@ import { SystemComponent } from './system.component';
 
 const routes: Routes = [
     { path: '', component: SystemComponent, },
-    { path: 'program/:systemId/:name', component: SystemProgramComponent, },
-    { path: 'role/:systemId/:name', component: SystemRoleListComponent, },
-    { path: 'role/funtions/:roleId/:name', component: SystemRoleFuntionsComponent, },
+    { path: 'program/:sysId/:sysName', component: SystemProgramComponent, },
+    { path: 'role/:sysId/:sysName', component: SystemRoleListComponent, },
+    { path: 'role/funtions/:roleId/:roleName', component: SystemRoleFuntionsComponent, },
     { path: '**', component: SystemComponent, },
 ];
 

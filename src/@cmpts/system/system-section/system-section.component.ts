@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ProgramElement, PROGRAM_ELEMENT_DATA } from '../model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ProgramElement, PROGRAM_ELEMENT_DATA, SystemProgramSearchDto } from '../model';
 
 @Component({
   selector: 'app-system-section',
@@ -8,17 +8,27 @@ import { ProgramElement, PROGRAM_ELEMENT_DATA } from '../model';
 })
 export class SystemSectionComponent implements OnInit {
 
-  name: string = '';
-  type: '1' | '2' | '3' | '4' | '' = '';
+  dto: SystemProgramSearchDto = new SystemProgramSearchDto();
 
-  @Input() sections: ProgramElement[] = PROGRAM_ELEMENT_DATA;
+  @Input() data: ProgramElement[] = PROGRAM_ELEMENT_DATA;
+  @Output() onAddProgram: EventEmitter<ProgramElement> = new EventEmitter<ProgramElement>();
+  @Output() onGetPrograms: EventEmitter<SystemProgramSearchDto> = new EventEmitter<SystemProgramSearchDto>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  onAddClick(e: ProgramElement): void {
+  onGetClick(): void {
+    this.onGetPrograms.emit(this.dto);
+  }
 
+  onResetClick(): void {
+    this.dto = new SystemProgramSearchDto();
+    this.onGetPrograms.emit(this.dto);
+  }
+
+  onAddClick(e: ProgramElement): void {
+    this.onAddProgram.emit(e);
   }
 }

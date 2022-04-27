@@ -14,6 +14,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { ProgramService } from './program.service';
 import { SharedModule } from 'src/@sun/shared/shared.module';
@@ -48,6 +49,7 @@ import { ProgramFunctionComponent } from './program-function/program-function.co
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatDividerModule,
   ],
   declarations: [
     ProgramComponent,
