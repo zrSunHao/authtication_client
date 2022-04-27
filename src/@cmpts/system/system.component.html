@@ -5,39 +5,41 @@
       <h2>系统管理</h2>
     </div>
     <div class="box-fill"></div>
-    <button mat-flat-button color="accent">
+    <button mat-flat-button color="accent" (click)="onAddClick()">
       <mat-icon>add</mat-icon>添加
     </button>
-    <button mat-flat-button color="accent">
+    <button mat-flat-button color="accent" (click)="onSearchClick()">
       <mat-icon>search</mat-icon>搜索
     </button>
-    <button mat-flat-button color="accent">
+    <button mat-flat-button color="accent" (click)="onResetClick()">
       <mat-icon>autorenew</mat-icon>重置
     </button>
+    <input type="file" #imageInput [hidden]="true" accept="image/*" (change)="onFileChange($event)" />
   </div>
   <div class="content-warp">
     <mat-card class="search">
       <form class="form">
         <mat-form-field appearance="outline">
-          <mat-label>名称</mat-label>
-          <input matInput placeholder="请输入要搜索的名称" [(ngModel)]="name" name="name" autocomplete="off">
-          <mat-icon matSuffix>account_circle</mat-icon>
+          <mat-label>系统名称</mat-label>
+          <input matInput placeholder="请输入要搜索的系统名称" [(ngModel)]="dto.name" name="name" autocomplete="off">
+          <mat-icon matSuffix>report</mat-icon>
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>类别</mat-label>
-          <input matInput placeholder="请选择要搜索的标识码" [(ngModel)]="code" autocomplete="off" name="code">
-          <mat-icon matSuffix>account_circle</mat-icon>
+          <mat-label>标识码</mat-label>
+          <input matInput placeholder="请选择要搜索的标识码" [(ngModel)]="dto.code" autocomplete="off" name="code">
+          <mat-icon matSuffix>report</mat-icon>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>简介/备注</mat-label>
-          <input matInput placeholder="请输入要搜索的简介/备注" [(ngModel)]="introOrRemark" autocomplete="off" name="introOrRemark">
-          <mat-icon matSuffix>account_circle</mat-icon>
+          <input matInput placeholder="请输入要搜索的简介/备注" [(ngModel)]="dto.introOrRemark" autocomplete="off"
+            name="introOrRemark">
+          <mat-icon matSuffix>message</mat-icon>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>创建时间</mat-label>
           <mat-date-range-input [rangePicker]="picker">
-            <input matStartDate [(ngModel)]="startAt" name="startAt" placeholder="开始日期">
-            <input matEndDate [(ngModel)]="endAt" name="endAt" placeholder="结束日期">
+            <input matStartDate [(ngModel)]="dto.startAt" name="startAt" placeholder="开始日期">
+            <input matEndDate [(ngModel)]="dto.endAt" name="endAt" placeholder="结束日期">
           </mat-date-range-input>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-date-range-picker #picker></mat-date-range-picker>
@@ -46,23 +48,27 @@
     </mat-card>
     <mat-card class="table">
       <table mat-table [dataSource]="dataSource">
-        <ng-container matColumnDef="icon">
-          <th mat-header-cell *matHeaderCellDef> 图标 </th>
+        <ng-container matColumnDef="logo">
+          <th mat-header-cell *matHeaderCellDef> logo </th>
           <td mat-cell *matCellDef="let element">
-            <img class="system-icon" [src]="element.icon" />
+            <img class="system-icon" *ngIf="element.logo" [src]="element.logo" />
+            <img class="system-icon" *ngIf="!element.logo" src="/assets/icons/app.png" />
           </td>
         </ng-container>
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef> 名称 </th>
-          <td mat-cell *matCellDef="let element"> {{element.name}}&nbsp;&nbsp; </td>
+          <td mat-cell *matCellDef="let element" style="color: #a5f3fc;min-width: 5rem;"> {{element.name}}
+          </td>
         </ng-container>
         <ng-container matColumnDef="code">
           <th mat-header-cell *matHeaderCellDef> 标识码 </th>
-          <td mat-cell *matCellDef="let element"> {{element.code}}&nbsp;&nbsp; </td>
+          <td mat-cell *matCellDef="let element" style="color: #fee2e2;min-width: 4rem;"> {{element.code}} </td>
         </ng-container>
         <ng-container matColumnDef="createdAt">
           <th mat-header-cell *matHeaderCellDef> 创建时间 </th>
-          <td mat-cell *matCellDef="let element"> {{element.createdAt| date:'yyyy-MM-dd HH:mm:ss'}} </td>
+          <td mat-cell *matCellDef="let element">
+            {{element.createdAt| date:'yyyy-MM-dd'}}
+          </td>
         </ng-container>
         <ng-container matColumnDef="intro">
           <th mat-header-cell *matHeaderCellDef> 功能简介 </th>
@@ -73,7 +79,7 @@
         <ng-container matColumnDef="remark">
           <th mat-header-cell *matHeaderCellDef> 备注 </th>
           <td mat-cell *matCellDef="let element">
-            <span matTooltip={{element.remark}}>{{element.remark|clip:15}} </span>
+            <span matTooltip={{element.remark}}>{{element.remark|clip:12}} </span>
           </td>
         </ng-container>
         <ng-container matColumnDef="operate">
@@ -82,10 +88,13 @@
             <button mat-icon-button matTooltip="编辑" (click)="onEditClick(element)">
               <mat-icon>mode_edit_outline</mat-icon>
             </button>
-            <button mat-icon-button matTooltip="程序" (click)="onProgtamClick(element)">
+            <button mat-icon-button matTooltip="logo上传" (click)="onLogoClick(element)">
+              <mat-icon>image</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="程序配置" (click)="onProgtamClick(element)">
               <mat-icon>all_inclusive</mat-icon>
             </button>
-            <button mat-icon-button matTooltip="角色" (click)="onRoleClick(element)">
+            <button mat-icon-button matTooltip="角色配置" (click)="onRoleClick(element)">
               <mat-icon>military_tech</mat-icon>
             </button>
             <button mat-icon-button matTooltip="删除" (click)="onDeleteClick(element)">
@@ -98,7 +107,7 @@
       </table>
     </mat-card>
     <mat-card class="footer">
-      <app-paginator [total]="total" [columns]="columns" [columnOp]="columnOp" (onChange)="paginatorChange($event)">
+      <app-paginator [total]="total" [columns]="columns" [columnOp]="columnOp" (onChange)="onPaginatorChange($event)">
       </app-paginator>
     </mat-card>
   </div>

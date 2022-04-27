@@ -3,7 +3,7 @@
 </div>
 <form [formGroup]="form">
   <mat-form-field appearance="outline">
-    <mat-label>功能名称</mat-label>
+    <mat-label>系统名称</mat-label>
     <input matInput formControlName="name">
     <mat-icon matSuffix>report</mat-icon>
     <mat-hint>中文、英文、数字、下划线，2-16位</mat-hint>
@@ -14,22 +14,9 @@
     <mat-icon matSuffix>report</mat-icon>
     <mat-hint>英文、数字、下划线，2-16位</mat-hint>
   </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>约束方式</mat-label>
-    <mat-select formControlName="constraint" #constraint>
-      <mat-option value="">无</mat-option>
-      <mat-option value="1">禁用</mat-option>
-      <mat-option value="2">锁定</mat-option>
-    </mat-select>
-    <mat-hint>是否添加约束</mat-hint>
-    <mat-icon matSuffix>category</mat-icon>
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>锁定过期时间</mat-label>
-    <input matInput [matDatepicker]="picker1" formControlName="limitedExpireAt">
-    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-    <mat-datepicker #picker1 [disabled]="constraint.value!='2'"></mat-datepicker>
-    <mat-hint>锁定过期时间</mat-hint>
+  <mat-form-field appearance="outline" class="intro">
+    <mat-label>功能简介</mat-label>
+    <textarea matInput formControlName="intro" rows="4"></textarea>
   </mat-form-field>
   <mat-form-field appearance="outline" class="remark">
     <mat-label>备注</mat-label>

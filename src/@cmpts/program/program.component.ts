@@ -29,7 +29,7 @@ export class ProgramComponent implements OnInit {
   ];
 
   displayedColumns = ['name', 'type', 'code', 'createdAt', 'intro', 'remark', 'operate',];
-  dataSource = PROGRAM_ELEMENT_DATA;
+  dataSource: ProgramElement[] = PROGRAM_ELEMENT_DATA;
 
   constructor(private router: Router,
     private dialog: MatDialog,

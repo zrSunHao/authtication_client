@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatCardModule } from '@angular/material/card';
@@ -11,13 +12,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { SharedModule } from 'src/@sun/shared/shared.module';
+import { SystemService } from './system.service';
 import { SystemRoutingModule } from './system.module.routing';
 
 import { SystemComponent } from './system.component';
@@ -25,11 +26,13 @@ import { SystemRoleListComponent } from './system-role-list/system-role-list.com
 import { SystemProgramComponent } from './system-program/system-program.component';
 import { SystemSectionComponent } from './system-section/system-section.component';
 import { SystemRoleFuntionsComponent } from './system-role-funtions/system-role-funtions.component';
+import { DialogSystemComponent } from './dialog-system/dialog-system.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
 
     SystemRoutingModule,
@@ -44,7 +47,6 @@ import { SystemRoleFuntionsComponent } from './system-role-funtions/system-role-
     MatTableModule,
     MatTooltipModule,
     MatDialogModule,
-    MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatDividerModule,
@@ -56,6 +58,8 @@ import { SystemRoleFuntionsComponent } from './system-role-funtions/system-role-
     SystemRoleListComponent,
     SystemSectionComponent,
     SystemRoleFuntionsComponent,
-  ]
+    DialogSystemComponent,
+  ],
+  providers: [SystemService]
 })
 export class SystemModule { }
