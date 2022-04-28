@@ -93,7 +93,7 @@ export class SystemRoleListComponent implements OnInit {
   }
 
   onFuntionsClick(e: RoleElement): void {
-    this.router.navigate([`/system/role/funtions/${e.name}`]);
+    this.router.navigate([`/system/role/funtions/${e.id}/${e.name}`]);
   }
 
   onDeleteClick(e: RoleElement): void {

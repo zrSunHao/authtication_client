@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { PagingParameter, ResponsePagingResult, ResponseResult } from 'src/@sun/models/paging.model';
 import { environment } from 'src/environments/environment';
-import { ProgramElement, RoleElement, RoleSearchDto, SystemElement, SystemProgramGetDto, SystemProgramSearchDto, SystemSearchDto } from './model';
+import { ProgramElement, RoleElement, RoleFunctionDto, RoleProgramElement, RoleSearchDto, SystemElement, SystemProgramGetDto, SystemProgramSearchDto, SystemSearchDto } from './model';
 
 @Injectable({
   providedIn: 'root'
@@ -92,6 +92,16 @@ export class SystemService {
     const url = `${this.roleUrl}/delete?id=${id}`;
     return this.http.get<ResponseResult<boolean>>(url)
       .pipe(catchError(this.handleError));
+  }
+
+  public getRoleFunctions(id: string): Observable<ResponseResult<RoleProgramElement[]>> {
+    const url = `${this.roleUrl}/getPrograms`;
+    return this.http.post<ResponseResult<RoleProgramElement[]>>(url, this.httpOptions).pipe(catchError(this.handleError));
+  }
+
+  public addRoleFunctions(param: RoleFunctionDto): Observable<ResponseResult<boolean>> {
+    const url = `${this.roleUrl}/addFunctions`;
+    return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
   // ---------------- private ------------------
