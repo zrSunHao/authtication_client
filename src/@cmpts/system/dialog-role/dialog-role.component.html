@@ -1,0 +1,55 @@
+<div mat-dialog-title class="header">
+  <h3>{{title}}</h3>
+</div>
+<form [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>角色名称</mat-label>
+    <input matInput formControlName="name">
+    <mat-icon matSuffix>report</mat-icon>
+    <mat-hint>中文、英文、数字、下划线，2-16位</mat-hint>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>标识码</mat-label>
+    <input matInput formControlName="code">
+    <mat-icon matSuffix>report</mat-icon>
+    <mat-hint>英文、数字、下划线，2-16位</mat-hint>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>角色等级</mat-label>
+    <mat-select formControlName="rank">
+      <mat-option [value]="1">默认</mat-option>
+      <mat-option [value]="2">普通用户</mat-option>
+      <mat-option [value]="10">所有约束</mat-option>
+      <mat-option [value]="100">业务员</mat-option>
+      <mat-option [value]="1000">管理员</mat-option>
+      <mat-option [value]="10000">超级管理员</mat-option>
+    </mat-select>
+    <mat-hint>角色的等级</mat-hint>
+    <mat-icon matSuffix>category</mat-icon>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>约束方式</mat-label>
+    <mat-select formControlName="limitedMethod" #constraint>
+      <mat-option value="">无</mat-option>
+      <mat-option value="1">禁用</mat-option>
+      <mat-option value="2">锁定</mat-option>
+    </mat-select>
+    <mat-hint>是否添加约束</mat-hint>
+    <mat-icon matSuffix>category</mat-icon>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>锁定过期时间</mat-label>
+    <input matInput [matDatepicker]="picker1" formControlName="limitedExpiredAt">
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1 [disabled]="constraint.value!='2'"></mat-datepicker>
+    <mat-hint>锁定过期时间</mat-hint>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="remark">
+    <mat-label>备注</mat-label>
+    <textarea matInput formControlName="remark" rows="4"></textarea>
+  </mat-form-field>
+</form>
+<div mat-dialog-actions align="end">
+  <button mat-button color="warn" (click)="onCloseClick()">取消</button>
+  <button mat-button color="accent" (click)="onSaveClick()" [disabled]="!form.valid">保存</button>
+</div>

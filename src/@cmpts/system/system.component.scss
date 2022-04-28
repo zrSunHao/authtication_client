@@ -99,16 +99,13 @@ table {
 }
 
 table button {
-    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    color: orange;
 }
 
 .system-icon {
     height: 2rem;
     border-radius: 50%;
-}
-
-.table button{
-    color: orange;
 }
 
 .table button:hover{

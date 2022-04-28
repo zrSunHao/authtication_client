@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { PagingParameter, ResponsePagingResult, ResponseResult } from 'src/@sun/models/paging.model';
 import { environment } from 'src/environments/environment';
-import { ProgramElement, SystemElement, SystemProgramGetDto, SystemProgramSearchDto, SystemSearchDto } from './model';
+import { ProgramElement, RoleElement, RoleSearchDto, SystemElement, SystemProgramGetDto, SystemProgramSearchDto, SystemSearchDto } from './model';
 
 @Injectable({
   providedIn: 'root'
@@ -73,7 +73,26 @@ export class SystemService {
 
   // ---------------- role config ------------------
 
+  public serachRoles(param: PagingParameter<RoleSearchDto>): Observable<ResponsePagingResult<RoleElement>> {
+    const url = `${this.roleUrl}/search`;
+    return this.http.post<ResponsePagingResult<RoleElement>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
+  }
 
+  public addRole(param: RoleElement): Observable<ResponseResult<boolean>> {
+    const url = `${this.roleUrl}/add`;
+    return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
+  }
+
+  public updateRole(param: RoleElement): Observable<ResponseResult<boolean>> {
+    const url = `${this.roleUrl}/update`;
+    return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
+  }
+
+  public deleteRole(id: string): Observable<ResponseResult<boolean>> {
+    const url = `${this.roleUrl}/delete?id=${id}`;
+    return this.http.get<ResponseResult<boolean>>(url)
+      .pipe(catchError(this.handleError));
+  }
 
   // ---------------- private ------------------
 

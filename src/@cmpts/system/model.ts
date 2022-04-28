@@ -47,27 +47,28 @@ export const PROGRAM_ELEMENT_DATA: ProgramElement[] = [
 
 export interface RoleElement {
     id: string;
-    rank: number;
+    rank: number;// 1：默认 2：普通用户 10：会员  100：业务员  1000：管理员 10000：超级管理员
     name: string;
+    systemId: string | null;
     code: string;
     limitedMethod: '1' | '2' | '';//禁用 锁定
-    limitedExpiredAt: Date;
-    createdAt: Date;
+    limitedExpiredAt: Date | null;
+    createdAt: Date | null;
     remark: string;
 }
 
 export const ROLE_ELEMENT_DATA: RoleElement[] = [
-    { id: '1', rank: 0, name: '普通用户', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { id: '1', rank: 1, name: '会员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { id: '1', rank: 100, name: '管理员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { id: '1', rank: 1000, name: '超级管理员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { id: '1', rank: 10, name: '业务员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { id: '1', rank: 10, name: '测试人员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { id: '1', rank: 10, name: '设计人员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { id: '1', rank: 10, name: '开发人员', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { id: '1', rank: 0, name: '普通用户', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { id: '1', rank: 0, name: '普通用户', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { id: '1', rank: 0, name: '普通用户', code: 'default', limitedMethod: '1', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { id: '1', rank: 2, name: '普通用户', systemId: '', code: 'default', limitedMethod: '1', limitedExpiredAt: null, createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { id: '1', rank: 10, name: '会员', systemId: '', code: 'default', limitedMethod: '2', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { id: '1', rank: 1000, name: '管理员', systemId: '', code: 'default', limitedMethod: '1', limitedExpiredAt: null, createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { id: '1', rank: 10000, name: '超级管理员', systemId: '', code: 'default', limitedMethod: '2', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { id: '1', rank: 100, name: '业务员', systemId: '', code: 'default', limitedMethod: '', limitedExpiredAt: null, createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { id: '1', rank: 100, name: '测试人员', systemId: '', code: 'default', limitedMethod: '', limitedExpiredAt: null, createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { id: '1', rank: 100, name: '设计人员', systemId: '', code: 'default', limitedMethod: '', limitedExpiredAt: null, createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { id: '1', rank: 100, name: '开发人员', systemId: '', code: 'default', limitedMethod: '', limitedExpiredAt: null, createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { id: '1', rank: 2, name: '普通用户', systemId: '', code: 'default', limitedMethod: '', limitedExpiredAt: null, createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { id: '1', rank: 2, name: '普通用户', systemId: '', code: 'default', limitedMethod: '1', limitedExpiredAt: null, createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { id: '1', rank: 2, name: '普通用户', systemId: '', code: 'default', limitedMethod: '2', limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
 ];
 
 export interface FunctionElement {
@@ -79,22 +80,23 @@ export interface FunctionElement {
 export interface SectionElement {
     id: string;
     name: string;
+    checked: boolean;
     functions: Array<FunctionElement>;
 }
 
 export interface RoleSectionElement {
     id: string;
-    systemName: string;
+    programName: string;
     sections: Array<SectionElement>;
 }
 
 export const ROLE_SECTION_ELEMENT_DATA: RoleSectionElement[] = [
     {
         id: '1',
-        systemName: 'web端',
+        programName: 'web端',
         sections: [
             {
-                id: '1', name: '模块1', functions: [
+                id: '1', name: '模块1', checked: false, functions: [
                     { id: '1', name: '功能/操作1', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作2', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作3', checked: false }, { id: '1', name: '功能/操作1', checked: false },
@@ -103,7 +105,7 @@ export const ROLE_SECTION_ELEMENT_DATA: RoleSectionElement[] = [
                 ]
             },
             {
-                id: '1', name: '模块1', functions: [
+                id: '1', name: '模块1', checked: false, functions: [
                     { id: '1', name: '功能/操作1', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作2', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作3', checked: false }, { id: '1', name: '功能/操作1', checked: false },
@@ -112,7 +114,7 @@ export const ROLE_SECTION_ELEMENT_DATA: RoleSectionElement[] = [
                 ]
             },
             {
-                id: '1', name: '模块1', functions: [
+                id: '1', name: '模块1', checked: false, functions: [
                     { id: '1', name: '功能/操作1', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作2', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作3', checked: false }, { id: '1', name: '功能/操作1', checked: false },
@@ -121,7 +123,7 @@ export const ROLE_SECTION_ELEMENT_DATA: RoleSectionElement[] = [
                 ]
             },
             {
-                id: '1', name: '模块1', functions: [
+                id: '1', name: '模块1', checked: false, functions: [
                     { id: '1', name: '功能/操作1', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作2', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作3', checked: false }, { id: '1', name: '功能/操作1', checked: false },
@@ -130,7 +132,7 @@ export const ROLE_SECTION_ELEMENT_DATA: RoleSectionElement[] = [
                 ]
             },
             {
-                id: '1', name: '模块1', functions: [
+                id: '1', name: '模块1', checked: false, functions: [
                     { id: '1', name: '功能/操作1', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作2', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作3', checked: false }, { id: '1', name: '功能/操作1', checked: false },
@@ -142,10 +144,10 @@ export const ROLE_SECTION_ELEMENT_DATA: RoleSectionElement[] = [
     },
     {
         id: '2',
-        systemName: '移动端',
+        programName: '移动端',
         sections: [
             {
-                id: '1', name: '模块1', functions: [
+                id: '1', name: '模块1', checked: false, functions: [
                     { id: '1', name: '功能/操作1', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作2', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作3', checked: false }, { id: '1', name: '功能/操作1', checked: false },
@@ -154,7 +156,7 @@ export const ROLE_SECTION_ELEMENT_DATA: RoleSectionElement[] = [
                 ]
             },
             {
-                id: '1', name: '模块1', functions: [
+                id: '1', name: '模块1', checked: false, functions: [
                     { id: '1', name: '功能/操作1', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作2', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作3', checked: false }, { id: '1', name: '功能/操作1', checked: false },
@@ -163,7 +165,7 @@ export const ROLE_SECTION_ELEMENT_DATA: RoleSectionElement[] = [
                 ]
             },
             {
-                id: '1', name: '模块1', functions: [
+                id: '1', name: '模块1', checked: false, functions: [
                     { id: '1', name: '功能/操作1', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作2', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作3', checked: false }, { id: '1', name: '功能/操作1', checked: false },
@@ -172,7 +174,7 @@ export const ROLE_SECTION_ELEMENT_DATA: RoleSectionElement[] = [
                 ]
             },
             {
-                id: '1', name: '模块1', functions: [
+                id: '1', name: '模块1', checked: false, functions: [
                     { id: '1', name: '功能/操作1', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作2', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作3', checked: false }, { id: '1', name: '功能/操作1', checked: false },
@@ -181,7 +183,7 @@ export const ROLE_SECTION_ELEMENT_DATA: RoleSectionElement[] = [
                 ]
             },
             {
-                id: '1', name: '模块1', functions: [
+                id: '1', name: '模块1', checked: false, functions: [
                     { id: '1', name: '功能/操作1', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作2', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作3', checked: false }, { id: '1', name: '功能/操作1', checked: false },
@@ -193,10 +195,10 @@ export const ROLE_SECTION_ELEMENT_DATA: RoleSectionElement[] = [
     },
     {
         id: '2',
-        systemName: '服务端',
+        programName: '服务端',
         sections: [
             {
-                id: '1', name: '模块1', functions: [
+                id: '1', name: '模块1', checked: false, functions: [
                     { id: '1', name: '功能/操作1', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作2', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作3', checked: false }, { id: '1', name: '功能/操作1', checked: false },
@@ -205,7 +207,7 @@ export const ROLE_SECTION_ELEMENT_DATA: RoleSectionElement[] = [
                 ]
             },
             {
-                id: '1', name: '模块1', functions: [
+                id: '1', name: '模块1', checked: false, functions: [
                     { id: '1', name: '功能/操作1', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作2', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作3', checked: false }, { id: '1', name: '功能/操作1', checked: false },
@@ -214,7 +216,7 @@ export const ROLE_SECTION_ELEMENT_DATA: RoleSectionElement[] = [
                 ]
             },
             {
-                id: '1', name: '模块1', functions: [
+                id: '1', name: '模块1', checked: false, functions: [
                     { id: '1', name: '功能/操作1', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作2', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作3', checked: false }, { id: '1', name: '功能/操作1', checked: false },
@@ -223,7 +225,7 @@ export const ROLE_SECTION_ELEMENT_DATA: RoleSectionElement[] = [
                 ]
             },
             {
-                id: '1', name: '模块1', functions: [
+                id: '1', name: '模块1', checked: false, functions: [
                     { id: '1', name: '功能/操作1', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作2', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作3', checked: false }, { id: '1', name: '功能/操作1', checked: false },
@@ -232,7 +234,7 @@ export const ROLE_SECTION_ELEMENT_DATA: RoleSectionElement[] = [
                 ]
             },
             {
-                id: '1', name: '模块1', functions: [
+                id: '1', name: '模块1', checked: false, functions: [
                     { id: '1', name: '功能/操作1', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作2', checked: false }, { id: '1', name: '功能/操作1', checked: false },
                     { id: '1', name: '功能/操作3', checked: false }, { id: '1', name: '功能/操作1', checked: false },
@@ -268,8 +270,8 @@ export class SystemProgramGetDto {
 export class RoleSearchDto {
     systemId: string = '';
     nameOrCode: string = '';
-    type: '' | '1' | '2' | '3' | '4' = '';
-    introOrRemark: string = '';
+    type: '' | '1' | '2' | '3' = '';
+    rank: number = 0;// 0：全部 1：默认 2：普通用户 10：会员  100：业务员  1000：管理员 10000：超级管理员
     startAt: Date | null = null;
     endAt: Date | null = null;
 }

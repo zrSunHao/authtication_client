@@ -27,6 +27,7 @@ import { SystemProgramComponent } from './system-program/system-program.componen
 import { SystemSectionComponent } from './system-section/system-section.component';
 import { SystemRoleFuntionsComponent } from './system-role-funtions/system-role-funtions.component';
 import { DialogSystemComponent } from './dialog-system/dialog-system.component';
+import { DialogRoleComponent } from './dialog-role/dialog-role.component';
 
 @NgModule({
   imports: [
@@ -59,6 +60,7 @@ import { DialogSystemComponent } from './dialog-system/dialog-system.component';
     SystemSectionComponent,
     SystemRoleFuntionsComponent,
     DialogSystemComponent,
+    DialogRoleComponent,
   ],
   providers: [SystemService]
 })

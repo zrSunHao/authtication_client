@@ -29,7 +29,7 @@ export class ProgramComponent implements OnInit {
   ];
 
   displayedColumns = ['name', 'type', 'code', 'createdAt', 'intro', 'remark', 'operate',];
-  dataSource: ProgramElement[] = PROGRAM_ELEMENT_DATA;
+  dataSource: ProgramElement[] = [];
 
   constructor(private router: Router,
     private dialog: MatDialog,
@@ -106,6 +106,8 @@ export class ProgramComponent implements OnInit {
       error: err => {
         const msg = `数据加载失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
+        this.dataSource = PROGRAM_ELEMENT_DATA; // TODO 删除
+        this.total = 35; // TODO 删除
       }
     });
   }
@@ -117,6 +119,8 @@ export class ProgramComponent implements OnInit {
     } else {
       const msg = `数据加载失败！！！ ${res.allMessages}`;
       this.notifyServ.notify(msg, 'error');
+      this.dataSource = PROGRAM_ELEMENT_DATA; // TODO 删除
+      this.total = 35; // TODO 删除
     }
   }
 

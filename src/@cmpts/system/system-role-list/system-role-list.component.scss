@@ -95,5 +95,11 @@ table {
 }
 
 table button {
-    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    color: orange;
 }
+
+.table button:hover{
+    color: red;
+}
+
