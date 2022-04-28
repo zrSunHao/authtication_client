@@ -153,3 +153,7 @@ body {
     transform: translateX(-6px) rotate(-1.2deg);
   }
 }
+
+thead tr th{
+  z-index: 15 !important;
+}

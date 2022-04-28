@@ -11,6 +11,9 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    z-index: 20;
+    position: sticky;
+    top: 0;
 }
 
 .box-fill{
@@ -80,6 +83,7 @@
     max-width: 1366px;
     height: fit-content;
     margin-top: 2rem;
+    margin-bottom: 1rem;
 }
 
 table {

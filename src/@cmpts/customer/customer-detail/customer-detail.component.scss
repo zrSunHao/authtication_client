@@ -13,6 +13,9 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+    z-index: 20;
+    position: sticky;
+    top: 0;
 }
 
 .topbar h2 {
