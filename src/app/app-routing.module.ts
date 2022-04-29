@@ -12,6 +12,7 @@ const routes: Routes = [
       { path: 'program', loadChildren: () => import('../@cmpts/program/program.module').then(m => m.ProgramModule) },
       { path: 'system', loadChildren: () => import('../@cmpts/system/system.module').then(m => m.SystemModule) },
       { path: 'constraint', loadChildren: () => import('../@cmpts/constraint/constraint.module').then(m => m.ConstraintModule) },
+      { path: 'my', loadChildren: () => import('../@cmpts/my/my.module').then(m => m.MyModule) },
       { path: '**', redirectTo: '/dashboard/' },
     ],
   },

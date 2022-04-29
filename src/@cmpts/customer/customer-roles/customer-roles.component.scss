@@ -1,6 +1,6 @@
 .search {
     display: grid;
-    grid-template-columns: auto auto auto 6rem 6rem;
+    grid-template-columns: auto auto 6rem 6rem 6rem;
     gap: 1rem;
     align-items: center;
 }
@@ -18,7 +18,7 @@
     min-height: 18rem;
 }
 
-table{
+table {
     width: 100%;
 }
 
@@ -30,7 +30,20 @@ table{
     background-color: #303030;
 }
 
-.app-avatar {
+table button {
+    margin-right: 0.5rem;
+}
+
+table mat-icon {
+    color: orange;
+}
+
+table mat-icon:hover {
+    color: #e91e63;
+}
+
+
+.system-icon {
     height: 2rem;
     border-radius: 50%;
 }

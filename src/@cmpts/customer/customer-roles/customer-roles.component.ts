@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { PagingParameter } from 'src/@sun/models/paging.model';
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
-import { CustomerRoleElement, CUSTOMER_ROLE_ELEMENT_DATA } from '../model';
+import { CustomerRoleElement, CustomerRoleSearchDto, CUSTOMER_ROLE_ELEMENT_DATA } from '../model';
 
 @Component({
   selector: 'app-customer-roles',
@@ -9,28 +10,39 @@ import { CustomerRoleElement, CUSTOMER_ROLE_ELEMENT_DATA } from '../model';
 })
 export class CustomerRolesComponent implements OnInit {
 
-  appName: string = '';
-  roleName: string = '';
-  remark: string = '';
+  dto: CustomerRoleSearchDto = new CustomerRoleSearchDto();
+  params = new PagingParameter<CustomerRoleSearchDto>();
+
+  @Input() customerId: string = '';
 
   total = 35;
+  pageSize: 5 | 10 | 20 | 50 = 5;
   columnOp = 'createdAt';
   columns: Array<PaginatorColumn> = [
-    { name: 'App', value: 'appName' },
+    { name: '系统名称', value: 'sysName' },
     { name: '角色', value: 'roleName' },
-    { name: '创建时间', value: 'createdAt' },
+    { name: '关联时间', value: 'createdAt' },
   ];
 
-  displayedColumns = ['avatar', 'appName', 'roleName', 'createdAt', 'remark', 'operate',];
-  dataSource = CUSTOMER_ROLE_ELEMENT_DATA;
+  displayedColumns = ['sysLogo', 'sysName', 'roleName', 'rank', 'createdAt', 'remark', 'operate',];
+  dataSource: CustomerRoleElement[] = CUSTOMER_ROLE_ELEMENT_DATA;
 
   constructor() { }
 
   ngOnInit() {
+    console.log(this.customerId);
   }
 
-  paginatorChange(paginator: Paginator) {
-    console.log(paginator);
+  onSearchClick(): void {
+
+  }
+
+  onResetClick(): void {
+
+  }
+
+  onAddClick(): void {
+
   }
 
   onEditClick(e: CustomerRoleElement) {
@@ -39,6 +51,10 @@ export class CustomerRolesComponent implements OnInit {
 
   onCancelClick(e: CustomerRoleElement) {
 
+  }
+
+  onPaginatorChange(paginator: Paginator) {
+    console.log(paginator);
   }
 
 }

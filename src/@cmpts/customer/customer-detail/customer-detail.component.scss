@@ -29,6 +29,14 @@
     color: white;
 }
 
+.box-fill {
+    flex: 1;
+}
+
+.topbar button {
+    margin-right: 1rem;
+}
+
 .content-warp {
     width: 100%;
     height: 100%;
@@ -37,14 +45,14 @@
     align-items: center;
 }
 
-mat-tab-group{
+mat-tab-group {
     margin-top: 2rem;
     width: 90%;
     min-width: 1024px;
-    max-width: 1366px; 
+    max-width: 1366px;
 }
 
-::ng-deep .mat-tab-header{
+::ng-deep .mat-tab-header {
     background-color: #424242;
 }
 

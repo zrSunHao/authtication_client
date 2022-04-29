@@ -51,7 +51,8 @@
         <ng-container matColumnDef="avatar">
           <th mat-header-cell *matHeaderCellDef> 头像 </th>
           <td mat-cell *matCellDef="let element">
-            <img class="customer-avatar" [src]="element.avatar" />
+            <img class="customer-avatar" *ngIf="element.avatar" [src]="element.avatar" />
+            <img class="customer-avatar" *ngIf="!element.avatar" src="/assets/icons/customer.png" />
           </td>
         </ng-container>
         <ng-container matColumnDef="name">
@@ -83,7 +84,7 @@
         </ng-container>
         <ng-container matColumnDef="operate">
           <th mat-header-cell *matHeaderCellDef> 操作 </th>
-          <td mat-cell *matCellDef="let element">
+          <td mat-cell *matCellDef="let element" style="width: 6rem;">
             <button mat-icon-button matTooltip="详情" (click)="onDetailClick(element)">
               <mat-icon>read_more</mat-icon>
             </button>

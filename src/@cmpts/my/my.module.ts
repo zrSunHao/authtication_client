@@ -16,10 +16,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
 import { SharedModule } from 'src/@sun/shared/shared.module';
-import { ConstraintService } from './constraint.service';
-import { ConstraintRoutingModule } from './constraint.module.routing';
+import { MyRoutingModule } from './my.module.routing';
+import { MyService } from './my.service';
 
-import { ConstraintComponent } from './constraint.component';
+import { MyComponent } from './my.component';
 
 @NgModule({
   imports: [
@@ -29,7 +29,7 @@ import { ConstraintComponent } from './constraint.component';
     ReactiveFormsModule,
 
     SharedModule,
-    ConstraintRoutingModule,
+    MyRoutingModule,
 
     MatCardModule,
     MatInputModule,
@@ -43,11 +43,7 @@ import { ConstraintComponent } from './constraint.component';
     MatDatepickerModule,
     MatNativeDateModule,
   ],
-  declarations: [
-    ConstraintComponent,
-  ],
-  providers: [
-    ConstraintService
-  ]
+  declarations: [MyComponent],
+  providers: [MyService]
 })
-export class ConstraintModule { }
+export class MyModule { }

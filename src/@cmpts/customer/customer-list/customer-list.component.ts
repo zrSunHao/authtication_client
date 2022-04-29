@@ -36,7 +36,6 @@ export class CustomerListComponent implements OnInit {
     private router: Router,
     private notifyServ: NotifyService,
     private hostServ: CustomerService) {
-
   }
 
   ngOnInit() {

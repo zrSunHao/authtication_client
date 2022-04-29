@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer-detail',
@@ -8,12 +8,20 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class CustomerDetailComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  id: string = '';
+  name: string = '';
+
+  constructor(private route: ActivatedRoute, private router: Router,) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      console.log(params['id']);
+      this.id = params['id'];
+      this.name = params['name'];
     })
+  }
+
+  onPreviousPageClick(): void {
+    this.router.navigate([`/customer`]);
   }
 
 }

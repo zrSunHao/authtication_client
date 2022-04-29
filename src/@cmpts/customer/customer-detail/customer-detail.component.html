@@ -1,16 +1,17 @@
 <div class="page">
   <div class="topbar">
-    <h2>客户【zhangsan】详情</h2>
+    <div><h2>客户管理 ---> 【{{name}}】详情</h2></div>
+    <div class="box-fill"></div>
+    <button mat-flat-button color="accent" (click)="onPreviousPageClick()">
+      <mat-icon>arrow_back</mat-icon>返回
+    </button>
   </div>
   <div class="content-warp">
-    <div class="info-warp">
-      <app-account-info></app-account-info>
-      <app-people-info></app-people-info>
-    </div>
+
     <mat-tab-group mat-align-tabs="center">
       <mat-tab label="账号角色">
         <div class="role-wrap">
-          <app-customer-roles></app-customer-roles>
+          <app-customer-roles [customerId]="id"></app-customer-roles>
         </div>
       </mat-tab>
       <mat-tab label="账号约束">
@@ -24,14 +25,9 @@
         </div>
       </mat-tab>
     </mat-tab-group>
-    <!-- <div class="role-wrap">
-      <app-customer-roles></app-customer-roles>
+    <div class="info-warp">
+      <app-account-info></app-account-info>
+      <app-people-info></app-people-info>
     </div>
-    <div class="constraint-wrap">
-      <app-customer-constraints></app-customer-constraints>
-    </div>
-    <div class="log-wrap">
-      <app-customer-logs></app-customer-logs>
-    </div> -->
   </div>
 </div>

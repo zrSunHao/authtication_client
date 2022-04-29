@@ -11,11 +11,11 @@ export interface CustomerElement {
 
 export const CUSTOMER_ELEMENT_DATA: CustomerElement[] = [
     {
-        id: '1', avatar: '/assets/images/people_1.jpg', name: 'zhangsan', nickname: '张三',
+        id: '1', avatar: '', name: 'zhangsan', nickname: '张三',
         limited: '0', lastLoginAt: new Date(), createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
     },
     {
-        id: '1', avatar: '/assets/images/logo_256.png', name: 'zhangsan', nickname: '认识的v',
+        id: '1', avatar: '', name: 'zhangsan', nickname: '认识的v',
         limited: '1', lastLoginAt: new Date(), createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
     },
     {
@@ -53,33 +53,35 @@ export const CUSTOMER_ELEMENT_DATA: CustomerElement[] = [
 ];
 
 export interface CustomerRoleElement {
-    avatar: string;
-    appName: string;
+    id: string;
+    sysLogo: string;
+    sysName: string;
     roleName: string;
+    rank: number;// 0：全部 1：默认 2：普通用户 10：会员  100：业务员  1000：管理员 10000：超级管理员
     remark: string;
-    createdAt: Date;
+    createdAt: Date; //关联时间
 }
 
 export const CUSTOMER_ROLE_ELEMENT_DATA: CustomerRoleElement[] = [
     {
-        avatar: '/assets/images/people_1.jpg', appName: 'app-111', roleName: '管理员',
-        createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
+        id: '1', sysLogo: '', sysName: 'app-111', roleName: '管理员',
+        rank: 1, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦撒看见打撒萨达萨达撒旦撒旦撒看见打撒萨达萨达撒旦撒旦'
     },
     {
-        avatar: '/assets/images/people_1.jpg', appName: 'app-222', roleName: '超级管理员',
-        createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
+        id: '1', sysLogo: '', sysName: 'app-222', roleName: '超级管理员',
+        rank: 2, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
     },
     {
-        avatar: '/assets/images/people_1.jpg', appName: 'app-333', roleName: '业务员',
-        createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
+        id: '1', sysLogo: '', sysName: 'app-333', roleName: '业务员',
+        rank: 10, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
     },
     {
-        avatar: '/assets/images/people_1.jpg', appName: 'app-444', roleName: '开发工程师',
-        createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
+        id: '1', sysLogo: '', sysName: 'app-444', roleName: '开发工程师',
+        rank: 100, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
     },
     {
-        avatar: '/assets/images/people_1.jpg', appName: 'app-555', roleName: '产品设计工程师',
-        createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
+        id: '1', sysLogo: '', sysName: 'app-555', roleName: '产品设计工程师',
+        rank: 1000, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
     },
 ];
 
@@ -134,4 +136,10 @@ export class CustomerSearchDto {
     remark: string = '';
     startAt: Date | null = null;
     endAt: Date | null = null;
+}
+
+export class CustomerRoleSearchDto {
+    customerId: string = '';
+    sysName: string | null = '';
+    roleName: string | null = '';
 }
