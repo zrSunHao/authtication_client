@@ -27,7 +27,7 @@ export const CONSTRAINT_ELEMENT_DATA: ConstraintElement[] = [
 export class ConstraintSearchDto {
     name: string = '';
     category: '' | '1' | '2' | '3' | '4' = '';
-    introOrRemark: string = '';
+    originOrRemark: string = '';
     startAt: Date | null = null;
     endAt: Date | null = null;
 }

@@ -86,47 +86,48 @@ export const CUSTOMER_ROLE_ELEMENT_DATA: CustomerRoleElement[] = [
 ];
 
 export interface ConstraintElement {
-    category: '1' | '2';
-    method: '1' | '2';
-    appName: string;
+    id: string;
+    category: '1' | '2'; //账号->所有系统 账号->某系统
+    method: '1' | '2';//禁用 锁定
+    sysName: string | null;
     origin: string;
-    expiredAt: Date;
+    expiredAt: Date | null;
     createdAt: Date;
     remark: string;
 }
 
 export const CONSTRAINT_ELEMENT_DATA: ConstraintElement[] = [
     {
-        category: '1', method: '1', appName: 'app-111', expiredAt: new Date(), origin: '【业务员】李四', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
+        id: '1', category: '1', method: '1', sysName: '', expiredAt: null, origin: '【业务员】李四', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦撒看见打撒萨达萨达撒旦撒旦'
     },
     {
-        category: '1', method: '1', appName: 'app-111', expiredAt: new Date(), origin: '【业务员】李四', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
+        id: '1', category: '2', method: '1', sysName: 'app-111', expiredAt: null, origin: '【业务员】李四', createdAt: new Date(), remark: '撒看见打撒撒看见打撒萨达萨达撒旦撒旦萨达萨达撒旦撒旦'
     },
     {
-        category: '2', method: '2', appName: 'app-111', expiredAt: new Date(), origin: '【后台服务】【service2】', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
+        id: '1', category: '2', method: '2', sysName: 'app-111', expiredAt: new Date(), origin: '【后台服务】【service2】', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
     },
     {
-        category: '1', method: '1', appName: 'app-111', expiredAt: new Date(), origin: '【业务员】李四', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
+        id: '1', category: '1', method: '1', sysName: '', expiredAt: null, origin: '【业务员】李四', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦撒看见打撒萨达萨达撒旦撒旦'
     },
     {
-        category: '1', method: '1', appName: 'app-111', expiredAt: new Date(), origin: '【业务员】李四', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
+        id: '1', category: '2', method: '1', sysName: 'app-111', expiredAt: null, origin: '【业务员】李四', createdAt: new Date(), remark: '撒看见打撒撒看见打撒萨达萨达撒旦撒旦萨达萨达撒旦撒旦'
     },
 ];
 
 export interface LogElement {
     operate: string;
-    appName: string;
+    sysName: string;
     roleName: string;
     createdAt: Date;
     remark: string;
 }
 
 export const LOG_ELEMENT_DATA: LogElement[] = [
-    { operate: '查询列表', appName: 'app-111', roleName: '普通用户', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
-    { operate: '查询列表', appName: 'app-222', roleName: '管理员', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
-    { operate: '查询列表', appName: 'app-333', roleName: '业务员', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
-    { operate: '查询列表', appName: 'app-444', roleName: '设计师', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
-    { operate: '查询列表', appName: 'app-555', roleName: '工程师', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
+    { operate: '查询列表', sysName: 'app-111', roleName: '普通用户', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
+    { operate: '查询列表', sysName: 'app-222', roleName: '管理员', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
+    { operate: '查询列表', sysName: 'app-333', roleName: '业务员', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
+    { operate: '查询列表', sysName: 'app-444', roleName: '设计师', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
+    { operate: '查询列表', sysName: 'app-555', roleName: '工程师', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
 
 ];
 
@@ -142,4 +143,20 @@ export class CustomerRoleSearchDto {
     customerId: string = '';
     sysName: string | null = '';
     roleName: string | null = '';
+}
+
+export class CustomerConstraintSearchDto {
+    customerId: string = '';
+    category: '' | '1' | '2' = ''; //账号->所有系统 账号->某系统
+    originOrRemark: string = '';
+    startAt: Date | null = null;
+    endAt: Date | null = null;
+}
+
+export class CustomerLogSearchDto {
+    customerId: string = '';
+    operate: string = '';
+    sysName: string = '';
+    startAt: Date | null = null;
+    endAt: Date | null = null;
 }

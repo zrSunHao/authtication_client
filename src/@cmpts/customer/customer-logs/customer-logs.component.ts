@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { PagingParameter } from 'src/@sun/models/paging.model';
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
-import { LOG_ELEMENT_DATA } from '../model';
+import { CustomerLogSearchDto, LOG_ELEMENT_DATA } from '../model';
 
 @Component({
   selector: 'app-customer-logs',
@@ -9,21 +10,22 @@ import { LOG_ELEMENT_DATA } from '../model';
 })
 export class CustomerLogsComponent implements OnInit {
 
-  operate: string = '';
-  appName: string = '';
-  startAt: Date | null = null;
-  endAt: Date | null = null;
+  dto: CustomerLogSearchDto = new CustomerLogSearchDto();
+  params = new PagingParameter<CustomerLogSearchDto>();
+
+  @Input() customerId: string = '';
 
   total = 35;
+  pageSize: 5 | 10 | 20 | 50 = 5;
   columnOp = 'createdAt';
   columns: Array<PaginatorColumn> = [
     { name: '操作', value: 'operate' },
-    { name: 'App', value: 'appName' },
-    { name: '角色', value: 'roleName' },
+    { name: '系统名称', value: 'sysName' },
+    { name: '角色名称', value: 'roleName' },
     { name: '创建时间', value: 'createdAt' },
   ];
 
-  displayedColumns = ['operate', 'appName', 'roleName', 'createdAt', 'remark'];
+  displayedColumns = ['operate', 'sysName', 'roleName', 'createdAt', 'remark'];
   dataSource = LOG_ELEMENT_DATA;
 
   constructor() { }
@@ -31,7 +33,15 @@ export class CustomerLogsComponent implements OnInit {
   ngOnInit() {
   }
 
-  paginatorChange(paginator: Paginator) {
+  onSearchClick(): void {
+
+  }
+
+  onResetClick(): void {
+
+  }
+
+  onPaginatorChange(paginator: Paginator) {
     console.log(paginator);
   }
 

@@ -36,3 +36,15 @@ table {
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
+
+table button {
+    margin-right: 0.5rem;
+}
+
+table mat-icon {
+    color: orange;
+}
+
+table mat-icon:hover {
+    color: #e91e63;
+}

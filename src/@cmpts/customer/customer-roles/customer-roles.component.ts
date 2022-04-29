@@ -31,6 +31,7 @@ export class CustomerRolesComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.customerId);
+    this.onResetClick();
   }
 
   onSearchClick(): void {
