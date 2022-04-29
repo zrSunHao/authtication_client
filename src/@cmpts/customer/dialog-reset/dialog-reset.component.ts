@@ -10,7 +10,6 @@ import { CustomerElement } from '../model';
 })
 export class DialogResetComponent implements OnInit {
 
-  newPasd: string = '';
   form: FormGroup;
   password = new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,17}$/)]);
 
@@ -27,7 +26,7 @@ export class DialogResetComponent implements OnInit {
   }
 
   onSaveClick(): void {
-    this.dialogRef.close({ op: 'save', newPasd: this.form.controls['password'].value });
+    this.dialogRef.close({ op: 'save', newPsd: this.form.controls['password'].value });
   }
 
   onCloseClick(): void {

@@ -29,9 +29,21 @@ export class CustomerService {
       .pipe(catchError(this.handleError));
   }
 
+  public reset(id: string, newPsd: string): Observable<ResponseResult<boolean>> {
+    const url = `${this.baseUrl}/reset?id=${id}&newPsd=${newPsd}`;
+    return this.http.get<ResponseResult<boolean>>(url)
+      .pipe(catchError(this.handleError));
+  }
+
   public getById(id: string): Observable<ResponseResult<CustomerElement>> {
     const url = `${this.baseUrl}/getById?id=${id}`;
     return this.http.get<ResponseResult<CustomerElement>>(url)
+      .pipe(catchError(this.handleError));
+  }
+
+  public icon(formData: FormData): Observable<ResponseResult<string>> {
+    const url = `${this.baseUrl}/icon`;
+    return this.http.post<ResponseResult<string>>(url, formData)
       .pipe(catchError(this.handleError));
   }
 

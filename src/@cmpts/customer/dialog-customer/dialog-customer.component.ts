@@ -17,7 +17,7 @@ export class DialogCustomerComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.data);
+
   }
 
   onSaveClick(): void {

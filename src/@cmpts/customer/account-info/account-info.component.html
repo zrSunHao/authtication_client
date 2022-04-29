@@ -6,6 +6,7 @@
     </mat-card-title>
     <mat-card-subtitle></mat-card-subtitle>
     <mat-card-content>
+        <input type="file" #imageInput [hidden]="true" accept="image/*" (change)="onFileChange($event)" />
         <form>
             <mat-form-field appearance="outline">
                 <mat-label>账号</mat-label>
@@ -28,8 +29,9 @@
                 <mat-icon matSuffix>calendar_today</mat-icon>
             </mat-form-field>
             <div class="image-upload">
-                <img class="customer-avatar" [src]="customer.avatar" />
-                <button mat-mini-fab color="accent" matTooltip="点击上传头像">
+                <img class="customer-avatar" *ngIf="customer.avatar" [src]="customer.avatar" />
+                <img class="customer-avatar" *ngIf="!customer.avatar" src="/assets/images/logo_256.png" />
+                <button mat-mini-fab color="accent" matTooltip="点击上传头像" (click)="onAvatarClick()">
                     <mat-icon>cloud_upload</mat-icon>
                 </button>
             </div>

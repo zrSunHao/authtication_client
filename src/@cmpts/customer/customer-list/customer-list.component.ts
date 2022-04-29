@@ -118,7 +118,7 @@ export class CustomerListComponent implements OnInit {
         }
       },
       error: err => {
-        const msg = `约束取消失败！！！ ${err}`;
+        const msg = `客户【${e.name}】备注失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
       }
     });
