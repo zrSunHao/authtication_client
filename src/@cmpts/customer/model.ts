@@ -1,52 +1,54 @@
 export interface CustomerElement {
+    id: string | null;
     avatar: string;
     name: string;
     nickname: string;
-    constraint: string;
+    limited: '0' | '1';
     lastLoginAt: Date;
     remark: string;
+    createdAt: Date | null;
 }
 
 export const CUSTOMER_ELEMENT_DATA: CustomerElement[] = [
     {
-        avatar: '/assets/images/people_1.jpg', name: 'zhangsan', nickname: '张三',
-        constraint: '有', lastLoginAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
+        id: '1', avatar: '/assets/images/people_1.jpg', name: 'zhangsan', nickname: '张三',
+        limited: '0', lastLoginAt: new Date(), createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
     },
     {
-        avatar: '/assets/images/logo_256.png', name: 'zhangsan', nickname: '认识的v',
-        constraint: '无', lastLoginAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
+        id: '1', avatar: '/assets/images/logo_256.png', name: 'zhangsan', nickname: '认识的v',
+        limited: '1', lastLoginAt: new Date(), createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
     },
     {
-        avatar: '/assets/images/people_1.jpg', name: 'zhangsan', nickname: '是发',
-        constraint: '有', lastLoginAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
+        id: '1', avatar: '/assets/images/people_1.jpg', name: 'zhangsan', nickname: '是发',
+        limited: '0', lastLoginAt: new Date(), createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
     },
     {
-        avatar: '/assets/images/logo_256.png', name: 'zhangsan', nickname: '张三',
-        constraint: '无', lastLoginAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
+        id: '1', avatar: '/assets/images/logo_256.png', name: 'zhangsan', nickname: '张三',
+        limited: '1', lastLoginAt: new Date(), createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
     },
     {
-        avatar: '/assets/images/people_1.jpg', name: 'zhangsan', nickname: '王五打赏',
-        constraint: '有', lastLoginAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
+        id: '1', avatar: '/assets/images/people_1.jpg', name: 'zhangsan', nickname: '王五打赏',
+        limited: '0', lastLoginAt: new Date(), createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
     },
     {
-        avatar: '/assets/images/logo_256.png', name: 'zhangsan', nickname: '浮点数',
-        constraint: '有', lastLoginAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
+        id: '1', avatar: '/assets/images/logo_256.png', name: 'zhangsan', nickname: '浮点数',
+        limited: '1', lastLoginAt: new Date(), createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
     },
     {
-        avatar: '/assets/images/people_1.jpg', name: 'zhangsan', nickname: '个位数',
-        constraint: '无', lastLoginAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
+        id: '1', avatar: '/assets/images/people_1.jpg', name: 'zhangsan', nickname: '个位数',
+        limited: '0', lastLoginAt: new Date(), createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
     },
     {
-        avatar: '/assets/images/logo_256.png', name: 'zhangsan', nickname: '方法',
-        constraint: '有', lastLoginAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
+        id: '1', avatar: '/assets/images/logo_256.png', name: 'zhangsan', nickname: '方法',
+        limited: '1', lastLoginAt: new Date(), createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
     },
     {
-        avatar: '/assets/images/people_1.jpg', name: 'zhangsan', nickname: '更好四个',
-        constraint: '有', lastLoginAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
+        id: '1', avatar: '/assets/images/people_1.jpg', name: 'zhangsan', nickname: '更好四个',
+        limited: '1', lastLoginAt: new Date(), createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
     },
     {
-        avatar: '/assets/images/logo_256.png', name: 'zhangsan', nickname: '法撒撒旦',
-        constraint: '无', lastLoginAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
+        id: '1', avatar: '/assets/images/logo_256.png', name: 'zhangsan', nickname: '法撒撒旦',
+        limited: '0', lastLoginAt: new Date(), createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦撒看见打撒萨达萨达撒旦撒旦'
     },
 ];
 
@@ -125,3 +127,11 @@ export const LOG_ELEMENT_DATA: LogElement[] = [
     { operate: '查询列表', appName: 'app-555', roleName: '工程师', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
 
 ];
+
+export class CustomerSearchDto {
+    nameOrNickname: string = '';
+    limited: '' | '0' | '1' = '';
+    remark: string = '';
+    startAt: Date | null = null;
+    endAt: Date | null = null;
+}

@@ -17,7 +17,7 @@ export class ConstraintComponent implements OnInit {
   dto: ConstraintSearchDto = new ConstraintSearchDto();
   params = new PagingParameter<ConstraintSearchDto>();
 
-  total = 35;
+  total = 0;
   columnOp = 'createdAt';
   columns: Array<PaginatorColumn> = [
     { name: '类别', value: 'category' },
@@ -27,7 +27,7 @@ export class ConstraintComponent implements OnInit {
   ];
 
   displayedColumns = ['category', 'method', 'userName', 'sysName', 'functionName', 'expiredAt', 'origin', 'createdAt', 'remark', 'operate',];
-  dataSource: Array<ConstraintElement> = CONSTRAINT_ELEMENT_DATA;
+  dataSource: Array<ConstraintElement> = [];
 
   constructor(private dialog: MatDialog,
     private notifyServ: NotifyService,
@@ -78,6 +78,8 @@ export class ConstraintComponent implements OnInit {
       error: err => {
         const msg = `数据加载失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
+        this.dataSource = CONSTRAINT_ELEMENT_DATA; // TODO 删除
+        this.total = 35; // TODO 删除
       }
     });
   }

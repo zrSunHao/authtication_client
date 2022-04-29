@@ -18,8 +18,8 @@ export class AccountInfoComponent implements OnInit {
   avatar: string = '/assets/images/logo_256.png';
 
   customer: CustomerElement = {
-    avatar: '/assets/images/people_1.jpg', name: 'zhangsan', nickname: '张三',
-    constraint: '有', lastLoginAt: new Date(), remark: '这是假数据'
+    id: '1', avatar: '/assets/images/people_1.jpg', name: 'zhangsan', nickname: '张三',
+    limited: '1', lastLoginAt: new Date(), createdAt: new Date(), remark: '这是假数据'
   };
 
   constructor(private dialog: MatDialog,) { }
