@@ -10,8 +10,8 @@
   </div>
   <div class="content-warp">
     <div class="info-warp">
-      <app-account-info></app-account-info>
-      <app-people-info></app-people-info>
+      <app-account-info [customerId]="id"></app-account-info>
+      <app-people-info [customerId]="id"></app-people-info>
     </div>
     <mat-tab-group mat-align-tabs="center">
       <mat-tab label="账号角色">

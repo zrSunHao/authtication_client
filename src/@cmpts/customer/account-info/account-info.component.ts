@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogCustomerComponent } from '../dialog-customer/dialog-customer.component';
+import { DialogResetComponent } from '../dialog-reset/dialog-reset.component';
 import { CustomerElement } from '../model';
 
 @Component({
@@ -10,13 +11,7 @@ import { CustomerElement } from '../model';
 })
 export class AccountInfoComponent implements OnInit {
 
-  userName: string = '账号';
-  nickName: string = '昵称';
-  registedAt: Date = new Date();
-  loginedAt: Date = new Date();
-  remark: string = '这是备注';
-  avatar: string = '/assets/images/logo_256.png';
-
+  @Input() customerId: string = '';
   customer: CustomerElement = {
     id: '1', avatar: '/assets/images/people_1.jpg', name: 'zhangsan', nickname: '张三',
     limited: '1', lastLoginAt: new Date(), createdAt: new Date(), remark: '这是假数据'
@@ -27,7 +22,20 @@ export class AccountInfoComponent implements OnInit {
   ngOnInit() {
   }
 
-  remark_click(): void {
+  onResetClick(): void {
+    const dialogRef = this.dialog.open(DialogResetComponent, {
+      width: '360px',
+      data: this.customer,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.op === 'save') {
+        const newPasd: string = result.newPasd;
+      }
+    });
+  }
+
+  onRemarkClick(): void {
     const dialogRef = this.dialog.open(DialogCustomerComponent, {
       width: '360px',
       data: this.customer,
@@ -36,7 +44,6 @@ export class AccountInfoComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result.op === 'save') {
         this.customer.remark = result.remark;
-        this.remark = result.remark;
       }
     });
   }

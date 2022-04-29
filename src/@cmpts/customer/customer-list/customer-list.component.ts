@@ -85,7 +85,7 @@ export class CustomerListComponent implements OnInit {
   }
 
   private _loadData(params: PagingParameter<CustomerSearchDto>) {
-    this.hostServ.serach(params).subscribe({
+    this.hostServ.search(params).subscribe({
       next: res => { this._renderInfo(res); },
       error: err => {
         const msg = `数据加载失败！！！ ${err}`;

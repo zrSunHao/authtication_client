@@ -31,6 +31,7 @@ import { CustomerRolesComponent } from './customer-roles/customer-roles.componen
 import { PeopleInfoComponent } from './people-info/people-info.component';
 import { DialogCustomerComponent } from './dialog-customer/dialog-customer.component';
 import { DialogConstraintComponent } from './dialog-constraint/dialog-constraint.component';
+import { DialogResetComponent } from './dialog-reset/dialog-reset.component';
 
 @NgModule({
   imports: [
@@ -66,6 +67,7 @@ import { DialogConstraintComponent } from './dialog-constraint/dialog-constraint
     PeopleInfoComponent,
     DialogCustomerComponent,
     DialogConstraintComponent,
+    DialogResetComponent,
   ],
   providers: [
     CustomerService

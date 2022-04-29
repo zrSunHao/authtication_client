@@ -1,15 +1,23 @@
 mat-card-title {
-    font-size: larger;
+    display: flex;
 }
 
 mat-card-title button {
-    float: right;
-    font-size: 12px;
-    margin-left: 1rem;
+    width: 4rem;
+    margin-left: 0.5rem;
+}
+
+.box-fill {
+    flex: 1;
 }
 
 .mat-raised-button {
+    font-size: 12px;
+    height: 24px;
     line-height: 24px;
+    max-width: 5rem;
+    padding: 0;
+    min-width: 2rem;
 }
 
 form {

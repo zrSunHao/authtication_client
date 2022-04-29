@@ -1,40 +1,42 @@
 <mat-card>
     <mat-card-title>
-        账号信息
-        <button mat-raised-button color="accent" (click)="remark_click()">添加备注</button>
+        <h3>账号信息</h3>
+        <button mat-raised-button color="accent" (click)="onResetClick()">重置密码</button>
+        <button mat-raised-button color="accent" (click)="onRemarkClick()">添加备注</button>
     </mat-card-title>
     <mat-card-subtitle></mat-card-subtitle>
     <mat-card-content>
         <form>
             <mat-form-field appearance="outline">
                 <mat-label>账号</mat-label>
-                <input matInput [ngModel]="userName" name="userName" disabled>
+                <input matInput [ngModel]="customer.name" name="userName" disabled>
                 <mat-icon matSuffix>account_circle</mat-icon>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>昵称</mat-label>
-                <input matInput [ngModel]="nickName" name="nickName" disabled>
+                <input matInput [ngModel]="customer.nickname" name="nickName" disabled>
                 <mat-icon matSuffix>portrait</mat-icon>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>注册时间</mat-label>
-                <input matInput [ngModel]="registedAt|date:'yyyy-MM-dd HH:mm:ss'" name="registedAt" disabled>
+                <input matInput [ngModel]="customer.createdAt|date:'yyyy-MM-dd HH:mm:ss'" name="registedAt" disabled>
                 <mat-icon matSuffix>calendar_today</mat-icon>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>注册时间</mat-label>
-                <input matInput [ngModel]="loginedAt|date:'yyyy-MM-dd HH:mm:ss'" name="registedAt" disabled>
+                <input matInput [ngModel]="customer.lastLoginAt|date:'yyyy-MM-dd HH:mm:ss'" name="registedAt" disabled>
                 <mat-icon matSuffix>calendar_today</mat-icon>
             </mat-form-field>
             <div class="image-upload">
-                <img class="customer-avatar" [src]="avatar" />
+                <img class="customer-avatar" [src]="customer.avatar" />
                 <button mat-mini-fab color="accent" matTooltip="点击上传头像">
                     <mat-icon>cloud_upload</mat-icon>
                 </button>
             </div>
             <mat-form-field appearance="outline" class="remark">
-                <mat-label>备注</mat-label>
-                <textarea matInput [(ngModel)]="remark" name="remark" rows="6" maxlength="256" disabled></textarea>
+                <mat-label>管理员添加的备注</mat-label>
+                <textarea matInput [(ngModel)]="customer.remark" name="remark" rows="6" maxlength="256"
+                    disabled></textarea>
             </mat-form-field>
         </form>
     </mat-card-content>

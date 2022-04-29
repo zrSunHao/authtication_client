@@ -115,6 +115,7 @@ export const CONSTRAINT_ELEMENT_DATA: ConstraintElement[] = [
 ];
 
 export interface LogElement {
+    id: string;
     operate: string;
     sysName: string;
     roleName: string;
@@ -124,13 +125,24 @@ export interface LogElement {
 }
 
 export const LOG_ELEMENT_DATA: LogElement[] = [
-    { operate: '查询列表', sysName: 'app-111', roleName: '普通用户', roleRank: 1, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
-    { operate: '查询列表', sysName: 'app-222', roleName: '管理员', roleRank: 2, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
-    { operate: '查询列表', sysName: 'app-333', roleName: '业务员', roleRank: 10, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
-    { operate: '查询列表', sysName: 'app-444', roleName: '设计师', roleRank: 100, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
-    { operate: '查询列表', sysName: 'app-555', roleName: '工程师', roleRank: 1000, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
+    { id: '1', operate: '查询列表', sysName: 'app-111', roleName: '普通用户', roleRank: 1, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
+    { id: '1', operate: '查询列表', sysName: 'app-222', roleName: '管理员', roleRank: 2, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
+    { id: '1', operate: '查询列表', sysName: 'app-333', roleName: '业务员', roleRank: 10, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
+    { id: '1', operate: '查询列表', sysName: 'app-444', roleName: '设计师', roleRank: 100, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
+    { id: '1', operate: '查询列表', sysName: 'app-555', roleName: '工程师', roleRank: 1000, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
 
 ];
+
+export interface PeopleElement {
+    id: string;
+    customerId: string;
+    fullName: string;
+    gender: '1' | '2';//男 女
+    birthday: Date;
+    education: string;
+    profession: string;
+    intro: string;
+}
 
 export class CustomerSearchDto {
     nameOrNickname: string = '';

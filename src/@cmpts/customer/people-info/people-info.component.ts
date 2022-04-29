@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { PeopleElement } from '../model';
 
 @Component({
   selector: 'app-people-info',
@@ -8,9 +9,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class PeopleInfoComponent implements OnInit {
 
+  @Input() customerId: string = '';
   form: FormGroup;
   dateDisabled = false;
   edit = false;
+  people: PeopleElement = { id: '1', customerId: '1', fullName: '1', gender: '1', birthday: new Date(), education: '1', profession: '计算机', intro: 'sddsfdfsdfsdffds', };
 
   constructor() {
     this.form = new FormGroup({
@@ -34,17 +37,37 @@ export class PeopleInfoComponent implements OnInit {
     this.form.controls['birthday'].disable();
     this.edit = true;
   }
+
   onSaveClick() {
     this.form.disable();
     this.dateDisabled = true;
     this.edit = false;
+
+    this._formMapToElement();
   }
-  onCancelClick() {
+
+  onCancelClick(): void {
     this.form.disable();
     this.dateDisabled = true;
     this.edit = false;
-    //初始化信息时备份数据
-    //取消时根据备份重新赋值
-    //保存时更新备份
+    this._elementMapToForm();
+  }
+
+  _elementMapToForm(): void {
+    this.form.controls['fullName'].setValue(this.people.fullName);
+    this.form.controls['gender'].setValue(this.people.gender);
+    this.form.controls['birthday'].setValue(this.people.birthday);
+    this.form.controls['education'].setValue(this.people.education);
+    this.form.controls['profession'].setValue(this.people.profession);
+    this.form.controls['intro'].setValue(this.people.intro);
+  }
+
+  _formMapToElement(): void {
+    this.people.fullName = this.form.controls['fullName'].value;
+    this.people.gender = this.form.controls['gender'].value;
+    this.people.birthday = this.form.controls['birthday'].value;
+    this.people.education = this.form.controls['education'].value;
+    this.people.profession = this.form.controls['profession'].value;
+    this.people.intro = this.form.controls['intro'].value;
   }
 }
