@@ -22,10 +22,11 @@ export class CustomerLogsComponent implements OnInit {
     { name: '操作', value: 'operate' },
     { name: '系统名称', value: 'sysName' },
     { name: '角色名称', value: 'roleName' },
+    { name: '角色等级', value: 'roleRank' },
     { name: '创建时间', value: 'createdAt' },
   ];
 
-  displayedColumns = ['operate', 'sysName', 'roleName', 'createdAt', 'remark'];
+  displayedColumns = ['operate', 'sysName', 'roleName', 'roleRank', 'createdAt', 'remark'];
   dataSource = LOG_ELEMENT_DATA;
 
   constructor() { }

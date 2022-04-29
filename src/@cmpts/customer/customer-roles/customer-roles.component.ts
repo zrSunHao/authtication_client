@@ -20,7 +20,8 @@ export class CustomerRolesComponent implements OnInit {
   columnOp = 'createdAt';
   columns: Array<PaginatorColumn> = [
     { name: '系统名称', value: 'sysName' },
-    { name: '角色', value: 'roleName' },
+    { name: '角色名称', value: 'roleName' },
+    { name: '角色等级', value: 'roleRank' },
     { name: '关联时间', value: 'createdAt' },
   ];
 

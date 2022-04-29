@@ -26,7 +26,7 @@ export class SystemRoleListComponent implements OnInit {
   columns: Array<PaginatorColumn> = [
     { name: '名称', value: 'name' },
     { name: '标识码', value: 'code' },
-    { name: '级别', value: 'rank' },
+    { name: '等级', value: 'rank' },
     { name: '创建时间', value: 'createdAt' },
   ];
 

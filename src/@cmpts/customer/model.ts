@@ -118,16 +118,17 @@ export interface LogElement {
     operate: string;
     sysName: string;
     roleName: string;
+    roleRank: number;// 1：默认 2：普通用户 10：会员  100：业务员  1000：管理员 10000：超级管理员
     createdAt: Date;
     remark: string;
 }
 
 export const LOG_ELEMENT_DATA: LogElement[] = [
-    { operate: '查询列表', sysName: 'app-111', roleName: '普通用户', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
-    { operate: '查询列表', sysName: 'app-222', roleName: '管理员', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
-    { operate: '查询列表', sysName: 'app-333', roleName: '业务员', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
-    { operate: '查询列表', sysName: 'app-444', roleName: '设计师', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
-    { operate: '查询列表', sysName: 'app-555', roleName: '工程师', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
+    { operate: '查询列表', sysName: 'app-111', roleName: '普通用户', roleRank: 1, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
+    { operate: '查询列表', sysName: 'app-222', roleName: '管理员', roleRank: 2, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
+    { operate: '查询列表', sysName: 'app-333', roleName: '业务员', roleRank: 10, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
+    { operate: '查询列表', sysName: 'app-444', roleName: '设计师', roleRank: 100, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
+    { operate: '查询列表', sysName: 'app-555', roleName: '工程师', roleRank: 1000, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
 
 ];
 
