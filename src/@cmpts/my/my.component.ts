@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/@sun/shared/services/auth.service';
 
 @Component({
   selector: 'app-my',
@@ -11,17 +12,17 @@ export class MyComponent implements OnInit {
   name: string = '';
 
   constructor(private route: ActivatedRoute,
-    private router: Router,) { }
+    private router: Router,
+    private authServ: AuthService) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.id = params['id'];
-      this.name = params['name'];
-    })
+    const account = this.authServ.getAccount();
+    this.id = account.id as string;
+    this.name = account.name;
   }
 
   onPreviousPageClick(): void {
-    this.router.navigate([`/customer`]);
+    history.back();
   }
 
 }

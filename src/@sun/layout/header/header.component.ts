@@ -9,6 +9,7 @@ export enum menutype {
   system = 'system',
   program = 'program',
   constraint = 'constraint',
+  other = ''
 }
 
 @Component({
@@ -49,6 +50,8 @@ export class HeaderComponent implements OnInit {
       this.menuitem = menutype.constraint;
     } else if (url == null) {
       this.menuitem = menutype.dashboard;
+    } else {
+      this.menuitem = menutype.other;
     }
   }
 

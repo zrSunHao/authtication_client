@@ -11,16 +11,19 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDividerModule } from '@angular/material/divider';
 
-import { ClipPipe } from './pipes/clip.pipe';
 import { PaginatorComponent } from './cmpts/paginator/paginator.component';
 import { IconSnackBarComponent } from './cmpts/icon-snack-bar/icon-snack-bar.component';
-import { NotifyService } from './services/notify.service';
 import { ConfirmDialogComponent } from './cmpts/confirm-dialog/confirm-dialog.component';
+
+import { ClipPipe } from './pipes/clip.pipe';
+
+import { NotifyService } from './services/notify.service';
+import { AuthService } from './services/auth.service';
 
 const mats = [MatFormFieldModule, MatIconModule, MatInputModule, MatSelectModule, MatButtonModule, MatDialogModule, MatSnackBarModule, MatDividerModule,];
 
 const components = [PaginatorComponent, IconSnackBarComponent, ConfirmDialogComponent,];
-const services = [NotifyService];
+const services = [NotifyService,AuthService];
 const pipes = [ClipPipe];
 const exports = [ClipPipe, PaginatorComponent, ConfirmDialogComponent,];
 
