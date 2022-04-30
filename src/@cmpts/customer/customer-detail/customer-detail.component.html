@@ -9,26 +9,29 @@
     </button>
   </div>
   <div class="content-warp">
-    <div class="info-warp">
-      <app-account-info [customerId]="id"></app-account-info>
-      <app-people-info [customerId]="id"></app-people-info>
-    </div>
+    
     <mat-tab-group mat-align-tabs="center">
-      <mat-tab label="账号角色">
-        <div class="role-wrap">
-          <app-customer-roles [customerId]="id"></app-customer-roles>
-        </div>
-      </mat-tab>
       <mat-tab label="账号约束">
         <div class="constraint-wrap">
           <app-customer-constraints [customerId]="id"></app-customer-constraints>
         </div>
       </mat-tab>
+      <mat-tab label="账号角色">
+        <div class="role-wrap">
+          <app-customer-roles [customerId]="id"></app-customer-roles>
+        </div>
+      </mat-tab>
+      
       <mat-tab label="操作日志">
         <div class="log-wrap">
           <app-customer-logs [customerId]="id"></app-customer-logs>
         </div>
       </mat-tab>
     </mat-tab-group>
+
+    <div class="info-warp">
+      <app-account-info [customerId]="id"></app-account-info>
+      <app-people-info [customerId]="id"></app-people-info>
+    </div>
   </div>
 </div>

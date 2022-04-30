@@ -11,6 +11,7 @@ import { CustomerElement } from '../model';
   templateUrl: './account-info.component.html',
   styleUrls: ['./account-info.component.scss']
 })
+
 export class AccountInfoComponent implements OnInit {
 
   @Input() customerId: string = '';
@@ -30,15 +31,14 @@ export class AccountInfoComponent implements OnInit {
   }
 
   onResetClick(): void {
-    const dialogRef = this.dialog.open(DialogResetComponent, {
-      width: '360px',
-      data: this.customer,
-    });
+    const dialogRef = this.dialog.open(DialogResetComponent,
+      { width: '360px', data: this.customer, }
+    );
 
     dialogRef.afterClosed().subscribe(result => {
       if (result.op === 'save') {
         const newPsd: string = result?.newPsd;
-        this._reset(newPsd);
+        this.notifyServ.notify(`重置密码成功！！！`, 'success');
       }
     });
   }
@@ -51,7 +51,8 @@ export class AccountInfoComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result.op === 'save') {
-        this._remark(result.remark);
+        this.customer.remark = result.remark;
+        this.notifyServ.notify(`备注成功！！！`, 'success');
       }
     });
   }
@@ -103,38 +104,4 @@ export class AccountInfoComponent implements OnInit {
     });
   }
 
-  private _reset(newPsd: string) {
-    this.hostServ.reset(this.customer.id as string, newPsd).subscribe({
-      next: res => {
-        if (res.success) {
-          this.notifyServ.notify(`重置密码成功！！！`, 'success');
-        } else {
-          const msg = `重置密码失败！！！ ${res.allMessages}`;
-          this.notifyServ.notify(msg, 'error');
-        }
-      },
-      error: err => {
-        const msg = `重置密码失败！！！ ${err}`;
-        this.notifyServ.notify(msg, 'error');
-      }
-    });
-  }
-
-  private _remark(remark: string) {
-    this.hostServ.remark(this.customer.id as string, remark).subscribe({
-      next: res => {
-        if (res.success) {
-          this.notifyServ.notify(`备注成功！！！`, 'success');
-          this.customer.remark = remark;
-        } else {
-          const msg = `备注失败！！！ ${res.allMessages}`;
-          this.notifyServ.notify(msg, 'error');
-        }
-      },
-      error: err => {
-        const msg = `备注失败！！！ ${err}`;
-        this.notifyServ.notify(msg, 'error');
-      }
-    });
-  }
 }

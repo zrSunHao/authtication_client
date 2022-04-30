@@ -1,5 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NotifyService } from 'src/@sun/shared/services/notify.service';
+import { CustomerService } from '../customer.service';
 import { CustomerElement } from '../model';
 
 @Component({
@@ -11,7 +13,9 @@ export class DialogCustomerComponent implements OnInit {
 
   remark: string = '';
 
-  constructor(private dialogRef: MatDialogRef<DialogCustomerComponent>,
+  constructor(private notifyServ: NotifyService,
+    private hostServ: CustomerService,
+    private dialogRef: MatDialogRef<DialogCustomerComponent>,
     @Inject(MAT_DIALOG_DATA) public data: CustomerElement,) {
     this.remark = this.data.remark;
   }
@@ -21,7 +25,20 @@ export class DialogCustomerComponent implements OnInit {
   }
 
   onSaveClick(): void {
-    this.dialogRef.close({ op: 'save', remark: this.remark });
+    this.hostServ.remark(this.data.id as string, this.remark).subscribe({
+      next: res => {
+        if (res.success) {
+          this.dialogRef.close({ op: 'save', remark: this.remark });
+        } else {
+          const msg = `备注失败！！！ ${res.allMessages}`;
+          this.notifyServ.notify(msg, 'error');
+        }
+      },
+      error: err => {
+        const msg = `备注失败！！！ ${err}`;
+        this.notifyServ.notify(msg, 'error');
+      }
+    });
   }
 
   onCloseClick(): void {

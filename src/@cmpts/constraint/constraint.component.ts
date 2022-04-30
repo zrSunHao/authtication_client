@@ -20,13 +20,13 @@ export class ConstraintComponent implements OnInit {
   total = 0;
   columnOp = 'createdAt';
   columns: Array<PaginatorColumn> = [
+    { name: 'ID', value: 'id' },
     { name: '类别', value: 'category' },
     { name: '方式', value: 'method' },
     { name: '到期时间', value: 'expiredAt' },
-    { name: '创建时间', value: 'createdAt' },
   ];
 
-  displayedColumns = ['category', 'method', 'userName', 'sysName', 'functionName', 'expiredAt', 'origin', 'createdAt', 'remark', 'operate',];
+  displayedColumns = ['id', 'category', 'method', 'userName', 'sysName', 'functionName', 'expiredAt', 'origin', 'createdAt', 'remark', 'operate',];
   dataSource: Array<ConstraintElement> = [];
 
   constructor(private dialog: MatDialog,

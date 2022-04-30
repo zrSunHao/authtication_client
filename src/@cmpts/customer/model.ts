@@ -161,9 +161,7 @@ export class CustomerRoleSearchDto {
 export class CustomerConstraintSearchDto {
     customerId: string = '';
     category: '' | '1' | '2' = ''; //账号->所有系统 账号->某系统
-    originOrRemark: string = '';
-    startAt: Date | null = null;
-    endAt: Date | null = null;
+    sysName: string = '';
 }
 
 export class CustomerLogSearchDto {

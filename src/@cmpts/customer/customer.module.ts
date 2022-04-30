@@ -32,6 +32,7 @@ import { PeopleInfoComponent } from './people-info/people-info.component';
 import { DialogCustomerComponent } from './dialog-customer/dialog-customer.component';
 import { DialogConstraintComponent } from './dialog-constraint/dialog-constraint.component';
 import { DialogResetComponent } from './dialog-reset/dialog-reset.component';
+import { DialogRoleComponent } from './dialog-role/dialog-role.component';
 
 @NgModule({
   imports: [
@@ -68,6 +69,7 @@ import { DialogResetComponent } from './dialog-reset/dialog-reset.component';
     DialogCustomerComponent,
     DialogConstraintComponent,
     DialogResetComponent,
+    DialogRoleComponent,
   ],
   providers: [
     CustomerService

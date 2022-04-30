@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NotifyService } from 'src/@sun/shared/services/notify.service';
+import { CustomerService } from '../customer.service';
 import { PeopleElement } from '../model';
 
 @Component({
@@ -7,15 +9,26 @@ import { PeopleElement } from '../model';
   templateUrl: './people-info.component.html',
   styleUrls: ['./people-info.component.scss']
 })
+
 export class PeopleInfoComponent implements OnInit {
 
   @Input() customerId: string = '';
   form: FormGroup;
   dateDisabled = false;
   edit = false;
-  people: PeopleElement = { id: '1', customerId: '1', fullName: '1', gender: '1', birthday: new Date(), education: '1', profession: '计算机', intro: 'sddsfdfsdfsdffds', };
+  people: PeopleElement = {
+    id: '',
+    customerId: '',
+    fullName: '',
+    gender: '1',
+    birthday: new Date(),
+    education: '',
+    profession: '',
+    intro: ''
+  };
 
-  constructor() {
+  constructor(private notifyServ: NotifyService,
+    private hostServ: CustomerService,) {
     this.form = new FormGroup({
       fullName: new FormControl(null, [Validators.required, Validators.pattern(/^[\u4E00-\u9FA5A-Za-z0-9_]{2,16}$/)]),
       gender: new FormControl(null, [Validators.required]),
@@ -29,6 +42,7 @@ export class PeopleInfoComponent implements OnInit {
   ngOnInit() {
     this.form.disable();
     this.dateDisabled = true;
+    this._loadData();
   }
 
   onEditClick() {
@@ -39,11 +53,32 @@ export class PeopleInfoComponent implements OnInit {
   }
 
   onSaveClick() {
-    this.form.disable();
-    this.dateDisabled = true;
-    this.edit = false;
+    const p: PeopleElement = {
+      id: '', customerId: '', fullName: '', gender: '1',
+      birthday: new Date(), education: '', profession: '', intro: ''
+    };
+    this._formMapToElement(p);
+    this.hostServ.updatePeople(p).subscribe({
+      next: res => {
+        if (res.success) {
+          const msg = `个人信息保存成功！！！ ${res.allMessages}`;
+          this.notifyServ.notify(msg, 'success');
+          this._elementMapToForm();
+          this.form.disable();
+          this.dateDisabled = true;
+          this.edit = false;
+        } else {
+          const msg = `个人信息保存失败！！！ ${res.allMessages}`;
+          this.notifyServ.notify(msg, 'error');
+        }
+      },
+      error: err => {
+        const msg = `个人信息保存失败！！！ ${err}`;
+        this.notifyServ.notify(msg, 'error');
+      }
+    });
 
-    this._formMapToElement();
+
   }
 
   onCancelClick(): void {
@@ -53,7 +88,24 @@ export class PeopleInfoComponent implements OnInit {
     this._elementMapToForm();
   }
 
-  _elementMapToForm(): void {
+  private _loadData() {
+    this.hostServ.getPeopleById(this.customerId).subscribe({
+      next: res => {
+        if (res.success) {
+          this.people = res.data as PeopleElement;
+        } else {
+          const msg = `个人信息加载失败！！！ ${res.allMessages}`;
+          this.notifyServ.notify(msg, 'error');
+        }
+      },
+      error: err => {
+        const msg = `个人信息加载失败！！！ ${err}`;
+        this.notifyServ.notify(msg, 'error');
+      }
+    });
+  }
+
+  private _elementMapToForm(): void {
     this.form.controls['fullName'].setValue(this.people.fullName);
     this.form.controls['gender'].setValue(this.people.gender);
     this.form.controls['birthday'].setValue(this.people.birthday);
@@ -62,12 +114,12 @@ export class PeopleInfoComponent implements OnInit {
     this.form.controls['intro'].setValue(this.people.intro);
   }
 
-  _formMapToElement(): void {
-    this.people.fullName = this.form.controls['fullName'].value;
-    this.people.gender = this.form.controls['gender'].value;
-    this.people.birthday = this.form.controls['birthday'].value;
-    this.people.education = this.form.controls['education'].value;
-    this.people.profession = this.form.controls['profession'].value;
-    this.people.intro = this.form.controls['intro'].value;
+  private _formMapToElement(people: PeopleElement): void {
+    people.fullName = this.form.controls['fullName'].value;
+    people.gender = this.form.controls['gender'].value;
+    people.birthday = this.form.controls['birthday'].value;
+    people.education = this.form.controls['education'].value;
+    people.profession = this.form.controls['profession'].value;
+    people.intro = this.form.controls['intro'].value;
   }
 }

@@ -41,6 +41,18 @@ export class CustomerService {
       .pipe(catchError(this.handleError));
   }
 
+  public deleteRole(id: string): Observable<ResponseResult<boolean>> {
+    const url = `${this.baseUrl}/deleteRole?id=${id}`;
+    return this.http.get<ResponseResult<boolean>>(url)
+      .pipe(catchError(this.handleError));
+  }
+
+  public deleteConstraint(id: string): Observable<ResponseResult<boolean>> {
+    const url = `${this.baseUrl}/deleteConstraint?id=${id}`;
+    return this.http.get<ResponseResult<boolean>>(url)
+      .pipe(catchError(this.handleError));
+  }
+
   public icon(formData: FormData): Observable<ResponseResult<string>> {
     const url = `${this.baseUrl}/icon`;
     return this.http.post<ResponseResult<string>>(url, formData)
