@@ -5,6 +5,7 @@ import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/con
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
+import { DialogConstraintComponent } from '../dialog-constraint/dialog-constraint.component';
 import { ConstraintElement, CONSTRAINT_ELEMENT_DATA, CustomerConstraintSearchDto } from '../model';
 
 @Component({
@@ -60,7 +61,15 @@ export class CustomerConstraintsComponent implements OnInit {
   }
 
   onAddClick(): void {
+    const dialogRef = this.dialog.open(DialogConstraintComponent,
+      { width: '520px', data: this.customerId, }
+    );
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result?.op && result.op === 'save') {
+        this.notifyServ.notify(`约束添加成功！！！`, 'success');
+      }
+    });
   }
 
   onCancelClick(e: ConstraintElement) {

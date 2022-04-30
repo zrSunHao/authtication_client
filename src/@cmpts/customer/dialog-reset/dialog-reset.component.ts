@@ -25,7 +25,6 @@ export class DialogResetComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.data);
   }
 
   onSaveClick(): void {

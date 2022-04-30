@@ -22,3 +22,8 @@ export class PagingParameter<T>{
     sort: 'desc' | 'asc' = 'desc';
     sortColumn: string = 'default'
 }
+
+export interface OptionItem {
+    key: string;
+    value: string;
+}

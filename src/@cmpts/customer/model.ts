@@ -55,7 +55,9 @@ export const CUSTOMER_ELEMENT_DATA: CustomerElement[] = [
 export interface CustomerRoleElement {
     id: string;
     sysLogo: string;
+    sysId: string;
     sysName: string;
+    roleId: string;
     roleName: string;
     rank: number;// 0：全部 1：默认 2：普通用户 10：会员  100：业务员  1000：管理员 10000：超级管理员
     remark: string;
@@ -64,23 +66,23 @@ export interface CustomerRoleElement {
 
 export const CUSTOMER_ROLE_ELEMENT_DATA: CustomerRoleElement[] = [
     {
-        id: '1', sysLogo: '', sysName: 'app-111', roleName: '管理员',
+        id: '1', sysLogo: '', sysId: '1', sysName: 'app-111', roleId: '1', roleName: '管理员',
         rank: 1, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦撒看见打撒萨达萨达撒旦撒旦撒看见打撒萨达萨达撒旦撒旦'
     },
     {
-        id: '1', sysLogo: '', sysName: 'app-222', roleName: '超级管理员',
+        id: '1', sysLogo: '', sysId: '1', sysName: 'app-222', roleId: '1', roleName: '超级管理员',
         rank: 2, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
     },
     {
-        id: '1', sysLogo: '', sysName: 'app-333', roleName: '业务员',
+        id: '1', sysLogo: '', sysId: '1', sysName: 'app-333', roleId: '1', roleName: '业务员',
         rank: 10, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
     },
     {
-        id: '1', sysLogo: '', sysName: 'app-444', roleName: '开发工程师',
+        id: '1', sysLogo: '', sysId: '1', sysName: 'app-444', roleId: '1', roleName: '开发工程师',
         rank: 100, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
     },
     {
-        id: '1', sysLogo: '', sysName: 'app-555', roleName: '产品设计工程师',
+        id: '1', sysLogo: '', sysId: '1', sysName: 'app-555', roleId: '1', roleName: '产品设计工程师',
         rank: 1000, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
     },
 ];
@@ -170,4 +172,19 @@ export class CustomerLogSearchDto {
     sysName: string = '';
     startAt: Date | null = null;
     endAt: Date | null = null;
+}
+
+export class CustomerConstraintAddDto {
+    customerId: string = '';
+    category: '1' | '2' = '1';  //账号->所有系统 账号->某系统
+    method: '1' | '2' = '1';  //禁用 锁定
+    sysId: string | null = '';
+    expiredAt: Date | null = null;
+    remark: string = '';
+}
+
+export class CustomerRoleAddDto {
+    customerId: string = '';
+    sysId: string = '';
+    roleId: string = '';
 }

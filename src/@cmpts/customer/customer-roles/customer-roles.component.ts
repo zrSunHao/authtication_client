@@ -5,7 +5,8 @@ import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/con
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
-import { CustomerRoleElement, CustomerRoleSearchDto, CUSTOMER_ROLE_ELEMENT_DATA } from '../model';
+import { DialogRoleComponent } from '../dialog-role/dialog-role.component';
+import { CustomerRoleAddDto, CustomerRoleElement, CustomerRoleSearchDto, CUSTOMER_ROLE_ELEMENT_DATA } from '../model';
 
 @Component({
   selector: 'app-customer-roles',
@@ -60,11 +61,33 @@ export class CustomerRolesComponent implements OnInit {
   }
 
   onAddClick(): void {
+    const dto = new CustomerRoleAddDto();
+    dto.customerId = this.customerId;
+    const dialogRef = this.dialog.open(DialogRoleComponent,
+      { width: '360px', data: dto, }
+    );
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result?.op && result.op === 'save') {
+        this.notifyServ.notify(`角色添加成功！！！`, 'success');
+      }
+    });
   }
 
   onEditClick(e: CustomerRoleElement) {
+    const dto = new CustomerRoleAddDto();
+    dto.customerId = this.customerId;
+    dto.sysId = e.sysId;
+    dto.roleId = e.roleId;
+    const dialogRef = this.dialog.open(DialogRoleComponent,
+      { width: '360px', data: dto, }
+    );
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result?.op && result.op === 'save') {
+        this.notifyServ.notify(`角色修改成功！！！`, 'success');
+      }
+    });
   }
 
   onCancelClick(e: CustomerRoleElement) {
@@ -126,5 +149,5 @@ export class CustomerRolesComponent implements OnInit {
       }
     });
   }
-  
+
 }
