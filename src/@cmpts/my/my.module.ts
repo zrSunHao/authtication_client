@@ -14,12 +14,19 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { SharedModule } from 'src/@sun/shared/shared.module';
 import { MyRoutingModule } from './my.module.routing';
 import { MyService } from './my.service';
 
 import { MyComponent } from './my.component';
+import { AccountInfoComponent } from './account-info/account-info.component';
+import { CustomerConstraintsComponent } from './customer-constraints/customer-constraints.component';
+import { CustomerRolesComponent } from './customer-roles/customer-roles.component';
+import { DialogResetComponent } from './dialog-reset/dialog-reset.component';
+import { PeopleInfoComponent } from './people-info/people-info.component';
+import { CustomerLogsComponent } from './customer-logs/customer-logs.component';
 
 @NgModule({
   imports: [
@@ -42,8 +49,17 @@ import { MyComponent } from './my.component';
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTabsModule,
   ],
-  declarations: [MyComponent],
+  declarations: [
+    MyComponent,
+    AccountInfoComponent,
+    CustomerConstraintsComponent,
+    CustomerRolesComponent,
+    CustomerLogsComponent,
+    DialogResetComponent,
+    PeopleInfoComponent,
+  ],
   providers: [MyService]
 })
 export class MyModule { }

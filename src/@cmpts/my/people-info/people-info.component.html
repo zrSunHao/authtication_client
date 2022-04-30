@@ -1,0 +1,62 @@
+<mat-card>
+    <mat-card-title>
+        <h3>个人信息</h3>
+        <div class="box-fill"></div>
+        <button mat-raised-button color="accent" *ngIf="!edit" (click)="onEditClick()">修改信息</button>
+        <button mat-raised-button *ngIf="edit" (click)="onCancelClick()">取消修改</button>
+        <button mat-raised-button color="accent" *ngIf="edit" (click)="onSaveClick()"
+            [disabled]="!form.valid">保存信息</button>
+    </mat-card-title>
+    <mat-card-subtitle></mat-card-subtitle>
+    <mat-card-content>
+        <form [formGroup]="form">
+            <mat-form-field appearance="outline">
+                <mat-label>姓名</mat-label>
+                <input matInput formControlName="fullName">
+                <mat-icon matSuffix>assignment</mat-icon>
+                <mat-hint>中文、英文、数字、下划线，2-16位</mat-hint>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>性别</mat-label>
+                <mat-select formControlName="gender">
+                    <mat-option value="1">男</mat-option>
+                    <mat-option value="2">女</mat-option>
+                </mat-select>
+                <mat-icon matSuffix>face_retouching_natural</mat-icon>
+                <mat-hint>男、女</mat-hint>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>生日</mat-label>
+                <input matInput [matDatepicker]="picker1" formControlName="birthday">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1 [disabled]="dateDisabled"></mat-datepicker>
+                <mat-hint>出生日期</mat-hint>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>职业</mat-label>
+                <input matInput formControlName="profession">
+                <mat-icon matSuffix>build</mat-icon>
+                <mat-hint>最长32个字</mat-hint>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>学历</mat-label>
+                <mat-select formControlName="education">
+                    <mat-option value="0">无</mat-option>
+                    <mat-option value="1">小学</mat-option>
+                    <mat-option value="2">初中</mat-option>
+                    <mat-option value="3">高中</mat-option>
+                    <mat-option value="4">大专</mat-option>
+                    <mat-option value="5">本科</mat-option>
+                    <mat-option value="6">硕士</mat-option>
+                    <mat-option value="7">博士</mat-option>
+                </mat-select>
+                <mat-icon matSuffix>school</mat-icon>
+                <mat-hint>学历</mat-hint>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="intro">
+                <mat-label>个人简介</mat-label>
+                <textarea matInput formControlName="intro" rows="6"></textarea>
+            </mat-form-field>
+        </form>
+    </mat-card-content>
+</mat-card>

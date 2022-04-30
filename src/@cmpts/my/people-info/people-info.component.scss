@@ -1,0 +1,33 @@
+mat-card-title {
+    display: flex;
+}
+
+mat-card-title button {
+    width: 4rem;
+    margin-left: 0.5rem;
+}
+
+.box-fill {
+    flex: 1;
+}
+
+.mat-raised-button {
+    font-size: 12px;
+    height: 24px;
+    line-height: 24px;
+    max-width: 5rem;
+    padding: 0;
+    min-width: 2rem;
+}
+
+form {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: 4rem 4rem 4rem 8rem;
+    gap: 1rem;
+}
+
+.intro {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}

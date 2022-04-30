@@ -1,0 +1,55 @@
+.search {
+    display: grid;
+    grid-template-columns: auto auto 6rem 6rem;
+    gap: 1rem;
+    align-items: center;
+}
+
+.search ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0 !important;
+}
+
+.search button {
+    height: 2.5rem;
+}
+
+.table {
+    margin-top: 2rem;
+    min-height: 18rem;
+}
+
+table {
+    width: 100%;
+}
+
+.table-header-row {
+    height: 3rem;
+    background-color: #303030;
+}
+.table-element-row:hover {
+    background-color: #303030;
+}
+
+table button {
+    margin-right: 0.5rem;
+}
+
+table mat-icon {
+    color: orange;
+}
+
+table mat-icon:hover {
+    color: #e91e63;
+}
+
+
+.system-icon {
+    height: 2rem;
+    border-radius: 50%;
+}
+
+.footer {
+    height: fit-content;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}

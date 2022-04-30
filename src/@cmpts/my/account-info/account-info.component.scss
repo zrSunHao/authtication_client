@@ -1,0 +1,48 @@
+mat-card-title {
+    font-size: larger;
+    display: grid;
+    grid-template-columns: auto 5rem;
+}
+
+.mat-raised-button {
+    font-size: 12px;
+    height: 24px;
+    line-height: 24px;
+    max-width: 4rem;
+    padding: 0;
+    min-width: 2rem;
+}
+
+form {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: 4rem 4rem 4rem 8rem;
+    gap: 1rem;
+}
+
+.remark {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.image-upload {
+    grid-column: 2;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-upload button {
+    margin-left: 1rem;
+}
+
+.image-upload button:hover {
+    color: red;
+}
+
+.customer-avatar {
+    width: 7rem;
+    height: 7rem;
+}

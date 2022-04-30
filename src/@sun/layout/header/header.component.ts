@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
   menuitemtype = menutype;
   menuitem: menutype = menutype.dashboard;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,) { }
 
   ngOnInit() {
     this.set_menu(this.router.url);
@@ -50,6 +50,10 @@ export class HeaderComponent implements OnInit {
     } else if (url == null) {
       this.menuitem = menutype.dashboard;
     }
+  }
+
+  onMyClick(): void {
+    this.router.navigate(['/my']);
   }
 
 }

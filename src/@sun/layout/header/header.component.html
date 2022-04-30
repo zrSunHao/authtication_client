@@ -35,11 +35,11 @@
 </div>
 
 <mat-menu #menu="matMenu">
-  <button mat-menu-item>
+  <button mat-menu-item (click)="onMyClick()">
     <mat-icon>assignment_ind</mat-icon>
     <span>账号信息</span>
   </button>
-  <button mat-menu-item>
+  <button mat-menu-item (click)="onMyClick()">
     <mat-icon>fingerprint</mat-icon>
     <span>修改密码</span>
   </button>
