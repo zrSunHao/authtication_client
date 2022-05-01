@@ -1,4 +1,4 @@
-export interface Widget {
+export interface WidgetElement {
     title: string;
     icon: string;
     color: string;

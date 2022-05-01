@@ -7,10 +7,10 @@
         <app-widget-activity *ngFor="let widget of widgets" [msg]="widget"></app-widget-activity>
     </div>
     <div class="activity-wrap">
-        <app-customer-activity></app-customer-activity>
-        <app-log-activity></app-log-activity>
+        <app-customer-activity [dataSource]="customers"></app-customer-activity>
+        <app-log-activity [dataSource]="logs"></app-log-activity>
     </div>
     <div class="constraint-wrap">
-        <app-constraint-activity></app-constraint-activity>
+        <app-constraint-activity [dataSource]="constraints"></app-constraint-activity>
     </div>
 </div>

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CUSTOMER_ELEMENT_DATA } from '../model';
+import { Component, Input, OnInit } from '@angular/core';
+import { CustomerElement } from '../model';
 
 @Component({
   selector: 'app-customer-activity',
@@ -9,7 +9,7 @@ import { CUSTOMER_ELEMENT_DATA } from '../model';
 export class CustomerActivityComponent implements OnInit {
 
   displayedColumns = ['avatar', 'name', 'app', 'createdAt'];
-  dataSource = CUSTOMER_ELEMENT_DATA;
+  @Input() dataSource:CustomerElement[] = [];
 
   constructor() { }
 

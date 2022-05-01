@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CONSTRAINT_ELEMENT_DATA } from '../model';
+import { Component, Input, OnInit } from '@angular/core';
+import { ConstraintElement, } from '../model';
 
 @Component({
   selector: 'app-constraint-activity',
@@ -9,7 +9,7 @@ import { CONSTRAINT_ELEMENT_DATA } from '../model';
 export class ConstraintActivityComponent implements OnInit {
 
   displayedColumns = ['type', 'method', 'name', 'origin', 'expireAt', 'createdAt', 'remark'];
-  dataSource = CONSTRAINT_ELEMENT_DATA;
+  @Input() dataSource: ConstraintElement[] = [];
 
   constructor() { }
 

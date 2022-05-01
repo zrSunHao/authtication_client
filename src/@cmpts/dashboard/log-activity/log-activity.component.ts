@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { LOG_ELEMENT_DATA } from '../model';
+import { Component, Input, OnInit } from '@angular/core';
+import { LogElement, LOG_ELEMENT_DATA } from '../model';
 
 @Component({
   selector: 'app-log-activity',
@@ -9,7 +9,7 @@ import { LOG_ELEMENT_DATA } from '../model';
 export class LogActivityComponent implements OnInit {
 
   displayedColumns = ['name', 'app', 'operate', 'createdAt'];
-  dataSource = LOG_ELEMENT_DATA;
+  @Input() dataSource: LogElement[] = [];
 
   constructor() { }
 
