@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -23,12 +24,12 @@ import { AuthService } from './services/auth.service';
 const mats = [MatFormFieldModule, MatIconModule, MatInputModule, MatSelectModule, MatButtonModule, MatDialogModule, MatSnackBarModule, MatDividerModule,];
 
 const components = [PaginatorComponent, IconSnackBarComponent, ConfirmDialogComponent,];
-const services = [NotifyService,AuthService];
+const services = [NotifyService, AuthService];
 const pipes = [ClipPipe];
 const exports = [ClipPipe, PaginatorComponent, ConfirmDialogComponent,];
 
 @NgModule({
-  imports: [CommonModule, FormsModule, ...mats],
+  imports: [CommonModule, FormsModule, HttpClientModule, ...mats],
   declarations: [...pipes, ...components],
   providers: [...services,],
   exports: [...exports]

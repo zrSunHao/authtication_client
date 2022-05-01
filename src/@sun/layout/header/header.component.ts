@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
 
-
 export enum menutype {
   dashboard = 'dashboard',
   customer = 'customer',
@@ -10,6 +9,12 @@ export enum menutype {
   program = 'program',
   constraint = 'constraint',
   other = ''
+}
+
+export class SectionElement {
+  name: string = '';
+  icon: string = '';
+  type: menutype = menutype.other;
 }
 
 @Component({
@@ -21,6 +26,13 @@ export class HeaderComponent implements OnInit {
 
   menuitemtype = menutype;
   menuitem: menutype = menutype.dashboard;
+  sections: SectionElement[] = [
+    { name: '起始页', icon: 'dashboard', type: menutype.dashboard },
+    { name: '客户管理', icon: 'group', type: menutype.customer },
+    { name: '程序管理', icon: 'miscellaneous_services', type: menutype.program },
+    { name: '系统管理', icon: 'gamepad', type: menutype.system },
+    { name: '约束管理', icon: 'security', type: menutype.constraint },
+  ];
 
   constructor(private router: Router,) { }
 
@@ -57,6 +69,10 @@ export class HeaderComponent implements OnInit {
 
   onMyClick(): void {
     this.router.navigate(['/my']);
+  }
+
+  onLogoutClick(): void {
+    this.router.navigate(['/security/login']);
   }
 
 }
