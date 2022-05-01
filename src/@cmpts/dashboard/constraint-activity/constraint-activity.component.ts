@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ConstraintElement, } from '../model';
 
 @Component({
@@ -8,12 +8,17 @@ import { ConstraintElement, } from '../model';
 })
 export class ConstraintActivityComponent implements OnInit {
 
-  displayedColumns = ['type', 'method', 'name', 'origin', 'expireAt', 'createdAt', 'remark'];
+  displayedColumns = ['id', 'category', 'method', 'userName', 'sysName', 'functionName', 'expiredAt', 'origin', 'createdAt', 'remark',];
   @Input() dataSource: ConstraintElement[] = [];
+  @Output() onRefesh: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onRefeshClick() {
+    this.onRefesh.emit();
   }
 
 }

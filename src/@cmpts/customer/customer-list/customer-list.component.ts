@@ -77,9 +77,9 @@ export class CustomerListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result.op === 'save') {
-        e.remark = result?.remark;
-        this._remark(e);
+      if (result?.op === 'save') {
+        e.remark = result.remark;
+        this.notifyServ.notify(`备注成功！！！`, 'success');
       }
     });
   }
@@ -104,24 +104,6 @@ export class CustomerListComponent implements OnInit {
       const msg = `数据加载失败！！！ ${res.allMessages}`;
       this.notifyServ.notify(msg, 'error');
     }
-  }
-
-  private _remark(e: CustomerElement) {
-    this.hostServ.remark(e.id as string, e.remark).subscribe({
-      next: res => {
-        if (res.success) {
-          this.notifyServ.notify(`客户【${e.name}】备注成功！！！`, 'success');
-          this._loadData(this.params);
-        } else {
-          const msg = `客户【${e.name}】备注失败！！！ ${res.allMessages}`;
-          this.notifyServ.notify(msg, 'error');
-        }
-      },
-      error: err => {
-        const msg = `客户【${e.name}】备注失败！！！ ${err}`;
-        this.notifyServ.notify(msg, 'error');
-      }
-    });
   }
 
 }

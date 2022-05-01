@@ -68,7 +68,7 @@ export class CustomerRolesComponent implements OnInit {
     );
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result?.op && result.op === 'save') {
+      if (result?.op === 'save') {
         this.notifyServ.notify(`角色添加成功！！！`, 'success');
       }
     });
@@ -84,7 +84,7 @@ export class CustomerRolesComponent implements OnInit {
     );
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result?.op && result.op === 'save') {
+      if (result?.op === 'save') {
         this.notifyServ.notify(`角色修改成功！！！`, 'success');
       }
     });

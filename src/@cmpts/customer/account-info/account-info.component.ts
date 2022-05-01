@@ -36,7 +36,7 @@ export class AccountInfoComponent implements OnInit {
     );
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result.op === 'save') {
+      if (result?.op === 'save') {
         const newPsd: string = result?.newPsd;
         this.notifyServ.notify(`重置密码成功！！！`, 'success');
       }
@@ -50,7 +50,7 @@ export class AccountInfoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result.op === 'save') {
+      if (result?.op === 'save') {
         this.customer.remark = result.remark;
         this.notifyServ.notify(`备注成功！！！`, 'success');
       }

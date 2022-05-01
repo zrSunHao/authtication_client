@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard.module.routing';
@@ -30,6 +31,7 @@ import { SharedModule } from 'src/@sun/shared/shared.module';
     MatCardModule,
     MatTableModule,
     MatDividerModule,
+    MatTooltipModule,
   ],
   declarations: [
     DashboardComponent,

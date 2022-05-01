@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { LogElement, LOG_ELEMENT_DATA } from '../model';
 
 @Component({
@@ -8,12 +8,17 @@ import { LogElement, LOG_ELEMENT_DATA } from '../model';
 })
 export class LogActivityComponent implements OnInit {
 
-  displayedColumns = ['name', 'app', 'operate', 'createdAt'];
+  displayedColumns = ['name', 'sysName', 'operate', 'createdAt'];
   @Input() dataSource: LogElement[] = [];
+  @Output() onRefesh: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onRefeshClick() {
+    this.onRefesh.emit();
   }
 
 }

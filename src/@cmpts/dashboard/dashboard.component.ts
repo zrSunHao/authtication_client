@@ -19,13 +19,13 @@ export class DashboardComponent implements OnInit {
     private hostServ: DashboardService,) { }
 
   ngOnInit() {
-    this._loadCustomers();
-    this._loadLogs();
-    this._loadConstraints();
+    this.onLoadCustomers();
+    this.onLoadLogs();
+    this.onLoadConstraints();
     this._loadWidgets();
   }
 
-  private _loadCustomers(): void {
+  onLoadCustomers(): void {
     this.hostServ.getCustomers().subscribe({
       next: res => {
         if (res.success) {
@@ -43,7 +43,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  private _loadLogs(): void {
+  onLoadLogs(): void {
     this.hostServ.getLogs().subscribe({
       next: res => {
         if (res.success) {
@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  private _loadConstraints(): void {
+  onLoadConstraints(): void {
     this.hostServ.getConstraints().subscribe({
       next: res => {
         if (res.success) {
@@ -94,9 +94,9 @@ export class DashboardComponent implements OnInit {
         this.notifyServ.notify(msg, 'error');
         this.widgets = [
           { title: '126名客户', icon: 'customer.png', color: 'primary' },
-          { title: '17个应用', icon: 'app.png', color: 'accent' },
-          { title: '99个程序（20|79）', icon: 'program.png', color: 'accent' },
-          { title: '11111个有效约束', icon: 'constraint.png', color: 'warn' },
+          { title: '17个系统', icon: 'app.png', color: 'accent' },
+          { title: '99个程序', icon: 'program.png', color: 'accent' },
+          { title: '11111个约束', icon: 'constraint.png', color: 'warn' },
         ]; // TODO待删除
       }
     });
