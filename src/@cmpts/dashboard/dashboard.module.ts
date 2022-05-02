@@ -2,13 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
-import { MatTableModule } from '@angular/material/table';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatTooltipModule } from '@angular/material/tooltip';
-
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard.module.routing';
 import { CustomerActivityComponent } from './customer-activity/customer-activity.component';
@@ -25,13 +18,6 @@ import { SharedModule } from 'src/@sun/shared/shared.module';
 
     SharedModule,
     DashboardRoutingModule,
-
-    MatButtonModule,
-    MatIconModule,
-    MatCardModule,
-    MatTableModule,
-    MatDividerModule,
-    MatTooltipModule,
   ],
   declarations: [
     DashboardComponent,
