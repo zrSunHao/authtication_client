@@ -28,6 +28,7 @@ import { SystemSectionComponent } from './system-section/system-section.componen
 import { SystemRoleFuntionsComponent } from './system-role-funtions/system-role-funtions.component';
 import { DialogSystemComponent } from './dialog-system/dialog-system.component';
 import { DialogRoleComponent } from './dialog-role/dialog-role.component';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   imports: [
@@ -52,6 +53,8 @@ import { DialogRoleComponent } from './dialog-role/dialog-role.component';
     MatNativeDateModule,
     MatDividerModule,
     MatCheckboxModule,
+
+    NgxPermissionsModule.forChild()
   ],
   declarations: [
     SystemComponent,

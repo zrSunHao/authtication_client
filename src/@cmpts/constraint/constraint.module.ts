@@ -20,6 +20,7 @@ import { ConstraintService } from './constraint.service';
 import { ConstraintRoutingModule } from './constraint.module.routing';
 
 import { ConstraintComponent } from './constraint.component';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   imports: [
@@ -42,6 +43,8 @@ import { ConstraintComponent } from './constraint.component';
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
+
+    NgxPermissionsModule.forChild()
   ],
   declarations: [
     ConstraintComponent,

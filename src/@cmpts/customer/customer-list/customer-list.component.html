@@ -85,7 +85,8 @@
         <ng-container matColumnDef="operate">
           <th mat-header-cell *matHeaderCellDef> 操作 </th>
           <td mat-cell *matCellDef="let element" style="width: 6rem;">
-            <button mat-icon-button matTooltip="详情" (click)="onDetailClick(element)">
+            <button mat-icon-button matTooltip="详情" *ngxPermissionsOnly="['customer_detail']"
+              (click)="onDetailClick(element)">
               <mat-icon>read_more</mat-icon>
             </button>
             <button mat-icon-button matTooltip="备注" (click)="onRemarkClick(element)">

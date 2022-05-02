@@ -7,6 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { LayoutModule } from 'src/@sun/layout/layout.module';
+
+import { NgxPermissionsModule } from 'ngx-permissions';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 
@@ -18,7 +20,8 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    LayoutModule
+    LayoutModule,
+    NgxPermissionsModule.forRoot()
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

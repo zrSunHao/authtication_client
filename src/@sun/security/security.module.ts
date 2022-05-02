@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { SharedModule } from '../shared/shared.module';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   imports: [
@@ -30,6 +31,8 @@ import { SharedModule } from '../shared/shared.module';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+
+    NgxPermissionsModule.forChild(),
 
     SharedModule,
     SecurityRoutingModule,

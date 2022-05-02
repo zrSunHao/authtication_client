@@ -33,6 +33,7 @@ import { DialogCustomerComponent } from './dialog-customer/dialog-customer.compo
 import { DialogConstraintComponent } from './dialog-constraint/dialog-constraint.component';
 import { DialogResetComponent } from './dialog-reset/dialog-reset.component';
 import { DialogRoleComponent } from './dialog-role/dialog-role.component';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   imports: [
@@ -57,6 +58,8 @@ import { DialogRoleComponent } from './dialog-role/dialog-role.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatTabsModule,
+
+    NgxPermissionsModule.forChild()
   ],
   declarations: [
     CustomerListComponent,

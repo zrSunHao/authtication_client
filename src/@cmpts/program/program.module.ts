@@ -27,6 +27,7 @@ import { DialogFunctionComponent } from './dialog-function/dialog-function.compo
 import { DialogProgramComponent } from './dialog-program/dialog-program.component';
 import { DialogSectionComponent } from './dialog-section/dialog-section.component';
 import { ProgramFunctionComponent } from './program-function/program-function.component';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   imports: [
@@ -50,6 +51,8 @@ import { ProgramFunctionComponent } from './program-function/program-function.co
     MatDatepickerModule,
     MatNativeDateModule,
     MatDividerModule,
+
+    NgxPermissionsModule.forChild(),
   ],
   declarations: [
     ProgramComponent,
