@@ -24,11 +24,7 @@
         <mat-form-field appearance="outline">
           <mat-label>类别</mat-label>
           <mat-select [(ngModel)]="dto.category" name="category">
-            <mat-option value="">全部</mat-option>
-            <mat-option value="1">账号&nbsp;&nbsp;- >&nbsp;&nbsp;所有系统</mat-option>
-            <mat-option value="2">账号&nbsp;&nbsp;- >&nbsp;&nbsp;某系统</mat-option>
-            <mat-option value="3">程序&nbsp;&nbsp;- >&nbsp;&nbsp;功能</mat-option>
-            <mat-option value="4">系统&nbsp;&nbsp;- >&nbsp;&nbsp;角色&nbsp;&nbsp;</mat-option>
+            <mat-option [value]="item.key" *ngFor="let item of categeryOps">{{item.value}}</mat-option>
           </mat-select>
           <mat-icon matSuffix>category</mat-icon>
         </mat-form-field>
@@ -61,25 +57,25 @@
         <ng-container matColumnDef="category">
           <th mat-header-cell *matHeaderCellDef> 类别 </th>
           <td mat-cell *matCellDef="let element" style="width: 9rem;">
-            <span *ngIf="element.category === '1'" style="color: #a5f3fc;">
-              账号&nbsp;&nbsp;- >&nbsp;&nbsp;所有系统
+            <span *ngIf="element.category === categeryOps[1].key" style="color: #a5f3fc;">
+              {{categeryOps[1].value}}
             </span>
-            <span *ngIf="element.category === '2'" style="color: #fde68a;">
-              账号&nbsp;&nbsp;- >&nbsp;&nbsp;某系统
+            <span *ngIf="element.category === categeryOps[2].key" style="color: #fde68a;">
+              {{categeryOps[2].value}}
             </span>
-            <span *ngIf="element.category === '3'" style="color: #a7f3d0;">
-              程序&nbsp;&nbsp;- >&nbsp;&nbsp;功能
+            <span *ngIf="element.category === categeryOps[3].key" style="color: #a7f3d0;">
+              {{categeryOps[3].value}}
             </span>
-            <span *ngIf="element.category === '4'" style="color: #f9a8d4;">
-              系统&nbsp;&nbsp;- >&nbsp;&nbsp;角色&nbsp;&nbsp;
+            <span *ngIf="element.category === categeryOps[4].key" style="color: #f9a8d4;">
+              {{categeryOps[4].value}}
             </span>
           </td>
         </ng-container>
         <ng-container matColumnDef="method">
           <th mat-header-cell *matHeaderCellDef> 方式 </th>
           <td mat-cell *matCellDef="let element" style="width: 4rem;">
-            <span *ngIf="element.method === '1'" style="color: #93c5fd;">禁用</span>
-            <span *ngIf="element.method === '2'" style="color: #c4b5fd;">锁定</span>
+            <span *ngIf="element.method === methodOps[1].key" style="color: #93c5fd;">{{methodOps[1].value}}</span>
+            <span *ngIf="element.method === methodOps[2].key" style="color: #c4b5fd;">{{methodOps[1].value}}</span>
           </td>
         </ng-container>
         <ng-container matColumnDef="expiredAt">

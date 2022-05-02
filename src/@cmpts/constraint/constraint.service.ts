@@ -5,7 +5,7 @@ import { Observable, throwError } from 'rxjs';
 
 import { environment } from 'src/environments/environment'
 import { PagingParameter, ResponsePagingResult, ResponseResult } from 'src/@sun/models/paging.model';
-import { ConstraintElement, ConstraintSearchDto } from './model';
+import { CttElet, CttSearchDto } from '../../@sun/models/constraint.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +19,9 @@ export class ConstraintService {
 
   constructor(public http: HttpClient) { }
 
-  public serach(params: PagingParameter<ConstraintSearchDto>): Observable<ResponsePagingResult<ConstraintElement>> {
+  public serach(params: PagingParameter<CttSearchDto>): Observable<ResponsePagingResult<CttElet>> {
     const url = `${this.baseUrl}/search`;
-    return this.http.post<ResponsePagingResult<ConstraintElement>>(url, params, this.httpOptions)
+    return this.http.post<ResponsePagingResult<CttElet>>(url, params, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 

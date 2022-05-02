@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { PagingParameter, ResponsePagingResult } from 'src/@sun/models/paging.model';
+import { OptionItem, PagingParameter, ResponsePagingResult } from 'src/@sun/models/paging.model';
 import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/confirm-dialog.component';
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 
 import { ConstraintService } from './constraint.service';
-import { ConstraintElement, ConstraintSearchDto, CONSTRAINT_ELEMENT_DATA } from './model';
+import { CttElet, CttSearchDto, CONSTRAINT_ELEMENT_DATA, CTT_CATEGERY_OPS, CTT_METHOD_OPS } from '../../@sun/models/constraint.model';
 
 @Component({
   selector: 'app-constraint',
@@ -16,8 +16,11 @@ import { ConstraintElement, ConstraintSearchDto, CONSTRAINT_ELEMENT_DATA } from 
 })
 export class ConstraintComponent implements OnInit {
 
-  dto: ConstraintSearchDto = new ConstraintSearchDto();
-  params = new PagingParameter<ConstraintSearchDto>();
+  dto: CttSearchDto = new CttSearchDto();
+  params = new PagingParameter<CttSearchDto>();
+
+  categeryOps: OptionItem[] = CTT_CATEGERY_OPS;
+  methodOps: OptionItem[] = CTT_METHOD_OPS;
 
   total = 0;
   columnOp = 'createdAt';
@@ -30,7 +33,7 @@ export class ConstraintComponent implements OnInit {
   ];
 
   displayedColumns = ['id', 'category', 'method', 'userName', 'sysName', 'functionName', 'expiredAt', 'origin', 'createdAt', 'remark', 'operate',];
-  dataSource: Array<ConstraintElement> = [];
+  dataSource: Array<CttElet> = [];
 
   constructor(private dialog: MatDialog,
     private notifyServ: NotifyService,
@@ -46,7 +49,7 @@ export class ConstraintComponent implements OnInit {
   }
 
   onResetClick(): void {
-    this.dto = new ConstraintSearchDto();
+    this.dto = new CttSearchDto();
     this.params.filter = this.dto;
     this.params.pageIndex = 1;
     this.params.pageSize = 10;
@@ -55,7 +58,7 @@ export class ConstraintComponent implements OnInit {
     this._loadData(this.params);
   }
 
-  onCancelClick(e: ConstraintElement): void {
+  onCancelClick(e: CttElet): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '260px',
       data: `确定要删除该约束吗？`,
@@ -75,7 +78,7 @@ export class ConstraintComponent implements OnInit {
     this._loadData(this.params);
   }
 
-  private _loadData(params: PagingParameter<ConstraintSearchDto>) {
+  private _loadData(params: PagingParameter<CttSearchDto>) {
     this.hostServ.serach(params).subscribe({
       next: res => { this._renderInfo(res); },
       error: err => {
@@ -87,7 +90,7 @@ export class ConstraintComponent implements OnInit {
     });
   }
 
-  private _renderInfo(res: ResponsePagingResult<ConstraintElement>) {
+  private _renderInfo(res: ResponsePagingResult<CttElet>) {
     if (res.success) {
       this.total = res.rowsCount;
       this.dataSource = res.data;
@@ -97,7 +100,7 @@ export class ConstraintComponent implements OnInit {
     }
   }
 
-  private _cancel(e: ConstraintElement) {
+  private _cancel(e: CttElet) {
     this.hostServ.cancel(e.id).subscribe({
       next: res => {
         if (res.success) {
