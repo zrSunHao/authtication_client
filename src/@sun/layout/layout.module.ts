@@ -9,11 +9,14 @@ import { MatMenuModule } from '@angular/material/menu';
 
 import { LayoutComponent } from './layout.component';
 import { HeaderComponent } from './header/header.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
+    SharedModule,
+
     MatButtonModule,
     MatIconModule,
     MatDividerModule,

@@ -11,10 +11,11 @@
   </div>
   <div class="customer-wrap">
     <div class="avatar-container" [matMenuTriggerFor]="menu">
-      <img class="people-img" src="/assets/images/people_1.jpg" />
+      <img class="people-img" *ngIf="avatar" [src]="avatar" />
+      <img class="people-img" *ngIf="!avatar" src="/assets/images/people_1.jpg" />
       <img class="adoner-img" src="/assets/images/adoner.png" />
     </div>
-    <span class="role">超级管理员</span>
+    <span class="role">{{userName}}</span>
   </div>
 </div>
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
+import { AuthService } from 'src/@sun/shared/services/auth.service';
 
 export enum menutype {
   dashboard = 'dashboard',
@@ -24,9 +25,13 @@ export class SectionElement {
 })
 export class HeaderComponent implements OnInit {
 
+  userName: string = '';
+  avatar: string = '';
+
   menuitemtype = menutype;
   menuitem: menutype = menutype.dashboard;
-  sections: SectionElement[] = [
+  sections: SectionElement[] = [];
+  allSections: SectionElement[] = [
     { name: '起始页', icon: 'dashboard', type: menutype.dashboard },
     { name: '客户管理', icon: 'group', type: menutype.customer },
     { name: '程序管理', icon: 'miscellaneous_services', type: menutype.program },
@@ -34,9 +39,18 @@ export class HeaderComponent implements OnInit {
     { name: '约束管理', icon: 'security', type: menutype.constraint },
   ];
 
-  constructor(private router: Router,) { }
+  constructor(private router: Router,
+    private hostServ: AuthService,) { }
 
   ngOnInit() {
+    this.userName = this.hostServ.getAccount().name;
+    this.avatar = this.hostServ.getAccount().avatar;
+    const sections = this.hostServ.getSections();
+    this.allSections.forEach(x => {
+      const flag = sections.findIndex(y => y === x.type) >= 0;
+      if (flag) this.sections.push(x);
+    })
+
     this.set_menu(this.router.url);
     this.router.events
       .pipe(filter(e => e instanceof NavigationEnd))
