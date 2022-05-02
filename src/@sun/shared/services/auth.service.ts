@@ -1,5 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError, Observable, throwError } from 'rxjs';
+import { ResponseResult } from 'src/@sun/models/paging.model';
 import { environment } from 'src/environments/environment';
 
 export interface AccountElement {
@@ -59,22 +61,67 @@ export interface RegisterDto {
 export class AuthService {
 
   private baseUrl = environment.hostUrl + 'auth';
+  private key = 'auth';
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-type': 'application/json' })
   };
 
-  constructor(public http: HttpClient) { }
+  private auth: AuthElement | undefined;
 
-  // 登录 
+  constructor(public http: HttpClient) {
+    const json = localStorage.getItem(this.key);
+    if (json) this.auth = JSON.parse(json);
+  }
 
-  // 注册
+  public login(param: LoginDto): Observable<ResponseResult<AuthElement>> {
+    const url = `${this.baseUrl}/login`;
+    return this.http.post<ResponseResult<AuthElement>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
+  }
+
+  public register(param: RegisterDto): Observable<ResponseResult<AuthElement>> {
+    const url = `${this.baseUrl}/register`;
+    return this.http.post<ResponseResult<AuthElement>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    const msg = `${error.status}  ${error.message}`
+    return throwError(() => msg);
+  }
+
+
+
+  public setAuthInfo(auth: AuthElement): void {
+    if (auth) {
+      const json = JSON.stringify(auth);
+      localStorage.setItem(this.key, json);
+      this.auth = auth;
+    }
+  }
 
   public getAccount(): AccountElement {
+    if (this.auth) return this.auth.account;
     const account: AccountElement = {
-      id: '1', avatar: '', name: 'zhangsan', nickname: '张三',
-      createdAt: new Date(), remark: '撒看见达萨达撒旦撒旦'
+      id: '', avatar: '', name: '', nickname: '',
+      createdAt: new Date(), remark: '这是假数据'
     };
     return account;
+  }
+
+  public getRole(): AuthRoleElement {
+    if (this.auth) return this.auth.role;
+    const role: AuthRoleElement =
+      { id: '', rank: -1, name: '' };
+    return role;
+  }
+
+  public getFunctions(): string[] {
+    if (this.auth) return this.auth.functions;
+    return environment.superFunctions;
+  }
+
+  public getSections(): string[] {
+    if (this.auth) return this.auth.sections;
+    return environment.superSections;
   }
 
 }

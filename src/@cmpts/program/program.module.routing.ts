@@ -1,12 +1,28 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from 'src/@sun/shared/guard/auth.guard';
 import { ProgramDetailComponent } from './program-detail/program-detail.component';
 import { ProgramComponent } from './program.component';
 
 const routes: Routes = [
-    { path: '', component: ProgramComponent, },
-    { path: 'detail/:id/:type/:name', component: ProgramDetailComponent, },
-    { path: '**', component: ProgramComponent, },
+    {
+        path: '',
+        component: ProgramComponent,
+        canActivate: [AuthGuard],
+        data: { permission: 'program' }
+    },
+    {
+        path: 'detail/:id/:type/:name',
+        component: ProgramDetailComponent,
+        canActivate: [AuthGuard],
+        data: { permission: 'program_detail' }
+    },
+    {
+        path: '**',
+        component: ProgramComponent,
+        canActivate: [AuthGuard],
+        data: { permission: 'program' }
+    },
 ];
 
 @NgModule({

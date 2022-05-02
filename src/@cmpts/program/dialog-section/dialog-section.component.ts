@@ -18,7 +18,7 @@ export class DialogSectionComponent implements OnInit {
     this.title = data?.name ? '修改' : '添加';
     this.form = new FormGroup({
       name: new FormControl(null, [Validators.required, Validators.pattern(/^[\u4E00-\u9FA5A-Za-z0-9_]{2,16}$/)]),
-      code: new FormControl(null, [Validators.required, Validators.pattern(/^[\u4E00-\u9FA5A-Za-z0-9_]{2,16}$/)]),
+      code: new FormControl(null, [Validators.required, Validators.pattern(/^[\u4E00-\u9FA5A-Za-z0-9/_]{2,16}$/)]),
       remark: new FormControl(null, [Validators.required, Validators.maxLength(256)]),
     });
   }

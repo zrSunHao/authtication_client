@@ -20,6 +20,7 @@ import { ClipPipe } from './pipes/clip.pipe';
 
 import { NotifyService } from './services/notify.service';
 import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guard/auth.guard';
 
 const mats = [MatFormFieldModule, MatIconModule, MatInputModule, MatSelectModule, MatButtonModule, MatDialogModule, MatSnackBarModule, MatDividerModule,];
 
@@ -31,7 +32,7 @@ const exports = [ClipPipe, PaginatorComponent, ConfirmDialogComponent,];
 @NgModule({
   imports: [CommonModule, FormsModule, HttpClientModule, ...mats],
   declarations: [...pipes, ...components],
-  providers: [...services,],
+  providers: [...services, AuthGuard],
   exports: [...exports]
 })
 export class SharedModule { }
