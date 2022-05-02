@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+
+import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { PagingParameter, ResponsePagingResult } from 'src/@sun/models/paging.model';
 import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/confirm-dialog.component';
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
-import { NotifyService } from 'src/@sun/shared/services/notify.service';
+
 import { ConstraintService } from './constraint.service';
 import { ConstraintElement, ConstraintSearchDto, CONSTRAINT_ELEMENT_DATA } from './model';
 
@@ -24,6 +26,7 @@ export class ConstraintComponent implements OnInit {
     { name: '类别', value: 'category' },
     { name: '方式', value: 'method' },
     { name: '到期时间', value: 'expiredAt' },
+    { name: '创建时间', value: 'createdAt' },
   ];
 
   displayedColumns = ['id', 'category', 'method', 'userName', 'sysName', 'functionName', 'expiredAt', 'origin', 'createdAt', 'remark', 'operate',];
