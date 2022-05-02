@@ -154,6 +154,64 @@ body {
   }
 }
 
-thead tr th{
+.topbar {
+  width: 100%;
+  background-color: #e91e63;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: 20;
+  position: sticky;
+  top: 0;
+}
+
+.topbar img {
+  height: 3rem;
+  width: 3rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.topbar h2 {
+  text-align: center;
+  margin: 0 0 0 1rem;
+  font-weight: bold;
+  letter-spacing: 0.25rem;
+}
+
+.topbar h2:hover {
+  color: white;
+}
+
+.topbar button {
+  margin-right: 1rem;
+}
+
+.box-fill {
+  flex: 1;
+}
+
+.table-header-row {
+  height: 3rem;
+  background-color: #303030;
+}
+.table-element-row:hover {
+  background-color: #303030;
+}
+
+table button {
+  margin-right: 0.5rem;
+}
+
+table mat-icon {
+  color: orange;
+}
+
+table mat-icon:hover {
+  color: #e91e63;
+}
+
+thead tr th {
   z-index: 15 !important;
 }

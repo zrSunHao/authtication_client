@@ -10,7 +10,7 @@
           <mat-label>账号</mat-label>
           <input matInput placeholder="请输入账号" formControlName="userName" autocomplete="off">
           <mat-icon matSuffix>account_circle</mat-icon>
-          <mat-hint>字母开头，6-16位，包括字母数字下划线</mat-hint>
+          <mat-hint>字母开头，6-16位，字母、数字、下划线</mat-hint>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>密码</mat-label>
@@ -22,8 +22,7 @@
           <a mat-button color="accent" routerLink="/security/register/">没有账号？注册</a>
           <a mat-button color="accent" routerLink="/security/forget/">忘记密码？</a>
         </div>
-        <button mat-raised-button color="primary" [disabled]="!form.valid" 
-        (click)="login()">
+        <button mat-raised-button color="primary" [disabled]="!form.valid" (click)="login()">
           登&nbsp;&nbsp;&nbsp;&nbsp;录</button>
       </form>
     </div>

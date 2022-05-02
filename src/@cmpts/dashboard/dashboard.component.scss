@@ -5,36 +5,6 @@
     grid-template-rows: 5rem 13rem 26rem 26rem;
 }
 
-.topbar {
-    width: 100%;
-    background-color: #e91e63;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    z-index: 20;
-    position: sticky;
-    top: 0;
-}
-
-.topbar img {
-    height: 3rem;
-    width: 3rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
-}
-
-.topbar h2 {
-    text-align: center;
-    margin: 0 0 0 1rem;
-    font-weight: bold;
-    letter-spacing: 0.25rem;
-}
-
-.topbar h2:hover {
-    color: white;
-}
-
 .module-wrap {
     margin: auto;
     padding: 1rem 1rem 0rem 1rem;

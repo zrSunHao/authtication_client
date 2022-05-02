@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 import { NgxPermissionsService } from 'ngx-permissions';
-import { AuthElement, AuthService, LoginDto } from 'src/@sun/shared/services/auth.service';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
+import { AuthElement, AuthService, LoginDto } from 'src/@sun/shared/services/auth.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
