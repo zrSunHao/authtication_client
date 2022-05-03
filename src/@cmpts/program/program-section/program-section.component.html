@@ -12,11 +12,16 @@
       <div class="section-header">
         <span class="title">{{section.name}}</span>
         <span>{{section.code}}</span>
-        <button mat-raised-button color="accent" (click)="onAddFunctionClick(section)">添加功能</button>
-        <button mat-raised-button color="accent" (click)="onEditClick(section)">修改</button>
-        <button mat-raised-button color="accent" (click)="onDeleteClick(section)">删除</button>
+        <button mat-raised-button color="accent" *ngxPermissionsOnly="['pgm_func_add']"
+          (click)="onAddFunctionClick(section)">添加功能</button>
+        <button mat-raised-button color="accent" *ngxPermissionsOnly="['pgm_sect_update']"
+          (click)="onEditClick(section)">修改</button>
+        <button mat-raised-button color="accent" *ngxPermissionsOnly="['pgm_sect_delete']"
+          (click)="onDeleteClick(section)">删除</button>
       </div>
-      <div ><mat-divider></mat-divider></div>
+      <div>
+        <mat-divider></mat-divider>
+      </div>
       <div class="section-remark">
         {{section.remark}}
       </div>

@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { catchError, Observable, throwError } from 'rxjs';
+import { AUTH_PERMISSION_DATA, Permission } from 'src/@sun/models/auth.model';
 import { ResponseResult } from 'src/@sun/models/paging.model';
 import { environment } from 'src/environments/environment';
 
@@ -35,8 +36,7 @@ export interface AuthElement {
   account: AccountElement;    // 账号信息
   people: AuthPeopleElement;  // 个人信息
   role: AuthRoleElement;      // 角色
-  sections: string[];         // 可进入模块
-  functions: string[];        // 可操作功能
+  perms: Permission[];        // 可进入模块
   token: string;              // JWT
   key: string;                // 本次登录主键
 }
@@ -73,7 +73,16 @@ export class AuthService {
     private permissionsServ: NgxPermissionsService,) {
     const json = localStorage.getItem(this.key);
     if (json) this.auth = JSON.parse(json);
-    if (this.auth) this.permissionsServ.loadPermissions(this.auth.functions);
+    if (this.auth) {
+      let functs: string[] = [];
+      this.auth.perms.forEach(p => {
+        if (p && p.funcs.length > 0) functs = [...functs, ...p.funcs]
+      });
+      // AUTH_PERMISSION_DATA.forEach(p => {
+      //   if (p && p.funcs.length > 0) functs = [...functs, ...p.funcs]
+      // });
+      this.permissionsServ.loadPermissions(functs);
+    }
   }
 
   public login(param: LoginDto): Observable<ResponseResult<AuthElement>> {
@@ -118,13 +127,25 @@ export class AuthService {
   }
 
   public getFunctions(): string[] {
-    if (this.auth) return this.auth.functions;
-    return environment.superFunctions;
+    if (this.auth) {
+      let functs: string[] = [];
+      this.auth.perms.forEach(p => {
+        if (p && p.funcs.length > 0) functs = [...functs, ...p.funcs]
+      });
+      return functs;
+    }
+    return [];
   }
 
   public getSections(): string[] {
-    if (this.auth) return this.auth.sections;
-    return environment.superSections;
+    if (this.auth) {
+      let sects: string[] = [];
+      this.auth.perms.forEach(p => {
+        if (p) sects.push(p.sect);
+      });
+      return sects;
+    }
+    return [];
   }
 
 }

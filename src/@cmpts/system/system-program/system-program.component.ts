@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/confirm-dialog.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { ProgramElement, PROGRAM_ELEMENT_DATA, SystemProgramGetDto, SystemProgramSearchDto } from '../model';
@@ -22,7 +22,8 @@ export class SystemProgramComponent implements OnInit {
   displayedColumns = ['name', 'type', 'code', 'intro', 'remark', 'operate',];
   programs: ProgramElement[] = [];
 
-  constructor(private route: ActivatedRoute,
+  constructor(private router: Router,
+    private route: ActivatedRoute,
     private dialog: MatDialog,
     private notifyServ: NotifyService,
     private hostServ: SystemService,) { }
@@ -34,6 +35,10 @@ export class SystemProgramComponent implements OnInit {
     });
     this.onSearchProgramsClick(new SystemProgramSearchDto());
     this.onGetProgramsClick();
+  }
+
+  onPreviousPageClick(): void {
+    this.router.navigate([`/system`]);
   }
 
   onSearchProgramsClick(e: SystemProgramSearchDto): void {

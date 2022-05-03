@@ -2,9 +2,12 @@
     <mat-card-title>
         <h3>个人信息</h3>
         <div class="box-fill"></div>
-        <button mat-raised-button color="accent" *ngIf="!edit" (click)="onEditClick()">修改信息</button>
-        <button mat-raised-button *ngIf="edit" (click)="onCancelClick()">取消修改</button>
-        <button mat-raised-button color="accent" *ngIf="edit" (click)="onSaveClick()" [disabled]="!form.valid">保存信息</button>
+        <button mat-raised-button color="accent" *ngxPermissionsOnly="['ctm_people_update']" (click)="onEditClick()">
+            <span *ngIf="!edit">修改信息</span>
+            <span *ngIf="edit">取消修改</span>
+        </button>
+        <button mat-raised-button color="accent" *ngIf="edit" (click)="onSaveClick()"
+            [disabled]="!form.valid">保存信息</button>
     </mat-card-title>
     <mat-card-subtitle></mat-card-subtitle>
     <mat-card-content>

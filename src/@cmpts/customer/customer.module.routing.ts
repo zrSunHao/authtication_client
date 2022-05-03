@@ -16,7 +16,7 @@ const routes: Routes = [
         path: 'detail/:id/:name',
         component: CustomerDetailComponent,
         canActivate: [AuthGuard],
-        data: { permission: 'customer_detail' }
+        data: { permission: 'ctm_datail' }
     },
     {
         path: '**',

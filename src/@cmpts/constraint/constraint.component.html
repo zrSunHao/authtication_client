@@ -121,8 +121,9 @@
         </ng-container>
         <ng-container matColumnDef="operate">
           <th mat-header-cell *matHeaderCellDef> 操作 </th>
-          <td mat-cell *matCellDef="let element">
-            <button mat-icon-button matTooltip="取消" matTooltipPosition="right" (click)="onCancelClick(element)">
+          <td mat-cell *matCellDef="let element" style="width: 4rem;">
+            <button mat-icon-button matTooltip="取消" *ngxPermissionsOnly="['ctt_delete']" matTooltipPosition="right"
+              (click)="onCancelClick(element)">
               <mat-icon>delete_forever</mat-icon>
             </button>
           </td>

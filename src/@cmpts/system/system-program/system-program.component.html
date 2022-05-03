@@ -5,6 +5,9 @@
       <h2>系统管理 ---> 【{{sysName}}】的程序配置</h2>
     </div>
     <div class="box-fill"></div>
+    <button mat-flat-button color="accent" (click)="onPreviousPageClick()">
+      <mat-icon>arrow_back</mat-icon>返回
+    </button>
   </div>
   <div class="content-warp">
     <div class="content">
@@ -79,8 +82,9 @@
             </ng-container>
             <ng-container matColumnDef="operate">
               <th mat-header-cell *matHeaderCellDef> 操作 </th>
-              <td mat-cell *matCellDef="let element">
-                <button mat-icon-button matTooltip="删除" (click)="onDeleteProgramClick(element)">
+              <td mat-cell *matCellDef="let element" style="width: 4rem;">
+                <button mat-icon-button matTooltip="删除" *ngxPermissionsOnly="['sys_pgm_delete']"
+                  (click)="onDeleteProgramClick(element)">
                   <mat-icon>delete_sweep</mat-icon>
                 </button>
               </td>

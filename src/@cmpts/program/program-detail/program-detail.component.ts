@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ResponseResult } from 'src/@sun/models/paging.model';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
@@ -33,7 +33,8 @@ export class ProgramDetailComponent implements OnInit {
   @ViewChild('funcCmpt')
   funcCmpt!: ProgramFunctionComponent;
 
-  constructor(private route: ActivatedRoute,
+  constructor(private router: Router,
+    private route: ActivatedRoute,
     private dialog: MatDialog,
     private notifyServ: NotifyService,
     private hostServ: ProgramService,) { }
@@ -62,6 +63,10 @@ export class ProgramDetailComponent implements OnInit {
 
       this._loadSectionData(this.programId);
     })
+  }
+
+  onPreviousPageClick(): void {
+    this.router.navigate([`/program`]);
   }
 
   onSelectSectionClick(e: SectionElement): void {

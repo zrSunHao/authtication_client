@@ -39,11 +39,11 @@
       </ng-container>
       <ng-container matColumnDef="operate">
         <th mat-header-cell *matHeaderCellDef> 操作 </th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-icon-button matTooltip="编辑" (click)="onEditClick(element)">
+        <td mat-cell *matCellDef="let element" style="width: 6rem;">
+          <button mat-icon-button matTooltip="编辑" *ngxPermissionsOnly="['pgm_func_update']" (click)="onEditClick(element)">
             <mat-icon>mode_edit</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="删除" (click)="onDeleteClick(element)">
+          <button mat-icon-button matTooltip="删除" *ngxPermissionsOnly="['pgm_func_delete']" (click)="onDeleteClick(element)">
             <mat-icon>delete_sweep</mat-icon>
           </button>
         </td>

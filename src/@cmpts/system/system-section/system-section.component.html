@@ -28,7 +28,8 @@
       <div class="section-header">
         <span class="title">{{section.name}}</span>
         <span>{{section.code}}</span>
-        <button mat-raised-button color="accent" (click)="onAddClick(section)">添加</button>
+        <button mat-raised-button color="accent" *ngxPermissionsOnly="['sys_pgm_add']"
+          (click)="onAddClick(section)">添加</button>
       </div>
       <div>
         <mat-divider></mat-divider>

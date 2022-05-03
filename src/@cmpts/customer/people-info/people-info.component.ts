@@ -46,10 +46,17 @@ export class PeopleInfoComponent implements OnInit {
   }
 
   onEditClick() {
-    this.form.enable();
-    this.dateDisabled = false;
-    this.form.controls['birthday'].disable();
-    this.edit = true;
+    if (!this.edit) {
+      this.form.enable();
+      this.dateDisabled = false;
+      this.form.controls['birthday'].disable();
+      this.edit = true;
+    }else{
+      this.form.disable();
+      this.dateDisabled = true;
+      this.edit = false;
+      this._elementMapToForm();
+    }
   }
 
   onSaveClick() {
@@ -79,13 +86,6 @@ export class PeopleInfoComponent implements OnInit {
     });
 
 
-  }
-
-  onCancelClick(): void {
-    this.form.disable();
-    this.dateDisabled = true;
-    this.edit = false;
-    this._elementMapToForm();
   }
 
   private _loadData() {

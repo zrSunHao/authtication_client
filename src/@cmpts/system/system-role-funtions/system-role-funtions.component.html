@@ -14,7 +14,7 @@
       <mat-card *ngFor="let program of programs">
         <mat-card-title>
           <h3>{{program.programName}} | 共 {{program.sections.length}} 个模块</h3>
-          <button mat-raised-button color="accent" (click)="onSaveClick(program)">保存</button>
+          <button mat-raised-button color="accent" *ngxPermissionsOnly="['sys_role_func_save']" (click)="onSaveClick(program)">保存</button>
         </mat-card-title>
         <mat-card-subtitle></mat-card-subtitle>
         <table mat-table [dataSource]="program.sections">

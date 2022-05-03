@@ -6,6 +6,7 @@ import { NgxPermissionsService } from 'ngx-permissions';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { AuthElement, AuthService, LoginDto } from 'src/@sun/shared/services/auth.service';
 import { environment } from 'src/environments/environment';
+import { AUTH_PERMISSION_DATA } from 'src/@sun/models/auth.model';
 
 @Component({
   selector: 'app-login',
@@ -38,7 +39,11 @@ export class LoginComponent implements OnInit {
         if (res.success) {
           const auth = res.data as AuthElement;
           this.hostServ.setAuthInfo(auth);
-          this.permissionsServ.loadPermissions(auth.functions);
+          let functs: string[] = [];
+          auth.perms.forEach(p => {
+            if (p && p.funcs.length > 0) functs = [...functs, ...p.funcs]
+          });
+          this.permissionsServ.loadPermissions(functs);
           this.router.navigate(['/']);
         } else {
           const msg = `登录失败！！！ ${res.allMessages}`;
@@ -59,13 +64,16 @@ export class LoginComponent implements OnInit {
             profession: '计算机', intro: '这是假数据'
           },
           role: { id: '222', rank: 1, name: '默认用户' },
-          sections: environment.superSections,
-          functions: environment.superFunctions,
+          perms: AUTH_PERMISSION_DATA,
           token: '',
           key: ''
         }; // TODO 删除
         this.hostServ.setAuthInfo(auth); // TODO 删除
-        this.permissionsServ.loadPermissions(auth.functions); // TODO 删除
+        let functs: string[] = [];
+        auth.perms.forEach(p => {
+          if (p && p.funcs.length > 0) functs = [...functs, ...p.funcs]
+        });
+        this.permissionsServ.loadPermissions(functs); // TODO 删除
         this.router.navigate(['/']); // TODO 删除
       }
     });

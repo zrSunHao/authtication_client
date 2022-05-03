@@ -9,7 +9,7 @@
         <input matInput placeholder="请输入要搜索的角色名称" [(ngModel)]="dto.roleName" autocomplete="off">
         <mat-icon matSuffix>report</mat-icon>
     </mat-form-field>
-    <button mat-flat-button color="accent" (click)="onAddClick()">
+    <button mat-flat-button color="accent" *ngxPermissionsOnly="['ctm_role_add']" (click)="onAddClick()">
         <mat-icon>add</mat-icon>添加
     </button>
     <button mat-flat-button color="accent" (click)="onSearchClick()">
@@ -64,10 +64,10 @@
         <ng-container matColumnDef="operate">
             <th mat-header-cell *matHeaderCellDef> 操作 </th>
             <td mat-cell *matCellDef="let element" style="width: 6rem;">
-                <button mat-icon-button matTooltip="修改" (click)="onEditClick(element)">
+                <button mat-icon-button matTooltip="修改" *ngxPermissionsOnly="['ctm_role_update']" (click)="onEditClick(element)">
                     <mat-icon>edit</mat-icon>
                 </button>
-                <button mat-icon-button matTooltip="撤销" (click)="onCancelClick(element)">
+                <button mat-icon-button matTooltip="撤销" *ngxPermissionsOnly="['ctm_role_delete']" (click)="onCancelClick(element)">
                     <mat-icon>delete_sweep</mat-icon>
                 </button>
             </td>

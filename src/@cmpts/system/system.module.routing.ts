@@ -16,19 +16,19 @@ const routes: Routes = [
         path: 'program/:sysId/:sysName',
         component: SystemProgramComponent,
         canActivate: [AuthGuard],
-        data: { permission: 'system_program' }
+        data: { permission: 'sys_pgm_cfg' }
     },
     {
         path: 'role/:sysId/:sysName',
         component: SystemRoleListComponent,
         canActivate: [AuthGuard],
-        data: { permission: 'system_role' }
+        data: { permission: 'sys_role' }
     },
     {
         path: 'role/funtions/:roleId/:roleName',
         component: SystemRoleFuntionsComponent,
         canActivate: [AuthGuard],
-        data: { permission: 'system_role_functions' }
+        data: { permission: 'sys_role_cfg' }
     },
     {
         path: '**',

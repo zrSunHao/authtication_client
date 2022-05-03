@@ -14,10 +14,9 @@ export class AuthGuard implements CanActivate {
         state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
         return new Observable((observer) => {
             const sections = this.hostSrv.getSections();
-            const functions = this.hostSrv.getFunctions();
             let flag = false;
             const permission: string = route.data["permission"]
-            if (permission) flag = sections.findIndex(x => x === permission) >= 0 || functions.findIndex(x => x === permission) >= 0;
+            if (permission) flag = sections.findIndex(x => x === permission) >= 0;
             console.log(state.url, permission, flag);
             if (flag) {
                 observer.next(true);
