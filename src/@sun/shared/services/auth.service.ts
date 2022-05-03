@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { NgxPermissionsService } from 'ngx-permissions';
 import { catchError, Observable, throwError } from 'rxjs';
 import { ResponseResult } from 'src/@sun/models/paging.model';
 import { environment } from 'src/environments/environment';
@@ -68,9 +69,11 @@ export class AuthService {
 
   private auth: AuthElement | undefined;
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient,
+    private permissionsServ: NgxPermissionsService,) {
     const json = localStorage.getItem(this.key);
     if (json) this.auth = JSON.parse(json);
+    if (this.auth) this.permissionsServ.loadPermissions(this.auth.functions);
   }
 
   public login(param: LoginDto): Observable<ResponseResult<AuthElement>> {

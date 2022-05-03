@@ -76,19 +76,22 @@ export class SystemRoleListComponent implements OnInit {
       { width: '520px', data: r, });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result?.op === 'save' && result?.e) this._add(result?.e);
+      if (result?.op === 'save' && result?.e) {
+        this.notifyServ.notify(`角色【${r.name}】信息保存成功！！！`, 'success');
+        this.onSearchClick()
+      }
     });
   }
 
   onEditClick(e: RoleElement): void {
-    const r: RoleElement = {
-      id: e.id, rank: e.rank, name: e.name, systemId: e.systemId, code: e.code, limitedMethod: e.limitedMethod, limitedExpiredAt: e.limitedExpiredAt, createdAt: e.createdAt, remark: e.remark
-    };
     const dialogRef = this.dialog.open(DialogRoleComponent,
-      { width: '520px', data: r, });
+      { width: '520px', data: e, });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result?.op === 'save' && result?.e) this._update(result?.e);
+      if (result?.op === 'save' && result?.e) {
+        this.notifyServ.notify(`角色【${e.name}】信息更新成功！！！`, 'success');
+        this.onSearchClick()
+      }
     });
   }
 
@@ -138,42 +141,6 @@ export class SystemRoleListComponent implements OnInit {
       this.dataSource = ROLE_ELEMENT_DATA;  // TODO 删除
       this.total = 35;  // TODO 删除
     }
-  }
-
-  private _add(e: RoleElement): void {
-    this.hostServ.addRole(e).subscribe({
-      next: res => {
-        if (res.success) {
-          this.notifyServ.notify(`角色【${e.name}】信息保存成功！！！`, 'success');
-          this.onSearchClick()
-        } else {
-          const msg = `角色【${e.name}】信息保存失败！！！ ${res.allMessages}`;
-          this.notifyServ.notify(msg, 'error');
-        }
-      },
-      error: err => {
-        const msg = `角色【${e.name}】信息保存失败！！！ ${err}`;
-        this.notifyServ.notify(msg, 'error');
-      }
-    });
-  }
-
-  private _update(e: RoleElement): void {
-    this.hostServ.addRole(e).subscribe({
-      next: res => {
-        if (res.success) {
-          this.notifyServ.notify(`角色【${e.name}】信息更新成功！！！`, 'success');
-          this.onSearchClick()
-        } else {
-          const msg = `角色【${e.name}】信息更新失败！！！ ${res.allMessages}`;
-          this.notifyServ.notify(msg, 'error');
-        }
-      },
-      error: err => {
-        const msg = `角色【${e.name}】信息更新失败！！！ ${err}`;
-        this.notifyServ.notify(msg, 'error');
-      }
-    });
   }
 
   private _delete(e: RoleElement): void {

@@ -80,7 +80,10 @@ export class ProgramDetailComponent implements OnInit {
       { width: '360px', data: e, });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result?.op === 'save' && result?.e) this._addSection(result?.e);
+      if (result?.op === 'save' && result?.e) {
+        this.notifyServ.notify(`模块【${e.name}】信息保存成功！！！`, 'success');
+        this._loadSectionData(this.programId);
+      }
     });
   }
 
@@ -92,7 +95,12 @@ export class ProgramDetailComponent implements OnInit {
       { width: '360px', data: newE, });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result?.op === 'save' && result?.e) this._editSection(result?.e, e);
+      if (result?.op === 'save' && result?.e) {
+        this.notifyServ.notify(`模块【${newE.name}】信息更新成功！！！`, 'success');
+        e.name = newE.name;
+        e.code = newE.code;
+        e.remark = newE.remark;
+      }
     });
   }
 
@@ -115,7 +123,11 @@ export class ProgramDetailComponent implements OnInit {
       { width: '520px', data: f, });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result?.op === 'save' && result?.e) this._addFunction(result?.e);
+      if (result?.op === 'save' && result?.e) {
+        this.notifyServ.notify(`功能【${e.name}】信息保存成功！！！`, 'success');
+        if (this.selectedSection?.id === e.id)
+          this._loadFunctionData(e.id as string);
+      }
     });
   }
 
@@ -127,7 +139,14 @@ export class ProgramDetailComponent implements OnInit {
       { width: '520px', data: f, });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result?.op === 'save' && result?.e) this._editFunction(result?.e, e);
+      if (result?.op === 'save' && result?.e) {
+        e.name = f.name;
+        e.code = f.code;
+        e.constraint = f.constraint;
+        e.limitedExpireAt = f.limitedExpireAt;
+        e.remark = f.remark;
+        this.notifyServ.notify(`功能【${e.name}】信息更新成功！！！`, 'success');
+      }
     });
   }
 
@@ -184,45 +203,6 @@ export class ProgramDetailComponent implements OnInit {
     }
   }
 
-  private _addSection(e: SectionElement): void {
-    this.hostServ.addSection(e).subscribe({
-      next: res => {
-        if (res.success) {
-          this.notifyServ.notify(`模块【${e.name}】信息保存成功！！！`, 'success');
-          this.sections = [e, ...this.sections]
-
-        } else {
-          const msg = `模块【${e.name}】信息保存失败！！！ ${res.allMessages}`;
-          this.notifyServ.notify(msg, 'error');
-        }
-      },
-      error: err => {
-        const msg = `模块【${e.name}】信息保存失败！！！ ${err}`;
-        this.notifyServ.notify(msg, 'error');
-      }
-    });
-  }
-
-  private _editSection(newE: SectionElement, oldE: SectionElement): void {
-    this.hostServ.updateSection(newE).subscribe({
-      next: res => {
-        if (res.success) {
-          this.notifyServ.notify(`模块【${newE.name}】信息更新成功！！！`, 'success');
-          oldE.name = newE.name;
-          oldE.code = newE.code;
-          oldE.remark = newE.remark;
-        } else {
-          const msg = `模块【${newE.name}】信息保存失败！！！ ${res.allMessages}`;
-          this.notifyServ.notify(msg, 'error');
-        }
-      },
-      error: err => {
-        const msg = `模块【${newE.name}】信息保存失败！！！ ${err}`;
-        this.notifyServ.notify(msg, 'error');
-      }
-    });
-  }
-
   private _deleteSection(e: SectionElement): void {
     this.hostServ.deleteSection(e.id as string).subscribe({
       next: res => {
@@ -238,47 +218,6 @@ export class ProgramDetailComponent implements OnInit {
       },
       error: err => {
         const msg = `【${e.name}】模块删除失败！！！ ${err}`;
-        this.notifyServ.notify(msg, 'error');
-      }
-    });
-  }
-
-  private _addFunction(e: FunctionElement): void {
-    this.hostServ.addFunction(e).subscribe({
-      next: res => {
-        if (res.success) {
-          this.notifyServ.notify(`功能【${e.name}】信息保存成功！！！`, 'success');
-          if (this.selectedSection?.id === e.sectionId)
-            this.functions = [e, ...this.functions]
-        } else {
-          const msg = `功能【${e.name}】信息保存失败！！！ ${res.allMessages}`;
-          this.notifyServ.notify(msg, 'error');
-        }
-      },
-      error: err => {
-        const msg = `功能【${e.name}】信息保存失败！！！ ${err}`;
-        this.notifyServ.notify(msg, 'error');
-      }
-    });
-  }
-
-  private _editFunction(newE: FunctionElement, oldE: FunctionElement): void {
-    this.hostServ.updateFunction(newE).subscribe({
-      next: res => {
-        if (res.success) {
-          this.notifyServ.notify(`功能【${newE.name}】信息更新成功！！！`, 'success');
-          oldE.name = newE.name;
-          oldE.code = newE.code;
-          oldE.constraint = newE.constraint;
-          oldE.limitedExpireAt = newE.limitedExpireAt;
-          oldE.remark = newE.remark;
-        } else {
-          const msg = `功能【${newE.name}】信息保存失败！！！ ${res.allMessages}`;
-          this.notifyServ.notify(msg, 'error');
-        }
-      },
-      error: err => {
-        const msg = `功能【${newE.name}】信息保存失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
       }
     });

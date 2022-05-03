@@ -48,7 +48,10 @@ export class ProgramComponent implements OnInit {
       { width: '520px', data: e, });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result?.op === 'save' && result?.e) this._add(result?.e);
+      if (result?.op === 'save' && result?.e) {
+        this.notifyServ.notify(`程序【${e.name}】信息保存成功！！！`, 'success');
+        this.onSearchClick();
+      }
     });
   }
 
@@ -76,7 +79,9 @@ export class ProgramComponent implements OnInit {
       { width: '520px', data: e, });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result?.op === 'save' && result?.e) this._update(result?.e);
+      if (result?.op === 'save' && result?.e)
+        this.notifyServ.notify(`程序【${e.name}】信息更新成功！！！`, 'success');
+        this.onSearchClick();
     });
   }
 
@@ -122,42 +127,6 @@ export class ProgramComponent implements OnInit {
       this.dataSource = PROGRAM_ELEMENT_DATA; // TODO 删除
       this.total = 35; // TODO 删除
     }
-  }
-
-  private _add(e: ProgramElement): void {
-    this.hostServ.add(e).subscribe({
-      next: res => {
-        if (res.success) {
-          this.notifyServ.notify(`程序【${e.name}】信息保存成功！！！`, 'success');
-          this.onSearchClick()
-        } else {
-          const msg = `程序【${e.name}】信息保存失败！！！ ${res.allMessages}`;
-          this.notifyServ.notify(msg, 'error');
-        }
-      },
-      error: err => {
-        const msg = `程序【${e.name}】信息保存失败！！！ ${err}`;
-        this.notifyServ.notify(msg, 'error');
-      }
-    });
-  }
-
-  private _update(e: ProgramElement): void {
-    this.hostServ.update(e).subscribe({
-      next: res => {
-        if (res.success) {
-          this.notifyServ.notify(`程序【${e.name}】信息更新成功！！！`, 'success');
-          this.onSearchClick()
-        } else {
-          const msg = `程序【${e.name}】信息更新失败！！！ ${res.allMessages}`;
-          this.notifyServ.notify(msg, 'error');
-        }
-      },
-      error: err => {
-        const msg = `程序【${e.name}】信息更新失败！！！ ${err}`;
-        this.notifyServ.notify(msg, 'error');
-      }
-    });
   }
 
   private _delete(e: ProgramElement): void {

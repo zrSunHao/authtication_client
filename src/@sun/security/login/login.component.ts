@@ -48,8 +48,25 @@ export class LoginComponent implements OnInit {
       error: err => {
         const msg = `登录失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
+        const auth: AuthElement = {
+          account: {
+            id: '1111', avatar: '', name: 'zhangsan', nickname: '张三',
+            createdAt: new Date(), remark: '这是假数据'
+          },
+          people: {
+            id: '123', customerId: '111', fullName: '张三',
+            gender: '1', birthday: new Date(), education: '研究生',
+            profession: '计算机', intro: '这是假数据'
+          },
+          role: { id: '222', rank: 1, name: '默认用户' },
+          sections: environment.superSections,
+          functions: environment.superFunctions,
+          token: '',
+          key: ''
+        }; // TODO 删除
+        this.hostServ.setAuthInfo(auth); // TODO 删除
+        this.permissionsServ.loadPermissions(auth.functions); // TODO 删除
         this.router.navigate(['/']); // TODO 删除
-        this.permissionsServ.loadPermissions(environment.superFunctions); // TODO 删除
       }
     });
   }

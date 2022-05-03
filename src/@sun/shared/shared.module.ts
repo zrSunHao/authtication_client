@@ -20,6 +20,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
 
+import { NgxPermissionsModule } from 'ngx-permissions';
+
 import { PaginatorComponent } from './cmpts/paginator/paginator.component';
 import { IconSnackBarComponent } from './cmpts/icon-snack-bar/icon-snack-bar.component';
 import { ConfirmDialogComponent } from './cmpts/confirm-dialog/confirm-dialog.component';
@@ -54,7 +56,7 @@ const pipes = [ClipPipe];
 const exports = [ClipPipe, PaginatorComponent, ConfirmDialogComponent,];
 
 @NgModule({
-  imports: [CommonModule, FormsModule, HttpClientModule, ...mats],
+  imports: [CommonModule, FormsModule, HttpClientModule, ...mats,NgxPermissionsModule.forChild(),],
   declarations: [...pipes, ...components],
   providers: [...services, AuthGuard],
   exports: [...exports, ...mats]

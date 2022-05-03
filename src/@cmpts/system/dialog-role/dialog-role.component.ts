@@ -1,7 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { RoleElement } from '../model';
+import { SystemService } from '../system.service';
 
 @Component({
   selector: 'app-dialog-role',
@@ -12,10 +14,14 @@ export class DialogRoleComponent implements OnInit {
 
   title: string = '';
   form: FormGroup;
+  update: boolean = false;
 
   constructor(private dialogRef: MatDialogRef<DialogRoleComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: RoleElement,) {
+    @Inject(MAT_DIALOG_DATA) public data: RoleElement,
+    private notifyServ: NotifyService,
+    private hostServ: SystemService,) {
     this.title = data?.name ? '修改' : '添加';
+    this.update = (data?.id !== '' && data?.id !== null && data?.id !== undefined);
     this.form = new FormGroup({
       name: new FormControl(null, [Validators.required, Validators.pattern(/^[\u4E00-\u9FA5A-Za-z0-9_]{2,16}$/)]),
       code: new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z0-9_]{2,16}$/)]),
@@ -42,11 +48,46 @@ export class DialogRoleComponent implements OnInit {
     this.data.limitedMethod = this.form.controls['limitedMethod'].value;
     this.data.limitedExpiredAt = this.form.controls['limitedExpiredAt'].value;
     this.data.remark = this.form.controls['remark'].value;
-    this.dialogRef.close({ op: 'save', e: this.data });
+    if (this.update) this._update(this.data);
+    else this._add(this.data);
   }
 
   onCloseClick(): void {
     this.dialogRef.close({ op: 'close' });
+  }
+
+  private _add(e: RoleElement): void {
+    this.hostServ.addRole(e).subscribe({
+      next: res => {
+        if (res.success) {
+          this.dialogRef.close({ op: 'save', e: e });
+        } else {
+          const msg = `角色【${e.name}】信息保存失败！！！ ${res.allMessages}`;
+          this.notifyServ.notify(msg, 'error');
+        }
+      },
+      error: err => {
+        const msg = `角色【${e.name}】信息保存失败！！！ ${err}`;
+        this.notifyServ.notify(msg, 'error');
+      }
+    });
+  }
+
+  private _update(e: RoleElement): void {
+    this.hostServ.addRole(e).subscribe({
+      next: res => {
+        if (res.success) {
+          this.dialogRef.close({ op: 'save', e: e });
+        } else {
+          const msg = `角色【${e.name}】信息更新失败！！！ ${res.allMessages}`;
+          this.notifyServ.notify(msg, 'error');
+        }
+      },
+      error: err => {
+        const msg = `角色【${e.name}】信息更新失败！！！ ${err}`;
+        this.notifyServ.notify(msg, 'error');
+      }
+    });
   }
 
 }

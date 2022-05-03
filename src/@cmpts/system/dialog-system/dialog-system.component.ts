@@ -1,7 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { SystemElement } from '../model';
+import { SystemService } from '../system.service';
 
 @Component({
   selector: 'app-dialog-system',
@@ -12,10 +14,14 @@ export class DialogSystemComponent implements OnInit {
 
   title: string = '';
   form: FormGroup;
+  update: boolean = false;
 
   constructor(private dialogRef: MatDialogRef<DialogSystemComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: SystemElement,) {
+    @Inject(MAT_DIALOG_DATA) public data: SystemElement,
+    private notifyServ: NotifyService,
+    private hostServ: SystemService,) {
     this.title = data?.name ? '修改' : '添加';
+    this.update = (data?.id !== '' && data?.id !== null && data?.id !== undefined);
     this.form = new FormGroup({
       name: new FormControl(null, [Validators.required, Validators.pattern(/^[\u4E00-\u9FA5A-Za-z0-9_]{2,16}$/)]),
       code: new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z0-9_]{2,16}$/)]),
@@ -36,10 +42,45 @@ export class DialogSystemComponent implements OnInit {
     this.data.code = this.form.controls['code'].value;
     this.data.intro = this.form.controls['intro'].value;
     this.data.remark = this.form.controls['remark'].value;
-    this.dialogRef.close({ op: 'save', e: this.data });
+    if (this.update) this._update(this.data);
+    else this._add(this.data);
   }
 
   onCloseClick(): void {
     this.dialogRef.close({ op: 'close' });
+  }
+
+  private _add(e: SystemElement): void {
+    this.hostServ.add(e).subscribe({
+      next: res => {
+        if (res.success) {
+          this.dialogRef.close({ op: 'save', e: e });
+        } else {
+          const msg = `系统【${e.name}】信息保存失败！！！ ${res.allMessages}`;
+          this.notifyServ.notify(msg, 'error');
+        }
+      },
+      error: err => {
+        const msg = `系统【${e.name}】信息保存失败！！！ ${err}`;
+        this.notifyServ.notify(msg, 'error');
+      }
+    });
+  }
+
+  private _update(e: SystemElement): void {
+    this.hostServ.update(e).subscribe({
+      next: res => {
+        if (res.success) {
+          this.dialogRef.close({ op: 'save', e: e });
+        } else {
+          const msg = `系统【${e.name}】信息更新失败！！！ ${res.allMessages}`;
+          this.notifyServ.notify(msg, 'error');
+        }
+      },
+      error: err => {
+        const msg = `系统【${e.name}】信息更新失败！！！ ${err}`;
+        this.notifyServ.notify(msg, 'error');
+      }
+    });
   }
 }

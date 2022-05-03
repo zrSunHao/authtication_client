@@ -70,6 +70,7 @@ export class CustomerRolesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result?.op === 'save') {
         this.notifyServ.notify(`角色添加成功！！！`, 'success');
+        this.onSearchClick();
       }
     });
   }
@@ -86,6 +87,7 @@ export class CustomerRolesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result?.op === 'save') {
         this.notifyServ.notify(`角色修改成功！！！`, 'success');
+        this.onSearchClick();
       }
     });
   }

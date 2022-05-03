@@ -68,7 +68,10 @@ export class SystemComponent implements OnInit, AfterViewInit {
       { width: '520px', data: e, });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result?.op === 'save' && result?.e) this._add(result?.e);
+      if (result?.op === 'save' && result?.e) {
+        this.notifyServ.notify(`系统【${e.name}】信息保存成功！！！`, 'success');
+        this.onSearchClick();
+      }
     });
   }
 
@@ -77,7 +80,9 @@ export class SystemComponent implements OnInit, AfterViewInit {
       { width: '520px', data: e, });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result?.op === 'save' && result?.e) this._update(result?.e);
+      if (result?.op === 'save' && result?.e)
+        this.notifyServ.notify(`系统【${e.name}】信息更新成功！！！`, 'success');
+        this.onSearchClick();
     });
   }
 
@@ -155,42 +160,6 @@ export class SystemComponent implements OnInit, AfterViewInit {
       const msg = `数据加载失败！！！ ${res.allMessages}`;
       this.notifyServ.notify(msg, 'error');
     }
-  }
-
-  private _add(e: SystemElement): void {
-    this.hostServ.add(e).subscribe({
-      next: res => {
-        if (res.success) {
-          this.notifyServ.notify(`系统【${e.name}】信息保存成功！！！`, 'success');
-          this.onSearchClick()
-        } else {
-          const msg = `系统【${e.name}】信息保存失败！！！ ${res.allMessages}`;
-          this.notifyServ.notify(msg, 'error');
-        }
-      },
-      error: err => {
-        const msg = `系统【${e.name}】信息保存失败！！！ ${err}`;
-        this.notifyServ.notify(msg, 'error');
-      }
-    });
-  }
-
-  private _update(e: SystemElement): void {
-    this.hostServ.update(e).subscribe({
-      next: res => {
-        if (res.success) {
-          this.notifyServ.notify(`系统【${e.name}】信息更新成功！！！`, 'success');
-          this.onSearchClick()
-        } else {
-          const msg = `系统【${e.name}】信息更新失败！！！ ${res.allMessages}`;
-          this.notifyServ.notify(msg, 'error');
-        }
-      },
-      error: err => {
-        const msg = `系统【${e.name}】信息更新失败！！！ ${err}`;
-        this.notifyServ.notify(msg, 'error');
-      }
-    });
   }
 
   private _delete(e: SystemElement): void {
