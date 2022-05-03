@@ -13,10 +13,11 @@ const routes: Routes = [
       { path: 'system', loadChildren: () => import('../@cmpts/system/system.module').then(m => m.SystemModule) },
       { path: 'constraint', loadChildren: () => import('../@cmpts/constraint/constraint.module').then(m => m.ConstraintModule) },
       { path: 'my', loadChildren: () => import('../@cmpts/my/my.module').then(m => m.MyModule) },
+      { path: 'notfound', loadChildren: () => import('../@cmpts/notfound/notfound.module').then(m => m.NotfoundModule) },
       { path: '**', redirectTo: '/dashboard/' },
     ],
   },
-  { path: '**', redirectTo: '/dashboard/' },
+  { path: '**', redirectTo: '/notfound/' },
 ];
 
 @NgModule({

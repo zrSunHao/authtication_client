@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { AuthService } from "../services/auth.service";
 import { NotifyService } from "../services/notify.service";
@@ -7,7 +7,9 @@ import { NotifyService } from "../services/notify.service";
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-    constructor(private hostSrv: AuthService, private notifySrv: NotifyService) { }
+    constructor(private hostSrv: AuthService, 
+        private notifySrv: NotifyService,
+        private router: Router,) { }
 
     canActivate(
         route: ActivatedRouteSnapshot,
@@ -25,6 +27,7 @@ export class AuthGuard implements CanActivate {
             }
             this.notifySrv.notify('权限不足', 'warning');
             observer.next(false);
+            this.router.navigate([`/notfound/`]);
             observer.complete();
         });
     }
