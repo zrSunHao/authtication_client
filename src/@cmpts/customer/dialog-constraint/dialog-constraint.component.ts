@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { OptionItem } from 'src/@sun/models/paging.model';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
-import { CustomerConstraintAddDto } from '../model';
+import { CtmCttAddDto } from '../../../@sun/models/customer.model';
 
 @Component({
   selector: 'app-dialog-constraint',
@@ -42,7 +42,7 @@ export class DialogConstraintComponent implements OnInit {
   }
 
   onSaveClick(): void {
-    let dto = new CustomerConstraintAddDto();
+    let dto = new CtmCttAddDto();
     dto.customerId = this.customerId;
     dto.category = this.form.controls['category'].value;
     dto.method = this.form.controls['method'].value;

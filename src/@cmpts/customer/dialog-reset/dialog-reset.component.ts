@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
-import { CustomerElement } from '../model';
+import { CtmElet } from '../../../@sun/models/customer.model';
 
 @Component({
   selector: 'app-dialog-reset',
@@ -17,7 +17,7 @@ export class DialogResetComponent implements OnInit {
   constructor(private notifyServ: NotifyService,
     private hostServ: CustomerService,
     private dialogRef: MatDialogRef<DialogResetComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: CustomerElement,) {
+    @Inject(MAT_DIALOG_DATA) public data: CtmElet,) {
     this.form = new FormGroup({
       password: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,17}$/)]),
       confirmPsd: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,17}$/)]),

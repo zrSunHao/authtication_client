@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { PagingParameter, ResponsePagingResult, ResponseResult } from 'src/@sun/models/paging.model';
 import { environment } from 'src/environments/environment';
-import { SysPgmElet, RoleElement, RoleFunctDto, RoleFunctElet, RoleSearchDto, SysElet, SysPgmGetDto, SysPgmSearchDto, SysSearchDto } from '../../@sun/models/system.model';
+import { SysPgmElet, RoleElet, RoleFunctDto, RoleFunctElet, RoleSearchDto, SysElet, SysPgmGetDto, SysPgmSearchDto, SysSearchDto } from '../../@sun/models/system.model';
 
 @Injectable({
   providedIn: 'root'
@@ -73,17 +73,17 @@ export class SystemService {
 
   // ---------------- role config ------------------
 
-  public serachRoles(param: PagingParameter<RoleSearchDto>): Observable<ResponsePagingResult<RoleElement>> {
+  public serachRoles(param: PagingParameter<RoleSearchDto>): Observable<ResponsePagingResult<RoleElet>> {
     const url = `${this.roleUrl}/search`;
-    return this.http.post<ResponsePagingResult<RoleElement>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.post<ResponsePagingResult<RoleElet>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  public addRole(param: RoleElement): Observable<ResponseResult<boolean>> {
+  public addRole(param: RoleElet): Observable<ResponseResult<boolean>> {
     const url = `${this.roleUrl}/add`;
     return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  public updateRole(param: RoleElement): Observable<ResponseResult<boolean>> {
+  public updateRole(param: RoleElet): Observable<ResponseResult<boolean>> {
     const url = `${this.roleUrl}/update`;
     return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }

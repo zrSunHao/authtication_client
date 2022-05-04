@@ -6,7 +6,7 @@ import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/con
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { DialogRoleComponent } from '../dialog-role/dialog-role.component';
-import { RoleElement, RoleSearchDto, ROLE_ELEMENT_DATA, ROLE_RANK_OPS } from '../../../@sun/models/system.model';
+import { RoleElet, RoleSearchDto, ROLE_ELEMENT_DATA, ROLE_RANK_OPS } from '../../../@sun/models/system.model';
 import { SystemService } from '../system.service';
 import { CttMethod } from 'src/@sun/models/constraint.model';
 
@@ -33,7 +33,7 @@ export class SystemRoleListComponent implements OnInit {
   ];
 
   displayedColumns = ['name', 'code', 'rank', 'limitedMethod', 'limitedExpiredAt', 'remark', 'createdAt', 'operate',];
-  dataSource: RoleElement[] = [];
+  dataSource: RoleElet[] = [];
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -71,7 +71,7 @@ export class SystemRoleListComponent implements OnInit {
   }
 
   onAddClick(): void {
-    const r: RoleElement = {
+    const r: RoleElet = {
       id: '', rank: 0, name: '', systemId: this.sysId, code: '', limitedMethod: CttMethod.other, limitedExpiredAt: null, createdAt: null, remark: ''
     };
     const dialogRef = this.dialog.open(DialogRoleComponent,
@@ -85,7 +85,7 @@ export class SystemRoleListComponent implements OnInit {
     });
   }
 
-  onEditClick(e: RoleElement): void {
+  onEditClick(e: RoleElet): void {
     const dialogRef = this.dialog.open(DialogRoleComponent,
       { width: '520px', data: e, });
 
@@ -97,11 +97,11 @@ export class SystemRoleListComponent implements OnInit {
     });
   }
 
-  onFuntionsClick(e: RoleElement): void {
+  onFuntionsClick(e: RoleElet): void {
     this.router.navigate([`/system/role/funtions/${e.id}/${e.name}`]);
   }
 
-  onDeleteClick(e: RoleElement): void {
+  onDeleteClick(e: RoleElet): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '260px',
       data: `确定要删除【${e.name}】角色吗？`,
@@ -133,7 +133,7 @@ export class SystemRoleListComponent implements OnInit {
     });
   }
 
-  private _renderInfo(res: ResponsePagingResult<RoleElement>): void {
+  private _renderInfo(res: ResponsePagingResult<RoleElet>): void {
     if (res.success) {
       this.total = res.rowsCount;
       this.dataSource = res.data;
@@ -145,7 +145,7 @@ export class SystemRoleListComponent implements OnInit {
     }
   }
 
-  private _delete(e: RoleElement): void {
+  private _delete(e: RoleElet): void {
     this.hostServ.deleteRole(e.id as string).subscribe({
       next: res => {
         if (res.success) {

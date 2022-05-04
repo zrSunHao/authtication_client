@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PagingParameter, ResponsePagingResult } from 'src/@sun/models/paging.model';
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { ConstraintElement, CONSTRAINT_ELEMENT_DATA, CustomerConstraintSearchDto } from 'src/@cmpts/customer/model';
+import { CtmCttElet, CONSTRAINT_ELEMENT_DATA, CtmCttSearchDto } from 'src/@sun/models/customer.model';
 
 import { MyService } from '../my.service';
 
@@ -15,8 +15,8 @@ import { MyService } from '../my.service';
 })
 export class CustomerConstraintsComponent implements OnInit {
 
-  dto: CustomerConstraintSearchDto = new CustomerConstraintSearchDto();
-  params = new PagingParameter<CustomerConstraintSearchDto>();
+  dto: CtmCttSearchDto = new CtmCttSearchDto();
+  params = new PagingParameter<CtmCttSearchDto>();
 
   @Input() customerId: string = '';
 
@@ -31,7 +31,7 @@ export class CustomerConstraintsComponent implements OnInit {
   ];
 
   displayedColumns = ['id', 'category', 'method', 'sysName', 'expiredAt', 'createdAt', 'origin', 'remark',];
-  dataSource: ConstraintElement[] = [];
+  dataSource: CtmCttElet[] = [];
 
   constructor(private dialog: MatDialog,
     private notifyServ: NotifyService,
@@ -50,7 +50,7 @@ export class CustomerConstraintsComponent implements OnInit {
   }
 
   onResetClick(): void {
-    this.dto = new CustomerConstraintSearchDto();
+    this.dto = new CtmCttSearchDto();
     this.dto.customerId = this.customerId;
     this.params.filter = this.dto;
     this.params.pageIndex = 1;
@@ -69,7 +69,7 @@ export class CustomerConstraintsComponent implements OnInit {
     this._loadData(this.params);
   }
 
-  private _loadData(params: PagingParameter<CustomerConstraintSearchDto>) {
+  private _loadData(params: PagingParameter<CtmCttSearchDto>) {
     this.hostServ.searchConstraints(params).subscribe({
       next: res => { this._renderInfo(res); },
       error: err => {
@@ -81,7 +81,7 @@ export class CustomerConstraintsComponent implements OnInit {
     });
   }
 
-  private _renderInfo(res: ResponsePagingResult<ConstraintElement>) {
+  private _renderInfo(res: ResponsePagingResult<CtmCttElet>) {
     if (res.success) {
       this.total = res.rowsCount;
       this.dataSource = res.data;

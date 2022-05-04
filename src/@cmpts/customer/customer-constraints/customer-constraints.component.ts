@@ -6,7 +6,7 @@ import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/pagi
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
 import { DialogConstraintComponent } from '../dialog-constraint/dialog-constraint.component';
-import { ConstraintElement, CONSTRAINT_ELEMENT_DATA, CustomerConstraintSearchDto } from '../model';
+import { CtmCttElet, CONSTRAINT_ELEMENT_DATA, CtmCttSearchDto } from '../../../@sun/models/customer.model';
 
 @Component({
   selector: 'app-customer-constraints',
@@ -15,8 +15,8 @@ import { ConstraintElement, CONSTRAINT_ELEMENT_DATA, CustomerConstraintSearchDto
 })
 export class CustomerConstraintsComponent implements OnInit {
 
-  dto: CustomerConstraintSearchDto = new CustomerConstraintSearchDto();
-  params = new PagingParameter<CustomerConstraintSearchDto>();
+  dto: CtmCttSearchDto = new CtmCttSearchDto();
+  params = new PagingParameter<CtmCttSearchDto>();
 
   @Input() customerId: string = '';
 
@@ -31,7 +31,7 @@ export class CustomerConstraintsComponent implements OnInit {
   ];
 
   displayedColumns = ['id', 'category', 'method', 'sysName', 'expiredAt', 'createdAt', 'origin', 'remark', 'operate',];
-  dataSource: ConstraintElement[] = [];
+  dataSource: CtmCttElet[] = [];
 
   constructor(private dialog: MatDialog,
     private notifyServ: NotifyService,
@@ -50,7 +50,7 @@ export class CustomerConstraintsComponent implements OnInit {
   }
 
   onResetClick(): void {
-    this.dto = new CustomerConstraintSearchDto();
+    this.dto = new CtmCttSearchDto();
     this.dto.customerId = this.customerId;
     this.params.filter = this.dto;
     this.params.pageIndex = 1;
@@ -73,7 +73,7 @@ export class CustomerConstraintsComponent implements OnInit {
     });
   }
 
-  onCancelClick(e: ConstraintElement) {
+  onCancelClick(e: CtmCttElet) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '260px',
       data: `确定要删除ID为【${e.id}】的约束吗？`,
@@ -93,7 +93,7 @@ export class CustomerConstraintsComponent implements OnInit {
     this._loadData(this.params);
   }
 
-  private _loadData(params: PagingParameter<CustomerConstraintSearchDto>) {
+  private _loadData(params: PagingParameter<CtmCttSearchDto>) {
     this.hostServ.searchConstraints(params).subscribe({
       next: res => { this._renderInfo(res); },
       error: err => {
@@ -105,7 +105,7 @@ export class CustomerConstraintsComponent implements OnInit {
     });
   }
 
-  private _renderInfo(res: ResponsePagingResult<ConstraintElement>) {
+  private _renderInfo(res: ResponsePagingResult<CtmCttElet>) {
     if (res.success) {
       this.total = res.rowsCount;
       this.dataSource = res.data;
@@ -115,7 +115,7 @@ export class CustomerConstraintsComponent implements OnInit {
     }
   }
 
-  private _delete(e: ConstraintElement): void {
+  private _delete(e: CtmCttElet): void {
     this.hostServ.deleteConstraint(e.id as string).subscribe({
       next: res => {
         if (res.success) {

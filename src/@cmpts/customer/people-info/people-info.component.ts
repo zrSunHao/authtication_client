@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
-import { PeopleElement } from '../model';
+import { PeopleElet } from '../../../@sun/models/customer.model';
 
 @Component({
   selector: 'app-people-info',
@@ -16,16 +16,7 @@ export class PeopleInfoComponent implements OnInit {
   form: FormGroup;
   dateDisabled = false;
   edit = false;
-  people: PeopleElement = {
-    id: '',
-    customerId: '',
-    fullName: '',
-    gender: '1',
-    birthday: new Date(),
-    education: '',
-    profession: '',
-    intro: ''
-  };
+  people: PeopleElet = new PeopleElet();
 
   constructor(private notifyServ: NotifyService,
     private hostServ: CustomerService,) {
@@ -60,10 +51,7 @@ export class PeopleInfoComponent implements OnInit {
   }
 
   onSaveClick() {
-    const p: PeopleElement = {
-      id: '', customerId: '', fullName: '', gender: '1',
-      birthday: new Date(), education: '', profession: '', intro: ''
-    };
+    const p: PeopleElet = new PeopleElet();
     this._formMapToElement(p);
     this.hostServ.updatePeople(p).subscribe({
       next: res => {
@@ -92,7 +80,7 @@ export class PeopleInfoComponent implements OnInit {
     this.hostServ.getPeopleById(this.customerId).subscribe({
       next: res => {
         if (res.success) {
-          this.people = res.data as PeopleElement;
+          this.people = res.data as PeopleElet;
         } else {
           const msg = `个人信息加载失败！！！ ${res.allMessages}`;
           this.notifyServ.notify(msg, 'error');
@@ -114,7 +102,7 @@ export class PeopleInfoComponent implements OnInit {
     this.form.controls['intro'].setValue(this.people.intro);
   }
 
-  private _formMapToElement(people: PeopleElement): void {
+  private _formMapToElement(people: PeopleElet): void {
     people.fullName = this.form.controls['fullName'].value;
     people.gender = this.form.controls['gender'].value;
     people.birthday = this.form.controls['birthday'].value;

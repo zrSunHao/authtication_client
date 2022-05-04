@@ -12,16 +12,6 @@ export enum RoleRank {
     other = 0,              // 其他
 }
 
-export const ROLE_RANK_OPS: OptionItem[] = [
-    { key: RoleRank.other, value: '- - -' },
-    { key: RoleRank.default, value: '默认/普通用户' },
-    { key: RoleRank.member, value: '会员' },
-    { key: RoleRank.business, value: '业务员' },
-    { key: RoleRank.manager, value: '管理员' },
-    { key: RoleRank.sysManager, value: '系统管理员' },
-    { key: RoleRank.superManager, value: '超级管理员' },
-];
-
 export class SysElet {
     id: string | null = '';
     logo: string | null = '';
@@ -36,7 +26,7 @@ export class SysPgmElet extends PgmElet {
     systemId: string | null = '';
 }
 
-export class RoleElement {
+export class RoleElet {
     id: string = '';
     rank: RoleRank = RoleRank.other;
     name: string = '';
@@ -69,6 +59,17 @@ export interface RoleFunctElet {
     programName: string;
     sections: Array<SysSectElet>;
 }
+
+export const ROLE_RANK_OPS: OptionItem[] = [
+    { key: RoleRank.other, value: '- - -' },
+    { key: RoleRank.default, value: '默认/普通用户' },
+    { key: RoleRank.member, value: '会员' },
+    { key: RoleRank.business, value: '业务员' },
+    { key: RoleRank.manager, value: '管理员' },
+    { key: RoleRank.sysManager, value: '系统管理员' },
+    { key: RoleRank.superManager, value: '超级管理员' },
+];
+
 
 
 
@@ -137,7 +138,7 @@ export const PROGRAM_ELEMENT_DATA: SysPgmElet[] = [
     { id: '10', name: 'service_10', type: PgmType.service, systemId: '', code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
 ];
 
-export const ROLE_ELEMENT_DATA: RoleElement[] = [
+export const ROLE_ELEMENT_DATA: RoleElet[] = [
     { id: '1', rank: RoleRank.default, name: '普通用户', systemId: '', code: 'default', limitedMethod: CttMethod.forbid, limitedExpiredAt: null, createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
     { id: '1', rank: RoleRank.member, name: '会员', systemId: '', code: 'default', limitedMethod: CttMethod.lock, limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
     { id: '1', rank: RoleRank.manager, name: '管理员', systemId: '', code: 'default', limitedMethod: CttMethod.forbid, limitedExpiredAt: null, createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },

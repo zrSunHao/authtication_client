@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
-import { CustomerElement } from '../model';
+import { CtmElet } from '../../../@sun/models/customer.model';
 
 @Component({
   selector: 'app-dialog-customer',
@@ -16,7 +16,7 @@ export class DialogCustomerComponent implements OnInit {
   constructor(private notifyServ: NotifyService,
     private hostServ: CustomerService,
     private dialogRef: MatDialogRef<DialogCustomerComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: CustomerElement,) {
+    @Inject(MAT_DIALOG_DATA) public data: CtmElet,) {
     this.remark = this.data.remark;
   }
 

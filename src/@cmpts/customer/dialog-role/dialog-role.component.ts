@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { OptionItem } from 'src/@sun/models/paging.model';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
-import { CustomerRoleAddDto } from '../model';
+import { CtmRoleAddDto } from '../../../@sun/models/customer.model';
 
 @Component({
   selector: 'app-dialog-role',
@@ -22,7 +22,7 @@ export class DialogRoleComponent implements OnInit {
   constructor(private notifyServ: NotifyService,
     private hostServ: CustomerService,
     private dialogRef: MatDialogRef<DialogRoleComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: CustomerRoleAddDto,) {
+    @Inject(MAT_DIALOG_DATA) public data: CtmRoleAddDto,) {
     this.title = data?.sysId ? '修改' : '添加';
     this.update = (data?.sysId !== '' && data?.sysId !== null && data?.sysId !== undefined);
     this.form = new FormGroup({

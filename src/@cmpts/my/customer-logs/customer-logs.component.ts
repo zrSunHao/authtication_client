@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { PagingParameter, ResponsePagingResult } from 'src/@sun/models/paging.model';
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { CustomerLogSearchDto, LogElement, LOG_ELEMENT_DATA } from 'src/@cmpts/customer/model';
+import { CtmLogSearchDto, CtmLogElet, LOG_ELEMENT_DATA } from 'src/@sun/models/customer.model';
 
 import { MyService } from '../my.service';
 
@@ -14,8 +14,8 @@ import { MyService } from '../my.service';
 })
 export class CustomerLogsComponent implements OnInit {
 
-  dto: CustomerLogSearchDto = new CustomerLogSearchDto();
-  params = new PagingParameter<CustomerLogSearchDto>();
+  dto: CtmLogSearchDto = new CtmLogSearchDto();
+  params = new PagingParameter<CtmLogSearchDto>();
 
   @Input() customerId: string = '';
 
@@ -31,7 +31,7 @@ export class CustomerLogsComponent implements OnInit {
   ];
 
   displayedColumns = ['operate', 'sysName', 'roleName', 'roleRank', 'createdAt', 'remark'];
-  dataSource: LogElement[] = [];
+  dataSource: CtmLogElet[] = [];
 
   constructor(private notifyServ: NotifyService,
     private hostServ: MyService) { }
@@ -48,7 +48,7 @@ export class CustomerLogsComponent implements OnInit {
   }
 
   onResetClick(): void {
-    this.dto = new CustomerLogSearchDto();
+    this.dto = new CtmLogSearchDto();
     this.dto.customerId = this.customerId;
     this.params.filter = this.dto;
     this.params.pageIndex = 1;
@@ -67,7 +67,7 @@ export class CustomerLogsComponent implements OnInit {
     this._loadData(this.params);
   }
 
-  private _loadData(params: PagingParameter<CustomerLogSearchDto>) {
+  private _loadData(params: PagingParameter<CtmLogSearchDto>) {
     this.hostServ.searchLogs(params).subscribe({
       next: res => { this._renderInfo(res); },
       error: err => {
@@ -79,7 +79,7 @@ export class CustomerLogsComponent implements OnInit {
     });
   }
 
-  private _renderInfo(res: ResponsePagingResult<LogElement>) {
+  private _renderInfo(res: ResponsePagingResult<CtmLogElet>) {
     if (res.success) {
       this.total = res.rowsCount;
       this.dataSource = res.data;

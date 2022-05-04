@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PagingParameter, ResponsePagingResult } from 'src/@sun/models/paging.model';
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { CustomerRoleElement, CustomerRoleSearchDto, CUSTOMER_ROLE_ELEMENT_DATA } from 'src/@cmpts/customer/model';
+import { CtmRoleElet, CtmRoleSearchDto, CUSTOMER_ROLE_ELEMENT_DATA } from 'src/@sun/models/customer.model';
 
 import { MyService } from '../my.service';
 
@@ -15,8 +15,8 @@ import { MyService } from '../my.service';
 })
 export class CustomerRolesComponent implements OnInit {
 
-  dto: CustomerRoleSearchDto = new CustomerRoleSearchDto();
-  params = new PagingParameter<CustomerRoleSearchDto>();
+  dto: CtmRoleSearchDto = new CtmRoleSearchDto();
+  params = new PagingParameter<CtmRoleSearchDto>();
 
   @Input() customerId: string = '';
 
@@ -31,7 +31,7 @@ export class CustomerRolesComponent implements OnInit {
   ];
 
   displayedColumns = ['sysLogo', 'sysName', 'roleName', 'rank', 'createdAt', 'remark',];
-  dataSource: CustomerRoleElement[] = [];
+  dataSource: CtmRoleElet[] = [];
 
   constructor(private dialog: MatDialog,
     private notifyServ: NotifyService,
@@ -50,7 +50,7 @@ export class CustomerRolesComponent implements OnInit {
   }
 
   onResetClick(): void {
-    this.dto = new CustomerRoleSearchDto();
+    this.dto = new CtmRoleSearchDto();
     this.dto.customerId = this.customerId;
     this.params.filter = this.dto;
     this.params.pageIndex = 1;
@@ -69,7 +69,7 @@ export class CustomerRolesComponent implements OnInit {
     this._loadData(this.params);
   }
 
-  private _loadData(params: PagingParameter<CustomerRoleSearchDto>) {
+  private _loadData(params: PagingParameter<CtmRoleSearchDto>) {
     this.hostServ.searchRoles(params).subscribe({
       next: res => { this._renderInfo(res); },
       error: err => {
@@ -81,7 +81,7 @@ export class CustomerRolesComponent implements OnInit {
     });
   }
 
-  private _renderInfo(res: ResponsePagingResult<CustomerRoleElement>) {
+  private _renderInfo(res: ResponsePagingResult<CtmRoleElet>) {
     if (res.success) {
       this.total = res.rowsCount;
       this.dataSource = res.data;

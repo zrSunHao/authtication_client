@@ -7,7 +7,7 @@ import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/pagi
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
 import { DialogCustomerComponent } from '../dialog-customer/dialog-customer.component';
-import { CustomerElement, CustomerSearchDto, CUSTOMER_ELEMENT_DATA } from '../model';
+import { CtmElet, CtmSearchDto, CUSTOMER_ELEMENT_DATA } from '../../../@sun/models/customer.model';
 
 @Component({
   selector: 'app-customer-list',
@@ -16,8 +16,8 @@ import { CustomerElement, CustomerSearchDto, CUSTOMER_ELEMENT_DATA } from '../mo
 })
 export class CustomerListComponent implements OnInit {
 
-  dto: CustomerSearchDto = new CustomerSearchDto();
-  params = new PagingParameter<CustomerSearchDto>();
+  dto: CtmSearchDto = new CtmSearchDto();
+  params = new PagingParameter<CtmSearchDto>();
 
   total = 0;
   columnOp = 'lastLoginAt';
@@ -30,7 +30,7 @@ export class CustomerListComponent implements OnInit {
   ];
 
   displayedColumns = ['avatar', 'name', 'nickname', 'limited', 'lastLoginAt', 'remark', 'operate',];
-  dataSource: CustomerElement[] = [];
+  dataSource: CtmElet[] = [];
 
   constructor(private dialog: MatDialog,
     private router: Router,
@@ -48,7 +48,7 @@ export class CustomerListComponent implements OnInit {
   }
 
   onResetClick(): void {
-    this.dto = new CustomerSearchDto();
+    this.dto = new CtmSearchDto();
     this.params.filter = this.dto;
     this.params.pageIndex = 1;
     this.params.pageSize = 10;
@@ -66,11 +66,11 @@ export class CustomerListComponent implements OnInit {
     this._loadData(this.params);
   }
 
-  onDetailClick(e: CustomerElement): void {
+  onDetailClick(e: CtmElet): void {
     this.router.navigate([`/customer/detail/${e.id}/${e.name}`]);
   }
 
-  onRemarkClick(e: CustomerElement): void {
+  onRemarkClick(e: CtmElet): void {
     const dialogRef = this.dialog.open(DialogCustomerComponent, {
       width: '360px',
       data: e,
@@ -84,7 +84,7 @@ export class CustomerListComponent implements OnInit {
     });
   }
 
-  private _loadData(params: PagingParameter<CustomerSearchDto>) {
+  private _loadData(params: PagingParameter<CtmSearchDto>) {
     this.hostServ.search(params).subscribe({
       next: res => { this._renderInfo(res); },
       error: err => {
@@ -96,7 +96,7 @@ export class CustomerListComponent implements OnInit {
     });
   }
 
-  private _renderInfo(res: ResponsePagingResult<CustomerElement>) {
+  private _renderInfo(res: ResponsePagingResult<CtmElet>) {
     if (res.success) {
       this.total = res.rowsCount;
       this.dataSource = res.data;

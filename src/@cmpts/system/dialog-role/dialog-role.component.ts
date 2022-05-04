@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { OptionItem } from 'src/@sun/models/paging.model';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { RoleElement, ROLE_RANK_OPS } from '../../../@sun/models/system.model';
+import { RoleElet, ROLE_RANK_OPS } from '../../../@sun/models/system.model';
 import { SystemService } from '../system.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class DialogRoleComponent implements OnInit {
   rankOps: OptionItem[] = ROLE_RANK_OPS;
 
   constructor(private dialogRef: MatDialogRef<DialogRoleComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: RoleElement,
+    @Inject(MAT_DIALOG_DATA) public data: RoleElet,
     private notifyServ: NotifyService,
     private hostServ: SystemService,) {
     this.title = data?.name ? '修改' : '添加';
@@ -58,7 +58,7 @@ export class DialogRoleComponent implements OnInit {
     this.dialogRef.close({ op: 'close' });
   }
 
-  private _add(e: RoleElement): void {
+  private _add(e: RoleElet): void {
     this.hostServ.addRole(e).subscribe({
       next: res => {
         if (res.success) {
@@ -75,7 +75,7 @@ export class DialogRoleComponent implements OnInit {
     });
   }
 
-  private _update(e: RoleElement): void {
+  private _update(e: RoleElet): void {
     this.hostServ.addRole(e).subscribe({
       next: res => {
         if (res.success) {

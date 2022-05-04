@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { OptionItem, PagingParameter, ResponsePagingResult, ResponseResult } from 'src/@sun/models/paging.model';
 import { environment } from 'src/environments/environment';
-import { ConstraintElement, CustomerConstraintAddDto, CustomerConstraintSearchDto, CustomerElement, CustomerLogSearchDto, CustomerRoleAddDto, CustomerRoleElement, CustomerRoleSearchDto, CustomerSearchDto, LogElement, PeopleElement } from './model';
+import { CtmCttElet, CtmCttAddDto, CtmCttSearchDto, CtmElet, CtmLogSearchDto, CtmRoleAddDto, CtmRoleElet, CtmRoleSearchDto, CtmSearchDto, CtmLogElet, PeopleElet } from '../../@sun/models/customer.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +19,9 @@ export class CustomerService {
 
   constructor(public http: HttpClient) { }
 
-  public search(params: PagingParameter<CustomerSearchDto>): Observable<ResponsePagingResult<CustomerElement>> {
+  public search(params: PagingParameter<CtmSearchDto>): Observable<ResponsePagingResult<CtmElet>> {
     const url = `${this.baseUrl}/search`;
-    return this.http.post<ResponsePagingResult<CustomerElement>>(url, params, this.httpOptions)
+    return this.http.post<ResponsePagingResult<CtmElet>>(url, params, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
@@ -37,9 +37,9 @@ export class CustomerService {
       .pipe(catchError(this.handleError));
   }
 
-  public getById(id: string): Observable<ResponseResult<CustomerElement>> {
+  public getById(id: string): Observable<ResponseResult<CtmElet>> {
     const url = `${this.baseUrl}/getById?id=${id}`;
-    return this.http.get<ResponseResult<CustomerElement>>(url)
+    return this.http.get<ResponseResult<CtmElet>>(url)
       .pipe(catchError(this.handleError));
   }
 
@@ -61,45 +61,45 @@ export class CustomerService {
       .pipe(catchError(this.handleError));
   }
 
-  public getPeopleById(id: string): Observable<ResponseResult<PeopleElement>> {
+  public getPeopleById(id: string): Observable<ResponseResult<PeopleElet>> {
     const url = `${this.baseUrl}/getPeopleById?id=${id}`;
-    return this.http.get<ResponseResult<PeopleElement>>(url)
+    return this.http.get<ResponseResult<PeopleElet>>(url)
       .pipe(catchError(this.handleError));
   }
 
-  public updatePeople(param: PeopleElement): Observable<ResponseResult<boolean>> {
+  public updatePeople(param: PeopleElet): Observable<ResponseResult<boolean>> {
     const url = `${this.baseUrl}/updatePeople`;
     return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  public searchRoles(param: PagingParameter<CustomerRoleSearchDto>): Observable<ResponsePagingResult<CustomerRoleElement>> {
+  public searchRoles(param: PagingParameter<CtmRoleSearchDto>): Observable<ResponsePagingResult<CtmRoleElet>> {
     const url = `${this.baseUrl}/searchRoles`;
-    return this.http.post<ResponsePagingResult<CustomerRoleElement>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.post<ResponsePagingResult<CtmRoleElet>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  public addRole(param: CustomerRoleAddDto): Observable<ResponseResult<boolean>> {
+  public addRole(param: CtmRoleAddDto): Observable<ResponseResult<boolean>> {
     const url = `${this.baseUrl}/addRole`;
     return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  public updateRole(param: CustomerRoleAddDto): Observable<ResponseResult<boolean>> {
+  public updateRole(param: CtmRoleAddDto): Observable<ResponseResult<boolean>> {
     const url = `${this.baseUrl}/updateRole`;
     return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  public searchConstraints(param: PagingParameter<CustomerConstraintSearchDto>): Observable<ResponsePagingResult<ConstraintElement>> {
+  public searchConstraints(param: PagingParameter<CtmCttSearchDto>): Observable<ResponsePagingResult<CtmCttElet>> {
     const url = `${this.baseUrl}/searchConstraints`;
-    return this.http.post<ResponsePagingResult<ConstraintElement>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.post<ResponsePagingResult<CtmCttElet>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  public addConstraint(param: CustomerConstraintAddDto): Observable<ResponseResult<boolean>> {
+  public addConstraint(param: CtmCttAddDto): Observable<ResponseResult<boolean>> {
     const url = `${this.baseUrl}/addConstraint`;
     return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  public searchLogs(param: PagingParameter<CustomerLogSearchDto>): Observable<ResponsePagingResult<LogElement>> {
+  public searchLogs(param: PagingParameter<CtmLogSearchDto>): Observable<ResponsePagingResult<CtmLogElet>> {
     const url = `${this.baseUrl}/searchLogs`;
-    return this.http.post<ResponsePagingResult<LogElement>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.post<ResponsePagingResult<CtmLogElet>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
   public getSystemItems(): Observable<ResponseResult<OptionItem[]>> {
