@@ -29,13 +29,7 @@
         <mat-form-field appearance="outline">
           <mat-label>角色等级</mat-label>
           <mat-select [(ngModel)]="dto.rank" name="rank">
-            <mat-option [value]="0">全部</mat-option>
-            <mat-option [value]="1">默认</mat-option>
-            <mat-option [value]="2">普通用户</mat-option>
-            <mat-option [value]="10">所有约束</mat-option>
-            <mat-option [value]="100">业务员</mat-option>
-            <mat-option [value]="1000">管理员</mat-option>
-            <mat-option [value]="10000">超级管理员</mat-option>
+            <mat-option [value]="item.key" *ngFor="let item of rankOps">{{item.value}}</mat-option>
           </mat-select>
           <mat-icon matSuffix>category</mat-icon>
         </mat-form-field>
@@ -73,12 +67,12 @@
         <ng-container matColumnDef="rank">
           <th mat-header-cell *matHeaderCellDef> 等级 </th>
           <td mat-cell *matCellDef="let element" style="min-width: 5rem;">
-            <span *ngIf="element.rank === 1" style="color: #a5f3fc;">默认</span>
-            <span *ngIf="element.rank === 2" style="color: #fde68a;">普通用户</span>
-            <span *ngIf="element.rank === 10" style="color: #a7f3d0;">会员</span>
-            <span *ngIf="element.rank === 100" style="color: #f9a8d4;">业务员</span>
-            <span *ngIf="element.rank === 1000" style="color: #67e8f9;">管理员</span>
-            <span *ngIf="element.rank === 10000" style="color: #34d399;">超级管理员</span>
+            <span *ngIf="element.rank === rankOps[1].key" style="color: #a5f3fc;">{{rankOps[1].value}}</span>
+            <span *ngIf="element.rank === rankOps[2].key" style="color: #fde68a;">{{rankOps[2].value}}</span>
+            <span *ngIf="element.rank === rankOps[3].key" style="color: #a7f3d0;">{{rankOps[3].value}}</span>
+            <span *ngIf="element.rank === rankOps[4].key" style="color: #f9a8d4;">{{rankOps[4].value}}</span>
+            <span *ngIf="element.rank === rankOps[5].key" style="color: #67e8f9;">{{rankOps[5].value}}</span>
+            <span *ngIf="element.rank === rankOps[6].key" style="color: #34d399;">{{rankOps[6].value}}</span>
           </td>
         </ng-container>
         <ng-container matColumnDef="limitedMethod">

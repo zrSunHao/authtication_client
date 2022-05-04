@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PagingParameter, ResponsePagingResult } from 'src/@sun/models/paging.model';
+import { OptionItem, PagingParameter, ResponsePagingResult } from 'src/@sun/models/paging.model';
 import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/confirm-dialog.component';
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { DialogRoleComponent } from '../dialog-role/dialog-role.component';
-import { RoleElement, RoleSearchDto, ROLE_ELEMENT_DATA } from '../model';
+import { RoleElement, RoleSearchDto, ROLE_ELEMENT_DATA, ROLE_RANK_OPS } from '../../../@sun/models/system.model';
 import { SystemService } from '../system.service';
+import { CttMethod } from 'src/@sun/models/constraint.model';
 
 @Component({
   selector: 'app-system-role-list',
@@ -20,6 +21,7 @@ export class SystemRoleListComponent implements OnInit {
   sysName: string = '';
   dto: RoleSearchDto = new RoleSearchDto();
   params = new PagingParameter<RoleSearchDto>();
+  rankOps: OptionItem[] = ROLE_RANK_OPS;
 
   total = 0;
   columnOp = 'createdAt';
@@ -70,7 +72,7 @@ export class SystemRoleListComponent implements OnInit {
 
   onAddClick(): void {
     const r: RoleElement = {
-      id: '', rank: 0, name: '', systemId: this.sysId, code: '', limitedMethod: '', limitedExpiredAt: null, createdAt: null, remark: ''
+      id: '', rank: 0, name: '', systemId: this.sysId, code: '', limitedMethod: CttMethod.other, limitedExpiredAt: null, createdAt: null, remark: ''
     };
     const dialogRef = this.dialog.open(DialogRoleComponent,
       { width: '520px', data: r, });

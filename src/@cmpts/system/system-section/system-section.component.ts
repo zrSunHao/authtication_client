@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ProgramElement, PROGRAM_ELEMENT_DATA, SystemProgramSearchDto } from '../model';
+import { SysPgmElet, PROGRAM_ELEMENT_DATA, SysPgmSearchDto } from '../../../@sun/models/system.model';
 
 @Component({
   selector: 'app-system-section',
@@ -8,11 +8,11 @@ import { ProgramElement, PROGRAM_ELEMENT_DATA, SystemProgramSearchDto } from '..
 })
 export class SystemSectionComponent implements OnInit {
 
-  dto: SystemProgramSearchDto = new SystemProgramSearchDto();
+  dto: SysPgmSearchDto = new SysPgmSearchDto();
 
-  @Input() data: ProgramElement[] = PROGRAM_ELEMENT_DATA;
-  @Output() onAddProgram: EventEmitter<ProgramElement> = new EventEmitter<ProgramElement>();
-  @Output() onGetPrograms: EventEmitter<SystemProgramSearchDto> = new EventEmitter<SystemProgramSearchDto>();
+  @Input() data: SysPgmElet[] = PROGRAM_ELEMENT_DATA;
+  @Output() onAddProgram: EventEmitter<SysPgmElet> = new EventEmitter<SysPgmElet>();
+  @Output() onGetPrograms: EventEmitter<SysPgmSearchDto> = new EventEmitter<SysPgmSearchDto>();
 
   constructor() { }
 
@@ -24,11 +24,11 @@ export class SystemSectionComponent implements OnInit {
   }
 
   onResetClick(): void {
-    this.dto = new SystemProgramSearchDto();
+    this.dto = new SysPgmSearchDto();
     this.onGetPrograms.emit(this.dto);
   }
 
-  onAddClick(e: ProgramElement): void {
+  onAddClick(e: SysPgmElet): void {
     this.onAddProgram.emit(e);
   }
 }

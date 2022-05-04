@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/confirm-dialog.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { ProgramElement, PROGRAM_ELEMENT_DATA, SystemProgramGetDto, SystemProgramSearchDto } from '../model';
+import { SysPgmElet, PROGRAM_ELEMENT_DATA, SysPgmGetDto, SysPgmSearchDto } from '../../../@sun/models/system.model';
 import { SystemService } from '../system.service';
 
 @Component({
@@ -13,14 +13,14 @@ import { SystemService } from '../system.service';
 })
 export class SystemProgramComponent implements OnInit {
 
-  dto: SystemProgramGetDto = new SystemProgramGetDto();
+  dto: SysPgmGetDto = new SysPgmGetDto();
 
   sysId: string = '';
   sysName: string = '';
 
-  sections: ProgramElement[] = [];
+  sections: SysPgmElet[] = [];
   displayedColumns = ['name', 'type', 'code', 'intro', 'remark', 'operate',];
-  programs: ProgramElement[] = [];
+  programs: SysPgmElet[] = [];
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -33,7 +33,7 @@ export class SystemProgramComponent implements OnInit {
       this.sysId = params['sysId'];
       this.sysName = params['sysName'];
     });
-    this.onSearchProgramsClick(new SystemProgramSearchDto());
+    this.onSearchProgramsClick(new SysPgmSearchDto());
     this.onGetProgramsClick();
   }
 
@@ -41,12 +41,12 @@ export class SystemProgramComponent implements OnInit {
     this.router.navigate([`/system`]);
   }
 
-  onSearchProgramsClick(e: SystemProgramSearchDto): void {
+  onSearchProgramsClick(e: SysPgmSearchDto): void {
     e.systemId = this.sysId;
     this.hostServ.searchPrograms(e).subscribe({
       next: res => {
         if (res.success) {
-          this.sections = res.data as ProgramElement[];
+          this.sections = res.data as SysPgmElet[];
         } else {
           const msg = `未关联程序的数据加载失败！！！ ${res.allMessages}`;
           this.notifyServ.notify(msg, 'error');
@@ -60,7 +60,7 @@ export class SystemProgramComponent implements OnInit {
     });
   }
 
-  onAddProgramClick(e: ProgramElement): void {
+  onAddProgramClick(e: SysPgmElet): void {
     e.systemId = this.sysId;
     this.hostServ.addProgram(e.systemId as string, e.id as string).subscribe({
       next: res => {
@@ -85,7 +85,7 @@ export class SystemProgramComponent implements OnInit {
     this.hostServ.getPrograms(this.dto).subscribe({
       next: res => {
         if (res.success) {
-          this.programs = res.data as ProgramElement[];
+          this.programs = res.data as SysPgmElet[];
         } else {
           const msg = `关联程序的数据加载失败！！！ ${res.allMessages}`;
           this.notifyServ.notify(msg, 'error');
@@ -100,11 +100,11 @@ export class SystemProgramComponent implements OnInit {
   }
 
   onResetProgramClick(): void {
-    this.dto = new SystemProgramGetDto();
+    this.dto = new SysPgmGetDto();
     this.onGetProgramsClick();
   }
 
-  onDeleteProgramClick(e: ProgramElement): void {
+  onDeleteProgramClick(e: SysPgmElet): void {
     e.systemId = this.sysId;
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '260px',
@@ -116,7 +116,7 @@ export class SystemProgramComponent implements OnInit {
     });
   }
 
-  private _delete(e: ProgramElement): void {
+  private _delete(e: SysPgmElet): void {
     this.hostServ.deleteProgram(e.systemId as string, e.id as string).subscribe({
       next: res => {
         if (res.success) {

@@ -17,12 +17,7 @@
   <mat-form-field appearance="outline">
     <mat-label>角色等级</mat-label>
     <mat-select formControlName="rank">
-      <mat-option [value]="1">默认</mat-option>
-      <mat-option [value]="2">普通用户</mat-option>
-      <mat-option [value]="10">所有约束</mat-option>
-      <mat-option [value]="100">业务员</mat-option>
-      <mat-option [value]="1000">管理员</mat-option>
-      <mat-option [value]="10000">超级管理员</mat-option>
+      <mat-option [value]="item.key" *ngFor="let item of rankOps">{{item.value}}</mat-option>
     </mat-select>
     <mat-hint>角色的等级</mat-hint>
     <mat-icon matSuffix>category</mat-icon>

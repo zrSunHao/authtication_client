@@ -6,7 +6,7 @@ import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/con
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { DialogSystemComponent } from './dialog-system/dialog-system.component';
-import { SystemElement, SystemSearchDto, SYSTEM_ELEMENT_DATA } from './model';
+import { SysElet, SysSearchDto, SYSTEM_ELEMENT_DATA } from '../../@sun/models/system.model';
 import { SystemService } from './system.service';
 
 @Component({
@@ -16,9 +16,9 @@ import { SystemService } from './system.service';
 })
 export class SystemComponent implements OnInit, AfterViewInit {
 
-  dto: SystemSearchDto = new SystemSearchDto();
-  params = new PagingParameter<SystemSearchDto>();
-  currentSys: SystemElement | null = null;
+  dto: SysSearchDto = new SysSearchDto();
+  params = new PagingParameter<SysSearchDto>();
+  currentSys: SysElet | null = null;
 
   total = 35;
   columnOp = 'createdAt';
@@ -28,7 +28,7 @@ export class SystemComponent implements OnInit, AfterViewInit {
     { name: '创建时间', value: 'createdAt' },
   ];
   displayedColumns = ['logo', 'name', 'code', 'createdAt', 'intro', 'remark', 'operate',];
-  dataSource: SystemElement[] = [];
+  dataSource: SysElet[] = [];
 
   @ViewChild("imageInput", { static: false })
   imageInput!: ElementRef;
@@ -51,7 +51,7 @@ export class SystemComponent implements OnInit, AfterViewInit {
   }
 
   onResetClick(): void {
-    this.dto = new SystemSearchDto();
+    this.dto = new SysSearchDto();
     this.params.filter = this.dto;
     this.params.pageIndex = 1;
     this.params.pageSize = 10;
@@ -61,7 +61,7 @@ export class SystemComponent implements OnInit, AfterViewInit {
   }
 
   onAddClick(): void {
-    const e: SystemElement = {
+    const e: SysElet = {
       id: '', logo: null, name: '', code: '', intro: '', createdAt: null, remark: ''
     };
     const dialogRef = this.dialog.open(DialogSystemComponent,
@@ -75,7 +75,7 @@ export class SystemComponent implements OnInit, AfterViewInit {
     });
   }
 
-  onEditClick(e: SystemElement): void {
+  onEditClick(e: SysElet): void {
     const dialogRef = this.dialog.open(DialogSystemComponent,
       { width: '520px', data: e, });
 
@@ -86,20 +86,20 @@ export class SystemComponent implements OnInit, AfterViewInit {
     });
   }
 
-  onLogoClick(e: SystemElement): void {
+  onLogoClick(e: SysElet): void {
     this.currentSys = e;
     this.imageInput.nativeElement.click();
   }
 
-  onProgtamClick(e: SystemElement): void {
+  onProgtamClick(e: SysElet): void {
     this.router.navigate([`/system/program/${e.id}/${e.name}`]);
   }
 
-  onRoleClick(e: SystemElement): void {
+  onRoleClick(e: SysElet): void {
     this.router.navigate([`/system/role/${e.id}/${e.name}`]);
   }
 
-  onDeleteClick(e: SystemElement): void {
+  onDeleteClick(e: SysElet): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '260px',
       data: `确定要删除【${e.name}】系统信息吗？`,
@@ -141,7 +141,7 @@ export class SystemComponent implements OnInit, AfterViewInit {
     }
   }
 
-  private _loadData(params: PagingParameter<SystemSearchDto>): void {
+  private _loadData(params: PagingParameter<SysSearchDto>): void {
     this.hostServ.serach(params).subscribe({
       next: res => { this._renderInfo(res); },
       error: err => {
@@ -152,7 +152,7 @@ export class SystemComponent implements OnInit, AfterViewInit {
     });
   }
 
-  private _renderInfo(res: ResponsePagingResult<SystemElement>): void {
+  private _renderInfo(res: ResponsePagingResult<SysElet>): void {
     if (res.success) {
       this.total = res.rowsCount;
       this.dataSource = res.data;
@@ -162,7 +162,7 @@ export class SystemComponent implements OnInit, AfterViewInit {
     }
   }
 
-  private _delete(e: SystemElement): void {
+  private _delete(e: SysElet): void {
     this.hostServ.delete(e.id as string).subscribe({
       next: res => {
         if (res.success) {

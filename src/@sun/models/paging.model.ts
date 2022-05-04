@@ -24,6 +24,6 @@ export class PagingParameter<T>{
 }
 
 export interface OptionItem {
-    key: string;
+    key: string | number;
     value: string;
 }

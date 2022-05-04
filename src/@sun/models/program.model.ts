@@ -8,14 +8,14 @@ export enum PgmType {
     other = '',     // 默认
 }
 
-export interface PgmElet {
-    id: string | null;
-    name: string;
-    type: PgmType;
-    code: string;
-    intro: string;
-    remark: string;
-    createdAt: Date | null;
+export class PgmElet {
+    id: string | null = '';
+    name: string = '';
+    type: PgmType = PgmType.other;
+    code: string = '';
+    intro: string = '';
+    remark: string = '';
+    createdAt: Date | null = null;
 }
 
 export interface SectElet {

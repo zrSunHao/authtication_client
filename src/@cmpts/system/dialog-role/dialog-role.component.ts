@@ -1,8 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { OptionItem } from 'src/@sun/models/paging.model';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { RoleElement } from '../model';
+import { RoleElement, ROLE_RANK_OPS } from '../../../@sun/models/system.model';
 import { SystemService } from '../system.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class DialogRoleComponent implements OnInit {
   title: string = '';
   form: FormGroup;
   update: boolean = false;
+  rankOps: OptionItem[] = ROLE_RANK_OPS;
 
   constructor(private dialogRef: MatDialogRef<DialogRoleComponent>,
     @Inject(MAT_DIALOG_DATA) public data: RoleElement,

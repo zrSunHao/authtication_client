@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { SystemElement } from '../model';
+import { SysElet } from '../../../@sun/models/system.model';
 import { SystemService } from '../system.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class DialogSystemComponent implements OnInit {
   update: boolean = false;
 
   constructor(private dialogRef: MatDialogRef<DialogSystemComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: SystemElement,
+    @Inject(MAT_DIALOG_DATA) public data: SysElet,
     private notifyServ: NotifyService,
     private hostServ: SystemService,) {
     this.title = data?.name ? '修改' : '添加';
@@ -50,7 +50,7 @@ export class DialogSystemComponent implements OnInit {
     this.dialogRef.close({ op: 'close' });
   }
 
-  private _add(e: SystemElement): void {
+  private _add(e: SysElet): void {
     this.hostServ.add(e).subscribe({
       next: res => {
         if (res.success) {
@@ -67,7 +67,7 @@ export class DialogSystemComponent implements OnInit {
     });
   }
 
-  private _update(e: SystemElement): void {
+  private _update(e: SysElet): void {
     this.hostServ.update(e).subscribe({
       next: res => {
         if (res.success) {

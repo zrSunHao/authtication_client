@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { FunctionElement, RoleFunctionDto, RoleProgramElement, ROLE_SECTION_ELEMENT_DATA, SectionElement } from '../model';
+import { SysFunctElet, RoleFunctDto, RoleFunctElet, ROLE_SECTION_ELEMENT_DATA, SysSectElet } from '../../../@sun/models/system.model';
 import { SystemService } from '../system.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class SystemRoleFuntionsComponent implements OnInit {
   roleName: string = '';
 
   displayedColumns = ['name', 'functions'];
-  programs: RoleProgramElement[] = [];
+  programs: RoleFunctElet[] = [];
 
   constructor(private route: ActivatedRoute,
     private notifyServ: NotifyService,
@@ -33,7 +33,7 @@ export class SystemRoleFuntionsComponent implements OnInit {
     this.hostServ.getRoleFunctions(this.roleId).subscribe({
       next: res => {
         if (res.success) {
-          this.programs = res.data as RoleProgramElement[];
+          this.programs = res.data as RoleFunctElet[];
         } else {
           const msg = `功能权限数据加载失败！！！ ${res.allMessages}`;
           this.notifyServ.notify(msg, 'error');
@@ -51,7 +51,7 @@ export class SystemRoleFuntionsComponent implements OnInit {
     history.back();
   }
 
-  onSectionChange(e: SectionElement): void {
+  onSectionChange(e: SysSectElet): void {
     if (e.checked) {
       e.functions.forEach(f => {
         f.checked = true;
@@ -63,7 +63,7 @@ export class SystemRoleFuntionsComponent implements OnInit {
     }
   }
 
-  onFunctionChange(e: FunctionElement): void {
+  onFunctionChange(e: SysFunctElet): void {
     const p = this.programs.find(x => x.id == e.programId);
     if (p) {
       const s = p.sections.find(x => x.id == e.sectionId);
@@ -77,7 +77,7 @@ export class SystemRoleFuntionsComponent implements OnInit {
     }
   }
 
-  onSaveClick(e: RoleProgramElement) {
+  onSaveClick(e: RoleFunctElet) {
     const s = e.sections.filter(x => x.checked).map(x => x.id);
     let f: string[] = [];
     e.sections.forEach(x => {
@@ -87,7 +87,7 @@ export class SystemRoleFuntionsComponent implements OnInit {
       }
     });
 
-    const dto = new RoleFunctionDto();
+    const dto = new RoleFunctDto();
     dto.roleId = this.roleId;
     dto.programId = e.id;
     dto.sectionIds = s;

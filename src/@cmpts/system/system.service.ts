@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { PagingParameter, ResponsePagingResult, ResponseResult } from 'src/@sun/models/paging.model';
 import { environment } from 'src/environments/environment';
-import { ProgramElement, RoleElement, RoleFunctionDto, RoleProgramElement, RoleSearchDto, SystemElement, SystemProgramGetDto, SystemProgramSearchDto, SystemSearchDto } from './model';
+import { SysPgmElet, RoleElement, RoleFunctDto, RoleFunctElet, RoleSearchDto, SysElet, SysPgmGetDto, SysPgmSearchDto, SysSearchDto } from '../../@sun/models/system.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,17 +20,17 @@ export class SystemService {
 
   // ---------------- system ------------------
 
-  public serach(param: PagingParameter<SystemSearchDto>): Observable<ResponsePagingResult<SystemElement>> {
+  public serach(param: PagingParameter<SysSearchDto>): Observable<ResponsePagingResult<SysElet>> {
     const url = `${this.baseUrl}/search`;
-    return this.http.post<ResponsePagingResult<SystemElement>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.post<ResponsePagingResult<SysElet>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  public add(param: SystemElement): Observable<ResponseResult<boolean>> {
+  public add(param: SysElet): Observable<ResponseResult<boolean>> {
     const url = `${this.baseUrl}/add`;
     return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  public update(param: SystemElement): Observable<ResponseResult<boolean>> {
+  public update(param: SysElet): Observable<ResponseResult<boolean>> {
     const url = `${this.baseUrl}/update`;
     return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
@@ -49,14 +49,14 @@ export class SystemService {
 
   // ---------------- program config ------------------
 
-  public searchPrograms(param: SystemProgramSearchDto): Observable<ResponseResult<ProgramElement[]>> {
+  public searchPrograms(param: SysPgmSearchDto): Observable<ResponseResult<SysPgmElet[]>> {
     const url = `${this.baseUrl}/getPrograms`;
-    return this.http.post<ResponseResult<ProgramElement[]>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.post<ResponseResult<SysPgmElet[]>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  public getPrograms(param: SystemProgramGetDto): Observable<ResponseResult<ProgramElement[]>> {
+  public getPrograms(param: SysPgmGetDto): Observable<ResponseResult<SysPgmElet[]>> {
     const url = `${this.baseUrl}/getPrograms`;
-    return this.http.post<ResponseResult<ProgramElement[]>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.post<ResponseResult<SysPgmElet[]>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
   public addProgram(sysId: string, programId: string): Observable<ResponseResult<boolean>> {
@@ -94,12 +94,12 @@ export class SystemService {
       .pipe(catchError(this.handleError));
   }
 
-  public getRoleFunctions(id: string): Observable<ResponseResult<RoleProgramElement[]>> {
+  public getRoleFunctions(id: string): Observable<ResponseResult<RoleFunctElet[]>> {
     const url = `${this.roleUrl}/getPrograms`;
-    return this.http.post<ResponseResult<RoleProgramElement[]>>(url, this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.post<ResponseResult<RoleFunctElet[]>>(url, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  public addRoleFunctions(param: RoleFunctionDto): Observable<ResponseResult<boolean>> {
+  public addRoleFunctions(param: RoleFunctDto): Observable<ResponseResult<boolean>> {
     const url = `${this.roleUrl}/addFunctions`;
     return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
