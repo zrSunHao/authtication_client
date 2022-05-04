@@ -1,3 +1,45 @@
+import { PeopleElet } from "./customer.model";
+import { RoleRank } from "./system.model";
+
+export class AcctElet {
+    id: string | null = '';
+    avatar: string = '';
+    name: string = '';
+    nickname: string = '';
+    remark: string = '';
+    createdAt: Date | null = null;
+}
+
+export class AuthRoleElet {
+    id: string = '';
+    rank: RoleRank = RoleRank.other;
+    name: string = '';
+}
+
+export class AuthResult {
+    account: AcctElet | null = null;    // 账号信息
+    people: PeopleElet | null = null;   // 个人信息
+    role: AuthRoleElet | null = null;   // 角色
+    perms: Permission[] = [];           // 可进入模块
+    token: string = '';                 // JWT
+    key: string = '';                   // 本次登录主键
+}
+
+export interface LoginDto {
+    userName: string;
+    password: string;
+}
+
+export interface RegisterDto {
+    userName: string;
+    fullName: string;
+    nickName: string;
+    gender: string;
+    birthday: Date;
+    password: string;
+    education: string;
+}
+
 export interface Permission {
     sect: string;
     funcs: string[];

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService, RegisterDto } from 'src/@sun/shared/services/auth.service';
+import { RegisterDto } from 'src/@sun/models/auth.model';
+import { CTM_EDUCATION_OPS, CTM_GENDER_OPS } from 'src/@sun/models/customer.model';
+import { OptionItem } from 'src/@sun/models/paging.model';
+import { AuthService } from 'src/@sun/shared/services/auth.service';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 
 @Component({
@@ -12,6 +15,8 @@ import { NotifyService } from 'src/@sun/shared/services/notify.service';
 export class RegisterComponent implements OnInit {
 
   form: FormGroup;
+  gerderOps: OptionItem[] = CTM_GENDER_OPS;
+  eduOps: OptionItem[] = CTM_EDUCATION_OPS;
 
   constructor(private router: Router,
     private notifyServ: NotifyService,

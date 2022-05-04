@@ -30,8 +30,7 @@
           <mat-form-field appearance="outline">
             <mat-label>性别</mat-label>
             <mat-select formControlName="gender">
-              <mat-option value="1">男</mat-option>
-              <mat-option value="2">女</mat-option>
+              <mat-option *ngFor="let item of gerderOps" [value]="item.key">{{item.value}}</mat-option>
             </mat-select>
             <mat-icon matSuffix>face_retouching_natural</mat-icon>
             <mat-hint>男、女</mat-hint>
@@ -57,20 +56,14 @@
             <mat-label>确认密码</mat-label>
             <input matInput placeholder="请输入确认密码" type="password" formControlName="confirmPsd" autocomplete="off">
             <mat-icon matSuffix>fingerprint</mat-icon>
-            <mat-hint [ngStyle]="{color: '#ff1744'}" *ngIf="form.value.password!=form.value.confirmPsd">确认密码不正确</mat-hint>
+            <mat-hint [ngStyle]="{color: '#ff1744'}" *ngIf="form.value.password!=form.value.confirmPsd">确认密码不正确
+            </mat-hint>
             <mat-hint *ngIf="form.value.password===form.value.confirmPsd">再次输入密码</mat-hint>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>学历</mat-label>
             <mat-select formControlName="education">
-              <mat-option value="0">无</mat-option>
-              <mat-option value="1">小学</mat-option>
-              <mat-option value="2">初中</mat-option>
-              <mat-option value="3">高中</mat-option>
-              <mat-option value="4">大专</mat-option>
-              <mat-option value="5">本科</mat-option>
-              <mat-option value="6">硕士</mat-option>
-              <mat-option value="7">博士</mat-option>
+              <mat-option *ngFor="let item of eduOps" [value]="item.key">{{item.value}}</mat-option>
             </mat-select>
             <mat-icon matSuffix>school</mat-icon>
             <mat-hint>学历</mat-hint>

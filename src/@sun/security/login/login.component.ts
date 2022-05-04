@@ -4,9 +4,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { NgxPermissionsService } from 'ngx-permissions';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { AuthElement, AuthService, LoginDto } from 'src/@sun/shared/services/auth.service';
-import { environment } from 'src/environments/environment';
-import { AUTH_PERMISSION_DATA } from 'src/@sun/models/auth.model';
+import { AuthService } from 'src/@sun/shared/services/auth.service';
+import { AcctElet, AuthResult, AuthRoleElet, AUTH_PERMISSION_DATA, LoginDto } from 'src/@sun/models/auth.model';
+import { PeopleElet } from 'src/@sun/models/customer.model';
 
 @Component({
   selector: 'app-login',
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     this.hostServ.login(dto).subscribe({
       next: res => {
         if (res.success) {
-          const auth = res.data as AuthElement;
+          const auth = res.data as AuthResult;
           this.hostServ.setAuthInfo(auth);
           let functs: string[] = [];
           auth.perms.forEach(p => {
@@ -53,21 +53,14 @@ export class LoginComponent implements OnInit {
       error: err => {
         const msg = `登录失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
-        const auth: AuthElement = {
-          account: {
-            id: '1111', avatar: '', name: 'zhangsan', nickname: '张三',
-            createdAt: new Date(), remark: '这是假数据'
-          },
-          people: {
-            id: '123', customerId: '111', fullName: '张三',
-            gender: '1', birthday: new Date(), education: '研究生',
-            profession: '计算机', intro: '这是假数据'
-          },
-          role: { id: '222', rank: 1, name: '默认用户' },
-          perms: AUTH_PERMISSION_DATA,
-          token: '',
-          key: ''
-        }; // TODO 删除
+
+        const auth: AuthResult = new AuthResult() // TODO 删除
+        const account = new AcctElet();
+        account.name = this.form.controls['userName'].value;
+        auth.account = account;
+        auth.people = new PeopleElet();
+        auth.role = new AuthRoleElet ();
+        auth.perms = AUTH_PERMISSION_DATA;
         this.hostServ.setAuthInfo(auth); // TODO 删除
         let functs: string[] = [];
         auth.perms.forEach(p => {

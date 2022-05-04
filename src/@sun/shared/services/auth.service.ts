@@ -2,59 +2,9 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { catchError, Observable, throwError } from 'rxjs';
-import { AUTH_PERMISSION_DATA, Permission } from 'src/@sun/models/auth.model';
+import { AcctElet, AuthResult, AuthRoleElet, AUTH_PERMISSION_DATA, LoginDto, Permission, RegisterDto } from 'src/@sun/models/auth.model';
 import { ResponseResult } from 'src/@sun/models/paging.model';
 import { environment } from 'src/environments/environment';
-
-export interface AccountElement {
-  id: string | null;
-  avatar: string;
-  name: string;
-  nickname: string;
-  remark: string;
-  createdAt: Date | null;
-}
-
-export interface AuthPeopleElement {
-  id: string;
-  customerId: string;
-  fullName: string;
-  gender: '1' | '2';//男 女
-  birthday: Date;
-  education: string;
-  profession: string;
-  intro: string;
-}
-
-export interface AuthRoleElement {
-  id: string;
-  rank: number;// 1：默认 2：普通用户 10：会员  100：业务员  1000：管理员 10000：超级管理员
-  name: string;
-}
-
-export interface AuthElement {
-  account: AccountElement;    // 账号信息
-  people: AuthPeopleElement;  // 个人信息
-  role: AuthRoleElement;      // 角色
-  perms: Permission[];        // 可进入模块
-  token: string;              // JWT
-  key: string;                // 本次登录主键
-}
-
-export interface LoginDto {
-  userName: string;
-  password: string;
-}
-
-export interface RegisterDto {
-  userName: string;
-  fullName: string;
-  nickName: string;
-  gender: string;
-  birthday: Date;
-  password: string;
-  education: string;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -67,7 +17,7 @@ export class AuthService {
     headers: new HttpHeaders({ 'Content-type': 'application/json' })
   };
 
-  private auth: AuthElement | undefined;
+  private auth: AuthResult | undefined;
 
   constructor(public http: HttpClient,
     private permissionsServ: NgxPermissionsService,) {
@@ -85,14 +35,14 @@ export class AuthService {
     }
   }
 
-  public login(param: LoginDto): Observable<ResponseResult<AuthElement>> {
+  public login(param: LoginDto): Observable<ResponseResult<AuthResult>> {
     const url = `${this.baseUrl}/login`;
-    return this.http.post<ResponseResult<AuthElement>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.post<ResponseResult<AuthResult>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  public register(param: RegisterDto): Observable<ResponseResult<AuthElement>> {
+  public register(param: RegisterDto): Observable<ResponseResult<AuthResult>> {
     const url = `${this.baseUrl}/register`;
-    return this.http.post<ResponseResult<AuthElement>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.post<ResponseResult<AuthResult>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -102,7 +52,7 @@ export class AuthService {
 
 
 
-  public setAuthInfo(auth: AuthElement): void {
+  public setAuthInfo(auth: AuthResult): void {
     if (auth) {
       const json = JSON.stringify(auth);
       localStorage.setItem(this.key, json);
@@ -110,20 +60,14 @@ export class AuthService {
     }
   }
 
-  public getAccount(): AccountElement {
-    if (this.auth) return this.auth.account;
-    const account: AccountElement = {
-      id: '', avatar: '', name: '', nickname: '',
-      createdAt: new Date(), remark: '这是假数据'
-    };
-    return account;
+  public getAccount(): AcctElet {
+    if (this.auth?.account) return this.auth.account;
+    else return new AcctElet();
   }
 
-  public getRole(): AuthRoleElement {
-    if (this.auth) return this.auth.role;
-    const role: AuthRoleElement =
-      { id: '', rank: -1, name: '' };
-    return role;
+  public getRole(): AuthRoleElet {
+    if (this.auth?.role) return this.auth.role;
+    else return new AuthRoleElet();
   }
 
   public getFunctions(): string[] {
