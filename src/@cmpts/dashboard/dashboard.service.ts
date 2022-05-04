@@ -1,9 +1,10 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
+import { CttElet } from 'src/@sun/models/constraint.model';
 import { ResponseResult } from 'src/@sun/models/paging.model';
 import { environment } from 'src/environments/environment';
-import { ConstraintElement, CustomerElement, LogElement, WidgetElement } from './model';
+import { ReportCtmElet, ReportLogElet, WidgetElet } from '../../@sun/models/report.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,24 +18,24 @@ export class DashboardService {
 
   constructor(public http: HttpClient) { }
 
-  public getCustomers(): Observable<ResponseResult<CustomerElement[]>> {
+  public getCustomers(): Observable<ResponseResult<ReportCtmElet[]>> {
     const url = `${this.baseUrl}/getRecentCustomers`;
-    return this.http.get<ResponseResult<CustomerElement[]>>(url).pipe(catchError(this.handleError));
+    return this.http.get<ResponseResult<ReportCtmElet[]>>(url).pipe(catchError(this.handleError));
   }
 
-  public getLogs(): Observable<ResponseResult<LogElement[]>> {
+  public getLogs(): Observable<ResponseResult<ReportLogElet[]>> {
     const url = `${this.baseUrl}/getRecentLogs`;
-    return this.http.get<ResponseResult<LogElement[]>>(url).pipe(catchError(this.handleError));
+    return this.http.get<ResponseResult<ReportLogElet[]>>(url).pipe(catchError(this.handleError));
   }
 
-  public getConstraints(): Observable<ResponseResult<ConstraintElement[]>> {
+  public getConstraints(): Observable<ResponseResult<CttElet[]>> {
     const url = `${this.baseUrl}/getRecentConstraints`;
-    return this.http.get<ResponseResult<ConstraintElement[]>>(url).pipe(catchError(this.handleError));
+    return this.http.get<ResponseResult<CttElet[]>>(url).pipe(catchError(this.handleError));
   }
 
-  public getWidgets(): Observable<ResponseResult<WidgetElement[]>> {
+  public getWidgets(): Observable<ResponseResult<WidgetElet[]>> {
     const url = `${this.baseUrl}/getWidgets`;
-    return this.http.get<ResponseResult<WidgetElement[]>>(url).pipe(catchError(this.handleError));
+    return this.http.get<ResponseResult<WidgetElet[]>>(url).pipe(catchError(this.handleError));
   }
 
 

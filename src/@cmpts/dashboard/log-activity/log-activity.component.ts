@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { LogElement, LOG_ELEMENT_DATA } from '../model';
+import { ReportLogElet, LOG_ELEMENT_DATA } from '../../../@sun/models/report.model';
 
 @Component({
   selector: 'app-log-activity',
@@ -9,7 +9,7 @@ import { LogElement, LOG_ELEMENT_DATA } from '../model';
 export class LogActivityComponent implements OnInit {
 
   displayedColumns = ['name', 'sysName', 'operate', 'createdAt'];
-  @Input() dataSource: LogElement[] = [];
+  @Input() dataSource: ReportLogElet[] = [];
   @Output() onRefesh: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }

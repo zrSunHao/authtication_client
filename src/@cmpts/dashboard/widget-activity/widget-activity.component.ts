@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { WidgetElement } from '../model';
+import { WidgetElet } from '../../../@sun/models/report.model';
 
 @Component({
   selector: 'app-widget-activity',
@@ -8,7 +8,7 @@ import { WidgetElement } from '../model';
 })
 export class WidgetActivityComponent implements OnInit {
 
-  @Input() msg: WidgetElement = { title: '', icon: '', color: '' };
+  @Input() msg: WidgetElet = { title: '', icon: '', color: '' };
 
   constructor() { }
 

@@ -42,7 +42,6 @@ export class CustomerConstraintsComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.categeryOps);
     this.onResetClick();
   }
 

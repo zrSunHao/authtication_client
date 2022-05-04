@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CustomerElement } from '../model';
+import { ReportCtmElet } from '../../../@sun/models/report.model';
 
 @Component({
   selector: 'app-customer-activity',
@@ -9,7 +9,7 @@ import { CustomerElement } from '../model';
 export class CustomerActivityComponent implements OnInit {
 
   displayedColumns = ['avatar', 'name', 'sysName', 'createdAt'];
-  @Input() dataSource:CustomerElement[] = [];
+  @Input() dataSource:ReportCtmElet[] = [];
   @Output() onRefesh: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }

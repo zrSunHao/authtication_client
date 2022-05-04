@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { CONSTRAINT_ELEMENT_DATA, CttElet } from 'src/@sun/models/constraint.model';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { DashboardService } from './dashboard.service';
-import { ConstraintElement, CONSTRAINT_ELEMENT_DATA, CustomerElement, CUSTOMER_ELEMENT_DATA, LogElement, LOG_ELEMENT_DATA, WidgetElement } from './model';
+import { ReportCtmElet, CUSTOMER_ELEMENT_DATA, ReportLogElet, LOG_ELEMENT_DATA, WidgetElet } from '../../@sun/models/report.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,10 +11,10 @@ import { ConstraintElement, CONSTRAINT_ELEMENT_DATA, CustomerElement, CUSTOMER_E
 })
 export class DashboardComponent implements OnInit {
 
-  customers: CustomerElement[] = [];
-  logs: LogElement[] = [];
-  constraints: ConstraintElement[] = [];
-  widgets: Array<WidgetElement> = [];
+  customers: ReportCtmElet[] = [];
+  logs: ReportLogElet[] = [];
+  constraints: CttElet[] = [];
+  widgets: Array<WidgetElet> = [];
 
   constructor(private notifyServ: NotifyService,
     private hostServ: DashboardService,) { }
@@ -29,7 +30,7 @@ export class DashboardComponent implements OnInit {
     this.hostServ.getCustomers().subscribe({
       next: res => {
         if (res.success) {
-          this.customers = res.data as CustomerElement[];
+          this.customers = res.data as ReportCtmElet[];
         } else {
           const msg = `客户数据加载失败！！！ ${res.allMessages}`;
           this.notifyServ.notify(msg, 'error');
@@ -47,7 +48,7 @@ export class DashboardComponent implements OnInit {
     this.hostServ.getLogs().subscribe({
       next: res => {
         if (res.success) {
-          this.logs = res.data as LogElement[];
+          this.logs = res.data as ReportLogElet[];
         } else {
           const msg = `日志数据加载失败！！！ ${res.allMessages}`;
           this.notifyServ.notify(msg, 'error');
@@ -65,7 +66,7 @@ export class DashboardComponent implements OnInit {
     this.hostServ.getConstraints().subscribe({
       next: res => {
         if (res.success) {
-          this.constraints = res.data as ConstraintElement[];
+          this.constraints = res.data as CttElet[];
         } else {
           const msg = `约束数据加载失败！！！ ${res.allMessages}`;
           this.notifyServ.notify(msg, 'error');
@@ -83,7 +84,7 @@ export class DashboardComponent implements OnInit {
     this.hostServ.getWidgets().subscribe({
       next: res => {
         if (res.success) {
-          this.widgets = res.data as WidgetElement[];
+          this.widgets = res.data as WidgetElet[];
         } else {
           const msg = `模块数据加载失败！！！ ${res.allMessages}`;
           this.notifyServ.notify(msg, 'error');
