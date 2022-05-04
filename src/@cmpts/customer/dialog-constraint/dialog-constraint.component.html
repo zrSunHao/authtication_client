@@ -5,7 +5,7 @@
   <mat-form-field appearance="outline">
     <mat-label>约束类别</mat-label>
     <mat-select formControlName="category" (valueChange)="onCategeryChange($event)">
-      <mat-option *ngFor="let item of categoryOptions" [value]="item.key">{{item.value}}</mat-option>
+      <mat-option *ngFor="let item of categeryOps" [value]="item.key">{{item.value}}</mat-option>
     </mat-select>
     <mat-hint>是否添加约束</mat-hint>
     <mat-icon matSuffix>category</mat-icon>

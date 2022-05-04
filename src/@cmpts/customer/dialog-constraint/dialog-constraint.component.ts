@@ -5,6 +5,7 @@ import { OptionItem } from 'src/@sun/models/paging.model';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
 import { CtmCttAddDto } from '../../../@sun/models/customer.model';
+import { CTT_CATEGERY_OPS, CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
 
 @Component({
   selector: 'app-dialog-constraint',
@@ -18,9 +19,8 @@ export class DialogConstraintComponent implements OnInit {
   sysEnabled = false;
   form: FormGroup;
   sysOptions: OptionItem[] = [];
-  categoryOptions: OptionItem[] = [
-    { key: '1', value: '账号  - >  所有系统' },
-    { key: '2', value: '账号  - >  某系统' },]
+  categeryOps: OptionItem[] = [CTT_CATEGERY_OPS[0], CTT_CATEGERY_OPS[1], CTT_CATEGERY_OPS[2]];
+  methodOps: OptionItem[] = CTT_METHOD_OPS;
 
   constructor(private notifyServ: NotifyService,
     private hostServ: CustomerService,
@@ -69,7 +69,7 @@ export class DialogConstraintComponent implements OnInit {
     this.dialogRef.close({ op: 'close' });
   }
 
-  onCategeryChange($event:any): void {
+  onCategeryChange($event: any): void {
     if ($event !== '2') {
       this.form.controls['sysId'].disable();
       this.sysEnabled = false;
@@ -79,7 +79,7 @@ export class DialogConstraintComponent implements OnInit {
     }
   }
 
-  onMethodChange($event:any): void {
+  onMethodChange($event: any): void {
     if ($event !== '2') {
       this.expiredAtEnabled = false;
     } else {

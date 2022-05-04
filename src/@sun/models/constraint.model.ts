@@ -38,9 +38,9 @@ export class CttSearchDto {
 export const CTT_CATEGERY_OPS: OptionItem[] = [
     { key: CttCategory.other, value: '- - -' },
     { key: CttCategory.customer_all_system, value: '账号  - >  所有系统' },
-    { key: CttCategory.customer_one_system, value: '账号- >某系统' },
-    { key: CttCategory.program_function, value: '程序- >功能' },
-    { key: CttCategory.system_role, value: '系统- >角色' },
+    { key: CttCategory.customer_one_system, value: '账号  - >  某系统' },
+    { key: CttCategory.program_function, value: '程序  - >  功能' },
+    { key: CttCategory.system_role, value: '系统  - >  角色' },
 ];
 
 export const CTT_METHOD_OPS: OptionItem[] = [

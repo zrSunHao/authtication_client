@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { PagingParameter, ResponsePagingResult } from 'src/@sun/models/paging.model';
+import { OptionItem, PagingParameter, ResponsePagingResult } from 'src/@sun/models/paging.model';
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
 import { DialogCustomerComponent } from '../dialog-customer/dialog-customer.component';
 import { CtmElet, CtmSearchDto, CUSTOMER_ELEMENT_DATA } from '../../../@sun/models/customer.model';
+import { CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
 
 @Component({
   selector: 'app-customer-list',
@@ -18,7 +19,8 @@ export class CustomerListComponent implements OnInit {
 
   dto: CtmSearchDto = new CtmSearchDto();
   params = new PagingParameter<CtmSearchDto>();
-
+  methodOps: OptionItem[] = CTT_METHOD_OPS;
+  
   total = 0;
   columnOp = 'lastLoginAt';
   columns: Array<PaginatorColumn> = [

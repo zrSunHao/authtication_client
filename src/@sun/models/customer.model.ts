@@ -8,6 +8,31 @@ export enum GenderType {
     other = '',     // 默认
 }
 
+export enum EducationType {
+    none = '0',             // 无
+    primary = '1',          // 小学
+    middle = '2',           // 初中
+    high = '3',             // 高中
+    college = '4',          // 大专
+    undergraduate = '5',    // 本科
+    master = '6',           // 硕士
+    doctor = '7',           // 博士
+    other = '',             // 默认
+}
+
+export const CTM_EDUCATION_OPS: OptionItem[] = [
+    { key: EducationType.other, value: '- - -' },
+    { key: EducationType.none, value: '无' },
+    { key: EducationType.primary, value: '小学' },
+    { key: EducationType.middle, value: '初中' },
+    { key: EducationType.high, value: '高中' },
+    { key: EducationType.college, value: '大专' },
+    { key: EducationType.undergraduate, value: '本科' },
+    { key: EducationType.master, value: '硕士' },
+    { key: EducationType.doctor, value: '博士' },
+];
+
+
 export class CtmElet {
     id: string | null = '';
     avatar: string = '';
@@ -68,6 +93,8 @@ export const CTM_GENDER_OPS: OptionItem[] = [
     { key: GenderType.male, value: '男' },
     { key: GenderType.female, value: '女' },
 ];
+
+
 
 
 export class CtmSearchDto {

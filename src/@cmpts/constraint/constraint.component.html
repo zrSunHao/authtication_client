@@ -75,7 +75,7 @@
           <th mat-header-cell *matHeaderCellDef> 方式 </th>
           <td mat-cell *matCellDef="let element" style="width: 4rem;">
             <span *ngIf="element.method === methodOps[1].key" style="color: #93c5fd;">{{methodOps[1].value}}</span>
-            <span *ngIf="element.method === methodOps[2].key" style="color: #c4b5fd;">{{methodOps[1].value}}</span>
+            <span *ngIf="element.method === methodOps[2].key" style="color: #c4b5fd;">{{methodOps[2].value}}</span>
           </td>
         </ng-container>
         <ng-container matColumnDef="expiredAt">

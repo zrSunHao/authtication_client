@@ -1,12 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
-import { PagingParameter, ResponsePagingResult } from 'src/@sun/models/paging.model';
+import { OptionItem, PagingParameter, ResponsePagingResult } from 'src/@sun/models/paging.model';
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CtmRoleElet, CtmRoleSearchDto, CUSTOMER_ROLE_ELEMENT_DATA } from 'src/@sun/models/customer.model';
 
 import { MyService } from '../my.service';
+import { ROLE_RANK_OPS } from 'src/@sun/models/system.model';
 
 @Component({
   selector: 'app-customer-roles',
@@ -17,6 +18,7 @@ export class CustomerRolesComponent implements OnInit {
 
   dto: CtmRoleSearchDto = new CtmRoleSearchDto();
   params = new PagingParameter<CtmRoleSearchDto>();
+  rankOps: OptionItem[] = ROLE_RANK_OPS;
 
   @Input() customerId: string = '';
 

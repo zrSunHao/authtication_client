@@ -22,11 +22,9 @@
           <mat-icon matSuffix>report</mat-icon>
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>是否存在约束</mat-label>
+          <mat-label>约束方式</mat-label>
           <mat-select [(ngModel)]="dto.limited" name="limited">
-            <mat-option value="">全部</mat-option>
-            <mat-option value="0">有</mat-option>
-            <mat-option value="1">无</mat-option>
+            <mat-option [value]="item.key" *ngFor="let item of methodOps">{{item.value}}</mat-option>
           </mat-select>
           <mat-icon matSuffix>category</mat-icon>
         </mat-form-field>
@@ -67,8 +65,8 @@
         <ng-container matColumnDef="limited">
           <th mat-header-cell *matHeaderCellDef> 约束 </th>
           <td mat-cell *matCellDef="let element" style="min-width: 3rem;">
-            <span *ngIf="element.limited === '1'" style="color: #93c5fd;">有</span>
-            <span *ngIf="element.limited === '0'" style="color: #c4b5fd;">无</span>
+            <span *ngIf="element.limited === methodOps[1].key" style="color: #93c5fd;">{{methodOps[1].value}}</span>
+            <span *ngIf="element.limited === methodOps[2].key" style="color: #c4b5fd;">{{methodOps[2].value}}</span>
           </td>
         </ng-container>
         <ng-container matColumnDef="lastLoginAt">
@@ -89,7 +87,8 @@
               (click)="onDetailClick(element)">
               <mat-icon>read_more</mat-icon>
             </button>
-            <button mat-icon-button matTooltip="备注" *ngxPermissionsOnly="['ctm_remark']" (click)="onRemarkClick(element)">
+            <button mat-icon-button matTooltip="备注" *ngxPermissionsOnly="['ctm_remark']"
+              (click)="onRemarkClick(element)">
               <mat-icon>message</mat-icon>
             </button>
           </td>

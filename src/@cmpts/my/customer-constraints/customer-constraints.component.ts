@@ -1,12 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
-import { PagingParameter, ResponsePagingResult } from 'src/@sun/models/paging.model';
+import { OptionItem, PagingParameter, ResponsePagingResult } from 'src/@sun/models/paging.model';
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CtmCttElet, CONSTRAINT_ELEMENT_DATA, CtmCttSearchDto } from 'src/@sun/models/customer.model';
 
 import { MyService } from '../my.service';
+import { CTT_CATEGERY_OPS, CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
 
 @Component({
   selector: 'app-customer-constraints',
@@ -17,6 +18,8 @@ export class CustomerConstraintsComponent implements OnInit {
 
   dto: CtmCttSearchDto = new CtmCttSearchDto();
   params = new PagingParameter<CtmCttSearchDto>();
+  categeryOps: OptionItem[] = [CTT_CATEGERY_OPS[0], CTT_CATEGERY_OPS[1], CTT_CATEGERY_OPS[2]];
+  methodOps: OptionItem[] = CTT_METHOD_OPS;
 
   @Input() customerId: string = '';
 

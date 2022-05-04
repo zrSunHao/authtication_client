@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
-import { PeopleElet } from '../../../@sun/models/customer.model';
+import { CTM_EDUCATION_OPS, CTM_GENDER_OPS, PeopleElet } from '../../../@sun/models/customer.model';
+import { OptionItem } from 'src/@sun/models/paging.model';
 
 @Component({
   selector: 'app-people-info',
@@ -17,6 +18,8 @@ export class PeopleInfoComponent implements OnInit {
   dateDisabled = false;
   edit = false;
   people: PeopleElet = new PeopleElet();
+  gerderOps: OptionItem[] = CTM_GENDER_OPS;
+  eduOps: OptionItem[] = CTM_EDUCATION_OPS;
 
   constructor(private notifyServ: NotifyService,
     private hostServ: CustomerService,) {
@@ -42,7 +45,7 @@ export class PeopleInfoComponent implements OnInit {
       this.dateDisabled = false;
       this.form.controls['birthday'].disable();
       this.edit = true;
-    }else{
+    } else {
       this.form.disable();
       this.dateDisabled = true;
       this.edit = false;
