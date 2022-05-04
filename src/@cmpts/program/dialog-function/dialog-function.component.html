@@ -17,9 +17,7 @@
   <mat-form-field appearance="outline">
     <mat-label>约束方式</mat-label>
     <mat-select formControlName="constraint" #constraint>
-      <mat-option value="">无</mat-option>
-      <mat-option value="1">禁用</mat-option>
-      <mat-option value="2">锁定</mat-option>
+      <mat-option [value]="item.key" *ngFor="let item of methodOps">{{item.value}}</mat-option>
     </mat-select>
     <mat-hint>是否添加约束</mat-hint>
     <mat-icon matSuffix>category</mat-icon>

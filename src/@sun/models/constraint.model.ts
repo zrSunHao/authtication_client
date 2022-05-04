@@ -36,7 +36,7 @@ export class CttSearchDto {
 }
 
 export const CTT_CATEGERY_OPS: OptionItem[] = [
-    { key: CttCategory.other, value: '全部' },
+    { key: CttCategory.other, value: '- - -' },
     { key: CttCategory.customer_all_system, value: '账号  - >  所有系统' },
     { key: CttCategory.customer_one_system, value: '账号- >某系统' },
     { key: CttCategory.program_function, value: '程序- >功能' },
@@ -44,9 +44,9 @@ export const CTT_CATEGERY_OPS: OptionItem[] = [
 ];
 
 export const CTT_METHOD_OPS: OptionItem[] = [
-    { key: CttMethod.other, value: '全部' },
+    { key: CttMethod.other, value: '- - -' },
     { key: CttMethod.forbid, value: '禁用' },
-    { key: CttMethod.lock, value: '默认' },
+    { key: CttMethod.lock, value: '锁定' },
 ];
 
 export const CONSTRAINT_ELEMENT_DATA: CttElet[] = [

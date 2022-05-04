@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { SectionElement } from '../model';
+import { SectElet } from '../../../@sun/models/program.model';
 import { ProgramService } from '../program.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class DialogSectionComponent implements OnInit {
   update: boolean = false;
 
   constructor(private dialogRef: MatDialogRef<DialogSectionComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: SectionElement,
+    @Inject(MAT_DIALOG_DATA) public data: SectElet,
     private notifyServ: NotifyService,
     private hostServ: ProgramService,) {
     this.title = data?.name ? '修改' : '添加';
@@ -47,7 +47,7 @@ export class DialogSectionComponent implements OnInit {
     this.dialogRef.close({ op: 'close' });
   }
 
-  private _add(e: SectionElement): void {
+  private _add(e: SectElet): void {
     this.hostServ.addSection(e).subscribe({
       next: res => {
         if (res.success) {
@@ -64,7 +64,7 @@ export class DialogSectionComponent implements OnInit {
     });
   }
 
-  private _update(e: SectionElement): void {
+  private _update(e: SectElet): void {
     this.hostServ.updateSection(e).subscribe({
       next: res => {
         if (res.success) {

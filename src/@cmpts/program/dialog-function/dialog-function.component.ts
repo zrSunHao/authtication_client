@@ -1,8 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
+import { OptionItem } from 'src/@sun/models/paging.model';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { FunctionElement } from '../model';
+import { FunctElet } from '../../../@sun/models/program.model';
 import { ProgramService } from '../program.service';
 
 @Component({
@@ -15,9 +17,10 @@ export class DialogFunctionComponent implements OnInit {
   title: string = '';
   form: FormGroup;
   update: boolean = false;
+  methodOps: OptionItem[] = CTT_METHOD_OPS;
 
   constructor(private dialogRef: MatDialogRef<DialogFunctionComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: FunctionElement,
+    @Inject(MAT_DIALOG_DATA) public data: FunctElet,
     private notifyServ: NotifyService,
     private hostServ: ProgramService,) {
     this.title = data?.name ? '修改' : '添加';
@@ -53,7 +56,7 @@ export class DialogFunctionComponent implements OnInit {
     this.dialogRef.close({ op: 'close' });
   }
 
-  private _add(e: FunctionElement): void {
+  private _add(e: FunctElet): void {
     this.hostServ.addFunction(e).subscribe({
       next: res => {
         if (res.success) {
@@ -70,7 +73,7 @@ export class DialogFunctionComponent implements OnInit {
     });
   }
 
-  private _update(e: FunctionElement): void {
+  private _update(e: FunctElet): void {
     this.hostServ.updateFunction(e).subscribe({
       next: res => {
         if (res.success) {

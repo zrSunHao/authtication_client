@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { SectionElement } from '../model';
+import { SectElet } from '../../../@sun/models/program.model';
 
 @Component({
   selector: 'app-program-section',
@@ -8,32 +8,32 @@ import { SectionElement } from '../model';
 })
 export class ProgramSectionComponent implements OnInit {
 
-  @Input() selectedSection: SectionElement | null = null;
-  @Input() data: Array<SectionElement> = [];
+  @Input() selectedSection: SectElet | null = null;
+  @Input() data: Array<SectElet> = [];
 
-  @Output() onSelect: EventEmitter<SectionElement> = new EventEmitter<SectionElement>();
-  @Output() onAddFunction: EventEmitter<SectionElement> = new EventEmitter<SectionElement>();
-  @Output() onEdit: EventEmitter<SectionElement> = new EventEmitter<SectionElement>();
-  @Output() onDelete: EventEmitter<SectionElement> = new EventEmitter<SectionElement>();
+  @Output() onSelect: EventEmitter<SectElet> = new EventEmitter<SectElet>();
+  @Output() onAddFunction: EventEmitter<SectElet> = new EventEmitter<SectElet>();
+  @Output() onEdit: EventEmitter<SectElet> = new EventEmitter<SectElet>();
+  @Output() onDelete: EventEmitter<SectElet> = new EventEmitter<SectElet>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  onSelectClick(e: SectionElement): void {
+  onSelectClick(e: SectElet): void {
     this.onSelect.emit(e);
   }
 
-  onAddFunctionClick(e: SectionElement): void {
+  onAddFunctionClick(e: SectElet): void {
     this.onAddFunction.emit(e);
   }
 
-  onEditClick(e: SectionElement): void {
+  onEditClick(e: SectElet): void {
     this.onEdit.emit(e);
   }
 
-  onDeleteClick(e: SectionElement): void {
+  onDeleteClick(e: SectElet): void {
     this.onDelete.emit(e);
   }
 

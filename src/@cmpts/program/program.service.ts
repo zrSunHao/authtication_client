@@ -5,7 +5,7 @@ import { Observable, throwError } from 'rxjs';
 
 import { environment } from 'src/environments/environment'
 import { PagingParameter, ResponsePagingResult, ResponseResult } from 'src/@sun/models/paging.model';
-import { FunctionElement, ProgramElement, ProgramSearchDto, SectionElement } from './model';
+import { FunctElet, PgmElet, PgmSearchDto, SectElet } from '../../@sun/models/program.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,17 +23,17 @@ export class ProgramService {
 
   // ---------------- program ------------------
 
-  public serach(param: PagingParameter<ProgramSearchDto>): Observable<ResponsePagingResult<ProgramElement>> {
+  public serach(param: PagingParameter<PgmSearchDto>): Observable<ResponsePagingResult<PgmElet>> {
     const url = `${this.baseUrl}/search`;
-    return this.http.post<ResponsePagingResult<ProgramElement>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.post<ResponsePagingResult<PgmElet>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  public add(param: ProgramElement): Observable<ResponseResult<boolean>> {
+  public add(param: PgmElet): Observable<ResponseResult<boolean>> {
     const url = `${this.baseUrl}/add`;
     return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  public update(param: ProgramElement): Observable<ResponseResult<boolean>> {
+  public update(param: PgmElet): Observable<ResponseResult<boolean>> {
     const url = `${this.baseUrl}/update`;
     return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
@@ -46,18 +46,18 @@ export class ProgramService {
 
   // ---------------- section ------------------
 
-  public getSections(programId: string): Observable<ResponseResult<SectionElement[]>> {
+  public getSections(programId: string): Observable<ResponseResult<SectElet[]>> {
     const url = `${this.sectionUrl}/getList?programId=${programId}`;
-    return this.http.get<ResponseResult<SectionElement[]>>(url)
+    return this.http.get<ResponseResult<SectElet[]>>(url)
       .pipe(catchError(this.handleError));
   }
 
-  public addSection(param: SectionElement): Observable<ResponseResult<boolean>> {
+  public addSection(param: SectElet): Observable<ResponseResult<boolean>> {
     const url = `${this.sectionUrl}/add`;
     return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  public updateSection(param: SectionElement): Observable<ResponseResult<boolean>> {
+  public updateSection(param: SectElet): Observable<ResponseResult<boolean>> {
     const url = `${this.sectionUrl}/update`;
     return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
@@ -70,18 +70,18 @@ export class ProgramService {
 
   // ---------------- function ------------------
 
-  public getFunctions(sectionId: string): Observable<ResponseResult<FunctionElement[]>> {
+  public getFunctions(sectionId: string): Observable<ResponseResult<FunctElet[]>> {
     const url = `${this.functionUrl}/getList?sectionId=${sectionId}`;
-    return this.http.get<ResponseResult<FunctionElement[]>>(url)
+    return this.http.get<ResponseResult<FunctElet[]>>(url)
       .pipe(catchError(this.handleError));
   }
 
-  public addFunction(param: FunctionElement): Observable<ResponseResult<boolean>> {
+  public addFunction(param: FunctElet): Observable<ResponseResult<boolean>> {
     const url = `${this.functionUrl}/add`;
     return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  public updateFunction(param: FunctionElement): Observable<ResponseResult<boolean>> {
+  public updateFunction(param: FunctElet): Observable<ResponseResult<boolean>> {
     const url = `${this.functionUrl}/update`;
     return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }

@@ -11,7 +11,7 @@ import { DialogFunctionComponent } from '../dialog-function/dialog-function.comp
 import { ProgramFunctionComponent } from '../program-function/program-function.component';
 import { ProgramSectionComponent } from '../program-section/program-section.component';
 import { ProgramService } from '../program.service';
-import { FunctionElement, FUNCTION_ELEMENT_DATA, SectionElement, SECTION_ELEMENT_DATA } from '../model';
+import { FunctElet, FUNCTION_ELEMENT_DATA, SectElet, SECTION_ELEMENT_DATA } from '../../../@sun/models/program.model';
 
 @Component({
   selector: 'app-program-detail',
@@ -24,9 +24,9 @@ export class ProgramDetailComponent implements OnInit {
   programType: string = '';
   programName: string = '';
 
-  selectedSection: SectionElement | null = null;
-  sections: SectionElement[] = [];
-  functions: FunctionElement[] = [];
+  selectedSection: SectElet | null = null;
+  sections: SectElet[] = [];
+  functions: FunctElet[] = [];
 
   @ViewChild('sectCmpt')
   sectCmpt!: ProgramSectionComponent;
@@ -69,7 +69,7 @@ export class ProgramDetailComponent implements OnInit {
     this.router.navigate([`/program`]);
   }
 
-  onSelectSectionClick(e: SectionElement): void {
+  onSelectSectionClick(e: SectElet): void {
     if (e?.id !== this.selectedSection?.id) {
       this.functions = [];
       this.selectedSection = e;
@@ -78,7 +78,7 @@ export class ProgramDetailComponent implements OnInit {
   }
 
   onAddSectionClick(): void {
-    const e: SectionElement = {
+    const e: SectElet = {
       id: '', name: '', programId: this.programId, code: '', remark: ''
     };
     const dialogRef = this.dialog.open(DialogSectionComponent,
@@ -92,8 +92,8 @@ export class ProgramDetailComponent implements OnInit {
     });
   }
 
-  onEditSectionClick(e: SectionElement): void {
-    const newE: SectionElement = {
+  onEditSectionClick(e: SectElet): void {
+    const newE: SectElet = {
       id: e.id, name: e.name, programId: e.programId, code: e.code, remark: e.remark
     };
     const dialogRef = this.dialog.open(DialogSectionComponent,
@@ -109,7 +109,7 @@ export class ProgramDetailComponent implements OnInit {
     });
   }
 
-  onDeleteSectionClick(e: SectionElement): void {
+  onDeleteSectionClick(e: SectElet): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '260px',
       data: `确定要删除【${e.name}】模块吗？`,
@@ -120,8 +120,8 @@ export class ProgramDetailComponent implements OnInit {
     });
   }
 
-  onAddFunctionClick(e: SectionElement): void {
-    const f: FunctionElement = {
+  onAddFunctionClick(e: SectElet): void {
+    const f: FunctElet = {
       id: '', programId: this.programId, sectionId: e.id as string, name: '', code: '', constraint: '', limitedExpireAt: null, remark: ''
     };
     const dialogRef = this.dialog.open(DialogFunctionComponent,
@@ -136,8 +136,8 @@ export class ProgramDetailComponent implements OnInit {
     });
   }
 
-  onEditFunctionClick(e: FunctionElement): void {
-    const f: FunctionElement = {
+  onEditFunctionClick(e: FunctElet): void {
+    const f: FunctElet = {
       id: e.id, programId: e.programId, sectionId: e.sectionId, name: e.name, code: e.code, constraint: e.constraint, limitedExpireAt: e.limitedExpireAt, remark: e.remark
     };
     const dialogRef = this.dialog.open(DialogFunctionComponent,
@@ -155,7 +155,7 @@ export class ProgramDetailComponent implements OnInit {
     });
   }
 
-  onDeleteFunctionClick(e: FunctionElement): void {
+  onDeleteFunctionClick(e: FunctElet): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '260px',
       data: `确定要删除【${e.name}】功能吗？`,
@@ -188,9 +188,9 @@ export class ProgramDetailComponent implements OnInit {
     });
   }
 
-  private _renderSectionData(res: ResponseResult<SectionElement[]>): void {
+  private _renderSectionData(res: ResponseResult<SectElet[]>): void {
     if (res.success) {
-      this.sections = res.data as SectionElement[];
+      this.sections = res.data as SectElet[];
     } else {
       this.sections = SECTION_ELEMENT_DATA; // TODO 待删除
       const msg = `模块数据加载失败！！！ ${res.allMessages}`;
@@ -198,9 +198,9 @@ export class ProgramDetailComponent implements OnInit {
     }
   }
 
-  private _renderFunctionData(res: ResponseResult<FunctionElement[]>): void {
+  private _renderFunctionData(res: ResponseResult<FunctElet[]>): void {
     if (res.success) {
-      this.functions = res.data as FunctionElement[];
+      this.functions = res.data as FunctElet[];
     } else {
       this.functions = FUNCTION_ELEMENT_DATA; // TODO 待删除
       const msg = `功能数据加载失败！！！ ${res.allMessages}`;
@@ -208,7 +208,7 @@ export class ProgramDetailComponent implements OnInit {
     }
   }
 
-  private _deleteSection(e: SectionElement): void {
+  private _deleteSection(e: SectElet): void {
     this.hostServ.deleteSection(e.id as string).subscribe({
       next: res => {
         if (res.success) {
@@ -228,7 +228,7 @@ export class ProgramDetailComponent implements OnInit {
     });
   }
 
-  private _deleteFunction(e: FunctionElement): void {
+  private _deleteFunction(e: FunctElet): void {
     this.hostServ.deleteFunction(e.id as string).subscribe({
       next: res => {
         if (res.success) {

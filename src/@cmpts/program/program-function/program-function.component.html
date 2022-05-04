@@ -17,11 +17,12 @@
         <td mat-cell *matCellDef="let element" style="color: #a5f3fc;"> {{element.code}}&nbsp;&nbsp; </td>
       </ng-container>
       <ng-container matColumnDef="constraint">
-        <th mat-header-cell *matHeaderCellDef> 约束 </th>
-        <td mat-cell *matCellDef="let element">
-          <span *ngIf="element.constraint === '1'">禁用&nbsp;&nbsp; </span>
-          <span *ngIf="element.constraint === '2'">锁定&nbsp;&nbsp; </span>
-          <span *ngIf="element.constraint !== '1'&&element.constraint !== '2'">-&nbsp;-&nbsp;-</span>
+        <th mat-header-cell *matHeaderCellDef> 约束方式 </th>
+        <td mat-cell *matCellDef="let element" style="width: 4rem;">
+          <span *ngIf="element.constraint === methodOps[1].key">{{methodOps[1].value}}</span>
+          <span *ngIf="element.constraint === methodOps[2].key">{{methodOps[2].value}}</span>
+          <span
+            *ngIf="element.constraint !== methodOps[1].key&&element.constraint !== methodOps[2].key">-&nbsp;-&nbsp;-</span>
         </td>
       </ng-container>
       <ng-container matColumnDef="limitedExpireAt">
@@ -40,10 +41,12 @@
       <ng-container matColumnDef="operate">
         <th mat-header-cell *matHeaderCellDef> 操作 </th>
         <td mat-cell *matCellDef="let element" style="width: 6rem;">
-          <button mat-icon-button matTooltip="编辑" *ngxPermissionsOnly="['pgm_func_update']" (click)="onEditClick(element)">
+          <button mat-icon-button matTooltip="编辑" *ngxPermissionsOnly="['pgm_func_update']"
+            (click)="onEditClick(element)">
             <mat-icon>mode_edit</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="删除" *ngxPermissionsOnly="['pgm_func_delete']" (click)="onDeleteClick(element)">
+          <button mat-icon-button matTooltip="删除" *ngxPermissionsOnly="['pgm_func_delete']"
+            (click)="onDeleteClick(element)">
             <mat-icon>delete_sweep</mat-icon>
           </button>
         </td>

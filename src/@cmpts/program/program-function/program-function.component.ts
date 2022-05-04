@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FunctionElement } from '../model';
+import { CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
+import { OptionItem } from 'src/@sun/models/paging.model';
+import { FunctElet } from '../../../@sun/models/program.model';
 
 @Component({
   selector: 'app-program-function',
@@ -8,24 +10,25 @@ import { FunctionElement } from '../model';
 })
 export class ProgramFunctionComponent implements OnInit {
 
+  methodOps: OptionItem[] = CTT_METHOD_OPS;
   displayedColumns = ['name', 'code', 'constraint', 'limitedExpireAt', 'remark', 'operate',];
 
   @Input() sectionName: string = 'xxx xxx'
-  @Input() data: FunctionElement[] = [];
+  @Input() data: FunctElet[] = [];
 
-  @Output() onEdit: EventEmitter<FunctionElement> = new EventEmitter<FunctionElement>();
-  @Output() onDelete: EventEmitter<FunctionElement> = new EventEmitter<FunctionElement>();
+  @Output() onEdit: EventEmitter<FunctElet> = new EventEmitter<FunctElet>();
+  @Output() onDelete: EventEmitter<FunctElet> = new EventEmitter<FunctElet>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  onEditClick(e: FunctionElement): void {
+  onEditClick(e: FunctElet): void {
     this.onEdit.emit(e);
   }
 
-  onDeleteClick(e: FunctionElement): void {
+  onDeleteClick(e: FunctElet): void {
     this.onDelete.emit(e);
   }
 

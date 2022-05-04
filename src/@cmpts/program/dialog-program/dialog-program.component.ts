@@ -1,8 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { OptionItem } from 'src/@sun/models/paging.model';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { ProgramElement } from '../model';
+import { PgmElet, PGM_TYPE_OPS } from '../../../@sun/models/program.model';
 import { ProgramService } from '../program.service';
 
 @Component({
@@ -15,9 +16,10 @@ export class DialogProgramComponent implements OnInit {
   title: string = '';
   form: FormGroup;
   update: boolean = false;
+  typeOps: OptionItem[] = PGM_TYPE_OPS;
 
   constructor(private dialogRef: MatDialogRef<DialogProgramComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: ProgramElement,
+    @Inject(MAT_DIALOG_DATA) public data: PgmElet,
     private hostServ: ProgramService,
     private notifyServ: NotifyService,) {
     this.title = data?.name ? '修改' : '添加';
@@ -53,7 +55,7 @@ export class DialogProgramComponent implements OnInit {
     this.dialogRef.close({ op: 'close' });
   }
 
-  private _add(e: ProgramElement): void {
+  private _add(e: PgmElet): void {
     this.hostServ.add(e).subscribe({
       next: res => {
         if (res.success) {
@@ -71,7 +73,7 @@ export class DialogProgramComponent implements OnInit {
     });
   }
 
-  private _update(e: ProgramElement): void {
+  private _update(e: PgmElet): void {
     this.hostServ.update(e).subscribe({
       next: res => {
         if (res.success) {
