@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
@@ -31,6 +31,7 @@ import { ClipPipe } from './pipes/clip.pipe';
 import { NotifyService } from './services/notify.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guard/auth.guard';
+import { AuthInterceptor } from './guard/auth.interceptor';
 
 const mats = [
   MatCardModule,
@@ -56,9 +57,13 @@ const pipes = [ClipPipe];
 const exports = [ClipPipe, PaginatorComponent, ConfirmDialogComponent,];
 
 @NgModule({
-  imports: [CommonModule, FormsModule, HttpClientModule, ...mats,NgxPermissionsModule.forChild(),],
+  imports: [CommonModule, FormsModule, HttpClientModule, ...mats, NgxPermissionsModule.forChild(),],
   declarations: [...pipes, ...components],
-  providers: [...services, AuthGuard],
-  exports: [...exports, ...mats]
+  providers: [
+    ...services,
+    AuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
+  exports: [...exports, ...mats, HttpClientModule]
 })
 export class SharedModule { }

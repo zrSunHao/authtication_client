@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard.module.routing';
@@ -14,7 +13,6 @@ import { SharedModule } from 'src/@sun/shared/shared.module';
 @NgModule({
   imports: [
     CommonModule,
-    HttpClientModule,
 
     SharedModule,
     DashboardRoutingModule,
