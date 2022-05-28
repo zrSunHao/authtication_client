@@ -1,16 +1,16 @@
 import { OptionItem } from "./paging.model";
 
 export enum CttCategory {
-    customer_all_system = '1',  // 账号->所有系统
-    customer_one_system = '2',  // 账号->某系统
-    program_function = '3',     // 程序->功能
-    system_role = '4',          // 系统->角色
-    other = '',                 // 默认
+    customer_all_system = 1,  // 账号->所有系统
+    customer_one_system = 2,  // 账号->某系统
+    program_function = 3,     // 程序->功能
+    system_role = 4,          // 系统->角色
+    other = '',                // 默认
 }
 
 export enum CttMethod {
-    forbid = '1',   // 禁用 
-    lock = '2',     // 锁定
+    forbid = 1,   // 禁用 
+    lock = 2,     // 锁定
     other = '',     // 默认
 }
 
@@ -27,7 +27,7 @@ export interface CttElet {
     remark: string;
 }
 
-export class CttSearchDto {
+export class CttFilter {
     name: string = '';
     category: CttCategory = CttCategory.other;
     originOrRemark: string = '';

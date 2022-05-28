@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { SysPgmElet, PROGRAM_ELEMENT_DATA, SysPgmSearchDto } from '../../../@sun/models/system.model';
+import { SysPgmElet, PROGRAM_ELEMENT_DATA, SysPgmFilter } from '../../../@sun/models/system.model';
 
 @Component({
   selector: 'app-system-section',
@@ -8,11 +8,11 @@ import { SysPgmElet, PROGRAM_ELEMENT_DATA, SysPgmSearchDto } from '../../../@sun
 })
 export class SystemSectionComponent implements OnInit {
 
-  dto: SysPgmSearchDto = new SysPgmSearchDto();
+  dto: SysPgmFilter = new SysPgmFilter();
 
   @Input() data: SysPgmElet[] = PROGRAM_ELEMENT_DATA;
   @Output() onAddProgram: EventEmitter<SysPgmElet> = new EventEmitter<SysPgmElet>();
-  @Output() onGetPrograms: EventEmitter<SysPgmSearchDto> = new EventEmitter<SysPgmSearchDto>();
+  @Output() onGetPrograms: EventEmitter<SysPgmFilter> = new EventEmitter<SysPgmFilter>();
 
   constructor() { }
 
@@ -24,7 +24,7 @@ export class SystemSectionComponent implements OnInit {
   }
 
   onResetClick(): void {
-    this.dto = new SysPgmSearchDto();
+    this.dto = new SysPgmFilter();
     this.onGetPrograms.emit(this.dto);
   }
 

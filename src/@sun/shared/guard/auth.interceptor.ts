@@ -32,7 +32,8 @@ export class AuthInterceptor implements HttpInterceptor {
      */
     handleRequest(req: HttpRequest<any>): HttpRequest<any> {
         const copyReq = req.clone({
-            headers: req.headers.set('token', 'my-auth-token')
+            headers: req.headers
+                .set('token', 'my-auth-token')
                 .set('pgm', 'ctm_client')
                 .set('sys', 'ctm')
         });

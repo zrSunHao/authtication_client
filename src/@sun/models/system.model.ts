@@ -7,8 +7,8 @@ export enum RoleRank {
     member = 10,            // 会员
     business = 100,         // 业务员
     manager = 1000,         // 管理员
-    sysManager = 10000,     // 系统管理员
-    superManager = 100000,  // 超级管理员
+    sys_manager = 10000,     // 系统管理员
+    super_manager = 100000,  // 超级管理员
     other = 0,              // 其他
 }
 
@@ -66,14 +66,14 @@ export const ROLE_RANK_OPS: OptionItem[] = [
     { key: RoleRank.member, value: '会员' },
     { key: RoleRank.business, value: '业务员' },
     { key: RoleRank.manager, value: '管理员' },
-    { key: RoleRank.sysManager, value: '系统管理员' },
-    { key: RoleRank.superManager, value: '超级管理员' },
+    { key: RoleRank.sys_manager, value: '系统管理员' },
+    { key: RoleRank.super_manager, value: '超级管理员' },
 ];
 
 
 
 
-export class SysSearchDto {
+export class SysFilter {
     name: string = '';
     code: string = '';
     introOrRemark: string = '';
@@ -81,20 +81,20 @@ export class SysSearchDto {
     endAt: Date | null = null;
 }
 
-export class SysPgmSearchDto {
+export class SysPgmFilter {
     systemId: string = '';
     nameOrCode: string = '';
     type: '' | '1' | '2' | '3' | '4' = '';
 }
 
-export class SysPgmGetDto {
+export class SysPgmGetFilter {
     systemId: string = '';
     nameOrCode: string = '';
     type: '' | '1' | '2' | '3' | '4' = '';
     introOrRemark: string = '';
 }
 
-export class RoleSearchDto {
+export class SysRoleFilter {
     systemId: string = '';
     nameOrCode: string = '';
     type: '' | '1' | '2' | '3' = '';
@@ -103,7 +103,7 @@ export class RoleSearchDto {
     endAt: Date | null = null;
 }
 
-export class RoleFunctDto {
+export class SysRoleRelation {
     roleId: string = '';
     programId: string = '';
     sectionIds: string[] = [];
@@ -126,23 +126,23 @@ export const SYSTEM_ELEMENT_DATA: SysElet[] = [
 ];
 
 export const PROGRAM_ELEMENT_DATA: SysPgmElet[] = [
-    { id: '1', name: 'client_1', type: PgmType.web, systemId: '', code: 'customer_angular', intro: '认证中心Angular版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '2', name: 'desktop_2', type: PgmType.desktop, systemId: '', code: 'customer_wpf', intro: '认证中心WPF版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '3', name: 'mobile_3', type: PgmType.mobile, systemId: '', code: 'customer_android', intro: '认证中心android版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '4', name: 'service_4', type: PgmType.service, systemId: '', code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '5', name: 'client_5', type: PgmType.web, systemId: '', code: 'customer_angular', intro: '认证中心Angular版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '6', name: 'desktop_6', type: PgmType.desktop, systemId: '', code: 'customer_wpf', intro: '认证中心WPF版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '7', name: 'mobile_7', type: PgmType.mobile, systemId: '', code: 'customer_android', intro: '认证中心android版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '8', name: 'service_8', type: PgmType.service, systemId: '', code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '9', name: 'mobile_9', type: PgmType.mobile, systemId: '', code: 'customer_android', intro: '认证中心android版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '10', name: 'service_10', type: PgmType.service, systemId: '', code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '1', name: 'client_1', category: PgmType.web, systemId: '', code: 'customer_angular', intro: '认证中心Angular版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '2', name: 'desktop_2', category: PgmType.desktop, systemId: '', code: 'customer_wpf', intro: '认证中心WPF版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '3', name: 'mobile_3', category: PgmType.mobile, systemId: '', code: 'customer_android', intro: '认证中心android版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '4', name: 'service_4', category: PgmType.service, systemId: '', code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '5', name: 'client_5', category: PgmType.web, systemId: '', code: 'customer_angular', intro: '认证中心Angular版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '6', name: 'desktop_6', category: PgmType.desktop, systemId: '', code: 'customer_wpf', intro: '认证中心WPF版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '7', name: 'mobile_7', category: PgmType.mobile, systemId: '', code: 'customer_android', intro: '认证中心android版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '8', name: 'service_8', category: PgmType.service, systemId: '', code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '9', name: 'mobile_9', category: PgmType.mobile, systemId: '', code: 'customer_android', intro: '认证中心android版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '10', name: 'service_10', category: PgmType.service, systemId: '', code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
 ];
 
 export const ROLE_ELEMENT_DATA: RoleElet[] = [
     { id: '1', rank: RoleRank.default, name: '普通用户', systemId: '', code: 'default', limitedMethod: CttMethod.forbid, limitedExpiredAt: null, createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
     { id: '1', rank: RoleRank.member, name: '会员', systemId: '', code: 'default', limitedMethod: CttMethod.lock, limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
     { id: '1', rank: RoleRank.manager, name: '管理员', systemId: '', code: 'default', limitedMethod: CttMethod.forbid, limitedExpiredAt: null, createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { id: '1', rank: RoleRank.superManager, name: '超级管理员', systemId: '', code: 'default', limitedMethod: CttMethod.lock, limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
+    { id: '1', rank: RoleRank.super_manager, name: '超级管理员', systemId: '', code: 'default', limitedMethod: CttMethod.lock, limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
     { id: '1', rank: RoleRank.business, name: '业务员', systemId: '', code: 'default', limitedMethod: CttMethod.other, limitedExpiredAt: null, createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
     { id: '1', rank: RoleRank.business, name: '测试人员', systemId: '', code: 'default', limitedMethod: CttMethod.other, limitedExpiredAt: null, createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
     { id: '1', rank: RoleRank.business, name: '设计人员', systemId: '', code: 'default', limitedMethod: CttMethod.other, limitedExpiredAt: null, createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },

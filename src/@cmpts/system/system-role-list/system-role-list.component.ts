@@ -6,7 +6,7 @@ import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/con
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { DialogRoleComponent } from '../dialog-role/dialog-role.component';
-import { RoleElet, RoleSearchDto, ROLE_ELEMENT_DATA, ROLE_RANK_OPS } from '../../../@sun/models/system.model';
+import { RoleElet, SysRoleFilter, ROLE_ELEMENT_DATA, ROLE_RANK_OPS } from '../../../@sun/models/system.model';
 import { SystemService } from '../system.service';
 import { CttMethod } from 'src/@sun/models/constraint.model';
 
@@ -19,8 +19,8 @@ export class SystemRoleListComponent implements OnInit {
 
   sysId: string = '';
   sysName: string = '';
-  dto: RoleSearchDto = new RoleSearchDto();
-  params = new PagingParameter<RoleSearchDto>();
+  dto: SysRoleFilter = new SysRoleFilter();
+  params = new PagingParameter<SysRoleFilter>();
   rankOps: OptionItem[] = ROLE_RANK_OPS;
 
   total = 0;
@@ -56,7 +56,7 @@ export class SystemRoleListComponent implements OnInit {
   }
 
   onResetClick(): void {
-    this.dto = new RoleSearchDto();
+    this.dto = new SysRoleFilter();
     this.dto.systemId = this.sysId;
     this.params.filter = this.dto;
     this.params.pageIndex = 1;
@@ -121,7 +121,7 @@ export class SystemRoleListComponent implements OnInit {
     this._loadData(this.params);
   }
 
-  private _loadData(params: PagingParameter<RoleSearchDto>): void {
+  private _loadData(params: PagingParameter<SysRoleFilter>): void {
     this.hostServ.serachRoles(params).subscribe({
       next: res => { this._renderInfo(res); },
       error: err => {

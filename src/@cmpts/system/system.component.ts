@@ -6,7 +6,7 @@ import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/con
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { DialogSystemComponent } from './dialog-system/dialog-system.component';
-import { SysElet, SysSearchDto, SYSTEM_ELEMENT_DATA } from '../../@sun/models/system.model';
+import { SysElet, SysFilter, SYSTEM_ELEMENT_DATA } from '../../@sun/models/system.model';
 import { SystemService } from './system.service';
 
 @Component({
@@ -16,8 +16,8 @@ import { SystemService } from './system.service';
 })
 export class SystemComponent implements OnInit, AfterViewInit {
 
-  dto: SysSearchDto = new SysSearchDto();
-  params = new PagingParameter<SysSearchDto>();
+  dto: SysFilter = new SysFilter();
+  params = new PagingParameter<SysFilter>();
   currentSys: SysElet | null = null;
 
   total = 35;
@@ -51,7 +51,7 @@ export class SystemComponent implements OnInit, AfterViewInit {
   }
 
   onResetClick(): void {
-    this.dto = new SysSearchDto();
+    this.dto = new SysFilter();
     this.params.filter = this.dto;
     this.params.pageIndex = 1;
     this.params.pageSize = 10;
@@ -141,7 +141,7 @@ export class SystemComponent implements OnInit, AfterViewInit {
     }
   }
 
-  private _loadData(params: PagingParameter<SysSearchDto>): void {
+  private _loadData(params: PagingParameter<SysFilter>): void {
     this.hostServ.serach(params).subscribe({
       next: res => { this._renderInfo(res); },
       error: err => {

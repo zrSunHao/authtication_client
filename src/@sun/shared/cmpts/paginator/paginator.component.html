@@ -1,13 +1,13 @@
 <div class="warp">
   <mat-form-field appearance="outline">
     <mat-label>当前排序项</mat-label>
-    <mat-select [(value)]="columnOp">
+    <mat-select [(value)]="columnOp" (valueChange)="notify()">
       <mat-option value={{c.value}} *ngFor="let c of columns">{{c.name}}</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>排序方式</mat-label>
-    <mat-select [(value)]="sort">
+    <mat-select [(value)]="sort" (valueChange)="notify()">
       <mat-option value="asc">升序</mat-option>
       <mat-option value="desc">降序</mat-option>
     </mat-select>
@@ -21,7 +21,7 @@
   </button>
   <mat-form-field appearance="outline">
     <mat-label>每页条数</mat-label>
-    <mat-select [(value)]="pageSize">
+    <mat-select [(value)]="pageSize" (valueChange)="notify()">
       <mat-option [value]="5">5条</mat-option>
       <mat-option [value]="10">10条</mat-option>
       <mat-option [value]="20">20条</mat-option>

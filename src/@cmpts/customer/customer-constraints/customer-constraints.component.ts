@@ -6,7 +6,7 @@ import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/pagi
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
 import { DialogConstraintComponent } from '../dialog-constraint/dialog-constraint.component';
-import { CtmCttElet, CONSTRAINT_ELEMENT_DATA, CtmCttSearchDto } from '../../../@sun/models/customer.model';
+import { CtmCttElet, CONSTRAINT_ELEMENT_DATA, CtmCttFilter } from '../../../@sun/models/customer.model';
 import { CTT_CATEGERY_OPS, CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
 
 @Component({
@@ -16,8 +16,8 @@ import { CTT_CATEGERY_OPS, CTT_METHOD_OPS } from 'src/@sun/models/constraint.mod
 })
 export class CustomerConstraintsComponent implements OnInit {
 
-  dto: CtmCttSearchDto = new CtmCttSearchDto();
-  params = new PagingParameter<CtmCttSearchDto>();
+  dto: CtmCttFilter = new CtmCttFilter();
+  params = new PagingParameter<CtmCttFilter>();
   categeryOps: OptionItem[] = [CTT_CATEGERY_OPS[0], CTT_CATEGERY_OPS[1], CTT_CATEGERY_OPS[2]];
   methodOps: OptionItem[] = CTT_METHOD_OPS;
 
@@ -53,7 +53,7 @@ export class CustomerConstraintsComponent implements OnInit {
   }
 
   onResetClick(): void {
-    this.dto = new CtmCttSearchDto();
+    this.dto = new CtmCttFilter();
     this.dto.customerId = this.customerId;
     this.params.filter = this.dto;
     this.params.pageIndex = 1;
@@ -96,7 +96,7 @@ export class CustomerConstraintsComponent implements OnInit {
     this._loadData(this.params);
   }
 
-  private _loadData(params: PagingParameter<CtmCttSearchDto>) {
+  private _loadData(params: PagingParameter<CtmCttFilter>) {
     this.hostServ.searchConstraints(params).subscribe({
       next: res => { this._renderInfo(res); },
       error: err => {

@@ -5,7 +5,7 @@ import { Observable, throwError } from 'rxjs';
 
 import { environment } from 'src/environments/environment'
 import { PagingParameter, ResponsePagingResult, ResponseResult } from 'src/@sun/models/paging.model';
-import { FunctElet, PgmElet, PgmSearchDto, SectElet } from '../../@sun/models/program.model';
+import { FunctElet, PgmElet, PgmFilter, SectElet } from '../../@sun/models/program.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,24 +23,30 @@ export class ProgramService {
 
   // ---------------- program ------------------
 
-  public serach(param: PagingParameter<PgmSearchDto>): Observable<ResponsePagingResult<PgmElet>> {
-    const url = `${this.baseUrl}/search`;
-    return this.http.post<ResponsePagingResult<PgmElet>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
+  public serach(param: PagingParameter<PgmFilter>): Observable<ResponsePagingResult<PgmElet>> {
+    const url = `${this.baseUrl}/GetList`;
+    return this.http.post<any>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
   public add(param: PgmElet): Observable<ResponseResult<boolean>> {
-    const url = `${this.baseUrl}/add`;
+    const url = `${this.baseUrl}/Add`;
     return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
   public update(param: PgmElet): Observable<ResponseResult<boolean>> {
-    const url = `${this.baseUrl}/update`;
-    return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
+    const url = `${this.baseUrl}/Update`;
+    return this.http.patch<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
   public delete(id: string): Observable<ResponseResult<boolean>> {
     const url = `${this.baseUrl}/delete?id=${id}`;
-    return this.http.get<ResponseResult<boolean>>(url)
+    return this.http.delete<ResponseResult<boolean>>(url)
+      .pipe(catchError(this.handleError));
+  }
+
+  public test(): Observable<any> {
+    const url = `${this.baseUrl}`;
+    return this.http.get<any>(url)
       .pipe(catchError(this.handleError));
   }
 

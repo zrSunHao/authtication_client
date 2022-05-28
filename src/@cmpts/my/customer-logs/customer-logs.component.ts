@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { PagingParameter, ResponsePagingResult } from 'src/@sun/models/paging.model';
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { CtmLogSearchDto, CtmLogElet, LOG_ELEMENT_DATA } from 'src/@sun/models/customer.model';
+import { CtmLogFilter, CtmLogElet, LOG_ELEMENT_DATA } from 'src/@sun/models/customer.model';
 
 import { MyService } from '../my.service';
 
@@ -14,8 +14,8 @@ import { MyService } from '../my.service';
 })
 export class CustomerLogsComponent implements OnInit {
 
-  dto: CtmLogSearchDto = new CtmLogSearchDto();
-  params = new PagingParameter<CtmLogSearchDto>();
+  dto: CtmLogFilter = new CtmLogFilter();
+  params = new PagingParameter<CtmLogFilter>();
 
   @Input() customerId: string = '';
 
@@ -48,7 +48,7 @@ export class CustomerLogsComponent implements OnInit {
   }
 
   onResetClick(): void {
-    this.dto = new CtmLogSearchDto();
+    this.dto = new CtmLogFilter();
     this.dto.customerId = this.customerId;
     this.params.filter = this.dto;
     this.params.pageIndex = 1;
@@ -67,7 +67,7 @@ export class CustomerLogsComponent implements OnInit {
     this._loadData(this.params);
   }
 
-  private _loadData(params: PagingParameter<CtmLogSearchDto>) {
+  private _loadData(params: PagingParameter<CtmLogFilter>) {
     this.hostServ.searchLogs(params).subscribe({
       next: res => { this._renderInfo(res); },
       error: err => {

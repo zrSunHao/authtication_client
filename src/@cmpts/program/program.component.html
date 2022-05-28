@@ -25,15 +25,14 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>类别</mat-label>
-          <mat-select [(ngModel)]="dto.type" name="type">
+          <mat-select [(ngModel)]="dto.category" name="category">
             <mat-option [value]="item.key" *ngFor="let item of typeOps">{{item.value}}</mat-option>
           </mat-select>
           <mat-icon matSuffix>category</mat-icon>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>功能简介/备注</mat-label>
-          <input matInput placeholder="请输入要搜索的功能简介/备注" [(ngModel)]="dto.introOrRemark" name="introOrRemark"
-            autocomplete="off">
+          <input matInput placeholder="请输入要搜索的功能简介/备注" [(ngModel)]="dto.remark" name="remark" autocomplete="off">
           <mat-icon matSuffix>message</mat-icon>
         </mat-form-field>
         <mat-form-field appearance="outline">
@@ -52,20 +51,20 @@
       <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef> 程序名称 </th>
-          <td mat-cell *matCellDef="let element" style="color: #a5f3fc;"> {{element.name}}&nbsp;&nbsp; </td>
+          <td mat-cell *matCellDef="let element" style="color: #a5f3fc;min-width: 4rem;"> {{element.name}}</td>
         </ng-container>
-        <ng-container matColumnDef="type">
+        <ng-container matColumnDef="category">
           <th mat-header-cell *matHeaderCellDef> 类别 </th>
-          <td mat-cell *matCellDef="let element">
-            <span *ngIf="element.type === typeOps[1].key" style="color: #a5f3fc;">{{typeOps[1].value}}</span>
-            <span *ngIf="element.type === typeOps[2].key" style="color: #fde68a;">{{typeOps[2].value}}</span>
-            <span *ngIf="element.type === typeOps[3].key" style="color: #a7f3d0;">{{typeOps[3].value}}</span>
-            <span *ngIf="element.type === typeOps[4].key" style="color: #f9a8d4;">{{typeOps[4].value}}</span>
+          <td mat-cell *matCellDef="let element" style="min-width: 4rem;">
+            <span *ngIf="element.category === typeOps[1].key" style="color: #a5f3fc;">{{typeOps[1].value}}</span>
+            <span *ngIf="element.category === typeOps[2].key" style="color: #fde68a;">{{typeOps[2].value}}</span>
+            <span *ngIf="element.category === typeOps[3].key" style="color: #a7f3d0;">{{typeOps[3].value}}</span>
+            <span *ngIf="element.category === typeOps[4].key" style="color: #f9a8d4;">{{typeOps[4].value}}</span>
           </td>
         </ng-container>
         <ng-container matColumnDef="code">
           <th mat-header-cell *matHeaderCellDef> 标识码 </th>
-          <td mat-cell *matCellDef="let element" style="color: #fee2e2;"> {{element.code}}&nbsp;&nbsp; </td>
+          <td mat-cell *matCellDef="let element" style="color: #fee2e2;min-width: 4rem;"> {{element.code}}</td>
         </ng-container>
         <ng-container matColumnDef="createdAt">
           <th mat-header-cell *matHeaderCellDef> 创建时间 </th>
@@ -106,7 +105,8 @@
     </mat-card>
 
     <mat-card class="footer">
-      <app-paginator [total]="total" [columns]="columns" [columnOp]="columnOp" (onChange)="onPaginatorChange($event)">
+      <app-paginator [pageIndex]="params.pageIndex" [total]="total" [columns]="columns" [columnOp]="columnOp"
+        (onChange)="onPaginatorChange($event)">
       </app-paginator>
     </mat-card>
   </div>

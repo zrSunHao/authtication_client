@@ -1,17 +1,17 @@
 import { OptionItem } from "./paging.model";
 
 export enum PgmType {
-    web = '1',      // 网页端
-    desktop = '2',  // 桌面端
-    mobile = '3',   // 移动端
-    service = '4',  // 服务端
-    other = '',     // 默认
+    web = 1,      // 网页端
+    desktop = 2,  // 桌面端
+    mobile = 3,   // 移动端
+    service = 4,  // 服务端
+    other = 0,     // 默认
 }
 
 export class PgmElet {
     id: string | null = '';
     name: string = '';
-    type: PgmType = PgmType.other;
+    category: PgmType = PgmType.other;
     code: string = '';
     intro: string = '';
     remark: string = '';
@@ -37,10 +37,10 @@ export interface FunctElet {
     remark: string;
 }
 
-export class PgmSearchDto {
+export class PgmFilter {
     nameOrCode: string = '';
-    type: '' | '1' | '2' | '3' | '4' = '';
-    introOrRemark: string = '';
+    category: PgmType = PgmType.other;
+    remark: string = '';
     startAt: Date | null = null;
     endAt: Date | null = null;
 }
@@ -54,16 +54,16 @@ export const PGM_TYPE_OPS: OptionItem[] = [
 ];
 
 export const PROGRAM_ELEMENT_DATA: PgmElet[] = [
-    { id: '1', name: 'client_1', type: PgmType.web, code: 'customer_angular', intro: '认证中心Angular版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '2', name: 'desktop_2', type: PgmType.desktop, code: 'customer_wpf', intro: '认证中心WPF版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '3', name: 'mobile_3', type: PgmType.mobile, code: 'customer_android', intro: '认证中心android版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '4', name: 'service_4', type: PgmType.service, code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '5', name: 'client_5', type: PgmType.web, code: 'customer_angular', intro: '认证中心Angular版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '6', name: 'desktop_6', type: PgmType.desktop, code: 'customer_wpf', intro: '认证中心WPF版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '7', name: 'mobile_7', type: PgmType.mobile, code: 'customer_android', intro: '认证中心android版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '8', name: 'service_8', type: PgmType.service, code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '9', name: 'mobile_9', type: PgmType.mobile, code: 'customer_android', intro: '认证中心android版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '10', name: 'service_10', type: PgmType.service, code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '1', name: 'client_1', category: PgmType.web, code: 'customer_angular', intro: '认证中心Angular版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '2', name: 'desktop_2', category: PgmType.desktop, code: 'customer_wpf', intro: '认证中心WPF版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '3', name: 'mobile_3', category: PgmType.mobile, code: 'customer_android', intro: '认证中心android版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '4', name: 'service_4', category: PgmType.service, code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '5', name: 'client_5', category: PgmType.web, code: 'customer_angular', intro: '认证中心Angular版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '6', name: 'desktop_6', category: PgmType.desktop, code: 'customer_wpf', intro: '认证中心WPF版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '7', name: 'mobile_7', category: PgmType.mobile, code: 'customer_android', intro: '认证中心android版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '8', name: 'service_8', category: PgmType.service, code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '9', name: 'mobile_9', category: PgmType.mobile, code: 'customer_android', intro: '认证中心android版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '10', name: 'service_10', category: PgmType.service, code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
 ];
 
 export const SECTION_ELEMENT_DATA: SectElet[] = [

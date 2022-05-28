@@ -3,20 +3,20 @@ import { OptionItem } from "./paging.model";
 import { RoleRank } from "./system.model";
 
 export enum GenderType {
-    male = '1',     // 男
-    female = '2',   // 女
+    male = 1,     // 男
+    female = 2,   // 女
     other = '',     // 默认
 }
 
 export enum EducationType {
-    none = '0',             // 无
-    primary = '1',          // 小学
-    middle = '2',           // 初中
-    high = '3',             // 高中
-    college = '4',          // 大专
-    undergraduate = '5',    // 本科
-    master = '6',           // 硕士
-    doctor = '7',           // 博士
+    none = 0,             // 无
+    primary = 1,          // 小学
+    middle = 2,           // 初中
+    high = 3,             // 高中
+    college = 4,          // 大专
+    undergraduate = 5,    // 本科
+    master = 6,           // 硕士
+    doctor = 7,           // 博士
     other = '',             // 默认
 }
 
@@ -95,7 +95,7 @@ export const CTM_EDUCATION_OPS: OptionItem[] = [
 
 
 
-export class CtmSearchDto {
+export class CtmFilter {
     nameOrNickname: string = '';
     limited: CttMethod = CttMethod.other;
     remark: string = '';
@@ -103,19 +103,19 @@ export class CtmSearchDto {
     endAt: Date | null = null;
 }
 
-export class CtmRoleSearchDto {
+export class CtmRoleFilter {
     customerId: string = '';
     sysName: string | null = '';
     roleName: string | null = '';
 }
 
-export class CtmCttSearchDto {
+export class CtmCttFilter {
     customerId: string = '';
     category: CttCategory = CttCategory.other; //账号->所有系统 账号->某系统
     sysName: string = '';
 }
 
-export class CtmLogSearchDto {
+export class CtmLogFilter {
     customerId: string = '';
     operate: string = '';
     sysName: string = '';
@@ -190,7 +190,7 @@ export const CUSTOMER_ROLE_ELEMENT_DATA: CtmRoleElet[] = [
     },
     {
         id: '1', sysLogo: '', sysId: '1', sysName: 'app-222', roleId: '1', roleName: '超级管理员',
-        rank: RoleRank.superManager, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
+        rank: RoleRank.super_manager, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
     },
     {
         id: '1', sysLogo: '', sysId: '1', sysName: 'app-333', roleId: '1', roleName: '业务员',

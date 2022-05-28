@@ -26,16 +26,16 @@ export class DialogProgramComponent implements OnInit {
     this.update = (data?.id !== '' && data?.id !== null && data?.id !== undefined);
     this.form = new FormGroup({
       name: new FormControl(null, [Validators.required, Validators.pattern(/^[\u4E00-\u9FA5A-Za-z0-9_]{2,16}$/)]),
-      type: new FormControl(null, [Validators.required]),
+      category: new FormControl(null, [Validators.required]),
       code: new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z0-9_]{2,16}$/)]),
       intro: new FormControl(null, [Validators.required, Validators.maxLength(256)]),
-      remark: new FormControl(null, [Validators.maxLength(256)]),
+      remark: new FormControl(null, [Validators.required, Validators.maxLength(256)]),
     });
   }
 
   ngOnInit() {
     this.form.controls['name'].setValue(this.data.name);
-    this.form.controls['type'].setValue(this.data.type);
+    this.form.controls['category'].setValue(this.data.category);
     this.form.controls['code'].setValue(this.data.code);
     this.form.controls['intro'].setValue(this.data.intro);
     this.form.controls['remark'].setValue(this.data.remark);
@@ -43,7 +43,7 @@ export class DialogProgramComponent implements OnInit {
 
   onSaveClick(): void {
     this.data.name = this.form.controls['name'].value;
-    this.data.type = this.form.controls['type'].value;
+    this.data.category = this.form.controls['category'].value;
     this.data.code = this.form.controls['code'].value;
     this.data.intro = this.form.controls['intro'].value;
     this.data.remark = this.form.controls['remark'].value;

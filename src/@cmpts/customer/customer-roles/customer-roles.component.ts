@@ -6,7 +6,7 @@ import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/pagi
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
 import { DialogRoleComponent } from '../dialog-role/dialog-role.component';
-import { CtmRoleAddDto, CtmRoleElet, CtmRoleSearchDto, CUSTOMER_ROLE_ELEMENT_DATA } from '../../../@sun/models/customer.model';
+import { CtmRoleAddDto, CtmRoleElet, CtmRoleFilter, CUSTOMER_ROLE_ELEMENT_DATA } from '../../../@sun/models/customer.model';
 import { ROLE_RANK_OPS } from 'src/@sun/models/system.model';
 
 @Component({
@@ -16,8 +16,8 @@ import { ROLE_RANK_OPS } from 'src/@sun/models/system.model';
 })
 export class CustomerRolesComponent implements OnInit {
 
-  dto: CtmRoleSearchDto = new CtmRoleSearchDto();
-  params = new PagingParameter<CtmRoleSearchDto>();
+  dto: CtmRoleFilter = new CtmRoleFilter();
+  params = new PagingParameter<CtmRoleFilter>();
   rankOps: OptionItem[] = ROLE_RANK_OPS;
 
   @Input() customerId: string = '';
@@ -52,7 +52,7 @@ export class CustomerRolesComponent implements OnInit {
   }
 
   onResetClick(): void {
-    this.dto = new CtmRoleSearchDto();
+    this.dto = new CtmRoleFilter();
     this.dto.customerId = this.customerId;
     this.params.filter = this.dto;
     this.params.pageIndex = 1;
@@ -114,7 +114,7 @@ export class CustomerRolesComponent implements OnInit {
     this._loadData(this.params);
   }
 
-  private _loadData(params: PagingParameter<CtmRoleSearchDto>) {
+  private _loadData(params: PagingParameter<CtmRoleFilter>) {
     this.hostServ.searchRoles(params).subscribe({
       next: res => { this._renderInfo(res); },
       error: err => {

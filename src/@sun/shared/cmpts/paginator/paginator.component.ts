@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 
 export interface Paginator {
   total: number;
@@ -18,7 +18,7 @@ export interface PaginatorColumn {
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss']
 })
-export class PaginatorComponent implements OnInit {
+export class PaginatorComponent implements OnInit, OnChanges {
 
   @Input() columns: Array<PaginatorColumn> = [{ name: '默认', value: 'default' }];
   @Input() columnOp: string = 'default';
@@ -38,6 +38,10 @@ export class PaginatorComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.btnStatus();
+  }
+
+  ngOnChanges(changes: any) {
     this.btnStatus();
   }
 

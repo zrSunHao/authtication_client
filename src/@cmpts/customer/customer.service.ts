@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { OptionItem, PagingParameter, ResponsePagingResult, ResponseResult } from 'src/@sun/models/paging.model';
 import { environment } from 'src/environments/environment';
-import { CtmCttElet, CtmCttAddDto, CtmCttSearchDto, CtmElet, CtmLogSearchDto, CtmRoleAddDto, CtmRoleElet, CtmRoleSearchDto, CtmSearchDto, CtmLogElet, PeopleElet } from '../../@sun/models/customer.model';
+import { CtmCttElet, CtmCttAddDto, CtmCttFilter, CtmElet, CtmLogFilter, CtmRoleAddDto, CtmRoleElet, CtmRoleFilter, CtmFilter, CtmLogElet, PeopleElet } from '../../@sun/models/customer.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class CustomerService {
 
   constructor(public http: HttpClient) { }
 
-  public search(params: PagingParameter<CtmSearchDto>): Observable<ResponsePagingResult<CtmElet>> {
+  public search(params: PagingParameter<CtmFilter>): Observable<ResponsePagingResult<CtmElet>> {
     const url = `${this.baseUrl}/search`;
     return this.http.post<ResponsePagingResult<CtmElet>>(url, params, this.httpOptions)
       .pipe(catchError(this.handleError));
@@ -72,7 +72,7 @@ export class CustomerService {
     return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  public searchRoles(param: PagingParameter<CtmRoleSearchDto>): Observable<ResponsePagingResult<CtmRoleElet>> {
+  public searchRoles(param: PagingParameter<CtmRoleFilter>): Observable<ResponsePagingResult<CtmRoleElet>> {
     const url = `${this.baseUrl}/searchRoles`;
     return this.http.post<ResponsePagingResult<CtmRoleElet>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
@@ -87,7 +87,7 @@ export class CustomerService {
     return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  public searchConstraints(param: PagingParameter<CtmCttSearchDto>): Observable<ResponsePagingResult<CtmCttElet>> {
+  public searchConstraints(param: PagingParameter<CtmCttFilter>): Observable<ResponsePagingResult<CtmCttElet>> {
     const url = `${this.baseUrl}/searchConstraints`;
     return this.http.post<ResponsePagingResult<CtmCttElet>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
@@ -97,7 +97,7 @@ export class CustomerService {
     return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  public searchLogs(param: PagingParameter<CtmLogSearchDto>): Observable<ResponsePagingResult<CtmLogElet>> {
+  public searchLogs(param: PagingParameter<CtmLogFilter>): Observable<ResponsePagingResult<CtmLogElet>> {
     const url = `${this.baseUrl}/searchLogs`;
     return this.http.post<ResponsePagingResult<CtmLogElet>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }

@@ -6,7 +6,7 @@ import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/con
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { DialogProgramComponent } from './dialog-program/dialog-program.component';
-import { PgmElet, PgmSearchDto, PgmType, PGM_TYPE_OPS, PROGRAM_ELEMENT_DATA } from '../../@sun/models/program.model';
+import { PgmElet, PgmFilter, PgmType, PGM_TYPE_OPS } from '../../@sun/models/program.model';
 import { ProgramService } from './program.service';
 
 @Component({
@@ -16,20 +16,18 @@ import { ProgramService } from './program.service';
 })
 export class ProgramComponent implements OnInit {
 
-  dto: PgmSearchDto = new PgmSearchDto();
-  params = new PagingParameter<PgmSearchDto>();
+  dto: PgmFilter = new PgmFilter();
+  params = new PagingParameter<PgmFilter>();
   typeOps: OptionItem[] = PGM_TYPE_OPS;
 
   total = 35;
   columnOp = 'createdAt';
   columns: Array<PaginatorColumn> = [
     { name: '名称', value: 'name' },
-    { name: '类别', value: 'type' },
-    { name: '编码', value: 'code' },
     { name: '创建时间', value: 'createdAt' },
   ];
 
-  displayedColumns = ['name', 'type', 'code', 'createdAt', 'intro', 'remark', 'operate',];
+  displayedColumns = ['name', 'category', 'code', 'createdAt', 'intro', 'remark', 'operate',];
   dataSource: PgmElet[] = [];
 
   constructor(private router: Router,
@@ -38,12 +36,13 @@ export class ProgramComponent implements OnInit {
     private hostServ: ProgramService,) { }
 
   ngOnInit() {
+    // this.hostServ.test().subscribe({next: res => {console.log(res)},error: err => {console.log(err)}})
     this.onResetClick();
   }
 
   onAddClick(): void {
     const e: PgmElet = {
-      id: '', name: '', type: PgmType.other, code: '', intro: '', createdAt: null, remark: ''
+      id: '', name: '', category: PgmType.other, code: '', intro: '', createdAt: null, remark: ''
     };
     const dialogRef = this.dialog.open(DialogProgramComponent,
       { width: '520px', data: e, });
@@ -58,11 +57,12 @@ export class ProgramComponent implements OnInit {
 
   onSearchClick(): void {
     this.params.filter = this.dto;
+    this.params.pageIndex = 1;
     this._loadData(this.params);
   }
 
   onResetClick(): void {
-    this.dto = new PgmSearchDto();
+    this.dto = new PgmFilter();
     this.params.filter = this.dto;
     this.params.pageIndex = 1;
     this.params.pageSize = 10;
@@ -72,7 +72,7 @@ export class ProgramComponent implements OnInit {
   }
 
   onConfigClick(e: PgmElet): void {
-    this.router.navigate([`/program/detail/${e.id}/${e.type}/${e.name}`]);
+    this.router.navigate([`/program/detail/${e.id}/${e.category}/${e.name}`]);
   }
 
   onEditClick(e: PgmElet): void {
@@ -106,14 +106,12 @@ export class ProgramComponent implements OnInit {
     this._loadData(this.params);
   }
 
-  private _loadData(params: PagingParameter<PgmSearchDto>): void {
+  private _loadData(params: PagingParameter<PgmFilter>): void {
     this.hostServ.serach(params).subscribe({
       next: res => { this._renderInfo(res); },
       error: err => {
         const msg = `数据加载失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
-        this.dataSource = PROGRAM_ELEMENT_DATA; // TODO 删除
-        this.total = 35; // TODO 删除
       }
     });
   }
@@ -125,8 +123,6 @@ export class ProgramComponent implements OnInit {
     } else {
       const msg = `数据加载失败！！！ ${res.allMessages}`;
       this.notifyServ.notify(msg, 'error');
-      this.dataSource = PROGRAM_ELEMENT_DATA; // TODO 删除
-      this.total = 35; // TODO 删除
     }
   }
 

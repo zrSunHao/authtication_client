@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { SysFunctElet, RoleFunctDto, RoleFunctElet, ROLE_SECTION_ELEMENT_DATA, SysSectElet } from '../../../@sun/models/system.model';
+import { SysFunctElet, SysRoleRelation, RoleFunctElet, ROLE_SECTION_ELEMENT_DATA, SysSectElet } from '../../../@sun/models/system.model';
 import { SystemService } from '../system.service';
 
 @Component({
@@ -87,7 +87,7 @@ export class SystemRoleFuntionsComponent implements OnInit {
       }
     });
 
-    const dto = new RoleFunctDto();
+    const dto = new SysRoleRelation();
     dto.roleId = this.roleId;
     dto.programId = e.id;
     dto.sectionIds = s;

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { PagingParameter, ResponsePagingResult, ResponseResult } from 'src/@sun/models/paging.model';
 import { environment } from 'src/environments/environment';
-import { SysPgmElet, RoleElet, RoleFunctDto, RoleFunctElet, RoleSearchDto, SysElet, SysPgmGetDto, SysPgmSearchDto, SysSearchDto } from '../../@sun/models/system.model';
+import { SysPgmElet, RoleElet, SysRoleRelation, RoleFunctElet, SysRoleFilter, SysElet, SysPgmGetFilter, SysPgmFilter, SysFilter } from '../../@sun/models/system.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class SystemService {
 
   // ---------------- system ------------------
 
-  public serach(param: PagingParameter<SysSearchDto>): Observable<ResponsePagingResult<SysElet>> {
+  public serach(param: PagingParameter<SysFilter>): Observable<ResponsePagingResult<SysElet>> {
     const url = `${this.baseUrl}/search`;
     return this.http.post<ResponsePagingResult<SysElet>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
@@ -49,12 +49,12 @@ export class SystemService {
 
   // ---------------- program config ------------------
 
-  public searchPrograms(param: SysPgmSearchDto): Observable<ResponseResult<SysPgmElet[]>> {
+  public searchPrograms(param: SysPgmFilter): Observable<ResponseResult<SysPgmElet[]>> {
     const url = `${this.baseUrl}/getPrograms`;
     return this.http.post<ResponseResult<SysPgmElet[]>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  public getPrograms(param: SysPgmGetDto): Observable<ResponseResult<SysPgmElet[]>> {
+  public getPrograms(param: SysPgmGetFilter): Observable<ResponseResult<SysPgmElet[]>> {
     const url = `${this.baseUrl}/getPrograms`;
     return this.http.post<ResponseResult<SysPgmElet[]>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
@@ -73,7 +73,7 @@ export class SystemService {
 
   // ---------------- role config ------------------
 
-  public serachRoles(param: PagingParameter<RoleSearchDto>): Observable<ResponsePagingResult<RoleElet>> {
+  public serachRoles(param: PagingParameter<SysRoleFilter>): Observable<ResponsePagingResult<RoleElet>> {
     const url = `${this.roleUrl}/search`;
     return this.http.post<ResponsePagingResult<RoleElet>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
@@ -99,7 +99,7 @@ export class SystemService {
     return this.http.post<ResponseResult<RoleFunctElet[]>>(url, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  public addRoleFunctions(param: RoleFunctDto): Observable<ResponseResult<boolean>> {
+  public addRoleFunctions(param: SysRoleRelation): Observable<ResponseResult<boolean>> {
     const url = `${this.roleUrl}/addFunctions`;
     return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }

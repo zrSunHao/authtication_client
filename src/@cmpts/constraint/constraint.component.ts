@@ -7,7 +7,7 @@ import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/con
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 
 import { ConstraintService } from './constraint.service';
-import { CttElet, CttSearchDto, CONSTRAINT_ELEMENT_DATA, CTT_CATEGERY_OPS, CTT_METHOD_OPS } from '../../@sun/models/constraint.model';
+import { CttElet, CttFilter, CONSTRAINT_ELEMENT_DATA, CTT_CATEGERY_OPS, CTT_METHOD_OPS } from '../../@sun/models/constraint.model';
 
 @Component({
   selector: 'app-constraint',
@@ -16,8 +16,8 @@ import { CttElet, CttSearchDto, CONSTRAINT_ELEMENT_DATA, CTT_CATEGERY_OPS, CTT_M
 })
 export class ConstraintComponent implements OnInit {
 
-  dto: CttSearchDto = new CttSearchDto();
-  params = new PagingParameter<CttSearchDto>();
+  dto: CttFilter = new CttFilter();
+  params = new PagingParameter<CttFilter>();
 
   categeryOps: OptionItem[] = CTT_CATEGERY_OPS;
   methodOps: OptionItem[] = CTT_METHOD_OPS;
@@ -49,7 +49,7 @@ export class ConstraintComponent implements OnInit {
   }
 
   onResetClick(): void {
-    this.dto = new CttSearchDto();
+    this.dto = new CttFilter();
     this.params.filter = this.dto;
     this.params.pageIndex = 1;
     this.params.pageSize = 10;
@@ -78,7 +78,7 @@ export class ConstraintComponent implements OnInit {
     this._loadData(this.params);
   }
 
-  private _loadData(params: PagingParameter<CttSearchDto>) {
+  private _loadData(params: PagingParameter<CttFilter>) {
     this.hostServ.serach(params).subscribe({
       next: res => { this._renderInfo(res); },
       error: err => {

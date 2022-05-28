@@ -10,7 +10,7 @@
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>类别</mat-label>
-    <mat-select formControlName="type">
+    <mat-select formControlName="category">
       <mat-option [value]="item.key" *ngFor="let item of typeOps">{{item.value}}</mat-option>
     </mat-select>
     <mat-icon matSuffix>category</mat-icon>

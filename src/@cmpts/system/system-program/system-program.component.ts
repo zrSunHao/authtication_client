@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/confirm-dialog.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { SysPgmElet, PROGRAM_ELEMENT_DATA, SysPgmGetDto, SysPgmSearchDto } from '../../../@sun/models/system.model';
+import { SysPgmElet, PROGRAM_ELEMENT_DATA, SysPgmGetFilter, SysPgmFilter } from '../../../@sun/models/system.model';
 import { SystemService } from '../system.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { SystemService } from '../system.service';
 })
 export class SystemProgramComponent implements OnInit {
 
-  dto: SysPgmGetDto = new SysPgmGetDto();
+  dto: SysPgmGetFilter = new SysPgmGetFilter();
 
   sysId: string = '';
   sysName: string = '';
@@ -33,7 +33,7 @@ export class SystemProgramComponent implements OnInit {
       this.sysId = params['sysId'];
       this.sysName = params['sysName'];
     });
-    this.onSearchProgramsClick(new SysPgmSearchDto());
+    this.onSearchProgramsClick(new SysPgmFilter());
     this.onGetProgramsClick();
   }
 
@@ -41,7 +41,7 @@ export class SystemProgramComponent implements OnInit {
     this.router.navigate([`/system`]);
   }
 
-  onSearchProgramsClick(e: SysPgmSearchDto): void {
+  onSearchProgramsClick(e: SysPgmFilter): void {
     e.systemId = this.sysId;
     this.hostServ.searchPrograms(e).subscribe({
       next: res => {
@@ -100,7 +100,7 @@ export class SystemProgramComponent implements OnInit {
   }
 
   onResetProgramClick(): void {
-    this.dto = new SysPgmGetDto();
+    this.dto = new SysPgmGetFilter();
     this.onGetProgramsClick();
   }
 
