@@ -6,7 +6,7 @@ import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/con
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { DialogProgramComponent } from './dialog-program/dialog-program.component';
-import { PgmElet, PgmFilter, PgmType, PGM_TYPE_OPS } from '../../@sun/models/program.model';
+import { PgmElet, PgmFilter, PgmCategory, PGM_TYPE_OPS } from '../../@sun/models/program.model';
 import { ProgramService } from './program.service';
 
 @Component({
@@ -36,13 +36,12 @@ export class ProgramComponent implements OnInit {
     private hostServ: ProgramService,) { }
 
   ngOnInit() {
-    // this.hostServ.test().subscribe({next: res => {console.log(res)},error: err => {console.log(err)}})
     this.onResetClick();
   }
 
   onAddClick(): void {
     const e: PgmElet = {
-      id: '', name: '', category: PgmType.other, code: '', intro: '', createdAt: null, remark: ''
+      id: '', name: '', category: PgmCategory.other, code: '', intro: '', createdAt: null, remark: ''
     };
     const dialogRef = this.dialog.open(DialogProgramComponent,
       { width: '520px', data: e, });

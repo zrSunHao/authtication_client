@@ -11,7 +11,8 @@ import { DialogFunctionComponent } from '../dialog-function/dialog-function.comp
 import { ProgramFunctionComponent } from '../program-function/program-function.component';
 import { ProgramSectionComponent } from '../program-section/program-section.component';
 import { ProgramService } from '../program.service';
-import { FunctElet, FUNCTION_ELEMENT_DATA, SectElet, SECTION_ELEMENT_DATA } from '../../../@sun/models/program.model';
+import { FunctElet, SectElet } from '../../../@sun/models/program.model';
+import { CttMethod } from 'src/@sun/models/constraint.model';
 
 @Component({
   selector: 'app-program-detail',
@@ -23,8 +24,10 @@ export class ProgramDetailComponent implements OnInit {
   programId: string = '';
   programType: string = '';
   programName: string = '';
+  sectionsTitle: string = '';
 
   selectedSection: SectElet | null = null;
+  selectedSectName: string = '';
   sections: SectElet[] = [];
   functions: FunctElet[] = [];
 
@@ -43,24 +46,30 @@ export class ProgramDetailComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.programId = params['id'];
       this.programName = params['name'];
-      switch (params['type']) {
+      const category = params['category'];
+      switch (category) {
         case '1':
           this.programType = '网页端';
+          this.sectionsTitle = '页面';
+          console.log(this.sectionsTitle);
           break;
         case '2':
           this.programType = '桌面端';
+          this.sectionsTitle = '页面';
           break;
         case '3':
           this.programType = '移动端';
+          this.sectionsTitle = '页面';
           break;
         case '4':
           this.programType = '服务端';
+          this.sectionsTitle = '模块';
           break;
         default:
           this.programType = '';
+          this.sectionsTitle = '页面/模块';
           break;
       }
-
       this._loadSectionData(this.programId);
     })
   }
@@ -73,13 +82,14 @@ export class ProgramDetailComponent implements OnInit {
     if (e?.id !== this.selectedSection?.id) {
       this.functions = [];
       this.selectedSection = e;
+      this.selectedSectName = e.name;
       this._loadFunctionData(e.id as string)
     }
   }
 
   onAddSectionClick(): void {
     const e: SectElet = {
-      id: '', name: '', programId: this.programId, code: '', remark: ''
+      id: '', name: '', pgmId: this.programId, code: '', remark: ''
     };
     const dialogRef = this.dialog.open(DialogSectionComponent,
       { width: '360px', data: e, });
@@ -94,7 +104,7 @@ export class ProgramDetailComponent implements OnInit {
 
   onEditSectionClick(e: SectElet): void {
     const newE: SectElet = {
-      id: e.id, name: e.name, programId: e.programId, code: e.code, remark: e.remark
+      id: e.id, name: e.name, pgmId: e.pgmId, code: e.code, remark: e.remark
     };
     const dialogRef = this.dialog.open(DialogSectionComponent,
       { width: '360px', data: newE, });
@@ -122,7 +132,7 @@ export class ProgramDetailComponent implements OnInit {
 
   onAddFunctionClick(e: SectElet): void {
     const f: FunctElet = {
-      id: '', programId: this.programId, sectionId: e.id as string, name: '', code: '', constraint: '', limitedExpireAt: null, remark: ''
+      id: '', pgmId: this.programId, sectId: e.id as string, name: '', code: '', cttMethod: CttMethod.other, limitedExpiredAt: null, remark: ''
     };
     const dialogRef = this.dialog.open(DialogFunctionComponent,
       { width: '520px', data: f, });
@@ -138,7 +148,7 @@ export class ProgramDetailComponent implements OnInit {
 
   onEditFunctionClick(e: FunctElet): void {
     const f: FunctElet = {
-      id: e.id, programId: e.programId, sectionId: e.sectionId, name: e.name, code: e.code, constraint: e.constraint, limitedExpireAt: e.limitedExpireAt, remark: e.remark
+      id: e.id, pgmId: e.pgmId, sectId: e.sectId, name: e.name, code: e.code, cttMethod: e.cttMethod, limitedExpiredAt: e.limitedExpiredAt, remark: e.remark
     };
     const dialogRef = this.dialog.open(DialogFunctionComponent,
       { width: '520px', data: f, });
@@ -147,10 +157,11 @@ export class ProgramDetailComponent implements OnInit {
       if (result?.op === 'save' && result?.e) {
         e.name = f.name;
         e.code = f.code;
-        e.constraint = f.constraint;
-        e.limitedExpireAt = f.limitedExpireAt;
+        e.cttMethod = f.cttMethod;
+        e.limitedExpiredAt = f.limitedExpiredAt;
         e.remark = f.remark;
         this.notifyServ.notify(`功能【${e.name}】信息更新成功！！！`, 'success');
+        this._loadFunctionData(this.selectedSection?.id as string);
       }
     });
   }
@@ -170,7 +181,6 @@ export class ProgramDetailComponent implements OnInit {
     this.hostServ.getSections(programId).subscribe({
       next: res => { this._renderSectionData(res); },
       error: err => {
-        this.sections = SECTION_ELEMENT_DATA; // TODO 待删除
         const msg = `模块数据加载失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
       }
@@ -181,7 +191,6 @@ export class ProgramDetailComponent implements OnInit {
     this.hostServ.getFunctions(sectionId).subscribe({
       next: res => { this._renderFunctionData(res); },
       error: err => {
-        this.functions = FUNCTION_ELEMENT_DATA; // TODO 待删除
         const msg = `功能数据加载失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
       }
@@ -192,7 +201,6 @@ export class ProgramDetailComponent implements OnInit {
     if (res.success) {
       this.sections = res.data as SectElet[];
     } else {
-      this.sections = SECTION_ELEMENT_DATA; // TODO 待删除
       const msg = `模块数据加载失败！！！ ${res.allMessages}`;
       this.notifyServ.notify(msg, 'error');
     }
@@ -202,7 +210,6 @@ export class ProgramDetailComponent implements OnInit {
     if (res.success) {
       this.functions = res.data as FunctElet[];
     } else {
-      this.functions = FUNCTION_ELEMENT_DATA; // TODO 待删除
       const msg = `功能数据加载失败！！！ ${res.allMessages}`;
       this.notifyServ.notify(msg, 'error');
     }

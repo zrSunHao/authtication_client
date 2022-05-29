@@ -12,7 +12,7 @@ const routes: Routes = [
         data: { permission: 'program' }
     },
     {
-        path: 'detail/:id/:type/:name',
+        path: 'detail/:id/:category/:name',
         component: ProgramDetailComponent,
         canActivate: [AuthGuard],
         data: { permission: 'pgm_cfg' }

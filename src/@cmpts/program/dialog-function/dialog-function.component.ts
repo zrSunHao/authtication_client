@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
+import { CttMethod, CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
 import { OptionItem } from 'src/@sun/models/paging.model';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { FunctElet } from '../../../@sun/models/program.model';
@@ -26,10 +26,10 @@ export class DialogFunctionComponent implements OnInit {
     this.title = data?.name ? '修改' : '添加';
     this.update = (data?.id !== '' && data?.id !== null && data?.id !== undefined);
     this.form = new FormGroup({
-      name: new FormControl(null, [Validators.required, Validators.pattern(/^[\u4E00-\u9FA5A-Za-z0-9_]{2,16}$/)]),
-      code: new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z0-9/_]{2,16}$/)]),
-      constraint: new FormControl(null, []),
-      limitedExpireAt: new FormControl(null, []),
+      name: new FormControl(null, [Validators.required, Validators.pattern(/^[\u4E00-\u9FA5A-Za-z0-9_]{2,32}$/)]),
+      code: new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z0-9/_]{2,32}$/)]),
+      cttMethod: new FormControl(null, []),
+      limitedExpiredAt: new FormControl(null, []),
       remark: new FormControl(null, [Validators.maxLength(256)]),
     });
   }
@@ -37,19 +37,25 @@ export class DialogFunctionComponent implements OnInit {
   ngOnInit() {
     this.form.controls['name'].setValue(this.data.name);
     this.form.controls['code'].setValue(this.data.code);
-    this.form.controls['constraint'].setValue(this.data.constraint);
-    this.form.controls['limitedExpireAt'].setValue(this.data.limitedExpireAt);
+    this.form.controls['cttMethod'].setValue(this.data.cttMethod);
+    this.form.controls['limitedExpiredAt'].setValue(this.data.limitedExpiredAt);
     this.form.controls['remark'].setValue(this.data.remark);
+    this.form.controls['limitedExpiredAt'].disable();
   }
 
   onSaveClick(): void {
     this.data.name = this.form.controls['name'].value;
     this.data.code = this.form.controls['code'].value;
-    this.data.constraint = this.form.controls['constraint'].value;
-    this.data.limitedExpireAt = this.form.controls['limitedExpireAt'].value;
+    this.data.cttMethod = this.form.controls['cttMethod'].value;
+    this.data.limitedExpiredAt = this.form.controls['limitedExpiredAt'].value;
     this.data.remark = this.form.controls['remark'].value;
     if (this.update) this._update(this.data);
     else this._add(this.data);
+  }
+
+  onCttMethodValueChange(event: number): void {
+    if(event != CttMethod.lock)
+    this.form.controls['limitedExpiredAt'].setValue(null);
   }
 
   onCloseClick(): void {

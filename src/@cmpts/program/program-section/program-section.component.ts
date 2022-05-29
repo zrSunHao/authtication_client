@@ -10,6 +10,7 @@ export class ProgramSectionComponent implements OnInit {
 
   @Input() selectedSection: SectElet | null = null;
   @Input() data: Array<SectElet> = [];
+  @Input() title: string = '';
 
   @Output() onSelect: EventEmitter<SectElet> = new EventEmitter<SectElet>();
   @Output() onAddFunction: EventEmitter<SectElet> = new EventEmitter<SectElet>();

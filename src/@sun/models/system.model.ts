@@ -1,6 +1,6 @@
 import { CttMethod } from "./constraint.model";
 import { OptionItem } from "./paging.model";
-import { PgmElet, PgmType } from "./program.model";
+import { PgmElet, PgmCategory } from "./program.model";
 
 export enum RoleRank {
     default = 1,            // 默认/普通用户
@@ -126,16 +126,16 @@ export const SYSTEM_ELEMENT_DATA: SysElet[] = [
 ];
 
 export const PROGRAM_ELEMENT_DATA: SysPgmElet[] = [
-    { id: '1', name: 'client_1', category: PgmType.web, systemId: '', code: 'customer_angular', intro: '认证中心Angular版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '2', name: 'desktop_2', category: PgmType.desktop, systemId: '', code: 'customer_wpf', intro: '认证中心WPF版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '3', name: 'mobile_3', category: PgmType.mobile, systemId: '', code: 'customer_android', intro: '认证中心android版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '4', name: 'service_4', category: PgmType.service, systemId: '', code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '5', name: 'client_5', category: PgmType.web, systemId: '', code: 'customer_angular', intro: '认证中心Angular版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '6', name: 'desktop_6', category: PgmType.desktop, systemId: '', code: 'customer_wpf', intro: '认证中心WPF版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '7', name: 'mobile_7', category: PgmType.mobile, systemId: '', code: 'customer_android', intro: '认证中心android版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '8', name: 'service_8', category: PgmType.service, systemId: '', code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '9', name: 'mobile_9', category: PgmType.mobile, systemId: '', code: 'customer_android', intro: '认证中心android版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
-    { id: '10', name: 'service_10', category: PgmType.service, systemId: '', code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '1', name: 'client_1', category: PgmCategory.web, systemId: '', code: 'customer_angular', intro: '认证中心Angular版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '2', name: 'desktop_2', category: PgmCategory.desktop, systemId: '', code: 'customer_wpf', intro: '认证中心WPF版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '3', name: 'mobile_3', category: PgmCategory.mobile, systemId: '', code: 'customer_android', intro: '认证中心android版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '4', name: 'service_4', category: PgmCategory.service, systemId: '', code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '5', name: 'client_5', category: PgmCategory.web, systemId: '', code: 'customer_angular', intro: '认证中心Angular版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '6', name: 'desktop_6', category: PgmCategory.desktop, systemId: '', code: 'customer_wpf', intro: '认证中心WPF版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '7', name: 'mobile_7', category: PgmCategory.mobile, systemId: '', code: 'customer_android', intro: '认证中心android版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '8', name: 'service_8', category: PgmCategory.service, systemId: '', code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '9', name: 'mobile_9', category: PgmCategory.mobile, systemId: '', code: 'customer_android', intro: '认证中心android版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
+    { id: '10', name: 'service_10', category: PgmCategory.service, systemId: '', code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
 ];
 
 export const ROLE_ELEMENT_DATA: RoleElet[] = [

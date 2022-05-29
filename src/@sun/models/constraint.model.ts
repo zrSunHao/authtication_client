@@ -11,7 +11,7 @@ export enum CttCategory {
 export enum CttMethod {
     forbid = 1,   // 禁用 
     lock = 2,     // 锁定
-    other = '',     // 默认
+    other = 0,     // 默认
 }
 
 export interface CttElet {

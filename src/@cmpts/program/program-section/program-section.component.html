@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
-      <h3>模块列表（当前 '{{selectedSection?.name}}' | 共 {{data.length}} 个）</h3>
+      <h3>{{title}}列表（当前 '{{selectedSection?.name}}' | 共 {{data.length}} 个）</h3>
     </mat-card-title>
     <mat-card-subtitle></mat-card-subtitle>
   </mat-card-header>
@@ -10,8 +10,10 @@
     <div class="section-wrap" [ngClass]="{'section-wrap-selected':section.id === selectedSection?.id}"
       *ngFor="let section of data;let i = index" (click)="onSelectClick(section)">
       <div class="section-header">
-        <span class="title">{{section.name}}</span>
-        <span>{{section.code}}</span>
+        <div class="title-wrap">
+          <span class="title">{{section.name}}</span>
+          <span class="code">{{section.code}}</span>
+        </div>
         <button mat-raised-button color="accent" *ngxPermissionsOnly="['pgm_func_add']"
           (click)="onAddFunctionClick(section)">添加功能</button>
         <button mat-raised-button color="accent" *ngxPermissionsOnly="['pgm_sect_update']"

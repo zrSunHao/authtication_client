@@ -11,10 +11,11 @@ import { FunctElet } from '../../../@sun/models/program.model';
 export class ProgramFunctionComponent implements OnInit {
 
   methodOps: OptionItem[] = CTT_METHOD_OPS;
-  displayedColumns = ['name', 'code', 'constraint', 'limitedExpireAt', 'remark', 'operate',];
+  displayedColumns = ['name', 'code', 'cttMethod', 'limitedExpiredAt', 'remark', 'operate',];
 
   @Input() sectionName: string = 'xxx xxx'
   @Input() data: FunctElet[] = [];
+  @Input() title: string = '';
 
   @Output() onEdit: EventEmitter<FunctElet> = new EventEmitter<FunctElet>();
   @Output() onDelete: EventEmitter<FunctElet> = new EventEmitter<FunctElet>();

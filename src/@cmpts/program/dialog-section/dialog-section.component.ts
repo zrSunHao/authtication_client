@@ -23,8 +23,8 @@ export class DialogSectionComponent implements OnInit {
     this.title = data?.name ? '修改' : '添加';
     this.update = (data?.id !== '' && data?.id !== null && data?.id !== undefined);
     this.form = new FormGroup({
-      name: new FormControl(null, [Validators.required, Validators.pattern(/^[\u4E00-\u9FA5A-Za-z0-9_]{2,16}$/)]),
-      code: new FormControl(null, [Validators.required, Validators.pattern(/^[\u4E00-\u9FA5A-Za-z0-9/_]{2,16}$/)]),
+      name: new FormControl(null, [Validators.required, Validators.pattern(/^[\u4E00-\u9FA5A-Za-z0-9_]{2,32}$/)]),
+      code: new FormControl(null, [Validators.required, Validators.pattern(/^[\u4E00-\u9FA5A-Za-z0-9/_]{2,32}$/)]),
       remark: new FormControl(null, [Validators.required, Validators.maxLength(256)]),
     });
   }
@@ -65,6 +65,7 @@ export class DialogSectionComponent implements OnInit {
   }
 
   private _update(e: SectElet): void {
+    console.log(e);
     this.hostServ.updateSection(e).subscribe({
       next: res => {
         if (res.success) {
