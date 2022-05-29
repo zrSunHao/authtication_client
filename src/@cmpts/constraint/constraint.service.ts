@@ -20,14 +20,14 @@ export class ConstraintService {
   constructor(public http: HttpClient) { }
 
   public serach(params: PagingParameter<CttFilter>): Observable<ResponsePagingResult<CttElet>> {
-    const url = `${this.baseUrl}/search`;
+    const url = `${this.baseUrl}/GetList`;
     return this.http.post<ResponsePagingResult<CttElet>>(url, params, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
   public cancel(id: string) {
     const url = `${this.baseUrl}/cancel?id=${id}`;
-    return this.http.get<ResponseResult<boolean>>(url)
+    return this.http.delete<ResponseResult<boolean>>(url)
       .pipe(catchError(this.handleError));
   }
 

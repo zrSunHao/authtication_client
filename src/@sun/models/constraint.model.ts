@@ -5,7 +5,7 @@ export enum CttCategory {
     customer_one_system = 2,  // 账号->某系统
     program_function = 3,     // 程序->功能
     system_role = 4,          // 系统->角色
-    other = '',                // 默认
+    other = 0,                // 默认
 }
 
 export enum CttMethod {

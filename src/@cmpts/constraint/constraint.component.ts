@@ -7,7 +7,7 @@ import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/con
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 
 import { ConstraintService } from './constraint.service';
-import { CttElet, CttFilter, CONSTRAINT_ELEMENT_DATA, CTT_CATEGERY_OPS, CTT_METHOD_OPS } from '../../@sun/models/constraint.model';
+import { CttElet, CttFilter, CTT_CATEGERY_OPS, CTT_METHOD_OPS } from '../../@sun/models/constraint.model';
 
 @Component({
   selector: 'app-constraint',
@@ -25,14 +25,11 @@ export class ConstraintComponent implements OnInit {
   total = 0;
   columnOp = 'createdAt';
   columns: Array<PaginatorColumn> = [
-    { name: 'ID', value: 'id' },
-    { name: '类别', value: 'category' },
-    { name: '方式', value: 'method' },
     { name: '到期时间', value: 'expiredAt' },
     { name: '创建时间', value: 'createdAt' },
   ];
 
-  displayedColumns = ['id', 'category', 'method', 'userName', 'sysName', 'functionName', 'expiredAt', 'origin', 'createdAt', 'remark', 'operate',];
+  displayedColumns = ['category', 'method', 'ctmName', 'sysName', 'functName', 'expiredAt', 'origin', 'createdAt', 'remark', 'operate',];
   dataSource: Array<CttElet> = [];
 
   constructor(private dialog: MatDialog,
@@ -84,8 +81,6 @@ export class ConstraintComponent implements OnInit {
       error: err => {
         const msg = `数据加载失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
-        this.dataSource = CONSTRAINT_ELEMENT_DATA; // TODO 删除
-        this.total = 35; // TODO 删除
       }
     });
   }
