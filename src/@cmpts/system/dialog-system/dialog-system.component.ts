@@ -23,10 +23,10 @@ export class DialogSystemComponent implements OnInit {
     this.title = data?.name ? '修改' : '添加';
     this.update = (data?.id !== '' && data?.id !== null && data?.id !== undefined);
     this.form = new FormGroup({
-      name: new FormControl(null, [Validators.required, Validators.pattern(/^[\u4E00-\u9FA5A-Za-z0-9_]{2,16}$/)]),
-      code: new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z0-9_]{2,16}$/)]),
+      name: new FormControl(null, [Validators.required, Validators.pattern(/^[\u4E00-\u9FA5A-Za-z0-9_]{2,32}$/)]),
+      code: new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z0-9_]{2,32}$/)]),
       intro: new FormControl(null, [Validators.required, Validators.maxLength(256)]),
-      remark: new FormControl(null, [Validators.maxLength(256)]),
+      remark: new FormControl(null, [Validators.required, Validators.maxLength(256)]),
     });
   }
 

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { OptionItem } from 'src/@sun/models/paging.model';
+import { PGM_TYPE_OPS } from 'src/@sun/models/program.model';
 import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/confirm-dialog.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { SysPgmElet, PROGRAM_ELEMENT_DATA, SysPgmGetFilter, SysPgmFilter } from '../../../@sun/models/system.model';
+import { SysPgmElet, PROGRAM_ELEMENT_DATA, SysOwnedPgmFilter, SysNotOwnedPgmFilter } from '../../../@sun/models/system.model';
 import { SystemService } from '../system.service';
 
 @Component({
@@ -13,7 +15,8 @@ import { SystemService } from '../system.service';
 })
 export class SystemProgramComponent implements OnInit {
 
-  dto: SysPgmGetFilter = new SysPgmGetFilter();
+  dto: SysOwnedPgmFilter = new SysOwnedPgmFilter();
+  typeOps: OptionItem[] = PGM_TYPE_OPS;
 
   sysId: string = '';
   sysName: string = '';
@@ -33,7 +36,7 @@ export class SystemProgramComponent implements OnInit {
       this.sysId = params['sysId'];
       this.sysName = params['sysName'];
     });
-    this.onSearchProgramsClick(new SysPgmFilter());
+    this.onSearchProgramsClick(new SysNotOwnedPgmFilter());
     this.onGetProgramsClick();
   }
 
@@ -41,8 +44,8 @@ export class SystemProgramComponent implements OnInit {
     this.router.navigate([`/system`]);
   }
 
-  onSearchProgramsClick(e: SysPgmFilter): void {
-    e.systemId = this.sysId;
+  onSearchProgramsClick(e: SysNotOwnedPgmFilter): void {
+    e.sysId = this.sysId;
     this.hostServ.searchPrograms(e).subscribe({
       next: res => {
         if (res.success) {
@@ -81,7 +84,7 @@ export class SystemProgramComponent implements OnInit {
   }
 
   onGetProgramsClick(): void {
-    this.dto.systemId = this.sysId;
+    this.dto.sysId = this.sysId;
     this.hostServ.getPrograms(this.dto).subscribe({
       next: res => {
         if (res.success) {
@@ -100,7 +103,7 @@ export class SystemProgramComponent implements OnInit {
   }
 
   onResetProgramClick(): void {
-    this.dto = new SysPgmGetFilter();
+    this.dto = new SysOwnedPgmFilter();
     this.onGetProgramsClick();
   }
 

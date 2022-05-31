@@ -35,11 +35,8 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>约束类别</mat-label>
-          <mat-select [(ngModel)]="dto.type" name="type">
-            <mat-option value="">无</mat-option>
-            <mat-option value="1">禁用</mat-option>
-            <mat-option value="2">锁定</mat-option>
-            <mat-option value="3">所有约束</mat-option>
+          <mat-select [(ngModel)]="dto.cttMethod" name="cttMethod">
+            <mat-option *ngFor="let item of methodOps" [value]="item.key">{{item.value}}</mat-option>
           </mat-select>
           <mat-icon matSuffix>category</mat-icon>
         </mat-form-field>

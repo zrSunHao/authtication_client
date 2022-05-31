@@ -30,34 +30,42 @@ export class RoleElet {
     id: string = '';
     rank: RoleRank = RoleRank.other;
     name: string = '';
-    systemId: string | null = '';
+    sysId: string | null = '';
     code: string = '';
-    limitedMethod: CttMethod = CttMethod.other;
+    intro: string = '无';
+    cttMethod: CttMethod = CttMethod.other;
     limitedExpiredAt: Date | null = null;
     createdAt: Date | null = null;
     remark: string = '';
 }
 
-export class SysFunctElet {
+export class SysRoleFunctElet {
     id: string = '';
     name: string = '';
-    programId: string = '';
-    sectionId: string = '';
+    pgmId: string = '';
+    sectId: string = '';
     checked: boolean = false;
 }
 
-export interface SysSectElet {
+export interface SysRoleSectElet {
     id: string;
     name: string;
-    programId: string;
+    pgmId: string;
     checked: boolean;
-    functions: Array<SysFunctElet>;
+    functs: Array<SysRoleFunctElet>;
 }
 
-export interface RoleFunctElet {
+export interface SysRolePgmElet {
     id: string;
-    programName: string;
-    sections: Array<SysSectElet>;
+    name: string;
+    sects: Array<SysRoleSectElet>;
+}
+
+export class SysRoleRelation {
+    roleId: string = '';
+    pgmId: string = '';
+    sectIds: string[] = [];
+    functIds: string[] = [];
 }
 
 export const ROLE_RANK_OPS: OptionItem[] = [
@@ -81,33 +89,26 @@ export class SysFilter {
     endAt: Date | null = null;
 }
 
-export class SysPgmFilter {
-    systemId: string = '';
+export class SysNotOwnedPgmFilter {
+    sysId: string = '';
     nameOrCode: string = '';
-    type: '' | '1' | '2' | '3' | '4' = '';
+    category: PgmCategory = PgmCategory.other;
 }
 
-export class SysPgmGetFilter {
-    systemId: string = '';
+export class SysOwnedPgmFilter {
+    sysId: string = '';
     nameOrCode: string = '';
-    type: '' | '1' | '2' | '3' | '4' = '';
+    category: PgmCategory = PgmCategory.other;
     introOrRemark: string = '';
 }
 
 export class SysRoleFilter {
-    systemId: string = '';
+    sysId: string = '';
     nameOrCode: string = '';
-    type: '' | '1' | '2' | '3' = '';
-    rank: number = 0;// 0：全部 1：默认 2：普通用户 10：会员  100：业务员  1000：管理员 10000：超级管理员
+    cttMethod: CttMethod = CttMethod.other;
+    rank: RoleRank = RoleRank.other;// 0：全部 1：默认 2：普通用户 10：会员  100：业务员  1000：管理员 10000：超级管理员
     startAt: Date | null = null;
     endAt: Date | null = null;
-}
-
-export class SysRoleRelation {
-    roleId: string = '';
-    programId: string = '';
-    sectionIds: string[] = [];
-    functionIds: string[] = [];
 }
 
 
@@ -138,169 +139,155 @@ export const PROGRAM_ELEMENT_DATA: SysPgmElet[] = [
     { id: '10', name: 'service_10', category: PgmCategory.service, systemId: '', code: 'customer_net6', intro: '认证中心net6版', createdAt: new Date(), remark: '啦啦啦啦啦啦啦啦啦啦' },
 ];
 
-export const ROLE_ELEMENT_DATA: RoleElet[] = [
-    { id: '1', rank: RoleRank.default, name: '普通用户', systemId: '', code: 'default', limitedMethod: CttMethod.forbid, limitedExpiredAt: null, createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { id: '1', rank: RoleRank.member, name: '会员', systemId: '', code: 'default', limitedMethod: CttMethod.lock, limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { id: '1', rank: RoleRank.manager, name: '管理员', systemId: '', code: 'default', limitedMethod: CttMethod.forbid, limitedExpiredAt: null, createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { id: '1', rank: RoleRank.super_manager, name: '超级管理员', systemId: '', code: 'default', limitedMethod: CttMethod.lock, limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { id: '1', rank: RoleRank.business, name: '业务员', systemId: '', code: 'default', limitedMethod: CttMethod.other, limitedExpiredAt: null, createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { id: '1', rank: RoleRank.business, name: '测试人员', systemId: '', code: 'default', limitedMethod: CttMethod.other, limitedExpiredAt: null, createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { id: '1', rank: RoleRank.business, name: '设计人员', systemId: '', code: 'default', limitedMethod: CttMethod.other, limitedExpiredAt: null, createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { id: '1', rank: RoleRank.business, name: '开发人员', systemId: '', code: 'default', limitedMethod: CttMethod.other, limitedExpiredAt: null, createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { id: '1', rank: RoleRank.default, name: '普通用户', systemId: '', code: 'default', limitedMethod: CttMethod.other, limitedExpiredAt: null, createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { id: '1', rank: RoleRank.default, name: '普通用户', systemId: '', code: 'default', limitedMethod: CttMethod.forbid, limitedExpiredAt: null, createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-    { id: '1', rank: RoleRank.default, name: '普通用户', systemId: '', code: 'default', limitedMethod: CttMethod.lock, limitedExpiredAt: new Date(), createdAt: new Date(), remark: '对方是个士大夫敢死队敢死队山豆根山豆根' },
-];
-
-export const ROLE_SECTION_ELEMENT_DATA: RoleFunctElet[] = [
+export const ROLE_SECTION_ELEMENT_DATA: SysRolePgmElet[] = [
     {
         id: '1',
-        programName: 'web端',
-        sections: [
+        name: 'web端',
+        sects: [
             {
-                id: '1', name: '模块1', programId: '1', checked: false, functions: [
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '1', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '1', checked: false },
-                    { id: '1', name: '功能/操作2', programId: '1', sectionId: '1', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '1', checked: false },
-                    { id: '1', name: '功能/操作3', programId: '1', sectionId: '1', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '1', checked: false },
-                    { id: '1', name: '功能/操作4', programId: '1', sectionId: '1', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '1', checked: false },
-                    { id: '1', name: '功能/操作5', programId: '1', sectionId: '1', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '1', checked: false },
+                id: '1', name: '模块1', pgmId: '1', checked: false, functs: [
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '1', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '1', checked: false },
+                    { id: '1', name: '功能/操作2', pgmId: '1', sectId: '1', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '1', checked: false },
+                    { id: '1', name: '功能/操作3', pgmId: '1', sectId: '1', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '1', checked: false },
+                    { id: '1', name: '功能/操作4', pgmId: '1', sectId: '1', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '1', checked: false },
+                    { id: '1', name: '功能/操作5', pgmId: '1', sectId: '1', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '1', checked: false },
                 ]
             },
             {
-                id: '2', name: '模块1', programId: '1', checked: false, functions: [
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '2', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '2', checked: false },
-                    { id: '1', name: '功能/操作2', programId: '1', sectionId: '2', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '2', checked: false },
-                    { id: '1', name: '功能/操作3', programId: '1', sectionId: '2', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '2', checked: false },
-                    { id: '1', name: '功能/操作4', programId: '1', sectionId: '2', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '2', checked: false },
-                    { id: '1', name: '功能/操作5', programId: '1', sectionId: '2', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '2', checked: false },
+                id: '2', name: '模块1', pgmId: '1', checked: false, functs: [
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '2', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '2', checked: false },
+                    { id: '1', name: '功能/操作2', pgmId: '1', sectId: '2', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '2', checked: false },
+                    { id: '1', name: '功能/操作3', pgmId: '1', sectId: '2', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '2', checked: false },
+                    { id: '1', name: '功能/操作4', pgmId: '1', sectId: '2', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '2', checked: false },
+                    { id: '1', name: '功能/操作5', pgmId: '1', sectId: '2', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '2', checked: false },
                 ]
             },
             {
-                id: '3', name: '模块1', programId: '1', checked: false, functions: [
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '3', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '3', checked: false },
-                    { id: '1', name: '功能/操作2', programId: '1', sectionId: '3', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '3', checked: false },
-                    { id: '1', name: '功能/操作3', programId: '1', sectionId: '3', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '3', checked: false },
-                    { id: '1', name: '功能/操作4', programId: '1', sectionId: '3', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '3', checked: false },
-                    { id: '1', name: '功能/操作5', programId: '1', sectionId: '3', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '3', checked: false },
+                id: '3', name: '模块1', pgmId: '1', checked: false, functs: [
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '3', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '3', checked: false },
+                    { id: '1', name: '功能/操作2', pgmId: '1', sectId: '3', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '3', checked: false },
+                    { id: '1', name: '功能/操作3', pgmId: '1', sectId: '3', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '3', checked: false },
+                    { id: '1', name: '功能/操作4', pgmId: '1', sectId: '3', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '3', checked: false },
+                    { id: '1', name: '功能/操作5', pgmId: '1', sectId: '3', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '3', checked: false },
                 ]
             },
             {
-                id: '4', name: '模块1', programId: '1', checked: false, functions: [
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '4', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '4', checked: false },
-                    { id: '1', name: '功能/操作2', programId: '1', sectionId: '4', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '4', checked: false },
-                    { id: '1', name: '功能/操作3', programId: '1', sectionId: '4', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '4', checked: false },
-                    { id: '1', name: '功能/操作4', programId: '1', sectionId: '4', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '4', checked: false },
-                    { id: '1', name: '功能/操作5', programId: '1', sectionId: '4', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '4', checked: false },
+                id: '4', name: '模块1', pgmId: '1', checked: false, functs: [
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '4', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '4', checked: false },
+                    { id: '1', name: '功能/操作2', pgmId: '1', sectId: '4', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '4', checked: false },
+                    { id: '1', name: '功能/操作3', pgmId: '1', sectId: '4', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '4', checked: false },
+                    { id: '1', name: '功能/操作4', pgmId: '1', sectId: '4', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '4', checked: false },
+                    { id: '1', name: '功能/操作5', pgmId: '1', sectId: '4', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '4', checked: false },
                 ]
             },
             {
-                id: '5', name: '模块1', programId: '1', checked: false, functions: [
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '5', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '5', checked: false },
-                    { id: '1', name: '功能/操作2', programId: '1', sectionId: '5', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '5', checked: false },
-                    { id: '1', name: '功能/操作3', programId: '1', sectionId: '5', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '5', checked: false },
-                    { id: '1', name: '功能/操作4', programId: '1', sectionId: '5', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '5', checked: false },
-                    { id: '1', name: '功能/操作5', programId: '1', sectionId: '5', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '1', sectionId: '5', checked: false },
+                id: '5', name: '模块1', pgmId: '1', checked: false, functs: [
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '5', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '5', checked: false },
+                    { id: '1', name: '功能/操作2', pgmId: '1', sectId: '5', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '5', checked: false },
+                    { id: '1', name: '功能/操作3', pgmId: '1', sectId: '5', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '5', checked: false },
+                    { id: '1', name: '功能/操作4', pgmId: '1', sectId: '5', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '5', checked: false },
+                    { id: '1', name: '功能/操作5', pgmId: '1', sectId: '5', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '1', sectId: '5', checked: false },
                 ]
             },
         ]
     },
     {
         id: '2',
-        programName: '移动端',
-        sections: [
+        name: '移动端',
+        sects: [
             {
-                id: '1', name: '模块1', programId: '2', checked: false, functions: [
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '1', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '1', checked: false },
-                    { id: '1', name: '功能/操作2', programId: '2', sectionId: '1', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '1', checked: false },
-                    { id: '1', name: '功能/操作3', programId: '2', sectionId: '1', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '1', checked: false },
-                    { id: '1', name: '功能/操作4', programId: '2', sectionId: '1', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '1', checked: false },
-                    { id: '1', name: '功能/操作5', programId: '2', sectionId: '1', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '1', checked: false },
+                id: '1', name: '模块1', pgmId: '2', checked: false, functs: [
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '1', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '1', checked: false },
+                    { id: '1', name: '功能/操作2', pgmId: '2', sectId: '1', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '1', checked: false },
+                    { id: '1', name: '功能/操作3', pgmId: '2', sectId: '1', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '1', checked: false },
+                    { id: '1', name: '功能/操作4', pgmId: '2', sectId: '1', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '1', checked: false },
+                    { id: '1', name: '功能/操作5', pgmId: '2', sectId: '1', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '1', checked: false },
                 ]
             },
             {
-                id: '2', name: '模块1', programId: '2', checked: false, functions: [
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '2', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '2', checked: false },
-                    { id: '1', name: '功能/操作2', programId: '2', sectionId: '2', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '2', checked: false },
-                    { id: '1', name: '功能/操作3', programId: '2', sectionId: '2', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '2', checked: false },
-                    { id: '1', name: '功能/操作4', programId: '2', sectionId: '2', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '2', checked: false },
-                    { id: '1', name: '功能/操作5', programId: '2', sectionId: '2', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '2', checked: false },
+                id: '2', name: '模块1', pgmId: '2', checked: false, functs: [
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '2', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '2', checked: false },
+                    { id: '1', name: '功能/操作2', pgmId: '2', sectId: '2', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '2', checked: false },
+                    { id: '1', name: '功能/操作3', pgmId: '2', sectId: '2', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '2', checked: false },
+                    { id: '1', name: '功能/操作4', pgmId: '2', sectId: '2', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '2', checked: false },
+                    { id: '1', name: '功能/操作5', pgmId: '2', sectId: '2', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '2', checked: false },
                 ]
             },
             {
-                id: '3', name: '模块1', programId: '2', checked: false, functions: [
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '3', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '3', checked: false },
-                    { id: '1', name: '功能/操作2', programId: '2', sectionId: '3', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '3', checked: false },
-                    { id: '1', name: '功能/操作3', programId: '2', sectionId: '3', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '3', checked: false },
-                    { id: '1', name: '功能/操作4', programId: '2', sectionId: '3', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '3', checked: false },
-                    { id: '1', name: '功能/操作5', programId: '2', sectionId: '3', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '3', checked: false },
+                id: '3', name: '模块1', pgmId: '2', checked: false, functs: [
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '3', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '3', checked: false },
+                    { id: '1', name: '功能/操作2', pgmId: '2', sectId: '3', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '3', checked: false },
+                    { id: '1', name: '功能/操作3', pgmId: '2', sectId: '3', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '3', checked: false },
+                    { id: '1', name: '功能/操作4', pgmId: '2', sectId: '3', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '3', checked: false },
+                    { id: '1', name: '功能/操作5', pgmId: '2', sectId: '3', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '3', checked: false },
                 ]
             },
             {
-                id: '4', name: '模块1', programId: '2', checked: false, functions: [
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '4', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '4', checked: false },
-                    { id: '1', name: '功能/操作2', programId: '2', sectionId: '4', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '4', checked: false },
-                    { id: '1', name: '功能/操作3', programId: '2', sectionId: '4', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '4', checked: false },
-                    { id: '1', name: '功能/操作4', programId: '2', sectionId: '4', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '4', checked: false },
-                    { id: '1', name: '功能/操作5', programId: '2', sectionId: '4', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '4', checked: false },
+                id: '4', name: '模块1', pgmId: '2', checked: false, functs: [
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '4', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '4', checked: false },
+                    { id: '1', name: '功能/操作2', pgmId: '2', sectId: '4', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '4', checked: false },
+                    { id: '1', name: '功能/操作3', pgmId: '2', sectId: '4', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '4', checked: false },
+                    { id: '1', name: '功能/操作4', pgmId: '2', sectId: '4', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '4', checked: false },
+                    { id: '1', name: '功能/操作5', pgmId: '2', sectId: '4', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '4', checked: false },
                 ]
             },
             {
-                id: '5', name: '模块1', programId: '2', checked: false, functions: [
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '5', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '5', checked: false },
-                    { id: '1', name: '功能/操作2', programId: '2', sectionId: '5', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '5', checked: false },
-                    { id: '1', name: '功能/操作3', programId: '2', sectionId: '5', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '5', checked: false },
-                    { id: '1', name: '功能/操作4', programId: '2', sectionId: '5', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '5', checked: false },
-                    { id: '1', name: '功能/操作5', programId: '2', sectionId: '5', checked: false },
-                    { id: '1', name: '功能/操作1', programId: '2', sectionId: '5', checked: false },
+                id: '5', name: '模块1', pgmId: '2', checked: false, functs: [
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '5', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '5', checked: false },
+                    { id: '1', name: '功能/操作2', pgmId: '2', sectId: '5', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '5', checked: false },
+                    { id: '1', name: '功能/操作3', pgmId: '2', sectId: '5', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '5', checked: false },
+                    { id: '1', name: '功能/操作4', pgmId: '2', sectId: '5', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '5', checked: false },
+                    { id: '1', name: '功能/操作5', pgmId: '2', sectId: '5', checked: false },
+                    { id: '1', name: '功能/操作1', pgmId: '2', sectId: '5', checked: false },
                 ]
             },
         ]

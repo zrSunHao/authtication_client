@@ -6,7 +6,7 @@ import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/con
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { DialogSystemComponent } from './dialog-system/dialog-system.component';
-import { SysElet, SysFilter, SYSTEM_ELEMENT_DATA } from '../../@sun/models/system.model';
+import { SysElet, SysFilter } from '../../@sun/models/system.model';
 import { SystemService } from './system.service';
 
 @Component({
@@ -82,7 +82,7 @@ export class SystemComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result?.op === 'save' && result?.e)
         this.notifyServ.notify(`系统【${e.name}】信息更新成功！！！`, 'success');
-        this.onSearchClick();
+      this.onSearchClick();
     });
   }
 
@@ -122,9 +122,9 @@ export class SystemComponent implements OnInit, AfterViewInit {
   onFileChange(e: any): void {
     if (e?.target?.files?.length > 0 && this.currentSys) {
       const formData = new FormData();
-      formData.append('id', this.currentSys.id as string);
+      formData.append('ownerId', this.currentSys.id as string);
       formData.append('logo', e.target.files[0]);
-      this.hostServ.icon(formData).subscribe({
+      this.hostServ.icon(this.currentSys.id as string, formData).subscribe({
         next: res => {
           if (res.success) {
             if (this.currentSys) this.currentSys.logo = res.data;
@@ -147,7 +147,6 @@ export class SystemComponent implements OnInit, AfterViewInit {
       error: err => {
         const msg = `数据加载失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
-        this.dataSource = SYSTEM_ELEMENT_DATA; // TODO 待删除
       }
     });
   }

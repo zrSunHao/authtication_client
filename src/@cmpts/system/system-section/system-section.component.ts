@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { SysPgmElet, PROGRAM_ELEMENT_DATA, SysPgmFilter } from '../../../@sun/models/system.model';
+import { OptionItem } from 'src/@sun/models/paging.model';
+import { PGM_TYPE_OPS } from 'src/@sun/models/program.model';
+import { SysPgmElet, SysNotOwnedPgmFilter } from '../../../@sun/models/system.model';
 
 @Component({
   selector: 'app-system-section',
@@ -8,11 +10,12 @@ import { SysPgmElet, PROGRAM_ELEMENT_DATA, SysPgmFilter } from '../../../@sun/mo
 })
 export class SystemSectionComponent implements OnInit {
 
-  dto: SysPgmFilter = new SysPgmFilter();
+  dto: SysNotOwnedPgmFilter = new SysNotOwnedPgmFilter();
+  typeOps: OptionItem[] = PGM_TYPE_OPS;
 
-  @Input() data: SysPgmElet[] = PROGRAM_ELEMENT_DATA;
+  @Input() data: SysPgmElet[] = [];
   @Output() onAddProgram: EventEmitter<SysPgmElet> = new EventEmitter<SysPgmElet>();
-  @Output() onGetPrograms: EventEmitter<SysPgmFilter> = new EventEmitter<SysPgmFilter>();
+  @Output() onGetPrograms: EventEmitter<SysNotOwnedPgmFilter> = new EventEmitter<SysNotOwnedPgmFilter>();
 
   constructor() { }
 
@@ -24,7 +27,7 @@ export class SystemSectionComponent implements OnInit {
   }
 
   onResetClick(): void {
-    this.dto = new SysPgmFilter();
+    this.dto = new SysNotOwnedPgmFilter();
     this.onGetPrograms.emit(this.dto);
   }
 

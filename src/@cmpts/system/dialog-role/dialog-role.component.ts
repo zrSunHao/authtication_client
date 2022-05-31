@@ -1,9 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
 import { OptionItem } from 'src/@sun/models/paging.model';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { RoleElet, ROLE_RANK_OPS } from '../../../@sun/models/system.model';
+import { RoleElet, RoleRank, ROLE_RANK_OPS } from '../../../@sun/models/system.model';
 import { SystemService } from '../system.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class DialogRoleComponent implements OnInit {
   title: string = '';
   form: FormGroup;
   update: boolean = false;
-  rankOps: OptionItem[] = ROLE_RANK_OPS;
+  rankOps: OptionItem[] = ROLE_RANK_OPS.filter(x => x.key != RoleRank.other);
+  methodOps: OptionItem[] = CTT_METHOD_OPS;
 
   constructor(private dialogRef: MatDialogRef<DialogRoleComponent>,
     @Inject(MAT_DIALOG_DATA) public data: RoleElet,
@@ -28,7 +30,7 @@ export class DialogRoleComponent implements OnInit {
       name: new FormControl(null, [Validators.required, Validators.pattern(/^[\u4E00-\u9FA5A-Za-z0-9_]{2,16}$/)]),
       code: new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z0-9_]{2,16}$/)]),
       rank: new FormControl(null, [Validators.required,]),
-      limitedMethod: new FormControl(null, []),
+      cttMethod: new FormControl(null, []),
       limitedExpiredAt: new FormControl(null, []),
       remark: new FormControl(null, [Validators.maxLength(256)]),
     });
@@ -38,7 +40,7 @@ export class DialogRoleComponent implements OnInit {
     this.form.controls['name'].setValue(this.data.name);
     this.form.controls['code'].setValue(this.data.code);
     this.form.controls['rank'].setValue(this.data.rank);
-    this.form.controls['limitedMethod'].setValue(this.data.limitedMethod);
+    this.form.controls['cttMethod'].setValue(this.data.cttMethod);
     this.form.controls['limitedExpiredAt'].setValue(this.data.limitedExpiredAt);
     this.form.controls['remark'].setValue(this.data.remark);
   }
@@ -47,7 +49,7 @@ export class DialogRoleComponent implements OnInit {
     this.data.name = this.form.controls['name'].value;
     this.data.code = this.form.controls['code'].value;
     this.data.rank = this.form.controls['rank'].value;
-    this.data.limitedMethod = this.form.controls['limitedMethod'].value;
+    this.data.cttMethod = this.form.controls['cttMethod'].value;
     this.data.limitedExpiredAt = this.form.controls['limitedExpiredAt'].value;
     this.data.remark = this.form.controls['remark'].value;
     if (this.update) this._update(this.data);
@@ -76,7 +78,7 @@ export class DialogRoleComponent implements OnInit {
   }
 
   private _update(e: RoleElet): void {
-    this.hostServ.addRole(e).subscribe({
+    this.hostServ.updateRole(e).subscribe({
       next: res => {
         if (res.success) {
           this.dialogRef.close({ op: 'save', e: e });

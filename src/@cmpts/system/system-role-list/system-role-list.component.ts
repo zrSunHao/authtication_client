@@ -6,9 +6,9 @@ import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/con
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { DialogRoleComponent } from '../dialog-role/dialog-role.component';
-import { RoleElet, SysRoleFilter, ROLE_ELEMENT_DATA, ROLE_RANK_OPS } from '../../../@sun/models/system.model';
+import { RoleElet, SysRoleFilter, ROLE_RANK_OPS } from '../../../@sun/models/system.model';
 import { SystemService } from '../system.service';
-import { CttMethod } from 'src/@sun/models/constraint.model';
+import { CttMethod, CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
 
 @Component({
   selector: 'app-system-role-list',
@@ -22,6 +22,7 @@ export class SystemRoleListComponent implements OnInit {
   dto: SysRoleFilter = new SysRoleFilter();
   params = new PagingParameter<SysRoleFilter>();
   rankOps: OptionItem[] = ROLE_RANK_OPS;
+  methodOps: OptionItem[] = CTT_METHOD_OPS;
 
   total = 0;
   columnOp = 'createdAt';
@@ -50,14 +51,14 @@ export class SystemRoleListComponent implements OnInit {
   }
 
   onSearchClick(): void {
-    this.dto.systemId = this.sysId;
+    this.dto.sysId = this.sysId;
     this.params.filter = this.dto;
     this._loadData(this.params);
   }
 
   onResetClick(): void {
     this.dto = new SysRoleFilter();
-    this.dto.systemId = this.sysId;
+    this.dto.sysId = this.sysId;
     this.params.filter = this.dto;
     this.params.pageIndex = 1;
     this.params.pageSize = 10;
@@ -71,9 +72,8 @@ export class SystemRoleListComponent implements OnInit {
   }
 
   onAddClick(): void {
-    const r: RoleElet = {
-      id: '', rank: 0, name: '', systemId: this.sysId, code: '', limitedMethod: CttMethod.other, limitedExpiredAt: null, createdAt: null, remark: ''
-    };
+    const r: RoleElet = new RoleElet();
+    r.sysId = this.sysId;
     const dialogRef = this.dialog.open(DialogRoleComponent,
       { width: '520px', data: r, });
 
@@ -127,8 +127,6 @@ export class SystemRoleListComponent implements OnInit {
       error: err => {
         const msg = `数据加载失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
-        this.dataSource = ROLE_ELEMENT_DATA;  // TODO 删除
-        this.total = 35;  // TODO 删除
       }
     });
   }
@@ -140,8 +138,6 @@ export class SystemRoleListComponent implements OnInit {
     } else {
       const msg = `数据加载失败！！！ ${res.allMessages}`;
       this.notifyServ.notify(msg, 'error');
-      this.dataSource = ROLE_ELEMENT_DATA;  // TODO 删除
-      this.total = 35;  // TODO 删除
     }
   }
 

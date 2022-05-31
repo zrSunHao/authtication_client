@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { SysFunctElet, SysRoleRelation, RoleFunctElet, ROLE_SECTION_ELEMENT_DATA, SysSectElet } from '../../../@sun/models/system.model';
+import { SysRoleFunctElet, SysRoleRelation, SysRolePgmElet, ROLE_SECTION_ELEMENT_DATA, SysRoleSectElet } from '../../../@sun/models/system.model';
 import { SystemService } from '../system.service';
 
 @Component({
@@ -14,8 +14,8 @@ export class SystemRoleFuntionsComponent implements OnInit {
   roleId: string = '';
   roleName: string = '';
 
-  displayedColumns = ['name', 'functions'];
-  programs: RoleFunctElet[] = [];
+  displayedColumns = ['name', 'functs'];
+  programs: SysRolePgmElet[] = [];
 
   constructor(private route: ActivatedRoute,
     private notifyServ: NotifyService,
@@ -33,7 +33,7 @@ export class SystemRoleFuntionsComponent implements OnInit {
     this.hostServ.getRoleFunctions(this.roleId).subscribe({
       next: res => {
         if (res.success) {
-          this.programs = res.data as RoleFunctElet[];
+          this.programs = res.data as SysRolePgmElet[];
         } else {
           const msg = `功能权限数据加载失败！！！ ${res.allMessages}`;
           this.notifyServ.notify(msg, 'error');
@@ -51,25 +51,25 @@ export class SystemRoleFuntionsComponent implements OnInit {
     history.back();
   }
 
-  onSectionChange(e: SysSectElet): void {
+  onSectionChange(e: SysRoleSectElet): void {
     if (e.checked) {
-      e.functions.forEach(f => {
+      e.functs.forEach(f => {
         f.checked = true;
       });
     } else {
-      e.functions.forEach(f => {
+      e.functs.forEach(f => {
         f.checked = false;
       });
     }
   }
 
-  onFunctionChange(e: SysFunctElet): void {
-    const p = this.programs.find(x => x.id == e.programId);
+  onFunctionChange(e: SysRoleFunctElet): void {
+    const p = this.programs.find(x => x.id == e.pgmId);
     if (p) {
-      const s = p.sections.find(x => x.id == e.sectionId);
+      const s = p.sects.find(x => x.id == e.sectId);
       if (s) {
         let flag = true; //全不选
-        s.functions.forEach(f => {
+        s.functs.forEach(f => {
           if (f.checked) flag = false;
         });
         s.checked = !flag;
@@ -77,34 +77,34 @@ export class SystemRoleFuntionsComponent implements OnInit {
     }
   }
 
-  onSaveClick(e: RoleFunctElet) {
-    const s = e.sections.filter(x => x.checked).map(x => x.id);
+  onSaveClick(e: SysRolePgmElet) {
+    const s = e.sects.filter(x => x.checked).map(x => x.id);
     let f: string[] = [];
-    e.sections.forEach(x => {
+    e.sects.forEach(x => {
       if (x.checked) {
-        const t = x.functions.filter(x => x.checked).map(x => x.id);
+        const t = x.functs.filter(x => x.checked).map(x => x.id);
         f = [...f, ...t];
       }
     });
 
     const dto = new SysRoleRelation();
     dto.roleId = this.roleId;
-    dto.programId = e.id;
-    dto.sectionIds = s;
-    dto.functionIds = f;
+    dto.pgmId = e.id;
+    dto.sectIds = s;
+    dto.functIds = f;
     console.info(dto);
 
     this.hostServ.addRoleFunctions(dto).subscribe({
       next: res => {
         if (res.success) {
-          this.notifyServ.notify(`程序【${e.programName}】的权限关联成功！！！`, 'success');
+          this.notifyServ.notify(`程序【${e.name}】的权限关联成功！！！`, 'success');
         } else {
-          const msg = `程序【${e.programName}】的权限关联失败！！！ ${res.allMessages}`;
+          const msg = `程序【${e.name}】的权限关联失败！！！ ${res.allMessages}`;
           this.notifyServ.notify(msg, 'error');
         }
       },
       error: err => {
-        const msg = `程序【${e.programName}】的权限关联失败！！！ ${err}`;
+        const msg = `程序【${e.name}】的权限关联失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
       }
     });
