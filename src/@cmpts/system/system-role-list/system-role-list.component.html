@@ -72,12 +72,12 @@
             <span *ngIf="element.rank === rankOps[6].key" style="color: #34d399;">{{rankOps[6].value}}</span>
           </td>
         </ng-container>
-        <ng-container matColumnDef="limitedMethod">
+        <ng-container matColumnDef="cttMethod">
           <th mat-header-cell *matHeaderCellDef> 方式 </th>
           <td mat-cell *matCellDef="let element" style="min-width: 4rem;">
-            <span *ngIf="element.limitedMethod === ''">- - -</span>
-            <span *ngIf="element.limitedMethod === '1'" style="color: #fde68a;">禁用</span>
-            <span *ngIf="element.limitedMethod === '2'" style="color: #f9a8d4;">锁定</span>
+            <span *ngIf="!element.cttMethod">- - -</span>
+            <span *ngIf="element.cttMethod == methodOps[1].key" style="color: #fde68a;">{{methodOps[1].value}}</span>
+            <span *ngIf="element.cttMethod == methodOps[2].key" style="color: #f9a8d4;">{{methodOps[2].value}}</span>
           </td>
         </ng-container>
         <ng-container matColumnDef="createdAt">

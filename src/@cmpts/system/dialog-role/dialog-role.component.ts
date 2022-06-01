@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
+import { CttMethod, CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
 import { OptionItem } from 'src/@sun/models/paging.model';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { RoleElet, RoleRank, ROLE_RANK_OPS } from '../../../@sun/models/system.model';
@@ -19,6 +19,7 @@ export class DialogRoleComponent implements OnInit {
   update: boolean = false;
   rankOps: OptionItem[] = ROLE_RANK_OPS.filter(x => x.key != RoleRank.other);
   methodOps: OptionItem[] = CTT_METHOD_OPS;
+  CttMethod = CttMethod;
 
   constructor(private dialogRef: MatDialogRef<DialogRoleComponent>,
     @Inject(MAT_DIALOG_DATA) public data: RoleElet,
@@ -27,8 +28,8 @@ export class DialogRoleComponent implements OnInit {
     this.title = data?.name ? '修改' : '添加';
     this.update = (data?.id !== '' && data?.id !== null && data?.id !== undefined);
     this.form = new FormGroup({
-      name: new FormControl(null, [Validators.required, Validators.pattern(/^[\u4E00-\u9FA5A-Za-z0-9_]{2,16}$/)]),
-      code: new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z0-9_]{2,16}$/)]),
+      name: new FormControl(null, [Validators.required, Validators.pattern(/^[\u4E00-\u9FA5A-Za-z0-9_]{2,32}$/)]),
+      code: new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z0-9_]{2,32}$/)]),
       rank: new FormControl(null, [Validators.required,]),
       cttMethod: new FormControl(null, []),
       limitedExpiredAt: new FormControl(null, []),
@@ -43,6 +44,7 @@ export class DialogRoleComponent implements OnInit {
     this.form.controls['cttMethod'].setValue(this.data.cttMethod);
     this.form.controls['limitedExpiredAt'].setValue(this.data.limitedExpiredAt);
     this.form.controls['remark'].setValue(this.data.remark);
+    this.form.controls['limitedExpiredAt'].disable();
   }
 
   onSaveClick(): void {
@@ -58,6 +60,11 @@ export class DialogRoleComponent implements OnInit {
 
   onCloseClick(): void {
     this.dialogRef.close({ op: 'close' });
+  }
+
+  onCttMethodValueChange(event: number): void {
+    if (event != CttMethod.lock)
+      this.form.controls['limitedExpiredAt'].setValue(null);
   }
 
   private _add(e: RoleElet): void {

@@ -12,7 +12,7 @@ export class SystemService {
 
   private baseUrl = environment.hostUrl + 'sys';
   private resourceUrl = environment.hostUrl + 'resource';
-  private resourceCategory = environment.hostUrl + 'sys';
+  private resourceCategory = 'sys';
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-type': 'application/json' })
   };
@@ -91,7 +91,7 @@ export class SystemService {
 
   public updateRole(param: RoleElet): Observable<ResponseResult<boolean>> {
     const url = `${this.baseUrl}/UpdateRole`;
-    if(!param.intro) param.intro='无';
+    if (!param.intro) param.intro = '无';
     return this.http.patch<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 

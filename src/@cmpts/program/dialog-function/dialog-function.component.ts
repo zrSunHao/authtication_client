@@ -18,6 +18,7 @@ export class DialogFunctionComponent implements OnInit {
   form: FormGroup;
   update: boolean = false;
   methodOps: OptionItem[] = CTT_METHOD_OPS;
+  CttMethod = CttMethod;
 
   constructor(private dialogRef: MatDialogRef<DialogFunctionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: FunctElet,
@@ -54,8 +55,8 @@ export class DialogFunctionComponent implements OnInit {
   }
 
   onCttMethodValueChange(event: number): void {
-    if(event != CttMethod.lock)
-    this.form.controls['limitedExpiredAt'].setValue(null);
+    if (event != CttMethod.lock)
+      this.form.controls['limitedExpiredAt'].setValue(null);
   }
 
   onCloseClick(): void {

@@ -53,9 +53,9 @@ export class SystemRoleFuntionsComponent implements OnInit {
 
   onSectionChange(e: SysRoleSectElet): void {
     if (e.checked) {
-      e.functs.forEach(f => {
-        f.checked = true;
-      });
+      // e.functs.forEach(f => {
+      //   f.checked = true;
+      // });
     } else {
       e.functs.forEach(f => {
         f.checked = false;
@@ -67,13 +67,14 @@ export class SystemRoleFuntionsComponent implements OnInit {
     const p = this.programs.find(x => x.id == e.pgmId);
     if (p) {
       const s = p.sects.find(x => x.id == e.sectId);
-      if (s) {
-        let flag = true; //全不选
-        s.functs.forEach(f => {
-          if (f.checked) flag = false;
-        });
-        s.checked = !flag;
-      }
+      // if (s) {
+      //   let flag = true; //全不选
+      //   s.functs.forEach(f => {
+      //     if (f.checked) flag = false;
+      //   });
+      //   s.checked = !flag;
+      // }
+      if (s && e.checked) s.checked = true;
     }
   }
 

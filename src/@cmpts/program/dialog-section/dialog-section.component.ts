@@ -24,7 +24,7 @@ export class DialogSectionComponent implements OnInit {
     this.update = (data?.id !== '' && data?.id !== null && data?.id !== undefined);
     this.form = new FormGroup({
       name: new FormControl(null, [Validators.required, Validators.pattern(/^[\u4E00-\u9FA5A-Za-z0-9_]{2,32}$/)]),
-      code: new FormControl(null, [Validators.required, Validators.pattern(/^[\u4E00-\u9FA5A-Za-z0-9/_]{2,32}$/)]),
+      code: new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z0-9/_]{2,32}$/)]),
       remark: new FormControl(null, [Validators.required, Validators.maxLength(256)]),
     });
   }

@@ -29,6 +29,7 @@ export class SystemComponent implements OnInit, AfterViewInit {
   ];
   displayedColumns = ['logo', 'name', 'code', 'createdAt', 'intro', 'remark', 'operate',];
   dataSource: SysElet[] = [];
+  file:any;
 
   @ViewChild("imageInput", { static: false })
   imageInput!: ElementRef;
@@ -132,8 +133,10 @@ export class SystemComponent implements OnInit, AfterViewInit {
             const msg = `程序${this.currentSys?.name}的logo上传失败！！！ ${res.allMessages}`;
             this.notifyServ.notify(msg, 'error');
           }
+          this.file = null;
         },
         error: err => {
+          this.file = null;
           const msg = `程序${this.currentSys?.name}的logo上传失败！！！ ${err}`;
           this.notifyServ.notify(msg, 'error');
         }

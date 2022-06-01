@@ -33,7 +33,7 @@ export class SystemRoleListComponent implements OnInit {
     { name: '创建时间', value: 'createdAt' },
   ];
 
-  displayedColumns = ['name', 'code', 'rank', 'limitedMethod', 'limitedExpiredAt', 'remark', 'createdAt', 'operate',];
+  displayedColumns = ['name', 'code', 'rank', 'cttMethod', 'limitedExpiredAt', 'remark', 'createdAt', 'operate',];
   dataSource: RoleElet[] = [];
 
   constructor(private router: Router,
