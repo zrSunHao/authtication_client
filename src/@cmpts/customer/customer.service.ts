@@ -13,6 +13,7 @@ export class CustomerService {
   private baseUrl = environment.hostUrl + 'customer';
   private sysUrl = environment.hostUrl + 'sys';
   private resourceUrl = environment.hostUrl + 'resource';
+  private cttUrl = environment.hostUrl + 'constraint';
   private resourceCategory = 'ctm';
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-type': 'application/json' })
@@ -91,13 +92,13 @@ export class CustomerService {
   }
 
   public deleteConstraint(id: string): Observable<ResponseResult<boolean>> {
-    const url = `${this.baseUrl}/deleteConstraint?id=${id}`;
-    return this.http.get<ResponseResult<boolean>>(url)
+    const url = `${this.cttUrl}/Cancel?id=${id}`;
+    return this.http.delete<ResponseResult<boolean>>(url)
       .pipe(catchError(this.handleError));
   }
 
   public addConstraint(param: CtmCttAddDto): Observable<ResponseResult<boolean>> {
-    const url = `${this.baseUrl}/addConstraint`;
+    const url = `${this.baseUrl}/AddCtt`;
     return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 

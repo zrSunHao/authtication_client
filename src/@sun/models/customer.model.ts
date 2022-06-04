@@ -123,7 +123,7 @@ export class CtmLogFilter {
 }
 
 export class CtmCttAddDto {
-    customerId: string = '';
+    ctmId: string = '';
     category: CttCategory = CttCategory.other;  //账号->所有系统 账号->某系统
     method: CttMethod = CttMethod.other;
     sysId: string | null = '';

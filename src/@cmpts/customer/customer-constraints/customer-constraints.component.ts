@@ -27,9 +27,7 @@ export class CustomerConstraintsComponent implements OnInit {
   pageSize: 5 | 10 | 20 | 50 = 5;
   columnOp = 'createdAt';
   columns: Array<PaginatorColumn> = [
-    { name: 'ID', value: 'id' },
-    { name: '类别', value: 'category' },
-    { name: '方式', value: 'method' },
+    { name: '创建时间', value: 'createdAt' },
     { name: '到期时间', value: 'expiredAt' },
   ];
 
@@ -78,7 +76,7 @@ export class CustomerConstraintsComponent implements OnInit {
 
   onCancelClick(e: CtmCttElet) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '260px',
+      width: '520px',
       data: `确定要删除ID为【${e.id}】的约束吗？`,
     });
 

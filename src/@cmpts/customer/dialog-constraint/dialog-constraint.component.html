@@ -13,8 +13,7 @@
   <mat-form-field appearance="outline">
     <mat-label>约束方式</mat-label>
     <mat-select formControlName="method" (valueChange)="onMethodChange($event)">
-      <mat-option value="1">禁用</mat-option>
-      <mat-option value="2">锁定</mat-option>
+      <mat-option *ngFor="let item of methodOps" [value]="item.key">{{item.value}}</mat-option>
     </mat-select>
     <mat-hint>禁用、锁定</mat-hint>
     <mat-icon matSuffix>category</mat-icon>

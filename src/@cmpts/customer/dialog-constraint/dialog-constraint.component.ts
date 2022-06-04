@@ -5,7 +5,7 @@ import { OptionItem } from 'src/@sun/models/paging.model';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
 import { CtmCttAddDto } from '../../../@sun/models/customer.model';
-import { CTT_CATEGERY_OPS, CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
+import { CttCategory, CttMethod, CTT_CATEGERY_OPS, CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
 
 @Component({
   selector: 'app-dialog-constraint',
@@ -43,7 +43,7 @@ export class DialogConstraintComponent implements OnInit {
 
   onSaveClick(): void {
     let dto = new CtmCttAddDto();
-    dto.customerId = this.customerId;
+    dto.ctmId = this.customerId;
     dto.category = this.form.controls['category'].value;
     dto.method = this.form.controls['method'].value;
     dto.sysId = this.form.controls['sysId'].value;
@@ -70,7 +70,7 @@ export class DialogConstraintComponent implements OnInit {
   }
 
   onCategeryChange($event: any): void {
-    if ($event !== '2') {
+    if ($event !== CttCategory.customer_one_system) {
       this.form.controls['sysId'].disable();
       this.sysEnabled = false;
     } else {
@@ -80,7 +80,7 @@ export class DialogConstraintComponent implements OnInit {
   }
 
   onMethodChange($event: any): void {
-    if ($event !== '2') {
+    if ($event !== CttMethod.lock) {
       this.expiredAtEnabled = false;
     } else {
       this.expiredAtEnabled = true;

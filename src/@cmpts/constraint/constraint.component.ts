@@ -29,7 +29,7 @@ export class ConstraintComponent implements OnInit {
     { name: '创建时间', value: 'createdAt' },
   ];
 
-  displayedColumns = ['category', 'method', 'ctmName', 'sysName', 'functName', 'expiredAt', 'origin', 'createdAt', 'remark', 'operate',];
+  displayedColumns = ['id', 'category', 'method', 'ctmName', 'sysName', 'functName', 'expiredAt', 'origin', 'createdAt', 'remark', 'operate',];
   dataSource: Array<CttElet> = [];
 
   constructor(private dialog: MatDialog,
