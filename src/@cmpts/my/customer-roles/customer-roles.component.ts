@@ -45,7 +45,7 @@ export class CustomerRolesComponent implements OnInit {
   }
 
   onSearchClick(): void {
-    this.dto.customerId = this.customerId;
+    this.dto.ctmId = this.customerId;
     this.params.filter = this.dto;
     this.params.pageSize = this.pageSize;
     this._loadData(this.params);
@@ -53,7 +53,7 @@ export class CustomerRolesComponent implements OnInit {
 
   onResetClick(): void {
     this.dto = new CtmRoleFilter();
-    this.dto.customerId = this.customerId;
+    this.dto.ctmId = this.customerId;
     this.params.filter = this.dto;
     this.params.pageIndex = 1;
     this.params.pageSize = this.pageSize;

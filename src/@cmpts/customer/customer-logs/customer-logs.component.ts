@@ -3,7 +3,7 @@ import { PagingParameter, ResponsePagingResult } from 'src/@sun/models/paging.mo
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
-import { CtmLogFilter, CtmLogElet, LOG_ELEMENT_DATA } from '../../../@sun/models/customer.model';
+import { CtmLogFilter, CtmLogElet } from '../../../@sun/models/customer.model';
 
 @Component({
   selector: 'app-customer-logs',
@@ -39,7 +39,7 @@ export class CustomerLogsComponent implements OnInit {
   }
 
   onSearchClick(): void {
-    this.dto.customerId = this.customerId;
+    this.dto.ctmId = this.customerId;
     this.params.filter = this.dto;
     this.params.pageSize = this.pageSize;
     this._loadData(this.params);
@@ -47,7 +47,7 @@ export class CustomerLogsComponent implements OnInit {
 
   onResetClick(): void {
     this.dto = new CtmLogFilter();
-    this.dto.customerId = this.customerId;
+    this.dto.ctmId = this.customerId;
     this.params.filter = this.dto;
     this.params.pageIndex = 1;
     this.params.pageSize = this.pageSize;
@@ -71,8 +71,6 @@ export class CustomerLogsComponent implements OnInit {
       error: err => {
         const msg = `日志数据加载失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
-        this.dataSource = LOG_ELEMENT_DATA; // TODO 删除
-        this.total = 35; // TODO 删除
       }
     });
   }

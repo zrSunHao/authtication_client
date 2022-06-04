@@ -49,7 +49,7 @@ export class PeopleInfoComponent implements OnInit {
       this.form.disable();
       this.dateDisabled = true;
       this.edit = false;
-      this._elementMapToForm();
+      this._elementMapToForm(this.people);
     }
   }
 
@@ -62,7 +62,7 @@ export class PeopleInfoComponent implements OnInit {
         if (res.success) {
           const msg = `个人信息保存成功！！！ ${res.allMessages}`;
           this.notifyServ.notify(msg, 'success');
-          this._elementMapToForm();
+          this._elementMapToForm(p);
           this.form.disable();
           this.dateDisabled = true;
           this.edit = false;
@@ -85,7 +85,7 @@ export class PeopleInfoComponent implements OnInit {
       next: res => {
         if (res.success) {
           this.people = res.data as PeopleElet;
-          this._elementMapToForm();
+          this._elementMapToForm(this.people);
         } else {
           const msg = `个人信息加载失败！！！ ${res.allMessages}`;
           this.notifyServ.notify(msg, 'error');
@@ -98,13 +98,13 @@ export class PeopleInfoComponent implements OnInit {
     });
   }
 
-  private _elementMapToForm(): void {
-    this.form.controls['fullName'].setValue(this.people.fullName);
-    this.form.controls['gender'].setValue(this.people.gender);
-    this.form.controls['birthday'].setValue(this.people.birthday);
-    this.form.controls['education'].setValue(this.people.education);
-    this.form.controls['profession'].setValue(this.people.profession);
-    this.form.controls['intro'].setValue(this.people.intro);
+  private _elementMapToForm(p: PeopleElet): void {
+    this.form.controls['fullName'].setValue(p.fullName);
+    this.form.controls['gender'].setValue(p.gender);
+    this.form.controls['birthday'].setValue(p.birthday);
+    this.form.controls['education'].setValue(p.education);
+    this.form.controls['profession'].setValue(p.profession);
+    this.form.controls['intro'].setValue(p.intro);
   }
 
   private _formMapToElement(people: PeopleElet): void {

@@ -6,7 +6,7 @@ import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/pagi
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
 import { DialogRoleComponent } from '../dialog-role/dialog-role.component';
-import { CtmRoleAddDto, CtmRoleElet, CtmRoleFilter, CUSTOMER_ROLE_ELEMENT_DATA } from '../../../@sun/models/customer.model';
+import { CtmRoleUpdateDto, CtmRoleElet, CtmRoleFilter } from '../../../@sun/models/customer.model';
 import { ROLE_RANK_OPS } from 'src/@sun/models/system.model';
 
 @Component({
@@ -27,8 +27,6 @@ export class CustomerRolesComponent implements OnInit {
   columnOp = 'createdAt';
   columns: Array<PaginatorColumn> = [
     { name: '系统名称', value: 'sysName' },
-    { name: '角色名称', value: 'roleName' },
-    { name: '角色等级', value: 'roleRank' },
     { name: '关联时间', value: 'createdAt' },
   ];
 
@@ -45,7 +43,7 @@ export class CustomerRolesComponent implements OnInit {
   }
 
   onSearchClick(): void {
-    this.dto.customerId = this.customerId;
+    this.dto.ctmId = this.customerId;
     this.params.filter = this.dto;
     this.params.pageSize = this.pageSize;
     this._loadData(this.params);
@@ -53,7 +51,7 @@ export class CustomerRolesComponent implements OnInit {
 
   onResetClick(): void {
     this.dto = new CtmRoleFilter();
-    this.dto.customerId = this.customerId;
+    this.dto.ctmId = this.customerId;
     this.params.filter = this.dto;
     this.params.pageIndex = 1;
     this.params.pageSize = this.pageSize;
@@ -63,8 +61,8 @@ export class CustomerRolesComponent implements OnInit {
   }
 
   onAddClick(): void {
-    const dto = new CtmRoleAddDto();
-    dto.customerId = this.customerId;
+    const dto = new CtmRoleUpdateDto();
+    dto.ctmId = this.customerId;
     const dialogRef = this.dialog.open(DialogRoleComponent,
       { width: '360px', data: dto, }
     );
@@ -78,8 +76,8 @@ export class CustomerRolesComponent implements OnInit {
   }
 
   onEditClick(e: CtmRoleElet) {
-    const dto = new CtmRoleAddDto();
-    dto.customerId = this.customerId;
+    const dto = new CtmRoleUpdateDto();
+    dto.ctmId = this.customerId;
     dto.sysId = e.sysId;
     dto.roleId = e.roleId;
     const dialogRef = this.dialog.open(DialogRoleComponent,
@@ -120,8 +118,6 @@ export class CustomerRolesComponent implements OnInit {
       error: err => {
         const msg = `角色数据加载失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
-        this.dataSource = CUSTOMER_ROLE_ELEMENT_DATA; // TODO 删除
-        this.total = 35; // TODO 删除
       }
     });
   }
@@ -137,7 +133,7 @@ export class CustomerRolesComponent implements OnInit {
   }
 
   private _delete(e: CtmRoleElet): void {
-    this.hostServ.deleteRole(e.id as string).subscribe({
+    this.hostServ.deleteRole(this.customerId, e.roleId as string).subscribe({
       next: res => {
         if (res.success) {
           this.notifyServ.notify(`已取消与【${e.roleName}】角色的关联！！！`, 'success');

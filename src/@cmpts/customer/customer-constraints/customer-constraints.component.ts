@@ -6,7 +6,7 @@ import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/pagi
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
 import { DialogConstraintComponent } from '../dialog-constraint/dialog-constraint.component';
-import { CtmCttElet, CONSTRAINT_ELEMENT_DATA, CtmCttFilter } from '../../../@sun/models/customer.model';
+import { CtmCttElet, CtmCttFilter } from '../../../@sun/models/customer.model';
 import { CTT_CATEGERY_OPS, CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
 
 @Component({
@@ -46,7 +46,7 @@ export class CustomerConstraintsComponent implements OnInit {
   }
 
   onSearchClick(): void {
-    this.dto.customerId = this.customerId;
+    this.dto.ctmId = this.customerId;
     this.params.filter = this.dto;
     this.params.pageSize = this.pageSize;
     this._loadData(this.params);
@@ -54,7 +54,7 @@ export class CustomerConstraintsComponent implements OnInit {
 
   onResetClick(): void {
     this.dto = new CtmCttFilter();
-    this.dto.customerId = this.customerId;
+    this.dto.ctmId = this.customerId;
     this.params.filter = this.dto;
     this.params.pageIndex = 1;
     this.params.pageSize = this.pageSize;
@@ -102,8 +102,6 @@ export class CustomerConstraintsComponent implements OnInit {
       error: err => {
         const msg = `约束数据加载失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
-        this.dataSource = CONSTRAINT_ELEMENT_DATA; // TODO 删除
-        this.total = 35; // TODO 删除
       }
     });
   }

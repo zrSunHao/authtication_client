@@ -103,19 +103,19 @@ export class CtmFilter {
 }
 
 export class CtmRoleFilter {
-    customerId: string = '';
+    ctmId: string = '';
     sysName: string | null = '';
     roleName: string | null = '';
 }
 
 export class CtmCttFilter {
-    customerId: string = '';
+    ctmId: string = '';
     category: CttCategory = CttCategory.other; //账号->所有系统 账号->某系统
     sysName: string = '';
 }
 
 export class CtmLogFilter {
-    customerId: string = '';
+    ctmId: string = '';
     operate: string = '';
     sysName: string = '';
     startAt: Date | null = null;
@@ -131,8 +131,8 @@ export class CtmCttAddDto {
     remark: string = '';
 }
 
-export class CtmRoleAddDto {
-    customerId: string = '';
+export class CtmRoleUpdateDto {
+    ctmId: string = '';
     sysId: string = '';
     roleId: string = '';
 }
