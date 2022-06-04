@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { OptionItem } from 'src/@sun/models/paging.model';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
@@ -15,7 +15,7 @@ export class DialogRoleComponent implements OnInit {
 
   title: string = '';
   update: boolean = false;
-  form: FormGroup;
+  form: UntypedFormGroup;
   sysOptions: OptionItem[] = [];
   roleOptions: OptionItem[] = [];
 
@@ -25,9 +25,9 @@ export class DialogRoleComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: CtmRoleAddDto,) {
     this.title = data?.sysId ? '修改' : '添加';
     this.update = (data?.sysId !== '' && data?.sysId !== null && data?.sysId !== undefined);
-    this.form = new FormGroup({
-      sysId: new FormControl(null, [Validators.required,]),
-      roleId: new FormControl(null, [Validators.required,]),
+    this.form = new UntypedFormGroup({
+      sysId: new UntypedFormControl(null, [Validators.required,]),
+      roleId: new UntypedFormControl(null, [Validators.required,]),
     });
   }
 

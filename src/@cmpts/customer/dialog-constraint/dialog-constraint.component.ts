@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { OptionItem } from 'src/@sun/models/paging.model';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
@@ -17,7 +17,7 @@ export class DialogConstraintComponent implements OnInit {
   title: string = '添加约束';
   expiredAtEnabled = false;
   sysEnabled = false;
-  form: FormGroup;
+  form: UntypedFormGroup;
   sysOptions: OptionItem[] = [];
   categeryOps: OptionItem[] = [CTT_CATEGERY_OPS[0], CTT_CATEGERY_OPS[1], CTT_CATEGERY_OPS[2]];
   methodOps: OptionItem[] = CTT_METHOD_OPS;
@@ -26,12 +26,12 @@ export class DialogConstraintComponent implements OnInit {
     private hostServ: CustomerService,
     private dialogRef: MatDialogRef<DialogConstraintComponent>,
     @Inject(MAT_DIALOG_DATA) public customerId: string,) {
-    this.form = new FormGroup({
-      category: new FormControl(null, [Validators.required,]),
-      method: new FormControl(null, [Validators.required,]),
-      sysId: new FormControl(null, []),
-      expiredAt: new FormControl(null, []),
-      remark: new FormControl(null, [Validators.required, Validators.maxLength(256)]),
+    this.form = new UntypedFormGroup({
+      category: new UntypedFormControl(null, [Validators.required,]),
+      method: new UntypedFormControl(null, [Validators.required,]),
+      sysId: new UntypedFormControl(null, []),
+      expiredAt: new UntypedFormControl(null, []),
+      remark: new UntypedFormControl(null, [Validators.required, Validators.maxLength(256)]),
     });
   }
 

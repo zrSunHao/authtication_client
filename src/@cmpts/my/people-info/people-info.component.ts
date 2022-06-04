@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CTM_EDUCATION_OPS, CTM_GENDER_OPS, PeopleElet } from 'src/@sun/models/customer.model';
@@ -16,7 +16,7 @@ import { OptionItem } from 'src/@sun/models/paging.model';
 export class PeopleInfoComponent implements OnInit {
 
   @Input() customerId: string = '';
-  form: FormGroup;
+  form: UntypedFormGroup;
   dateDisabled = false;
   edit = false;
   people: PeopleElet = new PeopleElet();
@@ -25,13 +25,13 @@ export class PeopleInfoComponent implements OnInit {
 
   constructor(private notifyServ: NotifyService,
     private hostServ: MyService,) {
-    this.form = new FormGroup({
-      fullName: new FormControl(null, [Validators.required, Validators.pattern(/^[\u4E00-\u9FA5A-Za-z0-9_]{2,16}$/)]),
-      gender: new FormControl(null, [Validators.required]),
-      birthday: new FormControl(null, [Validators.required]),
-      education: new FormControl(null, [Validators.required]),
-      profession: new FormControl(null, [Validators.maxLength(32)]),
-      intro: new FormControl(null, [Validators.maxLength(256)]),
+    this.form = new UntypedFormGroup({
+      fullName: new UntypedFormControl(null, [Validators.required, Validators.pattern(/^[\u4E00-\u9FA5A-Za-z0-9_]{2,16}$/)]),
+      gender: new UntypedFormControl(null, [Validators.required]),
+      birthday: new UntypedFormControl(null, [Validators.required]),
+      education: new UntypedFormControl(null, [Validators.required]),
+      profession: new UntypedFormControl(null, [Validators.maxLength(32)]),
+      intro: new UntypedFormControl(null, [Validators.maxLength(256)]),
     });
   }
 

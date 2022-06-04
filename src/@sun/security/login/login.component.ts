@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 
 import { NgxPermissionsService } from 'ngx-permissions';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
@@ -15,15 +15,15 @@ import { PeopleElet } from 'src/@sun/models/customer.model';
 })
 export class LoginComponent implements OnInit {
 
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   constructor(private router: Router,
     private notifyServ: NotifyService,
     private hostServ: AuthService,
     private permissionsServ: NgxPermissionsService,) {
-    this.form = new FormGroup({
-      userName: new FormControl(null, [Validators.required, Validators.pattern(/^[a-zA-Z][a-zA-Z0-9_]{5,15}$/)]),
-      password: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,17}$/)]),
+    this.form = new UntypedFormGroup({
+      userName: new UntypedFormControl(null, [Validators.required, Validators.pattern(/^[a-zA-Z][a-zA-Z0-9_]{5,15}$/)]),
+      password: new UntypedFormControl(null, [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,17}$/)]),
     });
   }
 
