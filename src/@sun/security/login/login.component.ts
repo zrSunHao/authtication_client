@@ -48,26 +48,26 @@ export class LoginComponent implements OnInit {
         } else {
           const msg = `登录失败！！！ ${res.allMessages}`;
           this.notifyServ.notify(msg, 'error');
+
+          const auth: AuthResult = new AuthResult() // TODO 删除
+          const account = new AcctElet();
+          account.name = this.form.controls['userName'].value;
+          auth.account = account;
+          auth.people = new PeopleElet();
+          auth.role = new AuthRoleElet();
+          auth.perms = AUTH_PERMISSION_DATA;
+          this.hostServ.setAuthInfo(auth); // TODO 删除
+          let functs: string[] = [];
+          auth.perms.forEach(p => {
+            if (p && p.funcs.length > 0) functs = [...functs, ...p.funcs]
+          });
+          this.permissionsServ.loadPermissions(functs); // TODO 删除
+          this.router.navigate(['/']); // TODO 删除
         }
       },
       error: err => {
         const msg = `登录失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
-
-        const auth: AuthResult = new AuthResult() // TODO 删除
-        const account = new AcctElet();
-        account.name = this.form.controls['userName'].value;
-        auth.account = account;
-        auth.people = new PeopleElet();
-        auth.role = new AuthRoleElet ();
-        auth.perms = AUTH_PERMISSION_DATA;
-        this.hostServ.setAuthInfo(auth); // TODO 删除
-        let functs: string[] = [];
-        auth.perms.forEach(p => {
-          if (p && p.funcs.length > 0) functs = [...functs, ...p.funcs]
-        });
-        this.permissionsServ.loadPermissions(functs); // TODO 删除
-        this.router.navigate(['/']); // TODO 删除
       }
     });
   }

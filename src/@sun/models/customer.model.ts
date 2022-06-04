@@ -65,8 +65,7 @@ export interface CtmLogElet {
 }
 
 export class PeopleElet {
-    id: string = '';
-    customerId: string = '';
+    ctmId: string = '';
     fullName: string = '';
     gender: GenderType = GenderType.other; // 男 女
     birthday: Date = new Date();
@@ -97,7 +96,7 @@ export const CTM_EDUCATION_OPS: OptionItem[] = [
 
 export class CtmFilter {
     nameOrNickname: string = '';
-    limited: CttMethod = CttMethod.other;
+    limited?: boolean = undefined;
     remark: string = '';
     startAt: Date | null = null;
     endAt: Date | null = null;

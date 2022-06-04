@@ -7,7 +7,7 @@ import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/pagi
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
 import { DialogCustomerComponent } from '../dialog-customer/dialog-customer.component';
-import { CtmElet, CtmFilter, CUSTOMER_ELEMENT_DATA } from '../../../@sun/models/customer.model';
+import { CtmElet, CtmFilter } from '../../../@sun/models/customer.model';
 import { CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
 
 @Component({
@@ -25,13 +25,11 @@ export class CustomerListComponent implements OnInit {
   columnOp = 'lastLoginAt';
   columns: Array<PaginatorColumn> = [
     { name: '账号', value: 'name' },
-    { name: '昵称', value: 'nickname' },
-    { name: '约束', value: 'limited' },
     { name: '最近登陆时间', value: 'lastLoginAt' },
     { name: '注册时间', value: 'createdAt' },
   ];
 
-  displayedColumns = ['avatar', 'name', 'nickname', 'limited', 'lastLoginAt', 'remark', 'operate',];
+  displayedColumns = ['avatar', 'name', 'nickname', 'limited', 'createdAt', 'lastLoginAt', 'remark', 'operate',];
   dataSource: CtmElet[] = [];
 
   constructor(private dialog: MatDialog,
@@ -92,8 +90,6 @@ export class CustomerListComponent implements OnInit {
       error: err => {
         const msg = `数据加载失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
-        this.dataSource = CUSTOMER_ELEMENT_DATA; // TODO 删除
-        this.total = 35; // TODO 删除
       }
     });
   }

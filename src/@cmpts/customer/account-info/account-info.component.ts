@@ -20,6 +20,7 @@ export class AccountInfoComponent implements OnInit {
 
   @ViewChild("imageInput", { static: false })
   imageInput!: ElementRef;
+  file: any;
 
   constructor(private dialog: MatDialog, private notifyServ: NotifyService,
     private hostServ: CustomerService,) { }
@@ -64,7 +65,7 @@ export class AccountInfoComponent implements OnInit {
       const formData = new FormData();
       formData.append('id', this.customer.id as string);
       formData.append('avatar', e.target.files[0]);
-      this.hostServ.icon(formData).subscribe({
+      this.hostServ.icon(this.customerId, formData).subscribe({
         next: res => {
           if (res.success) {
             if (this.customer) this.customer.avatar = res.data as string;
@@ -72,8 +73,10 @@ export class AccountInfoComponent implements OnInit {
             const msg = `程序${this.customer?.name}的头像上传失败！！！ ${res.allMessages}`;
             this.notifyServ.notify(msg, 'error');
           }
+          this.file = null;
         },
         error: err => {
+          this.file = null;
           const msg = `程序${this.customer?.name}的头像上传失败！！！ ${err}`;
           this.notifyServ.notify(msg, 'error');
         }

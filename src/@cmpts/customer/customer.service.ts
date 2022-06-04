@@ -12,7 +12,8 @@ export class CustomerService {
 
   private baseUrl = environment.hostUrl + 'customer';
   private sysUrl = environment.hostUrl + 'sys';
-  private roleUrl = environment.hostUrl + 'role';
+  private resourceUrl = environment.hostUrl + 'resource';
+  private resourceCategory = 'sys';
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-type': 'application/json' })
   };
@@ -20,28 +21,47 @@ export class CustomerService {
   constructor(public http: HttpClient) { }
 
   public search(params: PagingParameter<CtmFilter>): Observable<ResponsePagingResult<CtmElet>> {
-    const url = `${this.baseUrl}/search`;
+    const url = `${this.baseUrl}/GetList`;
     return this.http.post<ResponsePagingResult<CtmElet>>(url, params, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
   public remark(id: string, msg: string): Observable<ResponseResult<boolean>> {
-    const url = `${this.baseUrl}/remark?id=${id}&msg=${msg}`;
-    return this.http.get<ResponseResult<boolean>>(url)
+    const url = `${this.baseUrl}/AddRemark?ctmId=${id}&remark=${msg}`;
+    return this.http.patch<ResponseResult<boolean>>(url, null)
       .pipe(catchError(this.handleError));
   }
 
   public reset(id: string, newPsd: string): Observable<ResponseResult<boolean>> {
-    const url = `${this.baseUrl}/reset?id=${id}&newPsd=${newPsd}`;
-    return this.http.get<ResponseResult<boolean>>(url)
+    const url = `${this.baseUrl}/ResetPsd?ctmId=${id}&psd=${newPsd}`;
+    return this.http.patch<ResponseResult<boolean>>(url, null)
       .pipe(catchError(this.handleError));
   }
 
   public getById(id: string): Observable<ResponseResult<CtmElet>> {
-    const url = `${this.baseUrl}/getById?id=${id}`;
+    const url = `${this.baseUrl}/getById?ctmId=${id}`;
     return this.http.get<ResponseResult<CtmElet>>(url)
       .pipe(catchError(this.handleError));
   }
+
+  public icon(ownerId: string, formData: FormData): Observable<ResponseResult<string>> {
+    const url = `${this.resourceUrl}/Save?ownerId=${ownerId}&category=${this.resourceCategory}`;
+    return this.http.post<ResponseResult<string>>(url, formData)
+      .pipe(catchError(this.handleError));
+  }
+
+  public getPeopleById(id: string): Observable<ResponseResult<PeopleElet>> {
+    const url = `${this.baseUrl}/GetPeople?ctmId=${id}`;
+    return this.http.get<ResponseResult<PeopleElet>>(url)
+      .pipe(catchError(this.handleError));
+  }
+
+  public updatePeople(param: PeopleElet): Observable<ResponseResult<boolean>> {
+    const url = `${this.baseUrl}/UpdatePeople`;
+    return this.http.patch<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
+  }
+
+
 
   public deleteRole(id: string): Observable<ResponseResult<boolean>> {
     const url = `${this.baseUrl}/deleteRole?id=${id}`;
@@ -53,23 +73,6 @@ export class CustomerService {
     const url = `${this.baseUrl}/deleteConstraint?id=${id}`;
     return this.http.get<ResponseResult<boolean>>(url)
       .pipe(catchError(this.handleError));
-  }
-
-  public icon(formData: FormData): Observable<ResponseResult<string>> {
-    const url = `${this.baseUrl}/icon`;
-    return this.http.post<ResponseResult<string>>(url, formData)
-      .pipe(catchError(this.handleError));
-  }
-
-  public getPeopleById(id: string): Observable<ResponseResult<PeopleElet>> {
-    const url = `${this.baseUrl}/getPeopleById?id=${id}`;
-    return this.http.get<ResponseResult<PeopleElet>>(url)
-      .pipe(catchError(this.handleError));
-  }
-
-  public updatePeople(param: PeopleElet): Observable<ResponseResult<boolean>> {
-    const url = `${this.baseUrl}/updatePeople`;
-    return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
   public searchRoles(param: PagingParameter<CtmRoleFilter>): Observable<ResponsePagingResult<CtmRoleElet>> {
@@ -109,12 +112,12 @@ export class CustomerService {
   }
 
   public getRoleItems(sysId: string): Observable<ResponseResult<OptionItem[]>> {
-    const url = `${this.roleUrl}/getItems?sysId=${sysId}`;
+    const url = `${this.sysUrl}/getItems?sysId=${sysId}`;
     return this.http.get<ResponseResult<OptionItem[]>>(url)
       .pipe(catchError(this.handleError));
   }
 
-  
+
   private handleError(error: HttpErrorResponse) {
     const msg = `${error.status}  ${error.message}`
     return throwError(() => msg);

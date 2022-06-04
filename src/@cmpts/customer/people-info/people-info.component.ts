@@ -55,6 +55,7 @@ export class PeopleInfoComponent implements OnInit {
 
   onSaveClick() {
     const p: PeopleElet = new PeopleElet();
+    p.ctmId = this.customerId;
     this._formMapToElement(p);
     this.hostServ.updatePeople(p).subscribe({
       next: res => {
@@ -84,6 +85,7 @@ export class PeopleInfoComponent implements OnInit {
       next: res => {
         if (res.success) {
           this.people = res.data as PeopleElet;
+          this._elementMapToForm();
         } else {
           const msg = `个人信息加载失败！！！ ${res.allMessages}`;
           this.notifyServ.notify(msg, 'error');

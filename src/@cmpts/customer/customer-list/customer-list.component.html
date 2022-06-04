@@ -22,9 +22,11 @@
           <mat-icon matSuffix>report</mat-icon>
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>约束方式</mat-label>
+          <mat-label>是否被约束</mat-label>
           <mat-select [(ngModel)]="dto.limited" name="limited">
-            <mat-option [value]="item.key" *ngFor="let item of methodOps">{{item.value}}</mat-option>
+            <mat-option [value]="undefined">- - -</mat-option>
+            <mat-option [value]="true">是</mat-option>
+            <mat-option [value]="false">否</mat-option>
           </mat-select>
           <mat-icon matSuffix>category</mat-icon>
         </mat-form-field>
@@ -63,20 +65,23 @@
             {{element.nickname}}&nbsp;&nbsp; </td>
         </ng-container>
         <ng-container matColumnDef="limited">
-          <th mat-header-cell *matHeaderCellDef> 约束 </th>
+          <th mat-header-cell *matHeaderCellDef> 被约束 </th>
           <td mat-cell *matCellDef="let element" style="min-width: 3rem;">
-            <span *ngIf="element.limited === methodOps[1].key" style="color: #93c5fd;">{{methodOps[1].value}}</span>
-            <span *ngIf="element.limited === methodOps[2].key" style="color: #c4b5fd;">{{methodOps[2].value}}</span>
+            <span *ngIf="element.limited == true" style="color: red;">是</span>
+            <span *ngIf="element.limited != true" style="color: #c4b5fd;">否</span>
           </td>
+        </ng-container>
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef> 注册时间 </th>
+          <td mat-cell *matCellDef="let element" style="max-width: 12rem;"> {{element.createdAt| date:'yyyy-MM-dd HH:mm:ss'}} </td>
         </ng-container>
         <ng-container matColumnDef="lastLoginAt">
           <th mat-header-cell *matHeaderCellDef> 最近登陆时间 </th>
-          <td mat-cell *matCellDef="let element" style="min-width: 10rem;"> {{element.lastLoginAt| date:'yyyy-MM-dd
-            HH:mm:ss'}} </td>
+          <td mat-cell *matCellDef="let element" style="max-width: 12rem;"> {{element.lastLoginAt| date:'yyyy-MM-dd HH:mm:ss'}} </td>
         </ng-container>
         <ng-container matColumnDef="remark">
           <th mat-header-cell *matHeaderCellDef> 备注 </th>
-          <td mat-cell *matCellDef="let element">
+          <td mat-cell *matCellDef="let element" style="min-width: 5rem;">
             <span matTooltip={{element.remark}}>{{element.remark|clip:18}} </span>
           </td>
         </ng-container>

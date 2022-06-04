@@ -1,4 +1,4 @@
-import { PeopleElet } from "./customer.model";
+import { GenderType, PeopleElet } from "./customer.model";
 import { RoleRank } from "./system.model";
 
 export class AcctElet {
@@ -34,7 +34,7 @@ export interface RegisterDto {
     userName: string;
     fullName: string;
     nickName: string;
-    gender: string;
+    gender: GenderType;
     birthday: Date;
     password: string;
     education: string;
