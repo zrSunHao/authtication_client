@@ -5,8 +5,9 @@ import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms
 import { NgxPermissionsService } from 'ngx-permissions';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { AuthService } from 'src/@sun/shared/services/auth.service';
-import { AcctElet, AuthResult, AuthRoleElet, AUTH_PERMISSION_DATA, LoginDto } from 'src/@sun/models/auth.model';
+import { AcctElet, AuthResult, AuthRoleElet, AUTH_PERMISSION_DATA, LoginDto, Permission } from 'src/@sun/models/auth.model';
 import { PeopleElet } from 'src/@sun/models/customer.model';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    const dto: LoginDto = { userName: '', password: '' };
+    const dto: LoginDto = { userName: '', password: '', sysCode: environment.sysCode, pgmCode: environment.pgmCode };
     dto.password = this.form.controls['password'].value;
     dto.userName = this.form.controls['userName'].value;
     this.hostServ.login(dto).subscribe({
@@ -39,30 +40,13 @@ export class LoginComponent implements OnInit {
         if (res.success) {
           const auth = res.data as AuthResult;
           this.hostServ.setAuthInfo(auth);
-          let functs: string[] = [];
-          auth.perms.forEach(p => {
-            if (p && p.funcs.length > 0) functs = [...functs, ...p.funcs]
-          });
-          this.permissionsServ.loadPermissions(functs);
-          this.router.navigate(['/']);
+          this.hostServ.setPerms(auth);
+          setTimeout(() => {
+            this.router.navigate(['/']);
+          }, 500);
         } else {
           const msg = `登录失败！！！ ${res.allMessages}`;
           this.notifyServ.notify(msg, 'error');
-
-          const auth: AuthResult = new AuthResult() // TODO 删除
-          const account = new AcctElet();
-          account.name = this.form.controls['userName'].value;
-          auth.account = account;
-          auth.people = new PeopleElet();
-          auth.role = new AuthRoleElet();
-          auth.perms = AUTH_PERMISSION_DATA;
-          this.hostServ.setAuthInfo(auth); // TODO 删除
-          let functs: string[] = [];
-          auth.perms.forEach(p => {
-            if (p && p.funcs.length > 0) functs = [...functs, ...p.funcs]
-          });
-          this.permissionsServ.loadPermissions(functs); // TODO 删除
-          this.router.navigate(['/']); // TODO 删除
         }
       },
       error: err => {
@@ -71,5 +55,7 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+
+
 
 }

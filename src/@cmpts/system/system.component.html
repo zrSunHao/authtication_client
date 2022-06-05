@@ -1,6 +1,6 @@
 <div class="page">
   <div class="topbar">
-    <img src="/assets/icons/app.png" />
+    <img src="/assets/icons/sys.png" />
     <div>
       <h2>系统管理</h2>
     </div>
@@ -52,7 +52,7 @@
           <th mat-header-cell *matHeaderCellDef> logo </th>
           <td mat-cell *matCellDef="let element" style="width: 3rem;">
             <img class="system-icon" *ngIf="element.logo" [src]="element.logo" />
-            <img class="system-icon" *ngIf="!element.logo" src="/assets/icons/app.png" />
+            <img class="system-icon" *ngIf="!element.logo" src="/assets/icons/sys.png" />
           </td>
         </ng-container>
         <ng-container matColumnDef="name">

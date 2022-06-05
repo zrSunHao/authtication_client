@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
+  all_permission: true,
   hostUrl: '/api/',
+  sysCode: 'authentication_platform',
+  pgmCode: 'authentication_web',
 };
 
 /*

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CONSTRAINT_ELEMENT_DATA, CttElet } from 'src/@sun/models/constraint.model';
+import { CttElet } from 'src/@sun/models/constraint.model';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { DashboardService } from './dashboard.service';
-import { ReportCtmElet, CUSTOMER_ELEMENT_DATA, ReportLogElet, LOG_ELEMENT_DATA, WidgetElet } from '../../@sun/models/report.model';
+import { ReportCtmElet, ReportLogElet, WidgetElet } from '../../@sun/models/report.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -39,7 +39,6 @@ export class DashboardComponent implements OnInit {
       error: err => {
         const msg = `客户数据加载失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
-        this.customers = CUSTOMER_ELEMENT_DATA; // TODO待删除
       }
     });
   }
@@ -57,7 +56,6 @@ export class DashboardComponent implements OnInit {
       error: err => {
         const msg = `日志数据加载失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
-        this.logs = LOG_ELEMENT_DATA; // TODO待删除
       }
     });
   }
@@ -75,7 +73,6 @@ export class DashboardComponent implements OnInit {
       error: err => {
         const msg = `约束数据加载失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
-        this.constraints = CONSTRAINT_ELEMENT_DATA; // TODO待删除
       }
     });
   }
@@ -93,12 +90,6 @@ export class DashboardComponent implements OnInit {
       error: err => {
         const msg = `模块数据加载失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
-        this.widgets = [
-          { title: '126名客户', icon: 'customer.png', color: 'primary' },
-          { title: '17个系统', icon: 'app.png', color: 'accent' },
-          { title: '99个程序', icon: 'program.png', color: 'accent' },
-          { title: '11111个约束', icon: 'constraint.png', color: 'warn' },
-        ]; // TODO待删除
       }
     });
   }

@@ -19,22 +19,22 @@ export class DashboardService {
   constructor(public http: HttpClient) { }
 
   public getCustomers(): Observable<ResponseResult<ReportCtmElet[]>> {
-    const url = `${this.baseUrl}/getRecentCustomers`;
+    const url = `${this.baseUrl}/GetRecentLoginCtmList`;
     return this.http.get<ResponseResult<ReportCtmElet[]>>(url).pipe(catchError(this.handleError));
   }
 
   public getLogs(): Observable<ResponseResult<ReportLogElet[]>> {
-    const url = `${this.baseUrl}/getRecentLogs`;
+    const url = `${this.baseUrl}/GetRecentLogList`;
     return this.http.get<ResponseResult<ReportLogElet[]>>(url).pipe(catchError(this.handleError));
   }
 
   public getConstraints(): Observable<ResponseResult<CttElet[]>> {
-    const url = `${this.baseUrl}/getRecentConstraints`;
+    const url = `${this.baseUrl}/GetCtts`;
     return this.http.get<ResponseResult<CttElet[]>>(url).pipe(catchError(this.handleError));
   }
 
   public getWidgets(): Observable<ResponseResult<WidgetElet[]>> {
-    const url = `${this.baseUrl}/getWidgets`;
+    const url = `${this.baseUrl}/GetWidgetList`;
     return this.http.get<ResponseResult<WidgetElet[]>>(url).pipe(catchError(this.handleError));
   }
 

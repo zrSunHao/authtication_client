@@ -18,7 +18,7 @@ export interface CttElet {
     id: string;
     category: CttCategory;
     method: CttMethod;
-    userName: string;
+    ctmName: string;
     sysName: string;
     functionName: string;
     origin: string;
@@ -47,18 +47,5 @@ export const CTT_METHOD_OPS: OptionItem[] = [
     { key: CttMethod.other, value: '- - -' },
     { key: CttMethod.forbid, value: '禁用' },
     { key: CttMethod.lock, value: '锁定' },
-];
-
-export const CONSTRAINT_ELEMENT_DATA: CttElet[] = [
-    { id: '1', category: CttCategory.customer_all_system, method: CttMethod.forbid, userName: 'lisi01', sysName: '- - -', functionName: '- - -', origin: '安全服务添加', expiredAt: null, createdAt: new Date(), remark: '识别为爬虫' },
-    { id: '2', category: CttCategory.customer_one_system, method: CttMethod.forbid, userName: 'zhangsan', sysName: 'sys-1', functionName: '- - -', origin: '业务管理员张三添加', expiredAt: null, createdAt: new Date(), remark: '恶意言论' },
-    { id: '3', category: CttCategory.program_function, method: CttMethod.lock, userName: '- - -', sysName: 'sys-2', functionName: '添加', origin: '业务管理员张三添加', expiredAt: new Date(), createdAt: new Date(), remark: '升级' },
-    { id: '4', category: CttCategory.system_role, method: CttMethod.lock, userName: 'lisi01', sysName: 'sys-3', functionName: '管理员', origin: '业务管理员张三添加', expiredAt: new Date(), createdAt: new Date(), remark: '职能调整' },
-    { id: '1', category: CttCategory.customer_all_system, method: CttMethod.forbid, userName: 'lisi01', sysName: '- - -', functionName: '- - -', origin: '安全服务添加', expiredAt: null, createdAt: new Date(), remark: '识别为爬虫' },
-    { id: '2', category: CttCategory.customer_one_system, method: CttMethod.forbid, userName: 'zhangsan', sysName: 'sys-1', functionName: '- - -', origin: '业务管理员张三添加', expiredAt: null, createdAt: new Date(), remark: '恶意言论' },
-    { id: '3', category: CttCategory.program_function, method: CttMethod.lock, userName: '- - -', sysName: 'sys-2', functionName: '添加', origin: '业务管理员张三添加', expiredAt: new Date(), createdAt: new Date(), remark: '升级' },
-    { id: '4', category: CttCategory.system_role, method: CttMethod.lock, userName: 'lisi01', sysName: 'sys-3', functionName: '管理员', origin: '业务管理员张三添加', expiredAt: new Date(), createdAt: new Date(), remark: '职能调整' },
-    { id: '1', category: CttCategory.customer_all_system, method: CttMethod.forbid, userName: 'lisi01', sysName: '- - -', functionName: '- - -', origin: '安全服务添加', expiredAt: null, createdAt: new Date(), remark: '识别为爬虫' },
-    { id: '2', category: CttCategory.customer_one_system, method: CttMethod.forbid, userName: 'zhangsan', sysName: 'sys-1', functionName: '- - -', origin: '业务管理员张三添加', expiredAt: null, createdAt: new Date(), remark: '恶意言论' },
 ];
 

@@ -20,7 +20,8 @@ export class AuthResult {
     account: AcctElet | null = null;    // 账号信息
     people: PeopleElet | null = null;   // 个人信息
     role: AuthRoleElet | null = null;   // 角色
-    perms: Permission[] = [];           // 可进入模块
+    sectCodes: string[] = [];           // 可进入模块
+    functCodes: string[] = [];          // 可操作功能
     token: string = '';                 // JWT
     key: string = '';                   // 本次登录主键
 }
@@ -28,6 +29,8 @@ export class AuthResult {
 export interface LoginDto {
     userName: string;
     password: string;
+    sysCode: string;
+    pgmCode: string;
 }
 
 export interface RegisterDto {

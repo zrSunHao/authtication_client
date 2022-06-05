@@ -8,8 +8,8 @@ import { ReportCtmElet } from '../../../@sun/models/report.model';
 })
 export class CustomerActivityComponent implements OnInit {
 
-  displayedColumns = ['avatar', 'name', 'sysName', 'createdAt'];
-  @Input() dataSource:ReportCtmElet[] = [];
+  displayedColumns = ['avatar', 'name', 'sysName', 'lastLoginAt'];
+  @Input() dataSource: ReportCtmElet[] = [];
   @Output() onRefesh: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }

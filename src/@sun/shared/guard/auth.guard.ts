@@ -7,18 +7,19 @@ import { NotifyService } from "../services/notify.service";
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-    constructor(private hostSrv: AuthService, 
+    constructor(private hostSrv: AuthService,
         private notifySrv: NotifyService,
-        private router: Router,) { }
+        private router: Router,) {
+    }
 
     canActivate(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
         return new Observable((observer) => {
-            const sections = this.hostSrv.getSections();
+            const sectCodes: string[] = this.hostSrv.getSections();
             let flag = false;
             const permission: string = route.data["permission"]
-            if (permission) flag = sections.findIndex(x => x === permission) >= 0;
+            if (permission) flag = sectCodes.findIndex(x => x === permission) >= 0;
             console.log(state.url, permission, flag);
             if (flag) {
                 observer.next(true);

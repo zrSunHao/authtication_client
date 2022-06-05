@@ -9,7 +9,7 @@ import { OptionItem } from 'src/@sun/models/paging.model';
 })
 export class ConstraintActivityComponent implements OnInit {
 
-  displayedColumns = ['id', 'category', 'method', 'userName', 'sysName', 'functionName', 'expiredAt', 'origin', 'createdAt', 'remark',];
+  displayedColumns = ['id', 'category', 'method', 'ctmName', 'sysName', 'functionName', 'expiredAt', 'origin', 'createdAt',];
   @Input() dataSource: CttElet[] = [];
   @Output() onRefesh: EventEmitter<any> = new EventEmitter<any>();
 

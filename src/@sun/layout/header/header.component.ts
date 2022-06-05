@@ -45,12 +45,11 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.userName = this.hostServ.getAccount().name;
     this.avatar = this.hostServ.getAccount().avatar;
-    const sections = this.hostServ.getSections();
+    const codes = this.hostServ.getSections();
     this.allSections.forEach(x => {
-      const flag = sections.findIndex(y => y === x.type) >= 0;
+      const flag = codes.findIndex(y => y === x.type) >= 0;
       if (flag) this.sections.push(x);
     })
-
     this.set_menu(this.router.url);
     this.router.events
       .pipe(filter(e => e instanceof NavigationEnd))
@@ -86,6 +85,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogoutClick(): void {
+    localStorage.clear();
     this.router.navigate(['/security/login']);
   }
 

@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { catchError, Observable, throwError } from 'rxjs';
 import { AcctElet, AuthResult, AuthRoleElet, AUTH_PERMISSION_DATA, LoginDto, Permission, RegisterDto } from 'src/@sun/models/auth.model';
@@ -16,23 +16,14 @@ export class AuthService {
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-type': 'application/json' })
   };
-
   private auth: AuthResult | undefined;
 
   constructor(public http: HttpClient,
     private permissionsServ: NgxPermissionsService,) {
     const json = localStorage.getItem(this.key);
     if (json) this.auth = JSON.parse(json);
-    if (this.auth) {
-      let functs: string[] = [];
-      this.auth.perms.forEach(p => {
-        if (p && p.funcs.length > 0) functs = [...functs, ...p.funcs]
-      });
-      // AUTH_PERMISSION_DATA.forEach(p => {
-      //   if (p && p.funcs.length > 0) functs = [...functs, ...p.funcs]
-      // });
-      this.permissionsServ.loadPermissions(functs);
-    }
+    if (this.auth) this.setPerms(this.auth);
+    console.log(33333)
   }
 
   public login(param: LoginDto): Observable<ResponseResult<AuthResult>> {
@@ -51,6 +42,17 @@ export class AuthService {
   }
 
 
+  public setPerms(auth: AuthResult) {
+    let functs: string[] = [];
+    if (environment.all_permission) {
+      AUTH_PERMISSION_DATA.forEach(p => {
+        if (p && p.funcs.length > 0) functs = [...functs, ...p.funcs]
+      });
+    } else {
+      functs = auth.functCodes;
+    }
+    this.permissionsServ.loadPermissions(functs);
+  }
 
   public setAuthInfo(auth: AuthResult): void {
     if (auth) {
@@ -71,25 +73,21 @@ export class AuthService {
   }
 
   public getFunctions(): string[] {
-    if (this.auth) {
-      let functs: string[] = [];
-      this.auth.perms.forEach(p => {
+    let functs: string[] = [];
+    if (environment.all_permission) {
+      AUTH_PERMISSION_DATA.forEach(p => {
         if (p && p.funcs.length > 0) functs = [...functs, ...p.funcs]
       });
-      return functs;
-    }
-    return [];
+    } else if (this.auth) functs = this.auth.functCodes;
+
+    return functs;
   }
 
   public getSections(): string[] {
-    if (this.auth) {
-      let sects: string[] = [];
-      this.auth.perms.forEach(p => {
-        if (p) sects.push(p.sect);
-      });
-      return sects;
-    }
-    return [];
+    let sects: string[] = [];
+    if (environment.all_permission) AUTH_PERMISSION_DATA.forEach(x => { sects.push(x.sect); });
+    else if (this.auth) sects = this.auth.sectCodes;
+    return sects;
   }
 
 }

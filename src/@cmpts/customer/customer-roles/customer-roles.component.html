@@ -26,7 +26,7 @@
             <th mat-header-cell *matHeaderCellDef> 头像 </th>
             <td mat-cell *matCellDef="let element">
                 <img class="system-icon" *ngIf="element.sysLogo" [src]="element.sysLogo" />
-                <img class="system-icon" *ngIf="!element.sysLogo" src="/assets/icons/app.png" />
+                <img class="system-icon" *ngIf="!element.sysLogo" src="/assets/icons/sys.png" />
             </td>
         </ng-container>
         <ng-container matColumnDef="sysName">
