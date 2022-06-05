@@ -20,7 +20,6 @@ export class AuthGuard implements CanActivate {
             let flag = false;
             const permission: string = route.data["permission"]
             if (permission) flag = sectCodes.findIndex(x => x === permission) >= 0;
-            console.log(state.url, permission, flag);
             if (flag) {
                 observer.next(true);
                 observer.complete();

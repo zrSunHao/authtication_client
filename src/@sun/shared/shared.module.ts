@@ -31,8 +31,9 @@ import { ClipPipe } from './pipes/clip.pipe';
 import { NotifyService } from './services/notify.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guard/auth.guard';
-import { AuthInterceptor } from './guard/auth.interceptor';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { JwtInterceptor } from './guard/jwt.interceptor';
+import { ErrorInterceptor } from './guard/error.interceptor';
 
 const mats = [
   MatCardModule,
@@ -62,17 +63,18 @@ const exports = [ClipPipe, PaginatorComponent, ConfirmDialogComponent,];
   declarations: [...pipes, ...components],
   providers: [
     { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
-    {provide: MAT_DATE_LOCALE, useValue: 'zh-CN'},
+    { provide: MAT_DATE_LOCALE, useValue: 'zh-CN' },
     {
       provide: DateAdapter,
       useClass: MomentDateAdapter,
       deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
     },
-    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
-    
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+
     ...services,
     AuthGuard,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   exports: [...exports, ...mats, HttpClientModule]
 })

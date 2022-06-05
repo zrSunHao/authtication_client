@@ -23,7 +23,6 @@ export class AuthService {
     const json = localStorage.getItem(this.key);
     if (json) this.auth = JSON.parse(json);
     if (this.auth) this.setPerms(this.auth);
-    console.log(33333)
   }
 
   public login(param: LoginDto): Observable<ResponseResult<AuthResult>> {
@@ -56,6 +55,7 @@ export class AuthService {
 
   public setAuthInfo(auth: AuthResult): void {
     if (auth) {
+      this.auth = auth;
       const json = JSON.stringify(auth);
       localStorage.setItem(this.key, json);
       this.auth = auth;
@@ -88,6 +88,11 @@ export class AuthService {
     if (environment.all_permission) AUTH_PERMISSION_DATA.forEach(x => { sects.push(x.sect); });
     else if (this.auth) sects = this.auth.sectCodes;
     return sects;
+  }
+
+  public getToken(): string {
+    if (this.auth) return this.auth.token;
+    else return '';
   }
 
 }

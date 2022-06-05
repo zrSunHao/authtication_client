@@ -23,7 +23,7 @@ export class AuthResult {
     sectCodes: string[] = [];           // 可进入模块
     functCodes: string[] = [];          // 可操作功能
     token: string = '';                 // JWT
-    key: string = '';                   // 本次登录主键
+    loginId: string = '';                   // 本次登录主键
 }
 
 export interface LoginDto {
