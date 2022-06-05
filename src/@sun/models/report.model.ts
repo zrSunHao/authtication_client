@@ -1,5 +1,5 @@
 export interface WidgetElet {
-    title: string;
+    msg: string;
     icon: string;
     color: string;
 }

@@ -4,7 +4,7 @@
         <h2>起始页</h2>
     </div>
     <div class="module-wrap">
-        <app-widget-activity *ngFor="let widget of widgets" [msg]="widget"></app-widget-activity>
+        <app-widget-activity *ngFor="let widget of widgets" [info]="widget"></app-widget-activity>
     </div>
     <div class="activity-wrap">
         <app-customer-activity [dataSource]="customers" (onRefesh)="onLoadCustomers()"></app-customer-activity>

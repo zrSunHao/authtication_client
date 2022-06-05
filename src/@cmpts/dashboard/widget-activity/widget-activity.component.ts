@@ -8,7 +8,7 @@ import { WidgetElet } from '../../../@sun/models/report.model';
 })
 export class WidgetActivityComponent implements OnInit {
 
-  @Input() msg: WidgetElet = { title: '', icon: '', color: '' };
+  @Input() info: WidgetElet = { msg: '', icon: '', color: '' };
 
   constructor() { }
 
