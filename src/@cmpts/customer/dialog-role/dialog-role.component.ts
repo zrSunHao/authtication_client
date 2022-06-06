@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { OptionItem } from 'src/@sun/models/paging.model';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
-import { CtmRoleUpdateDto } from '../../../@sun/models/customer.model';
+import { CtmRoleUpdateDto } from 'src/@sun/models/customer.model';
 
 @Component({
   selector: 'app-dialog-role',

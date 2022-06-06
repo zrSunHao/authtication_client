@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CttMethod, CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
 import { OptionItem } from 'src/@sun/models/paging.model';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { RoleElet, RoleRank, ROLE_RANK_OPS } from '../../../@sun/models/system.model';
+import { RoleElet, RoleRank, ROLE_RANK_OPS } from 'src/@sun/models/system.model';
 import { SystemService } from '../system.service';
 
 @Component({

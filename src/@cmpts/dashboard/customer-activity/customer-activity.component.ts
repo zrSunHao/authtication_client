@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ReportCtmElet } from '../../../@sun/models/report.model';
+import { ReportCtmElet } from 'src/@sun/models/report.model';
 
 @Component({
   selector: 'app-customer-activity',

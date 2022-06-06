@@ -11,7 +11,7 @@ import { DialogFunctionComponent } from '../dialog-function/dialog-function.comp
 import { ProgramFunctionComponent } from '../program-function/program-function.component';
 import { ProgramSectionComponent } from '../program-section/program-section.component';
 import { ProgramService } from '../program.service';
-import { FunctElet, SectElet } from '../../../@sun/models/program.model';
+import { FunctElet, SectElet } from 'src/@sun/models/program.model';
 import { CttMethod } from 'src/@sun/models/constraint.model';
 
 @Component({

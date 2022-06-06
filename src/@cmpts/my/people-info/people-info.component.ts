@@ -1,11 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CTM_EDUCATION_OPS, CTM_GENDER_OPS, PeopleElet } from 'src/@sun/models/customer.model';
-
-import { MyService } from '../my.service';
 import { OptionItem } from 'src/@sun/models/paging.model';
+import { MyService } from '../my.service';
 
 @Component({
   selector: 'app-people-info',
@@ -42,21 +40,29 @@ export class PeopleInfoComponent implements OnInit {
   }
 
   onEditClick() {
-    this.form.enable();
-    this.dateDisabled = false;
-    this.form.controls['birthday'].disable();
-    this.edit = true;
+    if (!this.edit) {
+      this.form.enable();
+      this.dateDisabled = false;
+      this.form.controls['birthday'].disable();
+      this.edit = true;
+    } else {
+      this.form.disable();
+      this.dateDisabled = true;
+      this.edit = false;
+      this._elementMapToForm(this.people);
+    }
   }
 
   onSaveClick() {
     const p: PeopleElet = new PeopleElet();
+    p.ctmId = this.customerId;
     this._formMapToElement(p);
     this.hostServ.updatePeople(p).subscribe({
       next: res => {
         if (res.success) {
           const msg = `个人信息保存成功！！！ ${res.allMessages}`;
           this.notifyServ.notify(msg, 'success');
-          this._elementMapToForm();
+          this._elementMapToForm(p);
           this.form.disable();
           this.dateDisabled = true;
           this.edit = false;
@@ -70,13 +76,8 @@ export class PeopleInfoComponent implements OnInit {
         this.notifyServ.notify(msg, 'error');
       }
     });
-  }
 
-  onCancelClick(): void {
-    this.form.disable();
-    this.dateDisabled = true;
-    this.edit = false;
-    this._elementMapToForm();
+
   }
 
   private _loadData() {
@@ -84,6 +85,7 @@ export class PeopleInfoComponent implements OnInit {
       next: res => {
         if (res.success) {
           this.people = res.data as PeopleElet;
+          this._elementMapToForm(this.people);
         } else {
           const msg = `个人信息加载失败！！！ ${res.allMessages}`;
           this.notifyServ.notify(msg, 'error');
@@ -96,13 +98,13 @@ export class PeopleInfoComponent implements OnInit {
     });
   }
 
-  private _elementMapToForm(): void {
-    this.form.controls['fullName'].setValue(this.people.fullName);
-    this.form.controls['gender'].setValue(this.people.gender);
-    this.form.controls['birthday'].setValue(this.people.birthday);
-    this.form.controls['education'].setValue(this.people.education);
-    this.form.controls['profession'].setValue(this.people.profession);
-    this.form.controls['intro'].setValue(this.people.intro);
+  private _elementMapToForm(p: PeopleElet): void {
+    this.form.controls['fullName'].setValue(p.fullName);
+    this.form.controls['gender'].setValue(p.gender);
+    this.form.controls['birthday'].setValue(p.birthday);
+    this.form.controls['education'].setValue(p.education);
+    this.form.controls['profession'].setValue(p.profession);
+    this.form.controls['intro'].setValue(p.intro);
   }
 
   private _formMapToElement(people: PeopleElet): void {

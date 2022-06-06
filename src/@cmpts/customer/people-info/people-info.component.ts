@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
-import { CTM_EDUCATION_OPS, CTM_GENDER_OPS, PeopleElet } from '../../../@sun/models/customer.model';
+import { CTM_EDUCATION_OPS, CTM_GENDER_OPS, PeopleElet } from 'src/@sun/models/customer.model';
 import { OptionItem } from 'src/@sun/models/paging.model';
 
 @Component({

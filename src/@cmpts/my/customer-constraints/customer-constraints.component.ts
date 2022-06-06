@@ -1,13 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-
 import { OptionItem, PagingParameter, ResponsePagingResult } from 'src/@sun/models/paging.model';
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { CtmCttElet, CONSTRAINT_ELEMENT_DATA, CtmCttFilter } from 'src/@sun/models/customer.model';
-
-import { MyService } from '../my.service';
+import { CtmCttElet, CtmCttFilter } from 'src/@sun/models/customer.model';
 import { CTT_CATEGERY_OPS, CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
+import { MyService } from '../my.service';
 
 @Component({
   selector: 'app-customer-constraints',
@@ -27,9 +25,7 @@ export class CustomerConstraintsComponent implements OnInit {
   pageSize: 5 | 10 | 20 | 50 = 5;
   columnOp = 'createdAt';
   columns: Array<PaginatorColumn> = [
-    { name: 'ID', value: 'id' },
-    { name: '类别', value: 'category' },
-    { name: '方式', value: 'method' },
+    { name: '创建时间', value: 'createdAt' },
     { name: '到期时间', value: 'expiredAt' },
   ];
 
@@ -78,8 +74,6 @@ export class CustomerConstraintsComponent implements OnInit {
       error: err => {
         const msg = `约束数据加载失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
-        this.dataSource = CONSTRAINT_ELEMENT_DATA; // TODO 删除
-        this.total = 35; // TODO 删除
       }
     });
   }
@@ -93,5 +87,4 @@ export class CustomerConstraintsComponent implements OnInit {
       this.notifyServ.notify(msg, 'error');
     }
   }
-
 }

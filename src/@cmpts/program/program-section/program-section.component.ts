@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { SectElet } from '../../../@sun/models/program.model';
+import { SectElet } from 'src/@sun/models/program.model';
 
 @Component({
   selector: 'app-program-section',

@@ -17,7 +17,7 @@ export class AuthRoleElet {
 }
 
 export class AuthResult {
-    account: AcctElet | null = null;    // 账号信息
+    customer: AcctElet | null = null;    // 账号信息
     people: PeopleElet | null = null;   // 个人信息
     role: AuthRoleElet | null = null;   // 角色
     sectCodes: string[] = [];           // 可进入模块

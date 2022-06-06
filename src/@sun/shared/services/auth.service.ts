@@ -62,8 +62,8 @@ export class AuthService {
     }
   }
 
-  public getAccount(): AcctElet {
-    if (this.auth?.account) return this.auth.account;
+  public getCustomer(): AcctElet {
+    if (this.auth?.customer) return this.auth.customer;
     else return new AcctElet();
   }
 

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ReportLogElet } from '../../../@sun/models/report.model';
+import { ReportLogElet } from 'src/@sun/models/report.model';
 
 @Component({
   selector: 'app-log-activity',

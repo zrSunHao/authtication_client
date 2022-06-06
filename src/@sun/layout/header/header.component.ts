@@ -43,8 +43,8 @@ export class HeaderComponent implements OnInit {
     private hostServ: AuthService,) { }
 
   ngOnInit() {
-    this.userName = this.hostServ.getAccount().name;
-    this.avatar = this.hostServ.getAccount().avatar;
+    this.userName = this.hostServ.getCustomer().name;
+    this.avatar = this.hostServ.getCustomer().avatar;
     const codes = this.hostServ.getSections();
     this.allSections.forEach(x => {
       const flag = codes.findIndex(y => y === x.type) >= 0;

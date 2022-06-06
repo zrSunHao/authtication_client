@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { OptionItem } from 'src/@sun/models/paging.model';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
-import { CtmCttAddDto } from '../../../@sun/models/customer.model';
+import { CtmCttAddDto } from 'src/@sun/models/customer.model';
 import { CttCategory, CttMethod, CTT_CATEGERY_OPS, CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
 
 @Component({

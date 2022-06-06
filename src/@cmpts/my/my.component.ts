@@ -16,7 +16,7 @@ export class MyComponent implements OnInit {
     private authServ: AuthService) { }
 
   ngOnInit() {
-    const account = this.authServ.getAccount();
+    const account = this.authServ.getCustomer();
     this.id = account.id as string;
     this.name = account.name;
   }

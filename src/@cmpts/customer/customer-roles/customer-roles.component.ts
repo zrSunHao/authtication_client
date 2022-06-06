@@ -6,7 +6,7 @@ import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/pagi
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
 import { DialogRoleComponent } from '../dialog-role/dialog-role.component';
-import { CtmRoleUpdateDto, CtmRoleElet, CtmRoleFilter } from '../../../@sun/models/customer.model';
+import { CtmRoleUpdateDto, CtmRoleElet, CtmRoleFilter } from 'src/@sun/models/customer.model';
 import { ROLE_RANK_OPS } from 'src/@sun/models/system.model';
 
 @Component({

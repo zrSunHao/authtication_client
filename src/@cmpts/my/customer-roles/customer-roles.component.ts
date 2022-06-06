@@ -1,13 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-
 import { OptionItem, PagingParameter, ResponsePagingResult } from 'src/@sun/models/paging.model';
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { CtmRoleElet, CtmRoleFilter, CUSTOMER_ROLE_ELEMENT_DATA } from 'src/@sun/models/customer.model';
-
-import { MyService } from '../my.service';
+import { CtmRoleElet, CtmRoleFilter } from 'src/@sun/models/customer.model';
 import { ROLE_RANK_OPS } from 'src/@sun/models/system.model';
+import { MyService } from '../my.service';
 
 @Component({
   selector: 'app-customer-roles',
@@ -27,12 +25,10 @@ export class CustomerRolesComponent implements OnInit {
   columnOp = 'createdAt';
   columns: Array<PaginatorColumn> = [
     { name: '系统名称', value: 'sysName' },
-    { name: '角色名称', value: 'roleName' },
-    { name: '角色等级', value: 'roleRank' },
     { name: '关联时间', value: 'createdAt' },
   ];
 
-  displayedColumns = ['sysLogo', 'sysName', 'roleName', 'rank', 'createdAt', 'remark',];
+  displayedColumns = ['sysLogo', 'sysName', 'roleName', 'rank', 'createdAt', 'remark'];
   dataSource: CtmRoleElet[] = [];
 
   constructor(private dialog: MatDialog,
@@ -77,8 +73,6 @@ export class CustomerRolesComponent implements OnInit {
       error: err => {
         const msg = `角色数据加载失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
-        this.dataSource = CUSTOMER_ROLE_ELEMENT_DATA; // TODO 删除
-        this.total = 35; // TODO 删除
       }
     });
   }

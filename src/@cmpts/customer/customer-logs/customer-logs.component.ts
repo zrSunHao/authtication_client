@@ -3,7 +3,7 @@ import { PagingParameter, ResponsePagingResult } from 'src/@sun/models/paging.mo
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
-import { CtmLogFilter, CtmLogElet } from '../../../@sun/models/customer.model';
+import { CtmLogFilter, CtmLogElet } from 'src/@sun/models/customer.model';
 
 @Component({
   selector: 'app-customer-logs',
@@ -25,7 +25,7 @@ export class CustomerLogsComponent implements OnInit {
     { name: '创建时间', value: 'createdAt' },
   ];
 
-  displayedColumns = ['operate', 'sysName', 'roleName', 'createdAt', 'remark'];
+  displayedColumns = ['operate', 'sysName', 'pgmName', 'roleName', 'createdAt', 'remark'];
   dataSource: CtmLogElet[] = [];
 
   constructor(private notifyServ: NotifyService,

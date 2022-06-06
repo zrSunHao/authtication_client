@@ -1,11 +1,8 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CttMethod } from 'src/@sun/models/constraint.model';
-
-import { CtmElet, CUSTOMER_ELEMENT_DATA } from 'src/@sun/models/customer.model';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-
 import { DialogResetComponent } from '../dialog-reset/dialog-reset.component';
+import { CtmElet } from 'src/@sun/models/customer.model';
 import { MyService } from '../my.service';
 
 @Component({
@@ -21,6 +18,7 @@ export class AccountInfoComponent implements OnInit {
 
   @ViewChild("imageInput", { static: false })
   imageInput!: ElementRef;
+  file: any;
 
   constructor(private dialog: MatDialog, private notifyServ: NotifyService,
     private hostServ: MyService,) { }
@@ -51,17 +49,19 @@ export class AccountInfoComponent implements OnInit {
       const formData = new FormData();
       formData.append('id', this.customer.id as string);
       formData.append('avatar', e.target.files[0]);
-      this.hostServ.icon(formData).subscribe({
+      this.hostServ.icon(this.customerId, formData).subscribe({
         next: res => {
           if (res.success) {
             if (this.customer) this.customer.avatar = res.data as string;
           } else {
-            const msg = `头像上传失败！！！ ${res.allMessages}`;
+            const msg = `程序${this.customer?.name}的头像上传失败！！！ ${res.allMessages}`;
             this.notifyServ.notify(msg, 'error');
           }
+          this.file = null;
         },
         error: err => {
-          const msg = `头像上传失败！！！ ${err}`;
+          this.file = null;
+          const msg = `程序${this.customer?.name}的头像上传失败！！！ ${err}`;
           this.notifyServ.notify(msg, 'error');
         }
       });
@@ -81,7 +81,6 @@ export class AccountInfoComponent implements OnInit {
       error: err => {
         const msg = `账号信息加载失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
-        this.customer = CUSTOMER_ELEMENT_DATA[0]; // TODO 删除
       }
     });
   }

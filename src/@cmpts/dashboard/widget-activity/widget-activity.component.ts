@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { WidgetElet } from '../../../@sun/models/report.model';
+import { WidgetElet } from 'src/@sun/models/report.model';
 
 @Component({
   selector: 'app-widget-activity',

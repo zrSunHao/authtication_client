@@ -33,10 +33,10 @@ export class DialogResetComponent implements OnInit {
   onSaveClick(): void {
     const oldPsd = this.form.controls['oldPsd'].value;
     const newPsd = this.form.controls['newPsd'].value;
-    this.hostServ.reset(this.data.id as string, oldPsd, newPsd).subscribe({
+    this.hostServ.reset(oldPsd, newPsd).subscribe({
       next: res => {
         if (res.success) {
-          this.dialogRef.close({ op: 'save', newPsd: this.form.controls['password'].value });
+          this.dialogRef.close({ op: 'save', newPsd: this.form.controls['newPsd'].value });
         } else {
           const msg = `重置密码失败！！！ ${res.allMessages}`;
           this.notifyServ.notify(msg, 'error');

@@ -7,7 +7,7 @@ import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/pagi
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
 import { DialogCustomerComponent } from '../dialog-customer/dialog-customer.component';
-import { CtmElet, CtmFilter } from '../../../@sun/models/customer.model';
+import { CtmElet, CtmFilter } from 'src/@sun/models/customer.model';
 import { CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
 
 @Component({

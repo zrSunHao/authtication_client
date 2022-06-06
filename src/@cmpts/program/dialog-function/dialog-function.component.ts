@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CttMethod, CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
 import { OptionItem } from 'src/@sun/models/paging.model';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { FunctElet } from '../../../@sun/models/program.model';
+import { FunctElet } from 'src/@sun/models/program.model';
 import { ProgramService } from '../program.service';
 
 @Component({

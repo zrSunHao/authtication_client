@@ -6,7 +6,7 @@ import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/con
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { DialogRoleComponent } from '../dialog-role/dialog-role.component';
-import { RoleElet, SysRoleFilter, ROLE_RANK_OPS } from '../../../@sun/models/system.model';
+import { RoleElet, SysRoleFilter, ROLE_RANK_OPS } from 'src/@sun/models/system.model';
 import { SystemService } from '../system.service';
 import { CttMethod, CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
 

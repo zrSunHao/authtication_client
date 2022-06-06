@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { SectElet } from '../../../@sun/models/program.model';
+import { SectElet } from 'src/@sun/models/program.model';
 import { ProgramService } from '../program.service';
 
 @Component({

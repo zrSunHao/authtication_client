@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
 import { OptionItem } from 'src/@sun/models/paging.model';
-import { FunctElet } from '../../../@sun/models/program.model';
+import { FunctElet } from 'src/@sun/models/program.model';
 
 @Component({
   selector: 'app-program-function',

@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
-import { CtmElet } from '../../../@sun/models/customer.model';
+import { CtmElet } from 'src/@sun/models/customer.model';
 
 @Component({
   selector: 'app-dialog-customer',

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { OptionItem } from 'src/@sun/models/paging.model';
 import { PGM_TYPE_OPS } from 'src/@sun/models/program.model';
-import { SysPgmElet, SysNotOwnedPgmFilter } from '../../../@sun/models/system.model';
+import { SysPgmElet, SysNotOwnedPgmFilter } from 'src/@sun/models/system.model';
 
 @Component({
   selector: 'app-system-section',

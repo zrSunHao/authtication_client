@@ -2,8 +2,10 @@
     <mat-card-title>
         <h3>个人信息</h3>
         <div class="box-fill"></div>
-        <button mat-raised-button color="accent" *ngIf="!edit" (click)="onEditClick()">修改信息</button>
-        <button mat-raised-button *ngIf="edit" (click)="onCancelClick()">取消修改</button>
+        <button mat-raised-button color="accent" (click)="onEditClick()">
+            <span *ngIf="!edit">修改信息</span>
+            <span *ngIf="edit">取消修改</span>
+        </button>
         <button mat-raised-button color="accent" *ngIf="edit" (click)="onSaveClick()"
             [disabled]="!form.valid">保存信息</button>
     </mat-card-title>
@@ -26,7 +28,7 @@
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>生日</mat-label>
-                <input matInput [matDatepicker]="picker1" formControlName="birthday">
+                <input matInput [matDatepicker]="picker1" formControlName="birthday" placeholder="yyyy-mm-dd" />
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1 [disabled]="dateDisabled"></mat-datepicker>
                 <mat-hint>出生日期</mat-hint>

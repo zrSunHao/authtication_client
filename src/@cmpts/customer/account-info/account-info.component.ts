@@ -4,8 +4,7 @@ import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
 import { DialogCustomerComponent } from '../dialog-customer/dialog-customer.component';
 import { DialogResetComponent } from '../dialog-reset/dialog-reset.component';
-import { CtmElet, CUSTOMER_ELEMENT_DATA } from '../../../@sun/models/customer.model';
-import { CttMethod } from 'src/@sun/models/constraint.model';
+import { CtmElet } from 'src/@sun/models/customer.model';
 
 @Component({
   selector: 'app-account-info',
@@ -97,7 +96,6 @@ export class AccountInfoComponent implements OnInit {
       error: err => {
         const msg = `账号信息加载失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
-        this.customer = CUSTOMER_ELEMENT_DATA[0]; // TODO 删除
       }
     });
   }

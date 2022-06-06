@@ -1,10 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-
 import { PagingParameter, ResponsePagingResult } from 'src/@sun/models/paging.model';
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { CtmLogFilter, CtmLogElet, LOG_ELEMENT_DATA } from 'src/@sun/models/customer.model';
-
+import { CtmLogFilter, CtmLogElet } from 'src/@sun/models/customer.model';
 import { MyService } from '../my.service';
 
 @Component({
@@ -24,13 +22,10 @@ export class CustomerLogsComponent implements OnInit {
   columnOp = 'createdAt';
   columns: Array<PaginatorColumn> = [
     { name: '操作', value: 'operate' },
-    { name: '系统名称', value: 'sysName' },
-    { name: '角色名称', value: 'roleName' },
-    { name: '角色等级', value: 'roleRank' },
     { name: '创建时间', value: 'createdAt' },
   ];
 
-  displayedColumns = ['operate', 'sysName', 'roleName', 'roleRank', 'createdAt', 'remark'];
+  displayedColumns = ['operate', 'sysName', 'pgmName', 'roleName', 'createdAt', 'remark'];
   dataSource: CtmLogElet[] = [];
 
   constructor(private notifyServ: NotifyService,
@@ -73,8 +68,6 @@ export class CustomerLogsComponent implements OnInit {
       error: err => {
         const msg = `日志数据加载失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
-        this.dataSource = LOG_ELEMENT_DATA; // TODO 删除
-        this.total = 35; // TODO 删除
       }
     });
   }

@@ -5,7 +5,7 @@ import { OptionItem } from 'src/@sun/models/paging.model';
 import { PGM_TYPE_OPS } from 'src/@sun/models/program.model';
 import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/confirm-dialog.component';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
-import { SysPgmElet, PROGRAM_ELEMENT_DATA, SysOwnedPgmFilter, SysNotOwnedPgmFilter } from '../../../@sun/models/system.model';
+import { SysPgmElet, PROGRAM_ELEMENT_DATA, SysOwnedPgmFilter, SysNotOwnedPgmFilter } from 'src/@sun/models/system.model';
 import { SystemService } from '../system.service';
 
 @Component({
