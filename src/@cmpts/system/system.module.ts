@@ -15,6 +15,9 @@ import { SystemRoleFuntionsComponent } from './system-role-funtions/system-role-
 import { DialogSystemComponent } from './dialog-system/dialog-system.component';
 import { DialogRoleComponent } from './dialog-role/dialog-role.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { SysCustomersComponent } from './sys-customers/sys-customers.component';
+import { DialogCustomerRoleComponent } from './dialog-customer-role/dialog-customer-role.component';
+import { DialogCtmCttComponent } from './dialog-ctm-ctt/dialog-ctm-ctt.component';
 
 @NgModule({
   imports: [
@@ -30,12 +33,15 @@ import { NgxPermissionsModule } from 'ngx-permissions';
   ],
   declarations: [
     SystemComponent,
+    SysCustomersComponent,
     SystemProgramComponent,
     SystemRoleListComponent,
     SystemSectionComponent,
     SystemRoleFuntionsComponent,
     DialogSystemComponent,
     DialogRoleComponent,
+    DialogCustomerRoleComponent,
+    DialogCtmCttComponent,
   ],
   providers: [SystemService]
 })

@@ -84,13 +84,17 @@
         </ng-container>
         <ng-container matColumnDef="operate">
           <th mat-header-cell *matHeaderCellDef> 操作 </th>
-          <td mat-cell *matCellDef="let element" style="width: 13rem;">
+          <td mat-cell *matCellDef="let element" style="width: 15rem;">
             <button mat-icon-button matTooltip="编辑" *ngxPermissionsOnly="['sys_update']" (click)="onEditClick(element)">
               <mat-icon>mode_edit_outline</mat-icon>
             </button>
             <button mat-icon-button matTooltip="logo上传" *ngxPermissionsOnly="['sys_logo']"
               (click)="onLogoClick(element)">
               <mat-icon>image</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="客户管理" *ngxPermissionsOnly="['sys_ctms']"
+              (click)="onCustomerClick(element)">
+              <mat-icon>group</mat-icon>
             </button>
             <button mat-icon-button matTooltip="程序配置" *ngxPermissionsOnly="['sys_pgm_cfg']"
               (click)="onProgtamClick(element)">

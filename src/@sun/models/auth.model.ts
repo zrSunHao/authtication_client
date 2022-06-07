@@ -102,6 +102,15 @@ export const AUTH_PERMISSION_DATA: Permission[] = [
             'sys_pgm_cfg',
             'sys_role',
             'sys_delete',
+            'sys_ctms'
+        ]
+    },
+    {
+        sect: 'sys_ctms',
+        funcs: [
+            'sys_ctm_role',
+            'sys_ctt_add',
+            'sys_ctt_delete',
         ]
     },
     {

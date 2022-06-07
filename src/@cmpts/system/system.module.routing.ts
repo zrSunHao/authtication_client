@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/@sun/shared/guard/auth.guard';
+import { SysCustomersComponent } from './sys-customers/sys-customers.component';
 import { SystemProgramComponent } from './system-program/system-program.component';
 import { SystemRoleFuntionsComponent } from './system-role-funtions/system-role-funtions.component';
 import { SystemRoleListComponent } from './system-role-list/system-role-list.component';
@@ -11,6 +12,12 @@ const routes: Routes = [
         path: '', component: SystemComponent,
         canActivate: [AuthGuard],
         data: { permission: 'system' }
+    },
+    {
+        path: 'customer/:sysId/:sysName',
+        component: SysCustomersComponent,
+        canActivate: [AuthGuard],
+        data: { permission: 'sys_ctms' }
     },
     {
         path: 'program/:sysId/:sysName',

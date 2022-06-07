@@ -25,7 +25,7 @@ export class CtmElet {
     avatar: string = '';
     name: string = '';
     nickname: string = '';
-    limited: CttMethod = CttMethod.other;
+    limited?: boolean = undefined;
     lastLoginAt: Date | null = null;
     remark: string = '';
     createdAt: Date | null = null;
@@ -136,98 +136,3 @@ export class CtmRoleUpdateDto {
     sysId: string = '';
     roleId: string = '';
 }
-
-
-
-export const CUSTOMER_ELEMENT_DATA: CtmElet[] = [
-    {
-        id: '1', avatar: '', name: 'zhangsan', nickname: '张三',
-        limited: CttMethod.other, lastLoginAt: new Date(), createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
-    },
-    {
-        id: '1', avatar: '', name: 'zhangsan', nickname: '认识的v',
-        limited: CttMethod.forbid, lastLoginAt: new Date(), createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
-    },
-    {
-        id: '1', avatar: '/assets/images/people_1.jpg', name: 'zhangsan', nickname: '是发',
-        limited: CttMethod.other, lastLoginAt: new Date(), createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
-    },
-    {
-        id: '1', avatar: '/assets/images/logo_256.png', name: 'zhangsan', nickname: '张三',
-        limited: CttMethod.forbid, lastLoginAt: new Date(), createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
-    },
-    {
-        id: '1', avatar: '/assets/images/people_1.jpg', name: 'zhangsan', nickname: '王五打赏',
-        limited: CttMethod.other, lastLoginAt: new Date(), createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
-    },
-    {
-        id: '1', avatar: '/assets/images/logo_256.png', name: 'zhangsan', nickname: '浮点数',
-        limited: CttMethod.forbid, lastLoginAt: new Date(), createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
-    },
-    {
-        id: '1', avatar: '/assets/images/people_1.jpg', name: 'zhangsan', nickname: '个位数',
-        limited: CttMethod.other, lastLoginAt: new Date(), createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
-    },
-    {
-        id: '1', avatar: '/assets/images/logo_256.png', name: 'zhangsan', nickname: '方法',
-        limited: CttMethod.forbid, lastLoginAt: new Date(), createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
-    },
-    {
-        id: '1', avatar: '/assets/images/people_1.jpg', name: 'zhangsan', nickname: '更好四个',
-        limited: CttMethod.forbid, lastLoginAt: new Date(), createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
-    },
-    {
-        id: '1', avatar: '/assets/images/logo_256.png', name: 'zhangsan', nickname: '法撒撒旦',
-        limited: CttMethod.other, lastLoginAt: new Date(), createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦撒看见打撒萨达萨达撒旦撒旦'
-    },
-];
-
-export const CUSTOMER_ROLE_ELEMENT_DATA: CtmRoleElet[] = [
-    {
-        id: '1', sysLogo: '', sysId: '1', sysName: 'app-111', roleId: '1', roleName: '管理员',
-        rank: RoleRank.manager, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦撒看见打撒萨达萨达撒旦撒旦撒看见打撒萨达萨达撒旦撒旦'
-    },
-    {
-        id: '1', sysLogo: '', sysId: '1', sysName: 'app-222', roleId: '1', roleName: '超级管理员',
-        rank: RoleRank.super_manager, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
-    },
-    {
-        id: '1', sysLogo: '', sysId: '1', sysName: 'app-333', roleId: '1', roleName: '业务员',
-        rank: RoleRank.business, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
-    },
-    {
-        id: '1', sysLogo: '', sysId: '1', sysName: 'app-444', roleId: '1', roleName: '开发工程师',
-        rank: RoleRank.business, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
-    },
-    {
-        id: '1', sysLogo: '', sysId: '1', sysName: 'app-555', roleId: '1', roleName: '产品设计工程师',
-        rank: RoleRank.business, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
-    },
-];
-
-export const CONSTRAINT_ELEMENT_DATA: CtmCttElet[] = [
-    {
-        id: '1', category: CttCategory.customer_all_system, method: CttMethod.forbid, sysName: '', expiredAt: null, origin: '【业务员】李四', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦撒看见打撒萨达萨达撒旦撒旦'
-    },
-    {
-        id: '1', category: CttCategory.customer_one_system, method: CttMethod.forbid, sysName: 'app-111', expiredAt: null, origin: '【业务员】李四', createdAt: new Date(), remark: '撒看见打撒撒看见打撒萨达萨达撒旦撒旦萨达萨达撒旦撒旦'
-    },
-    {
-        id: '1', category: CttCategory.customer_one_system, method: CttMethod.lock, sysName: 'app-111', expiredAt: new Date(), origin: '【后台服务】【service2】', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦'
-    },
-    {
-        id: '1', category: CttCategory.customer_all_system, method: CttMethod.forbid, sysName: '', expiredAt: null, origin: '【业务员】李四', createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦撒看见打撒萨达萨达撒旦撒旦'
-    },
-    {
-        id: '1', category: CttCategory.customer_one_system, method: CttMethod.forbid, sysName: 'app-111', expiredAt: null, origin: '【业务员】李四', createdAt: new Date(), remark: '撒看见打撒撒看见打撒萨达萨达撒旦撒旦萨达萨达撒旦撒旦'
-    },
-];
-
-export const LOG_ELEMENT_DATA: CtmLogElet[] = [
-    { id: '1', operate: '查询列表', sysName: 'app-111', roleName: '普通用户', roleRank: 1, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
-    { id: '1', operate: '查询列表', sysName: 'app-222', roleName: '管理员', roleRank: 2, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
-    { id: '1', operate: '查询列表', sysName: 'app-333', roleName: '业务员', roleRank: 10, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
-    { id: '1', operate: '查询列表', sysName: 'app-444', roleName: '设计师', roleRank: 100, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
-    { id: '1', operate: '查询列表', sysName: 'app-555', roleName: '工程师', roleRank: 1000, createdAt: new Date(), remark: '撒看见打撒萨达萨达撒旦撒旦' },
-
-];

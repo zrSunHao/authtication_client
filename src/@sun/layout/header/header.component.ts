@@ -63,18 +63,16 @@ export class HeaderComponent implements OnInit {
   }
 
   set_menu(url: string) {
-    if (url.indexOf(menutype.dashboard) != -1) {
+    if (url.indexOf(`/${menutype.dashboard}`) == 0) {
       this.menuitem = menutype.dashboard;
-    } else if (url.indexOf(menutype.customer) != -1) {
+    } else if (url.indexOf(`/${menutype.customer}`) == 0) {
       this.menuitem = menutype.customer;
-    } else if (url.indexOf(menutype.system) != -1) {
+    } else if (url.indexOf(`/${menutype.system}`) == 0) {
       this.menuitem = menutype.system;
-    } else if (url.indexOf(menutype.program) != -1) {
+    } else if (url.indexOf(`/${menutype.program}`) == 0) {
       this.menuitem = menutype.program;
-    } else if (url.indexOf(menutype.constraint) != -1) {
+    } else if (url.indexOf(`/${menutype.constraint}`) == 0) {
       this.menuitem = menutype.constraint;
-    } else if (url == null) {
-      this.menuitem = menutype.dashboard;
     } else {
       this.menuitem = menutype.other;
     }

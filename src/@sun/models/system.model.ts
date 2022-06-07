@@ -22,6 +22,20 @@ export class SysElet {
     remark: string = '';
 }
 
+export class SysCtmElet {
+    id: string | null = '';
+    avatar: string = '';
+    name: string = '';
+    nickname: string = '';
+    limited?: boolean = undefined;
+    roleId: string = '';
+    rank: RoleRank = RoleRank.other;
+    roleName: string = '';
+    lastLoginAt: Date | null = null;
+    remark: string = '';
+    createdAt: Date | null = null;
+}
+
 export class SysPgmElet extends PgmElet {
     systemId: string | null = '';
 }
@@ -111,7 +125,14 @@ export class SysRoleFilter {
     endAt: Date | null = null;
 }
 
-
+export class SysCtmFilter {
+    sysId: string = '';
+    nameOrNickname: string = '';
+    limited?: boolean = undefined;
+    roleId: string = '';
+    startAt: Date | null = null;
+    endAt: Date | null = null;
+}
 
 export const SYSTEM_ELEMENT_DATA: SysElet[] = [
     { id: '1', logo: '', name: 'dgsddgds', code: 'hjrewe', createdAt: new Date(), intro: '他共为山豆根山豆根山豆根是德国i九二共识大锅饭时代吧', remark: '赴德国大使馆大使馆大使馆是豆腐干山豆根根深蒂固的是公司的' },

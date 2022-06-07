@@ -29,7 +29,7 @@ export class SystemComponent implements OnInit, AfterViewInit {
   ];
   displayedColumns = ['logo', 'name', 'code', 'createdAt', 'intro', 'remark', 'operate',];
   dataSource: SysElet[] = [];
-  file:any;
+  file: any;
 
   @ViewChild("imageInput", { static: false })
   imageInput!: ElementRef;
@@ -90,6 +90,10 @@ export class SystemComponent implements OnInit, AfterViewInit {
   onLogoClick(e: SysElet): void {
     this.currentSys = e;
     this.imageInput.nativeElement.click();
+  }
+
+  onCustomerClick(e: SysElet): void {
+    this.router.navigate([`/system/customer/${e.id}/${e.name}`]);
   }
 
   onProgtamClick(e: SysElet): void {

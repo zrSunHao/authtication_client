@@ -1,9 +1,10 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { PagingParameter, ResponsePagingResult, ResponseResult } from 'src/@sun/models/paging.model';
+import { CtmCttAddDto, CtmRoleUpdateDto } from 'src/@sun/models/customer.model';
+import { OptionItem, PagingParameter, ResponsePagingResult, ResponseResult } from 'src/@sun/models/paging.model';
 import { environment } from 'src/environments/environment';
-import { SysPgmElet, RoleElet, SysRoleRelation, SysRolePgmElet, SysRoleFilter, SysElet, SysOwnedPgmFilter, SysNotOwnedPgmFilter, SysFilter } from '../../@sun/models/system.model';
+import { SysPgmElet, RoleElet, SysRoleRelation, SysRolePgmElet, SysRoleFilter, SysElet, SysOwnedPgmFilter, SysNotOwnedPgmFilter, SysFilter, SysCtmFilter, SysCtmElet } from '../../@sun/models/system.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ import { SysPgmElet, RoleElet, SysRoleRelation, SysRolePgmElet, SysRoleFilter, S
 export class SystemService {
 
   private baseUrl = environment.hostUrl + 'sys';
+  private ctmUrl = environment.hostUrl + 'customer';
   private resourceUrl = environment.hostUrl + 'resource';
   private resourceCategory = 'sys';
   private httpOptions = {
@@ -45,6 +47,29 @@ export class SystemService {
   public icon(ownerId: string, formData: FormData): Observable<ResponseResult<string>> {
     const url = `${this.resourceUrl}/Save?ownerId=${ownerId}&category=${this.resourceCategory}`;
     return this.http.post<ResponseResult<string>>(url, formData)
+      .pipe(catchError(this.handleError));
+  }
+
+
+  public searchCtms(params: PagingParameter<SysCtmFilter>): Observable<ResponsePagingResult<SysCtmElet>> {
+    const url = `${this.baseUrl}/GetCtms`;
+    return this.http.post<ResponsePagingResult<SysCtmElet>>(url, params, this.httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
+  public updateCtmRole(param: CtmRoleUpdateDto): Observable<ResponseResult<boolean>> {
+    const url = `${this.ctmUrl}/UpdateRole`;
+    return this.http.patch<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
+  }
+
+  public addCtmConstraint(param: CtmCttAddDto): Observable<ResponseResult<boolean>> {
+    const url = `${this.baseUrl}/AddCtmCtt`;
+    return this.http.post<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
+  }
+
+  public cancelCtmCtt(ctmId: string, sysId: string,): Observable<ResponseResult<boolean>> {
+    const url = `${this.baseUrl}/CancelCtmCtt?ctmId=${ctmId}&sysId=${sysId}`;
+    return this.http.delete<ResponseResult<boolean>>(url)
       .pipe(catchError(this.handleError));
   }
 
@@ -109,6 +134,18 @@ export class SystemService {
   public addRoleFunctions(param: SysRoleRelation): Observable<ResponseResult<boolean>> {
     const url = `${this.baseUrl}/UpdateRolePgmFuncts`;
     return this.http.put<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
+  }
+
+  public getRoleItems(sysId: string): Observable<ResponseResult<OptionItem[]>> {
+    const url = `${this.baseUrl}/GetRoleOptions?sysId=${sysId}`;
+    return this.http.get<ResponseResult<OptionItem[]>>(url)
+      .pipe(catchError(this.handleError));
+  }
+
+  public getSystemItems(): Observable<ResponseResult<OptionItem[]>> {
+    const url = `${this.baseUrl}/GetOptions`;
+    return this.http.get<ResponseResult<OptionItem[]>>(url)
+      .pipe(catchError(this.handleError));
   }
 
   // ---------------- private ------------------

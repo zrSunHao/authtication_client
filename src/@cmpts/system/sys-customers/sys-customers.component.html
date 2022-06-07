@@ -2,7 +2,7 @@
   <div class="topbar">
     <img src="/assets/icons/customer.png" />
     <div>
-      <h2>客户管理页面</h2>
+      <h2>【{{sysName}}】系统客户管理页面</h2>
     </div>
     <div class="box-fill"></div>
     <button mat-flat-button color="accent" (click)="onSearchClick()">
@@ -10,6 +10,9 @@
     </button>
     <button mat-flat-button color="accent" (click)="onResetClick()">
       <mat-icon>autorenew</mat-icon>重置
+    </button>
+    <button mat-flat-button color="accent" (click)="onPreviousPageClick()">
+      <mat-icon>arrow_back</mat-icon>返回
     </button>
   </div>
   <div class="content-warp">
@@ -31,9 +34,12 @@
           <mat-icon matSuffix>category</mat-icon>
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>备注</mat-label>
-          <input matInput placeholder="请输入要搜索的备注内容" [(ngModel)]="dto.remark" autocomplete="off" name="remark">
-          <mat-icon matSuffix>message</mat-icon>
+          <mat-label>角色名称</mat-label>
+          <mat-select [(ngModel)]="dto.roleId" name="roleId">
+            <mat-option [value]="">- - -</mat-option>
+            <mat-option *ngFor="let item of roleOptions" [value]="item.key">{{item.value}}</mat-option>
+          </mat-select>
+          <mat-icon matSuffix>military_tech</mat-icon>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>最近登录时间</mat-label>
@@ -62,10 +68,25 @@
         <ng-container matColumnDef="nickname">
           <th mat-header-cell *matHeaderCellDef> 昵称 </th>
           <td mat-cell *matCellDef="let element" style="color: #fde68a;min-width: 5rem;">
-            {{element.nickname}}&nbsp;&nbsp; </td>
+            {{element.nickname}} </td>
+        </ng-container>
+        <ng-container matColumnDef="roleName">
+          <th mat-header-cell *matHeaderCellDef> 角色名称 </th>
+          <td mat-cell *matCellDef="let element" style="color: #a5f3fc;min-width: 5rem;"> {{element.roleName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="rank">
+          <th mat-header-cell *matHeaderCellDef> 等级 </th>
+          <td mat-cell *matCellDef="let element" style="min-width: 5rem;">
+            <span *ngIf="element.rank === rankOps[1].key" style="color: #a5f3fc;">{{rankOps[1].value}}</span>
+            <span *ngIf="element.rank === rankOps[2].key" style="color: #fde68a;">{{rankOps[2].value}}</span>
+            <span *ngIf="element.rank === rankOps[3].key" style="color: #a7f3d0;">{{rankOps[3].value}}</span>
+            <span *ngIf="element.rank === rankOps[4].key" style="color: #f9a8d4;">{{rankOps[4].value}}</span>
+            <span *ngIf="element.rank === rankOps[5].key" style="color: #67e8f9;">{{rankOps[5].value}}</span>
+            <span *ngIf="element.rank === rankOps[6].key" style="color: #34d399;">{{rankOps[6].value}}</span>
+          </td>
         </ng-container>
         <ng-container matColumnDef="limited">
-          <th mat-header-cell *matHeaderCellDef> 存在约束 </th>
+          <th mat-header-cell *matHeaderCellDef> 被约束 </th>
           <td mat-cell *matCellDef="let element" style="min-width: 3rem;">
             <span *ngIf="element.limited == true" style="color: red;">是</span>
             <span *ngIf="element.limited != true" style="color: #c4b5fd;">否</span>
@@ -73,11 +94,13 @@
         </ng-container>
         <ng-container matColumnDef="createdAt">
           <th mat-header-cell *matHeaderCellDef> 注册时间 </th>
-          <td mat-cell *matCellDef="let element" style="max-width: 12rem;"> {{element.createdAt| date:'yyyy-MM-dd HH:mm:ss'}} </td>
+          <td mat-cell *matCellDef="let element" style="max-width: 12rem;">
+            {{element.createdAt| date:'yyyy-MM-dd HH:mm:ss'}} </td>
         </ng-container>
         <ng-container matColumnDef="lastLoginAt">
           <th mat-header-cell *matHeaderCellDef> 最近登陆时间 </th>
-          <td mat-cell *matCellDef="let element" style="max-width: 12rem;"> {{element.lastLoginAt| date:'yyyy-MM-dd HH:mm:ss'}} </td>
+          <td mat-cell *matCellDef="let element" style="max-width: 12rem;">
+            {{element.lastLoginAt| date:'yyyy-MM-dd HH:mm:ss'}} </td>
         </ng-container>
         <ng-container matColumnDef="remark">
           <th mat-header-cell *matHeaderCellDef> 备注 </th>
@@ -87,15 +110,21 @@
         </ng-container>
         <ng-container matColumnDef="operate">
           <th mat-header-cell *matHeaderCellDef> 操作 </th>
-          <td mat-cell *matCellDef="let element" style="width: 6rem;">
-            <button mat-icon-button matTooltip="查看详情" *ngxPermissionsOnly="['ctm_datail']"
-              (click)="onDetailClick(element)">
-              <mat-icon>read_more</mat-icon>
+          <td mat-cell *matCellDef="let element" style="width: 8rem;">
+            <button mat-icon-button matTooltip="配置角色" *ngxPermissionsOnly="['sys_ctm_role']"
+              (click)="onRoleClick(element)">
+              <mat-icon>military_tech</mat-icon>
             </button>
-            <button mat-icon-button matTooltip="备注" *ngxPermissionsOnly="['ctm_remark']"
-              (click)="onRemarkClick(element)">
-              <mat-icon>message</mat-icon>
+            <button mat-icon-button matTooltip="添加约束" *ngxPermissionsOnly="['sys_ctt_add']"
+              (click)="onAddCttClick(element)">
+              <mat-icon>lock</mat-icon>
             </button>
+            <span *ngIf="element.limited == true">
+              <button mat-icon-button matTooltip="取消约束" *ngxPermissionsOnly="['sys_ctt_delete']"
+                [disabled]="element.limited != true" (click)="onCancelCttClick(element)">
+                <mat-icon>no_encryption</mat-icon>
+              </button>
+            </span>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="table-header-row"></tr>
