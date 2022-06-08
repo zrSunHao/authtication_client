@@ -51,7 +51,6 @@ export class ProgramDetailComponent implements OnInit {
         case '1':
           this.programType = '网页端';
           this.sectionsTitle = '页面';
-          console.log(this.sectionsTitle);
           break;
         case '2':
           this.programType = '桌面端';

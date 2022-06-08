@@ -125,6 +125,7 @@ export class SystemProgramComponent implements OnInit {
         if (res.success) {
           this.notifyServ.notify(`程序【${e.name}】关联已删除！！！`, 'success');
           this.programs = this.programs.filter(x => x.id != e.id);
+          this.sections = [e, ...this.sections];
         } else {
           const msg = `程序【${e.name}】关联删除失败！！！ ${res.allMessages}`;
           this.notifyServ.notify(msg, 'error');

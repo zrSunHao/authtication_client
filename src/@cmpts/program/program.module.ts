@@ -14,6 +14,9 @@ import { DialogProgramComponent } from './dialog-program/dialog-program.componen
 import { DialogSectionComponent } from './dialog-section/dialog-section.component';
 import { ProgramFunctionComponent } from './program-function/program-function.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { PgmCtmsComponent } from './pgm-ctms/pgm-ctms.component';
+import { PgmNotOwnedCtmsComponent } from './pgm-not-owned-ctms/pgm-not-owned-ctms.component';
+import { PgmOwnedCtmsComponent } from './pgm-owned-ctms/pgm-owned-ctms.component';
 
 @NgModule({
   imports: [
@@ -34,6 +37,9 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     DialogProgramComponent,
     DialogSectionComponent,
     DialogFunctionComponent,
+    PgmCtmsComponent,
+    PgmNotOwnedCtmsComponent,
+    PgmOwnedCtmsComponent,
   ],
   providers: [ProgramService]
 })

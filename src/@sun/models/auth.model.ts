@@ -79,6 +79,7 @@ export const AUTH_PERMISSION_DATA: Permission[] = [
             'pgm_add',
             'pgm_update',
             'pgm_cfg',
+            'pgm_ctm',
             'pgm_delete',
         ]
     },
@@ -91,6 +92,13 @@ export const AUTH_PERMISSION_DATA: Permission[] = [
             'pgm_sect_delete',
             'pgm_func_update',
             'pgm_func_delete',
+        ]
+    },
+    {
+        sect: 'pgm_ctm',
+        funcs: [
+            'pgm_ctm_add',
+            'pgm_ctm_delete',
         ]
     },
     {

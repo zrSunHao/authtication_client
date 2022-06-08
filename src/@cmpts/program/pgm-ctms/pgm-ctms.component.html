@@ -1,0 +1,21 @@
+<div class="page">
+  <div class="topbar">
+    <img src="/assets/icons/program.png" />
+    <div>
+      <h2>程序关联用户管理 -- {{programType}} -- 【{{programName}}】</h2>
+    </div>
+    <div class="box-fill"></div>
+    <button mat-flat-button color="accent" (click)="onPreviousPageClick()">
+      <mat-icon>arrow_back</mat-icon>返回
+    </button>
+  </div>
+
+  <div class="content-warp">
+    <div class="content">
+      <app-pgm-not-owned-ctms [data]="notOwnedCtms" (onGetCtms)="onGetNotOwnedCtmList($event)"
+        (onAddCtm)="onAddCtmClick($event)" [total]="notOwnedTotal"></app-pgm-not-owned-ctms>
+      <app-pgm-owned-ctms [data]="ownedCtms" (onGetCtms)="onGetOwnedCtmList($event)"
+        (onDeleteCtms)="onDeleteCtmClick($event)" [total]="ownedTotal"></app-pgm-owned-ctms>
+    </div>
+  </div>
+</div>

@@ -74,6 +74,10 @@ export class ProgramComponent implements OnInit {
     this.router.navigate([`/program/detail/${e.id}/${e.category}/${e.name}`]);
   }
 
+  onCustomerClick(e: PgmElet): void {
+    this.router.navigate([`/program/customer/${e.id}/${e.category}/${e.name}`]);
+  }
+
   onEditClick(e: PgmElet): void {
     const dialogRef = this.dialog.open(DialogProgramComponent,
       { width: '520px', data: e, });

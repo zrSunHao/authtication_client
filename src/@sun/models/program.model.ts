@@ -38,12 +38,29 @@ export interface FunctElet {
     remark: string;
 }
 
+export class PgmCtmElet {
+    id: string | null = '';
+    avatar: string = '';
+    name: string = '';
+    nickname: string = '';
+    remark: string = '';
+    intro: string = '';
+    createdAt: Date | null = null;
+}
+
+
 export class PgmFilter {
     nameOrCode: string = '';
     category: PgmCategory = PgmCategory.other;
     introOrRemark: string = '';
     startAt: Date | null = null;
     endAt: Date | null = null;
+}
+
+export class PgmCtmFilter {
+    pgmId: string = '';
+    name: string = '';
+    nickname: string = '';
 }
 
 export const PGM_TYPE_OPS: OptionItem[] = [

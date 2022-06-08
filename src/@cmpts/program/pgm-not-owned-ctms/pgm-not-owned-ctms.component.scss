@@ -1,0 +1,109 @@
+$section-bg-color: #595959;
+$section-hover-bg-color: #303030;
+
+mat-card-title button {
+    float: right;
+    font-size: 12px;
+    margin-left: 1rem;
+}
+
+mat-card-title .mat-raised-button {
+    line-height: 24px;
+    width: 3rem;
+    padding: 0;
+    min-width: 2rem;
+}
+
+.search {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.search ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0;
+    width: 11rem;
+}
+
+.list-wrap {
+    overflow-y: scroll;
+    max-height: 34rem;
+}
+
+.ctm-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-items: flex-start;
+    margin-bottom: 0.5rem;
+    margin-right: 0.5rem;
+    padding: 0.5rem;
+    background-color: $section-bg-color;
+}
+
+.ctm-wrap:hover {
+    background-color: $section-hover-bg-color;
+}
+
+.ctm-header {
+    color: #d1fae5;
+    display: grid;
+    grid-template-columns: auto 5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    align-items: center;
+}
+
+.ctm-header button {
+    float: right;
+    font-size: 12px;
+    margin-left: 0.5rem;
+}
+
+.ctm-header .mat-raised-button {
+    height: 24px;
+    line-height: 24px;
+    width: 3rem;
+    padding: 0;
+    min-width: 2rem;
+}
+
+.title {
+    font-size: medium;
+    font-weight: bold;
+}
+
+.title-wrap {
+    display: grid;
+    gap: 0.25rem;
+    grid-template-rows: auto auto;
+}
+
+.nickname {
+    color: lightcyan;
+    font-size: small;
+}
+
+.intro {
+    min-height: 3rem;
+    word-break: normal;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.mat-card .mat-divider-horizontal {
+    position: relative;
+}
+
+.mat-card-title {
+    display: grid;
+    grid-template-columns: auto 3.5rem 3.5rem 3.5rem 3.5rem;
+}
+
+.mat-card-title .mat-raised-button {
+    height: 24px;
+    line-height: 24px;
+    width: 3rem;
+    padding: 0;
+    min-width: 2rem;
+}

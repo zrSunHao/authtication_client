@@ -1,0 +1,40 @@
+<mat-card>
+  <mat-card-title>
+    <h4>未关联 ({{data.length}} | {{total}}) - {{pageIndex}} | {{count}} 页</h4>
+    <button mat-raised-button [disabled]="previousDisabled" (click)="previousPage()">上一页</button>
+    <button mat-raised-button [disabled]="nextDisabled" (click)="nextPage()">下一页</button>
+    <button mat-raised-button color="accent" (click)="onGetClick()">搜索</button>
+    <button mat-raised-button color="accent" (click)="onResetClick()">重置</button>
+  </mat-card-title>
+  <mat-card-subtitle></mat-card-subtitle>
+  <div class="search">
+    <mat-form-field appearance="outline">
+      <mat-label>账号</mat-label>
+      <input matInput placeholder="请输入要搜索的用户账号" [(ngModel)]="dto.name" name="name" autocomplete="off">
+      <mat-icon matSuffix>report</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>昵称</mat-label>
+      <input matInput placeholder="请输入要搜索的用户昵称" [(ngModel)]="dto.nickname" name="nickname" autocomplete="off">
+      <mat-icon matSuffix>report</mat-icon>
+    </mat-form-field>
+  </div>
+  <div class="list-wrap">
+    <div class="ctm-wrap" *ngFor="let ctm of data;let i  = index">
+      <div class="ctm-header">
+        <div class="title-wrap">
+          <span class="title">账号： {{ctm.name}}</span>
+          <span class="nickname">昵称： {{ctm.nickname}}</span>
+        </div>
+        <button mat-raised-button color="accent" *ngxPermissionsOnly="['pgm_ctm_add']"
+          (click)="onAddClick(ctm)">添加</button>
+      </div>
+      <div>
+        <mat-divider></mat-divider>
+      </div>
+      <div class="intro">
+        简介： {{ctm.intro}}
+      </div>
+    </div>
+  </div>
+</mat-card>

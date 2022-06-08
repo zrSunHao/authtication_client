@@ -32,7 +32,8 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>功能简介/备注</mat-label>
-          <input matInput placeholder="请输入要搜索的功能简介/备注" [(ngModel)]="dto.introOrRemark" name="introOrRemark" autocomplete="off">
+          <input matInput placeholder="请输入要搜索的功能简介/备注" [(ngModel)]="dto.introOrRemark" name="introOrRemark"
+            autocomplete="off">
           <mat-icon matSuffix>message</mat-icon>
         </mat-form-field>
         <mat-form-field appearance="outline">
@@ -84,7 +85,7 @@
         </ng-container>
         <ng-container matColumnDef="operate">
           <th mat-header-cell *matHeaderCellDef> 操作 </th>
-          <td mat-cell *matCellDef="let element" style="width: 8rem;">
+          <td mat-cell *matCellDef="let element" style="width: 10rem;">
             <button mat-icon-button matTooltip="编辑" matTooltipPosition="below" *ngxPermissionsOnly="['pgm_update']"
               (click)="onEditClick(element)">
               <mat-icon>edit</mat-icon>
@@ -92,6 +93,10 @@
             <button mat-icon-button matTooltip="模块/功能配置" matTooltipPosition="below" *ngxPermissionsOnly="['pgm_cfg']"
               (click)="onConfigClick(element)">
               <mat-icon>all_inclusive</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="关联人员配置" matTooltipPosition="below" *ngxPermissionsOnly="['pgm_ctm']"
+              (click)="onCustomerClick(element)">
+              <mat-icon>group</mat-icon>
             </button>
             <button mat-icon-button matTooltip="删除" matTooltipPosition="below" *ngxPermissionsOnly="['pgm_delete']"
               (click)="onDeleteClick(element)">

@@ -5,7 +5,7 @@ import { Observable, throwError } from 'rxjs';
 
 import { environment } from 'src/environments/environment'
 import { PagingParameter, ResponsePagingResult, ResponseResult } from 'src/@sun/models/paging.model';
-import { FunctElet, PgmElet, PgmFilter, SectElet } from '../../@sun/models/program.model';
+import { FunctElet, PgmCtmElet, PgmCtmFilter, PgmElet, PgmFilter, SectElet } from '../../@sun/models/program.model';
 
 @Injectable({
   providedIn: 'root'
@@ -92,6 +92,29 @@ export class ProgramService {
 
   public deleteFunction(id: string): Observable<ResponseResult<boolean>> {
     const url = `${this.baseUrl}/DeleteFunct?id=${id}`;
+    return this.http.delete<ResponseResult<boolean>>(url)
+      .pipe(catchError(this.handleError));
+  }
+
+  public getOwnedCtmList(param: PagingParameter<PgmCtmFilter>): Observable<ResponsePagingResult<PgmCtmElet>> {
+    const url = `${this.baseUrl}/GetOwnedCtmList`;
+    return this.http.post<ResponsePagingResult<PgmCtmElet>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
+  }
+
+  public getNotOwnedCtmList(param: PagingParameter<PgmCtmFilter>): Observable<ResponsePagingResult<PgmCtmElet>> {
+    const url = `${this.baseUrl}/GetNotOwnedCtmList`;
+    return this.http.post<ResponsePagingResult<PgmCtmElet>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
+  }
+
+  public addCtm(pgmId: string, ctmId: string): Observable<ResponseResult<boolean>> {
+    const url = `${this.baseUrl}/addCtm?pgmId=${pgmId}&ctmId=${ctmId}`;
+    const d = new URLSearchParams();
+    return this.http.post<ResponseResult<boolean>>(url, null)
+      .pipe(catchError(this.handleError));
+  }
+
+  public deleteCtm(pgmId: string, ctmId: string): Observable<ResponseResult<boolean>> {
+    const url = `${this.baseUrl}/deleteCtm?pgmId=${pgmId}&ctmId=${ctmId}`;
     return this.http.delete<ResponseResult<boolean>>(url)
       .pipe(catchError(this.handleError));
   }
