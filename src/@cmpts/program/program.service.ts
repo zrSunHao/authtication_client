@@ -36,6 +36,11 @@ export class ProgramService {
     return this.http.patch<ResponseResult<boolean>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
+  public flushCache(pgmId: string): Observable<ResponseResult<boolean>> {
+    const url = `${this.baseUrl}/FlushCache?id=${pgmId}`;
+    return this.http.patch<ResponseResult<boolean>>(url, null, this.httpOptions).pipe(catchError(this.handleError));
+  }
+
   public delete(id: string): Observable<ResponseResult<boolean>> {
     const url = `${this.baseUrl}/delete?id=${id}`;
     return this.http.delete<ResponseResult<boolean>>(url)

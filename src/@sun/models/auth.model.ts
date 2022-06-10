@@ -92,6 +92,7 @@ export const AUTH_PERMISSION_DATA: Permission[] = [
             'pgm_sect_delete',
             'pgm_func_update',
             'pgm_func_delete',
+            'pgm_cache_clear',
         ]
     },
     {

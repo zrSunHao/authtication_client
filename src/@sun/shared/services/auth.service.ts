@@ -12,7 +12,8 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
 
   private baseUrl = environment.hostUrl + 'user';
-  private key = 'auth';
+  public key = 'auth';
+  public tokenkey = 'token';
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-type': 'application/json' })
   };
@@ -35,6 +36,11 @@ export class AuthService {
     return this.http.post<ResponseResult<AuthResult>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
   }
 
+  public logout(): Observable<ResponseResult<AuthResult>> {
+    const url = `${this.baseUrl}/logout`;
+    return this.http.delete<ResponseResult<AuthResult>>(url, this.httpOptions).pipe(catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     const msg = `${error.status}  ${error.message}`
     return throwError(() => msg);
@@ -53,11 +59,18 @@ export class AuthService {
     this.permissionsServ.loadPermissions(functs);
   }
 
+  public clear(): void {
+    this.auth = undefined;
+    localStorage.removeItem(this.key);
+    localStorage.clear();
+  }
+
   public setAuthInfo(auth: AuthResult): void {
     if (auth) {
       this.auth = auth;
       const json = JSON.stringify(auth);
       localStorage.setItem(this.key, json);
+      localStorage.setItem(this.tokenkey,auth.token);
       this.auth = auth;
     }
   }
@@ -91,8 +104,9 @@ export class AuthService {
   }
 
   public getToken(): string {
-    if (this.auth) return this.auth.token;
-    else return '';
+    var t = localStorage.getItem(this.tokenkey);
+    if(!t) t = '';
+    return t;
   }
 
 }

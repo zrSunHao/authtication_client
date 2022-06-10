@@ -83,8 +83,16 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogoutClick(): void {
-    localStorage.clear();
-    this.router.navigate(['/security/login']);
+    this.hostServ.logout().subscribe({
+      next: res => {
+        this.hostServ.clear();
+        this.router.navigate(['/security/login']);
+      },
+      error: err => {
+        this.hostServ.clear();
+        this.router.navigate(['/security/login']);
+      }
+    })
   }
 
 }

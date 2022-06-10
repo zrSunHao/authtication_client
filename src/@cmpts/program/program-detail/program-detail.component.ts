@@ -101,6 +101,23 @@ export class ProgramDetailComponent implements OnInit {
     });
   }
 
+  onFlushCache() {
+    this.hostServ.flushCache(this.programId).subscribe({
+      next: res => {
+        if (res.success) {
+          this.notifyServ.notify(`清理缓存成功！！！`, 'success');
+        } else {
+          const msg = `清理缓存失败！！！ ${res.allMessages}`;
+          this.notifyServ.notify(msg, 'error');
+        }
+      },
+      error: err => {
+        const msg = `清理缓存失败！！！ ${err}`;
+        this.notifyServ.notify(msg, 'error');
+      }
+    });
+  }
+
   onEditSectionClick(e: SectElet): void {
     const newE: SectElet = {
       id: e.id, name: e.name, pgmId: e.pgmId, code: e.code, remark: e.remark
