@@ -11,12 +11,14 @@ const routes: Routes = [
       { path: 'customer', loadChildren: () => import('../@cmpts/customer/customer.module').then(m => m.CustomerModule) },
       { path: 'program', loadChildren: () => import('../@cmpts/program/program.module').then(m => m.ProgramModule) },
       { path: 'system', loadChildren: () => import('../@cmpts/system/system.module').then(m => m.SystemModule) },
+      { path: 'log', loadChildren: () => import('../@cmpts/log/log.module').then(m => m.LogModule) },
       { path: 'constraint', loadChildren: () => import('../@cmpts/constraint/constraint.module').then(m => m.ConstraintModule) },
       { path: 'my', loadChildren: () => import('../@cmpts/my/my.module').then(m => m.MyModule) },
       { path: 'notfound', loadChildren: () => import('../@cmpts/notfound/notfound.module').then(m => m.NotfoundModule) },
       { path: '**', redirectTo: '/dashboard/' },
     ],
   },
+
   { path: '**', redirectTo: '/notfound/' },
 ];
 

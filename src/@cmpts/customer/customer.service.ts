@@ -11,7 +11,6 @@ import { CtmCttElet, CtmCttAddDto, CtmCttFilter, CtmElet, CtmLogFilter, CtmRoleU
 export class CustomerService {
 
   private baseUrl = environment.hostUrl + 'customer';
-  private sysUrl = environment.hostUrl + 'sys';
   private resourceUrl = environment.hostUrl + 'resource';
   private cttUrl = environment.hostUrl + 'constraint';
   private resourceCategory = 'ctm';
@@ -105,20 +104,6 @@ export class CustomerService {
   public searchLogs(param: PagingParameter<CtmLogFilter>): Observable<ResponsePagingResult<CtmLogElet>> {
     const url = `${this.baseUrl}/GetLogList`;
     return this.http.post<ResponsePagingResult<CtmLogElet>>(url, param, this.httpOptions).pipe(catchError(this.handleError));
-  }
-
-
-
-  public getSystemItems(): Observable<ResponseResult<OptionItem[]>> {
-    const url = `${this.sysUrl}/GetOptions`;
-    return this.http.get<ResponseResult<OptionItem[]>>(url)
-      .pipe(catchError(this.handleError));
-  }
-
-  public getRoleItems(sysId: string): Observable<ResponseResult<OptionItem[]>> {
-    const url = `${this.sysUrl}/GetRoleOptions?sysId=${sysId}`;
-    return this.http.get<ResponseResult<OptionItem[]>>(url)
-      .pipe(catchError(this.handleError));
   }
 
 

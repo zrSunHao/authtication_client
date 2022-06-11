@@ -9,6 +9,7 @@ export enum menutype {
   system = 'system',
   program = 'program',
   constraint = 'constraint',
+  log = 'log',
   other = ''
 }
 
@@ -37,6 +38,7 @@ export class HeaderComponent implements OnInit {
     { name: '程序管理', icon: 'miscellaneous_services', type: menutype.program },
     { name: '系统管理', icon: 'gamepad', type: menutype.system },
     { name: '约束管理', icon: 'security', type: menutype.constraint },
+    { name: '日志管理', icon: 'format_list_numbered', type: menutype.log },
   ];
 
   constructor(private router: Router,

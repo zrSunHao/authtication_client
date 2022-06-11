@@ -5,6 +5,7 @@ import { OptionItem } from 'src/@sun/models/paging.model';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
 import { CtmRoleUpdateDto } from 'src/@sun/models/customer.model';
+import { AuthService } from 'src/@sun/shared/services/auth.service';
 
 @Component({
   selector: 'app-dialog-role',
@@ -21,6 +22,7 @@ export class DialogRoleComponent implements OnInit {
 
   constructor(private notifyServ: NotifyService,
     private hostServ: CustomerService,
+    private authServ:AuthService,
     private dialogRef: MatDialogRef<DialogRoleComponent>,
     @Inject(MAT_DIALOG_DATA) public data: CtmRoleUpdateDto,) {
     this.title = data?.sysId ? '修改' : '添加';
@@ -90,7 +92,7 @@ export class DialogRoleComponent implements OnInit {
   }
 
   private _loadSysItems(): void {
-    this.hostServ.getSystemItems().subscribe({
+    this.authServ.getSystemItems().subscribe({
       next: res => {
         if (res.success) {
           this.sysOptions = res.data as OptionItem[];
@@ -107,7 +109,7 @@ export class DialogRoleComponent implements OnInit {
   }
 
   private _loadRoleItems(sysId: string): void {
-    this.hostServ.getRoleItems(sysId).subscribe({
+    this.authServ.getRoleItems(sysId).subscribe({
       next: res => {
         if (res.success) {
           this.roleOptions = res.data as OptionItem[];

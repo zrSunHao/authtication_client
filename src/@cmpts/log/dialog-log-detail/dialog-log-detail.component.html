@@ -1,0 +1,41 @@
+<div mat-dialog-title class="header">
+  <h3>账号【{{data.ctmName}}】的操作日志</h3>
+</div>
+<div mat-dialog-content>
+  <form>
+    <mat-form-field appearance="outline" class="operate">
+      <mat-label>操作</mat-label>
+      <input matInput [ngModel]="data.operate" name="operate" disabled>
+      <mat-icon matSuffix>touch_app</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>系统名称</mat-label>
+      <input matInput [ngModel]="data.sysName" name="sysName" disabled>
+      <mat-icon matSuffix>gamepad</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>操作程序</mat-label>
+      <input matInput [ngModel]="data.pgmName" name="pgmName" disabled>
+      <mat-icon matSuffix>miscellaneous_services</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>角色名称</mat-label>
+      <input matInput [ngModel]="data.roleName" name="roleName" disabled>
+      <mat-icon matSuffix>military_tech</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>角色等级</mat-label>
+      <mat-select [ngModel]="data.roleRank" name="roleRank" disabled>
+        <mat-option [value]="item.key" *ngFor="let item of rankOps">{{item.value}}</mat-option>
+      </mat-select>
+      <mat-icon matSuffix>category</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="remark">
+      <mat-label>备注</mat-label>
+      <textarea matInput [(ngModel)]="data.remark" name="remark" rows="4" disabled></textarea>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button color="warn" (click)="onCloseClick()">关闭</button>
+</div>

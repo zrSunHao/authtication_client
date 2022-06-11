@@ -1,47 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-
-import { NotifyService } from 'src/@sun/shared/services/notify.service';
+import { UserLogElet, UserLogFilter } from 'src/@sun/models/auth.model';
 import { OptionItem, PagingParameter, ResponsePagingResult } from 'src/@sun/models/paging.model';
-import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/confirm-dialog.component';
 import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/paginator.component';
-
-import { ConstraintService } from './constraint.service';
-import { CttElet, CttFilter, CTT_CATEGERY_OPS, CTT_METHOD_OPS } from '../../@sun/models/constraint.model';
 import { AuthService } from 'src/@sun/shared/services/auth.service';
+import { NotifyService } from 'src/@sun/shared/services/notify.service';
+import { DialogLogDetailComponent } from './dialog-log-detail/dialog-log-detail.component';
 
 @Component({
-  selector: 'app-constraint',
-  templateUrl: './constraint.component.html',
-  styleUrls: ['./constraint.component.scss']
+  selector: 'app-log',
+  templateUrl: './log.component.html',
+  styleUrls: ['./log.component.scss']
 })
-export class ConstraintComponent implements OnInit {
+export class LogComponent implements OnInit {
 
-  dto: CttFilter = new CttFilter();
-  params = new PagingParameter<CttFilter>();
-
-  categeryOps: OptionItem[] = CTT_CATEGERY_OPS;
-  methodOps: OptionItem[] = CTT_METHOD_OPS;
+  dto: UserLogFilter = new UserLogFilter();
+  params = new PagingParameter<UserLogFilter>();
+  sysOptions: OptionItem[] = [];
 
   total = 0;
   columnOp = 'createdAt';
   columns: Array<PaginatorColumn> = [
-    { name: '到期时间', value: 'expiredAt' },
     { name: '创建时间', value: 'createdAt' },
   ];
 
-  displayedColumns = ['id', 'category', 'method', 'ctmName', 'sysName', 'functName', 'expiredAt', 'origin', 'createdAt', 'remark', 'operate',];
-  dataSource: Array<CttElet> = [];
+  displayedColumns = ['ctmName', 'ctmNickname', 'operate', 'sysName', 'remoteAddress', 'createdAt', 'remark', 'myoperate',];
+  dataSource: Array<UserLogElet> = [];
 
   constructor(private dialog: MatDialog,
     private notifyServ: NotifyService,
-    private hostServ: ConstraintService,
     private authServ: AuthService,) {
   }
 
   ngOnInit() {
     this.onResetClick();
-    this.authServ.log('进入约束管理页面', `无`);
+    this._loadSystemItems();
+    this.authServ.log('进入日志查看页面', `无`);
   }
 
   onSearchClick(): void {
@@ -50,7 +44,7 @@ export class ConstraintComponent implements OnInit {
   }
 
   onResetClick(): void {
-    this.dto = new CttFilter();
+    this.dto = new UserLogFilter();
     this.params.filter = this.dto;
     this.params.pageIndex = 1;
     this.params.pageSize = 10;
@@ -59,15 +53,10 @@ export class ConstraintComponent implements OnInit {
     this._loadData(this.params);
   }
 
-  onCancelClick(e: CttElet): void {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '260px',
-      data: `确定要删除该约束吗？`,
-    });
+  onDetailClick(e: UserLogElet): void {
+    const dialogRef = this.dialog.open(DialogLogDetailComponent,
+      { width: '520px', data: e, });
 
-    dialogRef.afterClosed().subscribe((result: string) => {
-      if (result === 'yes') this._cancel(e);
-    });
   }
 
   onPaginatorChange(paginator: Paginator) {
@@ -79,8 +68,8 @@ export class ConstraintComponent implements OnInit {
     this._loadData(this.params);
   }
 
-  private _loadData(params: PagingParameter<CttFilter>) {
-    this.hostServ.serach(params).subscribe({
+  private _loadData(params: PagingParameter<UserLogFilter>) {
+    this.authServ.getLogList(params).subscribe({
       next: res => { this._renderInfo(res); },
       error: err => {
         const msg = `数据加载失败！！！ ${err}`;
@@ -89,7 +78,7 @@ export class ConstraintComponent implements OnInit {
     });
   }
 
-  private _renderInfo(res: ResponsePagingResult<CttElet>) {
+  private _renderInfo(res: ResponsePagingResult<UserLogElet>) {
     if (res.success) {
       this.total = res.rowsCount;
       this.dataSource = res.data;
@@ -99,22 +88,20 @@ export class ConstraintComponent implements OnInit {
     }
   }
 
-  private _cancel(e: CttElet) {
-    this.hostServ.cancel(e.id).subscribe({
+  private _loadSystemItems() {
+    this.authServ.getSystemItems().subscribe({
       next: res => {
         if (res.success) {
-          this.notifyServ.notify('约束取消成功！！！', 'success');
-          this._loadData(this.params);
+          this.sysOptions = res.data as OptionItem[];
         } else {
-          const msg = `约束取消失败！！！ ${res.allMessages}`;
+          const msg = `系统信息加载失败！！！ ${res.allMessages}`;
           this.notifyServ.notify(msg, 'error');
         }
       },
       error: err => {
-        const msg = `约束取消失败！！！ ${err}`;
+        const msg = `系统信息加载失败！！！ ${err}`;
         this.notifyServ.notify(msg, 'error');
       }
     });
   }
-
 }

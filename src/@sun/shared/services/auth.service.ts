@@ -2,8 +2,8 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { EventEmitter, Injectable } from '@angular/core';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { catchError, Observable, throwError } from 'rxjs';
-import { AcctElet, AuthResult, AuthRoleElet, AUTH_PERMISSION_DATA, LoginDto, Permission, RegisterDto } from 'src/@sun/models/auth.model';
-import { ResponseResult } from 'src/@sun/models/paging.model';
+import { AcctElet, AuthResult, AuthRoleElet, AUTH_PERMISSION_DATA, LoginDto, Permission, RegisterDto, UserLogElet, UserLogFilter } from 'src/@sun/models/auth.model';
+import { OptionItem, PagingParameter, ResponsePagingResult, ResponseResult } from 'src/@sun/models/paging.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
 
   private baseUrl = environment.hostUrl + 'user';
+  private sysUrl = environment.hostUrl + 'sys';
   public key = 'auth';
   public tokenkey = 'token';
   private httpOptions = {
@@ -49,10 +50,33 @@ export class AuthService {
       .subscribe({ next: res => { }, error: err => { } });
   }
 
+  public getLogList(params: PagingParameter<UserLogFilter>): Observable<ResponsePagingResult<UserLogElet>> {
+    const url = `${this.baseUrl}/GetLogList`;
+    return this.http.post<ResponsePagingResult<UserLogElet>>(url, params, this.httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
+  public getSystemItems(): Observable<ResponseResult<OptionItem[]>> {
+    const url = `${this.sysUrl}/GetOptions`;
+    return this.http.get<ResponseResult<OptionItem[]>>(url)
+      .pipe(catchError(this.handleError));
+  }
+
+  public getRoleItems(sysId: string): Observable<ResponseResult<OptionItem[]>> {
+    const url = `${this.sysUrl}/GetRoleOptions?sysId=${sysId}`;
+    return this.http.get<ResponseResult<OptionItem[]>>(url)
+      .pipe(catchError(this.handleError));
+  }
+
+
   private handleError(error: HttpErrorResponse) {
     const msg = `${error.status}  ${error.message}`
     return throwError(() => msg);
   }
+
+
+
+  // ----------------------------------------------------------------
 
 
   public setPerms(auth: AuthResult) {

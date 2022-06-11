@@ -48,6 +48,29 @@ export interface Permission {
     funcs: string[];
 }
 
+export interface UserLogElet {
+    ctmId: string;
+    ctmName: string;
+    ctmNickname: string;
+    operate: string;
+    sysName: string | null;
+    pgmName: string | null;
+    roleName: string | null;
+    roleRank: RoleRank;
+    remoteAddress: string | null;
+    remark: string | null;
+    createdAt: Date;
+}
+
+export class UserLogFilter {
+    sysId: string | null = '';
+    name: string | null = '';
+    operateOrRemark: string | null = '';
+    startAt: Date | null = null;
+    endAt: Date | null = null;
+}
+
+
 export const AUTH_PERMISSION_DATA: Permission[] = [
     {
         sect: 'dashboard',
@@ -149,5 +172,9 @@ export const AUTH_PERMISSION_DATA: Permission[] = [
         funcs: [
             'ctt_delete',
         ]
+    },
+    {
+        sect: 'log',
+        funcs: []
     },
 ];

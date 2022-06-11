@@ -6,6 +6,7 @@ import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { CustomerService } from '../customer.service';
 import { CtmCttAddDto } from 'src/@sun/models/customer.model';
 import { CttCategory, CttMethod, CTT_CATEGERY_OPS, CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
+import { AuthService } from 'src/@sun/shared/services/auth.service';
 
 @Component({
   selector: 'app-dialog-constraint',
@@ -24,6 +25,7 @@ export class DialogConstraintComponent implements OnInit {
 
   constructor(private notifyServ: NotifyService,
     private hostServ: CustomerService,
+    private authServ: AuthService,
     private dialogRef: MatDialogRef<DialogConstraintComponent>,
     @Inject(MAT_DIALOG_DATA) public customerId: string,) {
     this.form = new UntypedFormGroup({
@@ -88,7 +90,7 @@ export class DialogConstraintComponent implements OnInit {
   }
 
   private _loadSystemItems() {
-    this.hostServ.getSystemItems().subscribe({
+    this.authServ.getSystemItems().subscribe({
       next: res => {
         if (res.success) {
           this.sysOptions = res.data as OptionItem[];
