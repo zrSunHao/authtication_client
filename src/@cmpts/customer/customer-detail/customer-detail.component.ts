@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/@sun/shared/services/auth.service';
 
 @Component({
   selector: 'app-customer-detail',
@@ -12,12 +13,13 @@ export class CustomerDetailComponent implements OnInit {
   name: string = '';
 
   constructor(private route: ActivatedRoute, 
-    private router: Router,) { }
+    private router: Router,private authServ: AuthService,) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.id = params['id'];
       this.name = params['name'];
+      this.authServ.log('进入客户详情页面', `客户标识[${this.id}]`);
     })
   }
 

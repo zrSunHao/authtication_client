@@ -8,6 +8,7 @@ import { Paginator, PaginatorColumn } from 'src/@sun/shared/cmpts/paginator/pagi
 
 import { ConstraintService } from './constraint.service';
 import { CttElet, CttFilter, CTT_CATEGERY_OPS, CTT_METHOD_OPS } from '../../@sun/models/constraint.model';
+import { AuthService } from 'src/@sun/shared/services/auth.service';
 
 @Component({
   selector: 'app-constraint',
@@ -34,7 +35,10 @@ export class ConstraintComponent implements OnInit {
 
   constructor(private dialog: MatDialog,
     private notifyServ: NotifyService,
-    private hostServ: ConstraintService) { }
+    private hostServ: ConstraintService,
+    private authServ: AuthService,) { 
+      this.authServ.log('进入约束管理页面', `无`);
+    }
 
   ngOnInit() {
     this.onResetClick();

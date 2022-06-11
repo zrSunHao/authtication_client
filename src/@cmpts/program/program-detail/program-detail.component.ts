@@ -13,6 +13,7 @@ import { ProgramSectionComponent } from '../program-section/program-section.comp
 import { ProgramService } from '../program.service';
 import { FunctElet, SectElet } from 'src/@sun/models/program.model';
 import { CttMethod } from 'src/@sun/models/constraint.model';
+import { AuthService } from 'src/@sun/shared/services/auth.service';
 
 @Component({
   selector: 'app-program-detail',
@@ -40,6 +41,7 @@ export class ProgramDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private notifyServ: NotifyService,
+    private authServ: AuthService,
     private hostServ: ProgramService,) { }
 
   ngOnInit() {
@@ -70,6 +72,7 @@ export class ProgramDetailComponent implements OnInit {
           break;
       }
       this._loadSectionData(this.programId);
+      this.authServ.log('进入程序功能配置页面', `程序标识[${this.programId}]`);
     })
   }
 

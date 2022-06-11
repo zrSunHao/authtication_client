@@ -3,6 +3,7 @@ import { CttElet } from 'src/@sun/models/constraint.model';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { DashboardService } from './dashboard.service';
 import { ReportCtmElet, ReportLogElet, WidgetElet } from '../../@sun/models/report.model';
+import { AuthService } from 'src/@sun/shared/services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,9 +18,11 @@ export class DashboardComponent implements OnInit {
   widgets: Array<WidgetElet> = [];
 
   constructor(private notifyServ: NotifyService,
-    private hostServ: DashboardService,) { }
+    private hostServ: DashboardService,
+    private authServ: AuthService,) { }
 
   ngOnInit() {
+    this.authServ.log('进入起始页面', '无');
     this.onLoadCustomers();
     this.onLoadLogs();
     this.onLoadConstraints();

@@ -41,6 +41,14 @@ export class AuthService {
     return this.http.delete<ResponseResult<AuthResult>>(url, this.httpOptions).pipe(catchError(this.handleError));
   }
 
+  public log(operate: string, remark: string): void {
+    if (!this.auth) return;
+    const url = `${this.baseUrl}/addlog?operate=${operate}&remark=${remark}`;
+    this.http.post<any>(url, null, this.httpOptions)
+      .pipe(catchError(this.handleError))
+      .subscribe({ next: res => { }, error: err => { } });
+  }
+
   private handleError(error: HttpErrorResponse) {
     const msg = `${error.status}  ${error.message}`
     return throwError(() => msg);
@@ -70,7 +78,7 @@ export class AuthService {
       this.auth = auth;
       const json = JSON.stringify(auth);
       localStorage.setItem(this.key, json);
-      localStorage.setItem(this.tokenkey,auth.token);
+      localStorage.setItem(this.tokenkey, auth.token);
       this.auth = auth;
     }
   }
@@ -105,7 +113,7 @@ export class AuthService {
 
   public getToken(): string {
     var t = localStorage.getItem(this.tokenkey);
-    if(!t) t = '';
+    if (!t) t = '';
     return t;
   }
 

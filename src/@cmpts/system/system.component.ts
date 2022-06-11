@@ -8,6 +8,7 @@ import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { DialogSystemComponent } from './dialog-system/dialog-system.component';
 import { SysElet, SysFilter } from '../../@sun/models/system.model';
 import { SystemService } from './system.service';
+import { AuthService } from 'src/@sun/shared/services/auth.service';
 
 @Component({
   selector: 'app-system',
@@ -37,10 +38,12 @@ export class SystemComponent implements OnInit, AfterViewInit {
   constructor(private router: Router,
     private dialog: MatDialog,
     private notifyServ: NotifyService,
-    private hostServ: SystemService,) { }
+    private hostServ: SystemService,
+    private authServ: AuthService,) { }
 
   ngOnInit() {
     this.onResetClick();
+    this.authServ.log('进入系统管理页面', `无`);
   }
 
   ngAfterViewInit() {

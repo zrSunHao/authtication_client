@@ -9,6 +9,7 @@ import { DialogRoleComponent } from '../dialog-role/dialog-role.component';
 import { RoleElet, SysRoleFilter, ROLE_RANK_OPS } from 'src/@sun/models/system.model';
 import { SystemService } from '../system.service';
 import { CttMethod, CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
+import { AuthService } from 'src/@sun/shared/services/auth.service';
 
 @Component({
   selector: 'app-system-role-list',
@@ -40,14 +41,16 @@ export class SystemRoleListComponent implements OnInit {
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private notifyServ: NotifyService,
-    private hostServ: SystemService,) { }
+    private hostServ: SystemService,
+    private authServ: AuthService,) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.sysId = params['sysId'];
       this.sysName = params['sysName'];
+      this.onResetClick();
+      this.authServ.log('进入系统角色管理页面', `系统标识[${this.sysId}]`);
     });
-    this.onResetClick();
   }
 
   onSearchClick(): void {

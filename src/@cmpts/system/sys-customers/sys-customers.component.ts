@@ -11,6 +11,7 @@ import { ROLE_RANK_OPS, SysCtmElet, SysCtmFilter } from 'src/@sun/models/system.
 import { DialogCustomerRoleComponent } from '../dialog-customer-role/dialog-customer-role.component';
 import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/confirm-dialog.component';
 import { DialogCtmCttComponent } from '../dialog-ctm-ctt/dialog-ctm-ctt.component';
+import { AuthService } from 'src/@sun/shared/services/auth.service';
 
 @Component({
   selector: 'app-sys-customers',
@@ -41,7 +42,8 @@ export class SysCustomersComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private notifyServ: NotifyService,
-    private hostServ: SystemService) {
+    private hostServ: SystemService,
+    private authServ: AuthService,) {
   }
 
   ngOnInit() {
@@ -50,6 +52,7 @@ export class SysCustomersComponent implements OnInit {
       this.sysName = params['sysName'];
       this._loadRoleItems(this.sysId);
       this.onResetClick();
+      this.authServ.log('进入系统客户管理页面', `系统标识[${this.sysId}]`);
     });
   }
 

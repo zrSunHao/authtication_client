@@ -7,6 +7,7 @@ import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/con
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { SysPgmElet, PROGRAM_ELEMENT_DATA, SysOwnedPgmFilter, SysNotOwnedPgmFilter } from 'src/@sun/models/system.model';
 import { SystemService } from '../system.service';
+import { AuthService } from 'src/@sun/shared/services/auth.service';
 
 @Component({
   selector: 'app-system-program',
@@ -29,15 +30,17 @@ export class SystemProgramComponent implements OnInit {
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private notifyServ: NotifyService,
-    private hostServ: SystemService,) { }
+    private hostServ: SystemService,
+    private authServ: AuthService,) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.sysId = params['sysId'];
       this.sysName = params['sysName'];
+      this.onSearchProgramsClick(new SysNotOwnedPgmFilter());
+      this.onGetProgramsClick();
+      this.authServ.log('进入系统程序配置页面', `系统标识[${this.sysId}]`);
     });
-    this.onSearchProgramsClick(new SysNotOwnedPgmFilter());
-    this.onGetProgramsClick();
   }
 
   onPreviousPageClick(): void {

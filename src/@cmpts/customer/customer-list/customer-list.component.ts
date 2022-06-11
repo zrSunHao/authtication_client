@@ -8,6 +8,7 @@ import { CustomerService } from '../customer.service';
 import { DialogCustomerComponent } from '../dialog-customer/dialog-customer.component';
 import { CtmElet, CtmFilter } from 'src/@sun/models/customer.model';
 import { CTT_METHOD_OPS } from 'src/@sun/models/constraint.model';
+import { AuthService } from 'src/@sun/shared/services/auth.service';
 
 @Component({
   selector: 'app-customer-list',
@@ -19,7 +20,7 @@ export class CustomerListComponent implements OnInit {
   dto: CtmFilter = new CtmFilter();
   params = new PagingParameter<CtmFilter>();
   methodOps: OptionItem[] = CTT_METHOD_OPS;
-  
+
   total = 0;
   columnOp = 'lastLoginAt';
   columns: Array<PaginatorColumn> = [
@@ -34,11 +35,13 @@ export class CustomerListComponent implements OnInit {
   constructor(private dialog: MatDialog,
     private router: Router,
     private notifyServ: NotifyService,
+    private authServ: AuthService,
     private hostServ: CustomerService) {
   }
 
   ngOnInit() {
     this.onResetClick();
+    this.authServ.log('进入客户管理页面', '无');
   }
 
   onSearchClick(): void {

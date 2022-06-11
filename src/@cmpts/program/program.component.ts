@@ -8,6 +8,7 @@ import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { DialogProgramComponent } from './dialog-program/dialog-program.component';
 import { PgmElet, PgmFilter, PgmCategory, PGM_TYPE_OPS } from '../../@sun/models/program.model';
 import { ProgramService } from './program.service';
+import { AuthService } from 'src/@sun/shared/services/auth.service';
 
 @Component({
   selector: 'app-program',
@@ -33,10 +34,11 @@ export class ProgramComponent implements OnInit {
   constructor(private router: Router,
     private dialog: MatDialog,
     private notifyServ: NotifyService,
-    private hostServ: ProgramService,) { }
+    private hostServ: ProgramService,private authServ: AuthService,) { }
 
   ngOnInit() {
     this.onResetClick();
+    this.authServ.log('查看程序管理页面', '无');
   }
 
   onAddClick(): void {

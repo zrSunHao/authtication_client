@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PagingParameter, ResponsePagingResult } from 'src/@sun/models/paging.model';
 import { PgmCtmElet, PgmCtmFilter } from 'src/@sun/models/program.model';
 import { ConfirmDialogComponent } from 'src/@sun/shared/cmpts/confirm-dialog/confirm-dialog.component';
+import { AuthService } from 'src/@sun/shared/services/auth.service';
 import { NotifyService } from 'src/@sun/shared/services/notify.service';
 import { ProgramService } from '../program.service';
 
@@ -28,6 +29,7 @@ export class PgmCtmsComponent implements OnInit {
   constructor(private router: Router,
     private route: ActivatedRoute,
     private dialog: MatDialog,
+    private authServ: AuthService,
     private notifyServ: NotifyService,
     private hostServ: ProgramService,) { }
 
@@ -59,6 +61,7 @@ export class PgmCtmsComponent implements OnInit {
       this.notOwnedParam.filter = filter;
       this._loadOwnedCtmList(this.ownedParam);
       this._loadNotOwnedCtmList(this.notOwnedParam);
+      this.authServ.log('进入程序客户关联页面', `程序标识[${this.programId}]`);
     })
   }
 
