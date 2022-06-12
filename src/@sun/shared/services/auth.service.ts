@@ -109,7 +109,14 @@ export class AuthService {
 
   public getCustomer(): AcctElet {
     if (this.auth?.customer) return this.auth.customer;
-    else return new AcctElet();
+    else {
+      const json = localStorage.getItem(this.key);
+      if (json) {
+        this.auth = JSON.parse(json);
+        if (this.auth?.customer) return this.auth?.customer;
+        else return new AcctElet();
+      } else return new AcctElet();
+    }
   }
 
   public getRole(): AuthRoleElet {
@@ -123,15 +130,20 @@ export class AuthService {
       AUTH_PERMISSION_DATA.forEach(p => {
         if (p && p.funcs.length > 0) functs = [...functs, ...p.funcs]
       });
-    } else if (this.auth) functs = this.auth.functCodes;
-
+    } else {
+      this.auth = this.getInfo();
+      if (this.auth) functs = this.auth.functCodes;
+    }
     return functs;
   }
 
   public getSections(): string[] {
     let sects: string[] = [];
     if (environment.all_permission) AUTH_PERMISSION_DATA.forEach(x => { sects.push(x.sect); });
-    else if (this.auth) sects = this.auth.sectCodes;
+    else {
+      this.auth = this.getInfo();
+      if (this.auth) sects = this.auth.sectCodes;
+    }
     return sects;
   }
 
@@ -139,6 +151,14 @@ export class AuthService {
     var t = localStorage.getItem(this.tokenkey);
     if (!t) t = '';
     return t;
+  }
+
+  private getInfo(): AuthResult {
+    const json = localStorage.getItem(this.key);
+    if (json) this.auth = JSON.parse(json);
+    else return new AuthResult;
+    if (this.auth) return this.auth;
+    else return new AuthResult;
   }
 
 }

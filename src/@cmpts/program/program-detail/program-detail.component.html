@@ -8,7 +8,7 @@
     <button mat-flat-button color="accent" *ngxPermissionsOnly="['pgm_sect_add']" (click)="onAddSectionClick()">
       <mat-icon>add</mat-icon>添加模块
     </button>
-    <button mat-flat-button color="accent" *ngxPermissionsOnly="['pgm_cache_clear']" (click)="onFlushCache()">
+    <button mat-flat-button color="accent" (click)="onFlushCache()">
       <mat-icon>cached</mat-icon>清理缓存
     </button>
     <button mat-flat-button color="accent" (click)="onPreviousPageClick()">

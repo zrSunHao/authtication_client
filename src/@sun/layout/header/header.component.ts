@@ -75,6 +75,8 @@ export class HeaderComponent implements OnInit {
       this.menuitem = menutype.program;
     } else if (url.indexOf(`/${menutype.constraint}`) == 0) {
       this.menuitem = menutype.constraint;
+    } else if (url.indexOf(`/${menutype.log}`) == 0) {
+      this.menuitem = menutype.log;
     } else {
       this.menuitem = menutype.other;
     }

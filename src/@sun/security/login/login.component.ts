@@ -41,9 +41,16 @@ export class LoginComponent implements OnInit {
           const auth = res.data as AuthResult;
           this.hostServ.setAuthInfo(auth);
           this.hostServ.setPerms(auth);
-          setTimeout(() => {
-            this.router.navigate(['/']);
-          }, 500);
+          if (auth.sectCodes.includes('dashboard')) {
+            setTimeout(() => {
+              this.router.navigate(['/']);
+            }, 500);
+          } else {
+            setTimeout(() => {
+              this.router.navigate(['/log']);
+            }, 500);
+          }
+
         } else {
           const msg = `登录失败！！！ ${res.allMessages}`;
           this.notifyServ.notify(msg, 'error');
