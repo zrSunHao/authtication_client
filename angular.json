@@ -80,7 +80,6 @@
           },
           "defaultConfiguration": "development",
           "options": {
-            "proxyConfig": "proxy.config.dev.json",
             "disableHostCheck": true
           }
         },

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   all_permission: false,
-  hostUrl: '/api/',
+  hostUrl: 'https://localhost:7201/api/',
   sysCode: 'authentication_platform',
   pgmCode: 'auth_web',
 };
